@@ -3,10 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Client.MVVM.View.GladePage"
              Title="GladePage">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior 
+                        IsVisible="False"
+                        IsEnabled="False"/>
+    </Shell.BackButtonBehavior>
+
     <VerticalStackLayout>
         <Label 
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <Button Text="В город"
+                Command="{Binding GoToTownCommand}"/>
+        
     </VerticalStackLayout>
 </ContentPage>

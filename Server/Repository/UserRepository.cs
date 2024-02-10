@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Server.Models;
 using Server.Models.DTO;
+using Server.Models.Utilities;
 
 namespace Server.Repository
 {
@@ -38,7 +39,7 @@ namespace Server.Repository
                 activityUser.CharacterName = user.CharacterName;
                 activityUser.Race = user.Race;
                 activityUser.Level = user.Level;
-                activityUser.CurrentLocation = user.CurrentLocation;
+                activityUser.CurrentArea = user.CurrentArea;
             }
 
             LoginResponseDTO loginResponseDTO = new()
@@ -60,7 +61,7 @@ namespace Server.Repository
                     Password = user.Password,
                     Race = user.Race,
                     Level = 1,
-                    CurrentLocation = Location.Town
+                    CurrentArea = Area.Town
                 };
 
                 dbContext.Users.Add(newUser);
@@ -73,6 +74,5 @@ namespace Server.Repository
                 return false;
             }
         }
-
     }
 }

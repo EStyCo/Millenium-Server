@@ -1,9 +1,13 @@
+using Client.MVVM.ViewModel;
+
 namespace Client.MVVM.View;
 
 public partial class GladePage : ContentPage
 {
-	public GladePage()
+	public GladePage(GladeViewModel vm)
 	{
 		InitializeComponent();
+
+		BindingContext = vm;
 	}
 }

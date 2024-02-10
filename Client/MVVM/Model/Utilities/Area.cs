@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.MVVM.Model
+namespace Client.MVVM.Model.Utilities
 {
-    public enum Location
+    public enum Area
     {
         Town,
         Glade,

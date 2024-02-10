@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.MVVM.View.Town.TownPage"
+             Title="TownPage">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior 
+                        IsVisible="False"
+                        IsEnabled="False"/>
+    </Shell.BackButtonBehavior>
+    
+    <VerticalStackLayout VerticalOptions="Center" 
+                         HorizontalOptions="Center" >
+        <HorizontalStackLayout>
+            <Frame>
+                <Label Text="{Binding UserStore.CurrentUser.CharacterName}"
+                       FontAttributes="Bold"/>
+            </Frame>
+            <Frame>
+                <Label Text="HP:"
+                       FontAttributes="Bold"
+                       TextColor="PaleVioletRed"/>
+            </Frame>
+            <Frame>
+                <Label Text="MP:"
+                       FontAttributes="Bold"
+                       TextColor="LightSkyBlue"/>
+            </Frame>
+        </HorizontalStackLayout>
+
+        <VerticalStackLayout Spacing="5">
+
+            <Frame>
+                <Label Text="Рад приветствовать тебя Путник в Нашем городе"/>
+            </Frame>
+
+            <Button Text="Администрация"/>
+            <Button Text="Таверна"/>
+            <Button Text="Магазин"/>
+
+            <Button Text="Выйти из города"
+                    Margin="0,20,0,0"
+                    Command="{Binding GoToGladeCommand}"/>
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>

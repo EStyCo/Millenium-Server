@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Client.MVVM.Model.Utilities;
 
 namespace Client.MVVM.Model
 {
@@ -11,6 +7,6 @@ namespace Client.MVVM.Model
         public string CharacterName { get; set; }
         public string Race { get; set; }
         public int Level { get; set; }
-        public Location CurrentLocation { get; set; }
+        public Area CurrentArea { get; set; }
     }
 }

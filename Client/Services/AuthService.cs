@@ -14,6 +14,7 @@ namespace Client.Services
     public class AuthService : BaseService, IAuthService
     {
         private readonly IHttpClientFactory _clientFactory;
+        private readonly string serviceUrl = "/auth";
 
         public AuthService(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory)
         {
@@ -26,7 +27,7 @@ namespace Client.Services
             {
                 ApiType = ApiType.POST,
                 Data = obj,
-                Url = baseUrl + "/login"
+                Url = baseUrl + serviceUrl + "/login"
             });
         }
 
@@ -36,7 +37,7 @@ namespace Client.Services
             {
                 ApiType = ApiType.POST,
                 Data = obj,
-                Url = baseUrl + "/reg"
+                Url = baseUrl + serviceUrl + "/reg"
             });
         }
     }

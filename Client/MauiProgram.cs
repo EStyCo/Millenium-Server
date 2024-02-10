@@ -1,5 +1,8 @@
-﻿using Client.MVVM.View;
+﻿using Client.MVVM.Model;
+using Client.MVVM.View;
+using Client.MVVM.View.Town;
 using Client.MVVM.ViewModel;
+using Client.MVVM.ViewModel.Town;
 using Client.Services;
 using Client.Services.IServices;
 using Microsoft.Extensions.Logging;
@@ -20,10 +23,16 @@ namespace Client
                 });
 
             builder.Services.AddTransient<NewPage1>();
+
             builder.Services.AddTransient<MainPage>();
-            builder.Services.AddTransient<TownPage>();
-            builder.Services.AddTransient<GladePage>();
             builder.Services.AddTransient<MainViewModel>();
+
+            builder.Services.AddTransient<TownPage>();
+            builder.Services.AddTransient<TownViewModel>();
+
+            builder.Services.AddTransient<GladePage>();
+            builder.Services.AddTransient<GladeViewModel>();
+
             builder.Services.AddTransient<RegistrationPage>();
             builder.Services.AddTransient<RegistrationViewModel>();
 
@@ -31,7 +40,8 @@ namespace Client
             builder.Services.AddSingleton<IAuthService, AuthService>();
 
             builder.Services.AddSingleton<UserStore>();
-            builder.Services.AddSingleton<TravelService>();
+            builder.Services.AddTransient<Router>();
+            builder.Services.AddTransient<TravelService>();
 
 #if DEBUG
             builder.Logging.AddDebug();

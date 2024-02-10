@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Models;
 
@@ -10,9 +11,11 @@ using Server.Models;
 namespace Server.Migrations
 {
     [DbContext(typeof(DbUserContext))]
-    partial class DbUserContextModelSnapshot : ModelSnapshot
+    [Migration("20240209185911_RenameLocationToArea")]
+    partial class RenameLocationToArea
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

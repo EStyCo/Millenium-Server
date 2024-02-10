@@ -8,7 +8,7 @@ namespace Client.Services
 {
     public class BaseService : IBaseService
     {
-        public string baseUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5266/auth" : "https://localhost:7082/auth";
+        public string baseUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5266" : "https://localhost:7082";
         public APIResponse responseModel { get; set; }
         public IHttpClientFactory hhtpClient { get; set; }
 

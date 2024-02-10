@@ -1,14 +1,16 @@
-﻿namespace Client
+﻿using Client.MVVM.Model.Utilities;
+
+namespace Client
 {
     public partial class App : Application
     {
-        public App(MainPage mainPage)
+        public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(mainPage);
+            //MainPage = new NavigationPage(mainPage);
 
-            //MainPage = new AppShell();
+            MainPage = new AppShell();
         }
     }
 }

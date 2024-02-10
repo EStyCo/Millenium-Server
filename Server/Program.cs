@@ -12,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<TravelRepository>();
 
 builder.Services.AddDbContext<DbUserContext>(
     options =>

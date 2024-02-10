@@ -1,15 +1,15 @@
 ﻿using Client.MVVM.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Client.MVVM.Model.DTO;
+using Client.MVVM.View;
+using Client.MVVM.View.Town;
+using Newtonsoft.Json;
+using PropertyChanged;
 
 namespace Client.Services
 {
+    [AddINotifyPropertyChangedInterface]
     public class UserStore
     {
         public ActivityUser CurrentUser { get; set; }
-
     }
 }

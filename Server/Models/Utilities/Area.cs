@@ -1,6 +1,6 @@
-﻿namespace Server.Models
+﻿namespace Server.Models.Utilities
 {
-    public enum Location
+    public enum Area
     {
         Town,
         Glade,

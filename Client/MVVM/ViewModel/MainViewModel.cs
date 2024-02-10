@@ -1,6 +1,8 @@
 ﻿using Client.MVVM.Model;
 using Client.MVVM.Model.DTO;
+using Client.MVVM.Model.Utilities;
 using Client.MVVM.View;
+using Client.MVVM.View.Town;
 using Client.Services;
 using Client.Services.IServices;
 using Newtonsoft.Json;
@@ -14,8 +16,7 @@ namespace Client.MVVM.ViewModel
     {
         private readonly IAuthService authService;
         private readonly UserStore userStore;
-        private readonly TravelService travelService;
-        private readonly RegistrationPage registrationPage;
+        private readonly Router router;
         public LoginRequestDTO UserLogin { get; set; }
         public bool isLoading { get; set; } = false;
         public bool canWriting { get; set; } = true;
@@ -23,12 +24,11 @@ namespace Client.MVVM.ViewModel
         public ICommand LoginCommand { get; set; }
         public ICommand GoToRegisterCommand {  get; set; }
 
-        public MainViewModel(IAuthService _authService, RegistrationPage _registrationPage, UserStore _userStore, TravelService _travelService)
+        public MainViewModel(IAuthService _authService, RegistrationPage _registrationPage, UserStore _userStore, Router _router)
         {
             authService = _authService;
-            registrationPage = _registrationPage;
+            router = _router;
             userStore = _userStore;
-            travelService = _travelService;
             UserLogin = new();
 
             LoginCommand = new Command(async () => await Login());
@@ -41,7 +41,7 @@ namespace Client.MVVM.ViewModel
             canWriting = false;
 
             var response = await authService.LoginAsync<APIResponse>(UserLogin);
-            await Task.Delay(1000);
+            //await Task.Delay(1000);
 
             if (response != null && response.IsSuccess)
             {
@@ -52,25 +52,23 @@ namespace Client.MVVM.ViewModel
                     CharacterName = loginResponse.User.CharacterName,
                     Race = loginResponse.User.Race,
                     Level = loginResponse.User.Level,
-                    CurrentLocation = loginResponse.User.CurrentLocation
+                    CurrentArea = loginResponse.User.CurrentArea
                 };
 
-                await travelService.GoToLocationPage();
+                await router.GoToCurrentArea();
             }
             else
             {
                 Response = response.ErrorMessages.FirstOrDefault().ToString();
-                isLoading = false;
-                canWriting = true;
             }
+
+            isLoading = false;
+            canWriting = true;
         }
 
         private async Task PushRegisterPage()
         {
-            var Navigation = Application.Current.MainPage.Navigation;
-            await Navigation.PushAsync(registrationPage);
-
-            //Shell.Current.GoToAsync(nameof(RegistrationPage));
+            await Shell.Current.GoToAsync(nameof(RegistrationPage));
         }
     }
 }
