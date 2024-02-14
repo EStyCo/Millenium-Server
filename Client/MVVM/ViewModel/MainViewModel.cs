@@ -1,4 +1,5 @@
-﻿using Client.MVVM.Model;
+﻿using AutoMapper;
+using Client.MVVM.Model;
 using Client.MVVM.Model.DTO;
 using Client.MVVM.Model.Utilities;
 using Client.MVVM.View;
@@ -15,6 +16,7 @@ namespace Client.MVVM.ViewModel
     public class MainViewModel
     {
         private readonly IAuthService authService;
+        private readonly IMapper mapper;
         private readonly UserStore userStore;
         private readonly Router router;
         public LoginRequestDTO UserLogin { get; set; }
@@ -22,11 +24,12 @@ namespace Client.MVVM.ViewModel
         public bool canWriting { get; set; } = true;
         public string Response { get; set; } = string.Empty;
         public ICommand LoginCommand { get; set; }
-        public ICommand GoToRegisterCommand {  get; set; }
+        public ICommand GoToRegisterCommand { get; set; }
 
-        public MainViewModel(IAuthService _authService, RegistrationPage _registrationPage, UserStore _userStore, Router _router)
+        public MainViewModel(IAuthService _authService, IMapper _mapper, RegistrationPage _registrationPage, UserStore _userStore, Router _router)
         {
             authService = _authService;
+            mapper = _mapper;
             router = _router;
             userStore = _userStore;
             UserLogin = new();
@@ -46,14 +49,7 @@ namespace Client.MVVM.ViewModel
             if (response != null && response.IsSuccess)
             {
                 var loginResponse = JsonConvert.DeserializeObject<LoginResponseDTO>(Convert.ToString(response.Result));
-
-                userStore.CurrentUser = new()
-                {
-                    CharacterName = loginResponse.User.CharacterName,
-                    Race = loginResponse.User.Race,
-                    Level = loginResponse.User.Level,
-                    CurrentArea = loginResponse.User.CurrentArea
-                };
+                userStore.Character = mapper.Map<Character>(loginResponse.Character);
 
                 await router.GoToCurrentArea();
             }

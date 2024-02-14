@@ -1,4 +1,4 @@
-﻿using Client.MVVM.Utilities;
+﻿using Client.MVVM.Model.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

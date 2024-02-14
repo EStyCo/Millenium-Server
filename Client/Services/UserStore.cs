@@ -10,6 +10,6 @@ namespace Client.Services
     [AddINotifyPropertyChangedInterface]
     public class UserStore
     {
-        public ActivityUser CurrentUser { get; set; }
+        public Character Character { get; set; }
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.MVVM.View.CharacterModal.CharacterPage"
+             Title="CharacterPage">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior x:Name="BackButton"
+                            IsVisible="False"
+                            IsEnabled="False"/>
+    </Shell.BackButtonBehavior>
+
+    <VerticalStackLayout>
+        
+        <Button Text="Return"
+            HorizontalOptions="Start"
+            Command="{Binding ReturnCommand}"/>
+
+        <Label 
+            Text="Character"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Label 
+            Text="{Binding UserStore.Character.CharacterName}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Label 
+             Text="{Binding UserStore.Character.Race}"
+             VerticalOptions="Center" 
+             HorizontalOptions="Center" />
+
+        <Label 
+             Text="{Binding UserStore.Character.Level}"
+             VerticalOptions="Center" 
+             HorizontalOptions="Center" />
+
+    </VerticalStackLayout>
+</ContentPage>

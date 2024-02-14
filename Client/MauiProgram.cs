@@ -1,7 +1,8 @@
-﻿using Client.MVVM.Model;
-using Client.MVVM.View;
+﻿using Client.MVVM.View;
+using Client.MVVM.View.CharacterModal;
 using Client.MVVM.View.Town;
 using Client.MVVM.ViewModel;
+using Client.MVVM.ViewModel.CharacterModal;
 using Client.MVVM.ViewModel.Town;
 using Client.Services;
 using Client.Services.IServices;
@@ -22,6 +23,10 @@ namespace Client
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddAutoMapper(typeof(MappingConfig));
+
+            AddCharacterModalPages(builder);
+
             builder.Services.AddTransient<NewPage1>();
 
             builder.Services.AddTransient<MainPage>();
@@ -40,7 +45,7 @@ namespace Client
             builder.Services.AddSingleton<IAuthService, AuthService>();
 
             builder.Services.AddSingleton<UserStore>();
-            builder.Services.AddTransient<Router>();
+            builder.Services.AddSingleton<Router>();
             builder.Services.AddTransient<TravelService>();
 
 #if DEBUG
@@ -48,6 +53,18 @@ namespace Client
 #endif
 
             return builder.Build();
+        }
+
+        private static void AddCharacterModalPages(MauiAppBuilder builder)
+        {
+            builder.Services.AddTransient<CharacterPage>();
+            builder.Services.AddTransient<CharacterViewModel>();
+
+            builder.Services.AddTransient<SpellBookPage>();
+            builder.Services.AddTransient<SpellBookViewModel>();
+
+            builder.Services.AddTransient<InventoryPage>();
+            builder.Services.AddTransient<InventoryViewModel>();
         }
     }
 }

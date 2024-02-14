@@ -1,4 +1,5 @@
 ﻿using Client.MVVM.Model.Utilities;
+using Client.Services;
 
 namespace Client
 {
@@ -7,7 +8,6 @@ namespace Client
         public App()
         {
             InitializeComponent();
-
             //MainPage = new NavigationPage(mainPage);
 
             MainPage = new AppShell();

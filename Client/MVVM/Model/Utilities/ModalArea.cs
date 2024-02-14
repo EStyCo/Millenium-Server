@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.MVVM.Utilities
+namespace Client.MVVM.Model.Utilities
 {
-    public enum ApiType
+    public enum ModalArea
     {
-        GET,
-        POST,
-        PUT,
-        DELETE
+        Character,
+        SpellBook,
+        Inventory
     }
 }

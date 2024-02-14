@@ -2,6 +2,6 @@
 {
     public class LoginResponseDTO
     {
-        public ActivityUser User { get; set; }
+        public CharacterDTO Character { get; set; }
     }
 }

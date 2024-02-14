@@ -1,5 +1,4 @@
-﻿using Azure;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
 using Server.Models.DTO;
@@ -26,7 +25,7 @@ namespace WebApplication1.Controllers
         {
             var userResponse = await userRep.LoginUser(user.Email, user.Password);
 
-            if (userResponse.User == null)
+            if (userResponse.Character == null)
             {
                 response.StatusCode = HttpStatusCode.BadRequest;
                 response.IsSuccess = false;
@@ -44,14 +43,14 @@ namespace WebApplication1.Controllers
         [HttpPost("reg")]
         public async Task<ActionResult> AddUser(RegistrationRequestDTO user)
         {
-            bool ifUserNameUnique = await userRep.IsUniqueUser(user.CharacterName, user.Email);
+            /*bool ifUserNameUnique = await userRep.IsUniqueUser( user.Email);
             if (!ifUserNameUnique)
             {
                 response.StatusCode = HttpStatusCode.BadRequest;
                 response.IsSuccess = false;
                 response.ErrorMessages.Add("Данные Имя/Эл.почта уже заняты!");
                 return BadRequest(response);
-            }
+            }*/
 
             var userResponse = await userRep.Registration(user);
 

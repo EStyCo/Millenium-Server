@@ -1,5 +1,4 @@
-﻿using Client.MVVM.Model;
-using Client.MVVM.Model.Utilities;
+﻿using Client.MVVM.Model.Utilities;
 using Client.MVVM.View.Town;
 using Client.Services;
 using PropertyChanged;

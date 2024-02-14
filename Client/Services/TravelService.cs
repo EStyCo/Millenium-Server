@@ -1,6 +1,6 @@
 ﻿using Client.MVVM.Model;
 using Client.MVVM.Model.DTO;
-using Client.MVVM.Utilities;
+using Client.MVVM.Model.Utilities;
 using Microsoft.Extensions.Configuration;
 
 namespace Client.Services

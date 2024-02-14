@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Server.Models;
 using Server.Models.DTO;
+using Server.Models.Utilities;
 
 namespace Server.Repository
 {
@@ -15,7 +16,7 @@ namespace Server.Repository
 
         public async Task<TravelDTO> GetArea(TravelDTO travel)
         {
-            var user = await dbContext.Users
+            var user = await dbContext.Characters
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.CharacterName == travel.CharacterName);
 
@@ -33,7 +34,7 @@ namespace Server.Repository
 
         public async Task<TravelDTO> GoNewArea(TravelDTO travel)
         {
-            var user = await dbContext.Users
+            var user = await dbContext.Characters
                 .FirstOrDefaultAsync(x => x.CharacterName == travel.CharacterName);
 
             if (user != null)

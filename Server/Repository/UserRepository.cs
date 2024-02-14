@@ -14,11 +14,11 @@ namespace Server.Repository
             dbContext = _dbContext;
         }
 
-        public async Task<bool> IsUniqueUser(string email, string characterName)
+        public async Task<bool> IsUniqueUser(string email)
         {
             var result = await dbContext.Users
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.CharacterName == characterName || x.Email == email);
+                .FirstOrDefaultAsync(x => x.Email == email);
 
             if (result != null)
                 return false;
@@ -30,49 +30,62 @@ namespace Server.Repository
         {
             var user = await dbContext.Users
                 .AsNoTracking()
+                .Include(x => x.Character)
                 .FirstOrDefaultAsync(x => x.Email == email.ToLower() && x.Password == password);
 
-            ActivityUser activityUser = new();
+            CharacterDTO character = new();
+            LoginResponseDTO loginResponseDTO = new();
 
             if (user != null)
             {
-                activityUser.CharacterName = user.CharacterName;
-                activityUser.Race = user.Race;
-                activityUser.Level = user.Level;
-                activityUser.CurrentArea = user.CurrentArea;
-            }
+                character.CharacterName = user.Character.CharacterName;
+                character.Race = user.Character.Race;
+                character.Gender = user.Character.Gender;
+                character.Level = user.Character.Level;
+                character.Exp = user.Character.Exp;
+                character.TotalPoints = user.Character.TotalPoints;
+                character.FreePoints = user.Character.FreePoints;
+                character.Strength = user.Character.Strength;
+                character.Agility = user.Character.Agility;
+                character.Intelligence = user.Character.Intelligence;
 
-            LoginResponseDTO loginResponseDTO = new()
-            {
-                User = activityUser
-            };
+                loginResponseDTO.Character = character ;
+                return loginResponseDTO;
+            }
 
             return loginResponseDTO;
         }
 
-        public async Task<bool> Registration(RegistrationRequestDTO user)
+        public async Task<bool> Registration(RegistrationRequestDTO regDTO)
         {
-            if (user != null)
+            if (regDTO != null)
             {
-                var newUser = new User
+                var user = new User
                 {
-                    CharacterName = user.CharacterName,
-                    Email = user.Email,
-                    Password = user.Password,
-                    Race = user.Race,
-                    Level = 1,
-                    CurrentArea = Area.Town
+                    Email = regDTO.Email,
+                    Password = regDTO.Password,
                 };
 
-                dbContext.Users.Add(newUser);
+                var character = new Character
+                {
+                    CharacterName = regDTO.CharacterName,
+                    Gender = Gender.male,
+                    Race = Race.Human,
+                    CurrentArea = Area.Town,
+                    User = user
+                };
+                user.Character = character;
+
+                dbContext.Users.Add(user);
+                dbContext.Characters.Add(character);
+
                 await dbContext.SaveChangesAsync();
 
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
+
     }
 }

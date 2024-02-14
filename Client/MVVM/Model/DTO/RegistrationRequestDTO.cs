@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.MVVM.Model.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,6 +17,6 @@ namespace Client.MVVM.Model.DTO
         [Required(ErrorMessage = "Введите пароль")]
         public string Password { get; set; }
         [Required(ErrorMessage = "Введите рассу")]
-        public string Race { get; set; }
+        public Race Race { get; set; }
     }
 }

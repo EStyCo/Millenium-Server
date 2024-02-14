@@ -14,18 +14,20 @@
                          HorizontalOptions="Center" >
         <HorizontalStackLayout>
             <Frame>
-                <Label Text="{Binding UserStore.CurrentUser.CharacterName}"
-                       FontAttributes="Bold"/>
+                <Button Text="{Binding UserStore.Character.CharacterName}"
+                        FontAttributes="Bold"
+                        Command="{Binding ShowCharacterCommand}"/>
             </Frame>
             <Frame>
-                <Label Text="HP:"
-                       FontAttributes="Bold"
-                       TextColor="PaleVioletRed"/>
+                <Button Text="SpellBook"
+                        FontAttributes="Bold"
+                        TextColor="LightSkyBlue"
+                        Command="{Binding ShowSpellBookCommand}"/>
             </Frame>
             <Frame>
-                <Label Text="MP:"
-                       FontAttributes="Bold"
-                       TextColor="LightSkyBlue"/>
+                <Button Text="Inventory"
+                        FontAttributes="Bold"
+                        Command="{Binding ShowInventoryCommand}"/>
             </Frame>
         </HorizontalStackLayout>
 

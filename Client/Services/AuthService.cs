@@ -1,6 +1,6 @@
 ﻿using Client.MVVM.Model;
 using Client.MVVM.Model.DTO;
-using Client.MVVM.Utilities;
+using Client.MVVM.Model.Utilities;
 using Client.Services.IServices;
 using Microsoft.Extensions.Configuration;
 using System;

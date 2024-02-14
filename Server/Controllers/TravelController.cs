@@ -56,7 +56,7 @@ namespace Server.Controllers
 
             response.StatusCode = HttpStatusCode.OK;
             response.IsSuccess = true;
-            response.Result = travelResponse;
+            response.Result = true;
             return Ok(response);
         }
     }

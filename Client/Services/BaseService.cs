@@ -1,5 +1,5 @@
 ﻿using Client.MVVM.Model;
-using Client.MVVM.Utilities;
+using Client.MVVM.Model.Utilities;
 using Client.Services.IServices;
 using Newtonsoft.Json;
 using System.Text;
