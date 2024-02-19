@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Server.Hubs;
 using Server.Models;
 using Server.Models.DTO;
 using Server.Repository;
@@ -12,11 +13,13 @@ namespace Server.Controllers
     public class TravelController : ControllerBase
     {
         private readonly TravelRepository rep;
+        private readonly UserStorage userStorage;
         protected APIResponse response;
 
-        public TravelController(TravelRepository _rep)
+        public TravelController(TravelRepository _rep, UserStorage _userStorage)
         {
             rep = _rep;
+            userStorage = _userStorage;
             response = new();
         }
 
@@ -57,6 +60,16 @@ namespace Server.Controllers
             response.StatusCode = HttpStatusCode.OK;
             response.IsSuccess = true;
             response.Result = true;
+            return Ok(response);
+        }
+
+        [HttpPost("break")]
+        public async Task<IActionResult> BreakChar([FromBody] string name)
+        {
+            await userStorage.BreakCharacter(name);
+
+            response.StatusCode = HttpStatusCode.OK;
+            response.IsSuccess = true;
             return Ok(response);
         }
     }

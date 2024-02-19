@@ -19,6 +19,7 @@ namespace Client.MVVM.ViewModel
         private readonly IMapper mapper;
         private readonly UserStore userStore;
         private readonly Router router;
+        private readonly VitalityService vitalityService;
         public LoginRequestDTO UserLogin { get; set; }
         public bool isLoading { get; set; } = false;
         public bool canWriting { get; set; } = true;
@@ -26,12 +27,13 @@ namespace Client.MVVM.ViewModel
         public ICommand LoginCommand { get; set; }
         public ICommand GoToRegisterCommand { get; set; }
 
-        public MainViewModel(IAuthService _authService, IMapper _mapper, RegistrationPage _registrationPage, UserStore _userStore, Router _router)
+        public MainViewModel(IAuthService _authService, IMapper _mapper, RegistrationPage _registrationPage, UserStore _userStore, Router _router, VitalityService _vitalityService)
         {
             authService = _authService;
             mapper = _mapper;
             router = _router;
             userStore = _userStore;
+            vitalityService = _vitalityService;
             UserLogin = new();
 
             LoginCommand = new Command(async () => await Login());
@@ -52,6 +54,8 @@ namespace Client.MVVM.ViewModel
                 userStore.Character = mapper.Map<Character>(loginResponse.Character);
 
                 await router.GoToCurrentArea();
+
+                await vitalityService.ConnectionToHub();
             }
             else
             {

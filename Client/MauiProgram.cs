@@ -1,4 +1,5 @@
-﻿using Client.MVVM.View;
+﻿using Client.MVVM.Model;
+using Client.MVVM.View;
 using Client.MVVM.View.CharacterModal;
 using Client.MVVM.View.Town;
 using Client.MVVM.ViewModel;
@@ -47,6 +48,8 @@ namespace Client
             builder.Services.AddSingleton<UserStore>();
             builder.Services.AddSingleton<Router>();
             builder.Services.AddTransient<TravelService>();
+            builder.Services.AddSingleton<VitalityService>();
+            builder.Services.AddSingleton<HP>();
 
 #if DEBUG
             builder.Logging.AddDebug();

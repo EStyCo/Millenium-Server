@@ -9,7 +9,7 @@
                         IsVisible="False"
                         IsEnabled="False"/>
     </Shell.BackButtonBehavior>
-    
+
     <VerticalStackLayout VerticalOptions="Center" 
                          HorizontalOptions="Center" >
         <HorizontalStackLayout>
@@ -31,13 +31,38 @@
             </Frame>
         </HorizontalStackLayout>
 
+        <HorizontalStackLayout>
+            <Frame>
+                <HorizontalStackLayout>
+                    <Label Text="HP: "
+                       TextColor="PaleVioletRed"
+                       FontAttributes="Bold"/>
+                    <Label Text="{Binding HP.HealthPoint}"
+                       TextColor="PaleVioletRed"
+                       FontAttributes="Bold"/>
+                </HorizontalStackLayout>
+            </Frame>
+            <Frame>
+                <HorizontalStackLayout>
+                    <Label Text="HP: "
+                           TextColor="LightSkyBlue"
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding HP.ManaPoint}"
+                           TextColor="LightSkyBlue"
+                           FontAttributes="Bold"/>
+                </HorizontalStackLayout>
+            </Frame>
+        </HorizontalStackLayout>
+
         <VerticalStackLayout Spacing="5">
 
             <Frame>
                 <Label Text="Рад приветствовать тебя Путник в Нашем городе"/>
             </Frame>
 
-            <Button Text="Администрация"/>
+            <Button Text="Break"
+                    FontAttributes="Bold"
+                    Command="{Binding BreakCharacterCommand}"/>
             <Button Text="Таверна"/>
             <Button Text="Магазин"/>
 

@@ -87,5 +87,29 @@ namespace Server.Repository
             return false;
         }
 
+        public async Task<CharacterDTO> GetCharacter(string name)
+        { 
+            var character = dbContext.Characters
+                .FirstOrDefault(x => x.CharacterName == name);
+
+            if (character != null)
+            {
+                return new CharacterDTO()
+                {
+                    CharacterName = character.CharacterName,
+                    Race = character.Race,
+                    Gender = character.Gender,
+                    CurrentArea = character.CurrentArea,
+                    Level = character.Level,
+                    Exp = character.Exp,
+                    TotalPoints = character.TotalPoints,
+                    FreePoints = character.FreePoints,
+                    Strength = character.Strength,
+                    Agility = character.Agility,
+                    Intelligence = character.Intelligence,
+                };
+            }
+            return null;
+        }
     }
 }

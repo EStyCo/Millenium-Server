@@ -34,8 +34,16 @@ namespace Client.Services
                 Url = baseUrl + serviceUrl + "/go"
             });
         }
-        
 
+        public async Task<T> BreakChar<T>(string name)
+        {
+            return await SendAsync<T>(new APIRequest()
+            {
+                ApiType = ApiType.POST,
+                Data = name,
+                Url = baseUrl + serviceUrl + "/break"
+            });
+        }
     }
 }
 

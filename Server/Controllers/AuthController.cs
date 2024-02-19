@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Server;
 using Server.Models;
 using Server.Models.DTO;
 using Server.Repository;
@@ -12,11 +13,13 @@ namespace WebApplication1.Controllers
     public class AuthController : ControllerBase
     {
         private readonly UserRepository userRep;
+        private readonly UserStorage userStorage;
         protected APIResponse response;
 
-        public AuthController(UserRepository _userRep)
+        public AuthController(UserRepository _userRep, UserStorage _userStorage)
         {
             userRep = _userRep;
+            userStorage = _userStorage;
             response = new();
         }
 
