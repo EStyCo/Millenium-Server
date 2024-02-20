@@ -2,6 +2,7 @@
 using Client.MVVM.View.Town;
 using Client.Services;
 using PropertyChanged;
+using System.Linq.Expressions;
 using System.Windows.Input;
 
 namespace Client.MVVM.ViewModel
@@ -18,6 +19,8 @@ namespace Client.MVVM.ViewModel
             userStore = _userStore;
             GoToTownCommand = new Command(async () => await GoToTown());
             router = _router;
+
+            //Shell.Current.SetValue(AppShell.ShowTabsProperty, true);
         }
 
         private async Task GoToTown()

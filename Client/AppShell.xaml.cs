@@ -9,9 +9,15 @@ namespace Client
 {
     public partial class AppShell : Shell
     {
+        public static readonly BindableProperty ShowTabsProperty = BindableProperty.Create(nameof(ShowTabs), typeof(bool), typeof(AppShell), false);
+        public bool ShowTabs { get => (bool)GetValue(ShowTabsProperty); set => SetValue(ShowTabsProperty, value); }
+
         public AppShell()
         {
             InitializeComponent();
+
+            ShowTabs = false; 
+            BindingContext = this;
 
             Routing.RegisterRoute(Area.Town.ToString(), typeof(TownPage));
             Routing.RegisterRoute(Area.Glade.ToString(), typeof(GladePage));
@@ -21,8 +27,7 @@ namespace Client
             Routing.RegisterRoute(ModalArea.Inventory.ToString(), typeof(InventoryPage));
 
             Routing.RegisterRoute(nameof(RegistrationPage), typeof(RegistrationPage));
-            Routing.RegisterRoute(nameof(NewPage1), typeof(NewPage1));
-
+            Routing.RegisterRoute(nameof(ChatPage), typeof(ChatPage));
         }
 
         protected override void OnNavigating(ShellNavigatingEventArgs args)

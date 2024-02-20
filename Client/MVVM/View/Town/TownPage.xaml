@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Client.MVVM.View.Town.TownPage"
-             Title="TownPage">
+             x:Class="Client.MVVM.View.Town.TownPage">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior 
@@ -10,66 +9,73 @@
                         IsEnabled="False"/>
     </Shell.BackButtonBehavior>
 
-    <VerticalStackLayout VerticalOptions="Center" 
-                         HorizontalOptions="Center" >
-        <HorizontalStackLayout>
-            <Frame>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <VerticalStackLayout Spacing="3"
+                             Margin="0,10,0,0">
+            <HorizontalStackLayout HorizontalOptions="Center">
                 <Button Text="{Binding UserStore.Character.CharacterName}"
-                        FontAttributes="Bold"
-                        Command="{Binding ShowCharacterCommand}"/>
-            </Frame>
-            <Frame>
+                    TextColor="Black"
+                    BackgroundColor="AliceBlue"
+                    Command="{Binding ShowCharacterCommand}"/>
                 <Button Text="SpellBook"
-                        FontAttributes="Bold"
-                        TextColor="LightSkyBlue"
-                        Command="{Binding ShowSpellBookCommand}"/>
-            </Frame>
-            <Frame>
+                    BackgroundColor="AliceBlue"
+                    TextColor="Black"
+                    Command="{Binding ShowSpellBookCommand}"/>
                 <Button Text="Inventory"
-                        FontAttributes="Bold"
-                        Command="{Binding ShowInventoryCommand}"/>
-            </Frame>
-        </HorizontalStackLayout>
+                    BackgroundColor="AliceBlue"
+                    TextColor="Black"
+                    Command="{Binding ShowInventoryCommand}"/>
+            </HorizontalStackLayout>
 
-        <HorizontalStackLayout>
-            <Frame>
-                <HorizontalStackLayout>
-                    <Label Text="HP: "
-                       TextColor="PaleVioletRed"
-                       FontAttributes="Bold"/>
-                    <Label Text="{Binding HP.HealthPoint}"
-                       TextColor="PaleVioletRed"
-                       FontAttributes="Bold"/>
-                </HorizontalStackLayout>
-            </Frame>
-            <Frame>
-                <HorizontalStackLayout>
-                    <Label Text="HP: "
-                           TextColor="LightSkyBlue"
-                           FontAttributes="Bold"/>
-                    <Label Text="{Binding HP.ManaPoint}"
-                           TextColor="LightSkyBlue"
-                           FontAttributes="Bold"/>
-                </HorizontalStackLayout>
-            </Frame>
-        </HorizontalStackLayout>
-
-        <VerticalStackLayout Spacing="5">
-
-            <Frame>
-                <Label Text="Рад приветствовать тебя Путник в Нашем городе"/>
-            </Frame>
-
-            <Button Text="Break"
-                    FontAttributes="Bold"
-                    Command="{Binding BreakCharacterCommand}"/>
-            <Button Text="Таверна"/>
-            <Button Text="Магазин"/>
-
-            <Button Text="Выйти из города"
-                    Margin="0,20,0,0"
-                    Command="{Binding GoToGladeCommand}"/>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Frame HeightRequest="55"
+                       CornerRadius="250">
+                    <HorizontalStackLayout>
+                        <Label Text="{Binding HP.HealthPoint}"
+                           TextColor="PaleVioletRed"/>
+                        <Label Text="/200"
+                           TextColor="PaleVioletRed"/>
+                    </HorizontalStackLayout>
+                </Frame>
+                <Frame HeightRequest="55"
+                       CornerRadius="250">
+                    <HorizontalStackLayout>
+                        <Label Text="{Binding HP.ManaPoint}"
+                           TextColor="LightSkyBlue"/>
+                        <Label Text="/200"
+                           TextColor="LightSkyBlue"/>
+                    </HorizontalStackLayout>
+                </Frame>
+            </HorizontalStackLayout>
         </VerticalStackLayout>
 
-    </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center">
+            
+            <VerticalStackLayout WidthRequest="200"
+                                 Spacing="5">
+                <Frame WidthRequest="300"
+                       Margin="0,0,0,25">
+                    <Label Text="Рад приветствовать тебя Путник в Нашем городе"/>
+                </Frame>
+
+                <Button Text="Break"
+                        WidthRequest="200"
+                        Command="{Binding BreakCharacterCommand}"/>
+                <Button Text="Таверна"/>
+                <Button Text="Магазин"/>
+
+                <Button Text="Выйти из города"
+                        Margin="0,20,0,0"
+                        Command="{Binding GoToGladeCommand}"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

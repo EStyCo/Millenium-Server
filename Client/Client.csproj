@@ -70,6 +70,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="MVVM\View\ChatPage.xaml.cs">
+	    <DependentUpon>ChatPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="MVVM\View\CharacterModal\CharacterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -82,7 +88,7 @@
 	  <MauiXaml Update="MVVM\View\GladePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="MVVM\View\NewPage1.xaml">
+	  <MauiXaml Update="MVVM\View\ChatPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\View\RegistrationPage.xaml">

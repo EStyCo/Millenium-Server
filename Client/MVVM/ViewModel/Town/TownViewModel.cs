@@ -2,6 +2,7 @@
 using Client.MVVM.Model.Utilities;
 using Client.MVVM.View;
 using Client.Services;
+using Microsoft.Maui.Controls;
 using PropertyChanged;
 using System.Windows.Input;
 
@@ -38,6 +39,8 @@ namespace Client.MVVM.ViewModel.Town
             ShowInventoryCommand = new Command(async () => await ShowInventory());
             router = _router;
 
+
+            Shell.Current.SetValue(AppShell.ShowTabsProperty, true);
             //ConnectionHub();
         }
 

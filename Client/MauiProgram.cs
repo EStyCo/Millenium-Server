@@ -28,7 +28,8 @@ namespace Client
 
             AddCharacterModalPages(builder);
 
-            builder.Services.AddTransient<NewPage1>();
+            builder.Services.AddSingleton<ChatPage>();
+            builder.Services.AddSingleton<ChatViewModel>();
 
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<MainViewModel>();

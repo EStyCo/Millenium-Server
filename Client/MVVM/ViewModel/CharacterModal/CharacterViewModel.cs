@@ -20,6 +20,8 @@ namespace Client.MVVM.ViewModel.CharacterModal
             router.canBack = true;
             ReturnCommand = new Command(async () => await Return());
             UserStore = _userStore;
+
+            Shell.Current.SetValue(AppShell.ShowTabsProperty, false);
         }
 
         private async Task Return()

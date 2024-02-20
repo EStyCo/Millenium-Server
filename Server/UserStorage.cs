@@ -25,7 +25,6 @@ namespace Server
         public async Task ConnectHub(string name)
         {
             var userRepository = userRepositoryFactory.Create();
-
             var character = await userRepository.GetCharacter(name);
 
             if (character != null)

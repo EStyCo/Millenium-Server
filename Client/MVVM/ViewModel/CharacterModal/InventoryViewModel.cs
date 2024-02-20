@@ -17,6 +17,8 @@ namespace Client.MVVM.ViewModel.CharacterModal
         {
             router = _router;
             ReturnCommand = new Command(async () => await Return());
+
+            Shell.Current.SetValue(AppShell.ShowTabsProperty, false);
         }
 
         private async Task Return()
