@@ -1,15 +1,19 @@
-﻿using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+﻿using PropertyChanged;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Server.Models.Monsters
+namespace Client.MVVM.Model
 {
-    public abstract class Monster
+    [AddINotifyPropertyChangedInterface]
+    public class Monster
     {
         public int Id { get; set; }
         public int CurrentHP { get; set; }
         public int MaxHP { get; set; }
         public string Name { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
-
-        public abstract int Attack();
     }
 }

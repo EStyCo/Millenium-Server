@@ -4,6 +4,7 @@ using Server;
 using Server.Hubs;
 using Server.Models;
 using Server.Models.Interfaces;
+using Server.Models.Locations;
 using Server.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,8 @@ builder.Services.AddScoped<TravelRepository>();
 
 builder.Services.AddSingleton<UserStorage>();
 builder.Services.AddSingleton<IServiceFactory<UserRepository>, ScopedServiceFactory<UserRepository>>();
+
+builder.Services.AddSingleton<Glade>();
 
 builder.Services.AddDbContext<DbUserContext>(
     options =>

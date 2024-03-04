@@ -48,6 +48,7 @@ namespace Client
 
             builder.Services.AddSingleton<UserStore>();
             builder.Services.AddSingleton<Router>();
+            builder.Services.AddTransient<MonsterService>();
             builder.Services.AddTransient<TravelService>();
             builder.Services.AddSingleton<VitalityService>();
             builder.Services.AddSingleton<HP>();

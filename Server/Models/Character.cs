@@ -1,4 +1,6 @@
-﻿using Server.Models.Utilities;
+﻿using Server.Models.Locations;
+using Server.Models.Utilities;
+using Area = Server.Models.Utilities.Area;
 
 namespace Server.Models
 {

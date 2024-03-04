@@ -24,11 +24,16 @@ namespace Client.MVVM.ViewModel.Town
         public ICommand ShowSpellBookCommand { get; set; }
         public ICommand ShowInventoryCommand { get; set; }
 
-        public TownViewModel(UserStore _userStore, Router _router, HP _HP, VitalityService _vitalityService, TravelService _travelService)
+        public TownViewModel(UserStore _userStore, 
+                             VitalityService _vitalityService, 
+                             TravelService _travelService,
+                             Router _router, 
+                             HP _HP) 
         {
             UserStore = _userStore;
             vitalityService = _vitalityService;
             travelService = _travelService;
+            router = _router;
             HP = _HP;
 
             BreakCharacterCommand = new Command(async () => await BreakCharacter());
@@ -37,17 +42,10 @@ namespace Client.MVVM.ViewModel.Town
             ShowCharacterCommand = new Command(async () => await ShowCharacter());
             ShowSpellBookCommand = new Command(async () => await ShowSpellBook());
             ShowInventoryCommand = new Command(async () => await ShowInventory());
-            router = _router;
 
 
             Shell.Current.SetValue(AppShell.ShowTabsProperty, true);
-            //ConnectionHub();
         }
-
-        /*private async Task ConnectionHub()
-        {
-            await vitalityService.ConnectionToHub();
-        }*/
 
         private async Task BreakCharacter()
         {
@@ -57,7 +55,6 @@ namespace Client.MVVM.ViewModel.Town
         private async Task GoToGlade()
         {
             await router.GoToNewArea(Area.Glade);
-            //await Shell.Current.GoToAsync(Area.Glade.ToString());
         }
 
         private async Task ShowCharacter()
