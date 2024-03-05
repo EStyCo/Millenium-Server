@@ -19,8 +19,8 @@ namespace Client
             ShowTabs = false; 
             BindingContext = this;
 
-            Routing.RegisterRoute(Area.Town.ToString(), typeof(TownPage));
-            Routing.RegisterRoute(Area.Glade.ToString(), typeof(GladePage));
+            Routing.RegisterRoute(Place.Town.ToString(), typeof(TownPage));
+            Routing.RegisterRoute(Place.Glade.ToString(), typeof(GladePage));
 
             Routing.RegisterRoute(ModalArea.Character.ToString(), typeof(CharacterPage));
             Routing.RegisterRoute(ModalArea.SpellBook.ToString(), typeof(SpellBookPage));

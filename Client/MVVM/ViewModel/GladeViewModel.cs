@@ -12,7 +12,7 @@ namespace Client.MVVM.ViewModel
     [AddINotifyPropertyChangedInterface]
     public class GladeViewModel
     {
-        private readonly UserStore userStore;
+        private readonly PlaceService placeService;
         private readonly MonsterService monsterService;
         private readonly Router router;
 
@@ -22,11 +22,10 @@ namespace Client.MVVM.ViewModel
         public ICommand AddMonsterCommand { get; set; }
         public ICommand DeleteMonsterCommand { get; set; }
 
-        public GladeViewModel(UserStore _userStore, 
-                              Router _router,
-                              MonsterService _monsterService)
+        public GladeViewModel(MonsterService _monsterService,
+                              Router _router)
         {
-            userStore = _userStore;
+            placeService = new(this);
             monsterService = _monsterService;
             router = _router;
 
@@ -41,29 +40,25 @@ namespace Client.MVVM.ViewModel
 
         private async Task LoadMonsters()
         {
-            var response = await monsterService.GetMonsters<APIResponse>();
-            if (response != null && response.IsSuccess)
-            {
-                Monsters = JsonConvert.DeserializeObject<List<Monster>>(Convert.ToString(response.Result));
-            }
+            await placeService.ConnectToHub();
         }
 
         private async Task AddMonster()
         { 
             await monsterService.AddMonster<APIResponse>();
-            await LoadMonsters();
+            //await LoadMonsters();
         }
 
         private async Task DeleteMonster(int id)
         {
             await monsterService.DeleteMonster<APIResponse>(id);
-            await LoadMonsters();
+            //await LoadMonsters();
         }
 
         private async Task GoToTown()
         {
-            await router.GoToNewArea(Area.Town);
-            //await Shell.Current.GoToAsync(Area.Town.ToString());
+            await placeService.Disconnect();
+            await router.GoToNewArea(Place.Town);
         }
     }
 }

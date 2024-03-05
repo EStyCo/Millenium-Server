@@ -1,9 +1,10 @@
 ﻿namespace Client.MVVM.Model.Utilities
 {
-    public enum Area
+    public enum Place
     {
         Town,
         Glade,
+        Wood,
         Battle,
     }
 }

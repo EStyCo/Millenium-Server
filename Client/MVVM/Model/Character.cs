@@ -7,7 +7,7 @@ namespace Client.MVVM.Model
         public string CharacterName { get; set; } = string.Empty;
         public Race Race { get; set; }
         public Gender Gender { get; set; }
-        public Area CurrentArea { get; set; }
+        public Place CurrentArea { get; set; }
         public int Level { get; set; } = 1;
         public int Exp { get; set; } = 0;
         public int TotalPoints { get; set; } = 0;

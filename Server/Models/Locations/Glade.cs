@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.SignalR;
 using Server.Models.Monsters;
 
 namespace Server.Models.Locations
@@ -26,6 +27,8 @@ namespace Server.Models.Locations
                 monster.Id = maxId + 1;
             }
             Monsters.Add(monster);
+
+            await UpdateMonsters();
         }
 
         public override async Task DeleteMonster(int id)
@@ -38,6 +41,8 @@ namespace Server.Models.Locations
             { 
                 Monsters.Remove(monster);
             }
+
+            await UpdateMonsters();
         }
 
         public override async Task<List<Monster>> GetMonster()
@@ -50,6 +55,11 @@ namespace Server.Models.Locations
             }
 
             return null;
+        }
+
+        public override async Task UpdateMonsters()
+        {
+            await Clients.All.SendAsync("UpdateList", Monsters);
         }
     }
 }

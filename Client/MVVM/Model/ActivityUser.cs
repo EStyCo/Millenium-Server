@@ -7,6 +7,6 @@ namespace Client.MVVM.Model
         public string CharacterName { get; set; }
         public string Race { get; set; }
         public int Level { get; set; }
-        public Area CurrentArea { get; set; }
+        public Place CurrentArea { get; set; }
     }
 }

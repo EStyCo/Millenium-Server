@@ -54,7 +54,7 @@ namespace Client.MVVM.ViewModel.Town
 
         private async Task GoToGlade()
         {
-            await router.GoToNewArea(Area.Glade);
+            await router.GoToNewArea(Place.Glade);
         }
 
         private async Task ShowCharacter()

@@ -3,7 +3,6 @@ using Server.Models;
 using Server.Models.DTO;
 using Server.Models.Locations;
 using Server.Models.Utilities;
-using Area = Server.Models.Utilities.Area;
 
 namespace Server.Repository
 {
@@ -73,7 +72,7 @@ namespace Server.Repository
                     CharacterName = regDTO.CharacterName,
                     Gender = Gender.male,
                     Race = Race.Human,
-                    CurrentArea = Area.Town,
+                    CurrentArea = Place.Town,
                     User = user
                 };
                 user.Character = character;

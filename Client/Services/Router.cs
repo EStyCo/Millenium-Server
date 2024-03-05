@@ -28,28 +28,28 @@ namespace Client.Services
             var response = await travelService.GetCurrentPage<APIResponse>(new TravelDTO
             {
                 CharacterName = userStore.Character.CharacterName,
-                Area = userStore.Character.CurrentArea
+                Place = userStore.Character.CurrentArea
             });
 
             if (response != null && response.IsSuccess)
             {
                 var result = JsonConvert.DeserializeObject<TravelDTO>(Convert.ToString(response.Result));
-                await Shell.Current.GoToAsync(result?.Area.ToString());
+                await Shell.Current.GoToAsync(result?.Place.ToString());
             }
         }
 
-        public async Task GoToNewArea(Area area)
+        public async Task GoToNewArea(Place place)
         {
             var response = await travelService.PushNewPage<APIResponse>(new TravelDTO
             {
                 CharacterName = userStore.Character.CharacterName,
-                Area = area
+                Place = place
             });
 
             if (response != null && response.IsSuccess && (bool)response.Result)
             {
-                userStore.Character.CurrentArea = area;
-                await Shell.Current.GoToAsync(area.ToString());
+                userStore.Character.CurrentArea = place;
+                await Shell.Current.GoToAsync(place.ToString());
             }
             else if(response.ErrorMessages.Count > 0)
             {

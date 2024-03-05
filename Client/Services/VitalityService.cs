@@ -10,7 +10,7 @@ namespace Client.Services
 {
     public class VitalityService
     {
-        HubConnection connection;
+        private HubConnection connection;
         private readonly HP hp;
         private readonly UserStore userStore;
 

@@ -1,9 +1,10 @@
 ﻿namespace Server.Models.Utilities
 {
-    public enum Area
+    public enum Place
     {
         Town,
         Glade,
+        Wood,
         Battle,
     }
 }

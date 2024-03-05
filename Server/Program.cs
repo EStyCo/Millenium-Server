@@ -48,6 +48,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapHub<UserStorage>("/UserStorage");
+app.MapHub<Glade>("/GladeHub");
 
 app.Run();
 
