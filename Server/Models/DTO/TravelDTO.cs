@@ -5,6 +5,6 @@ namespace Server.Models.DTO
     public class TravelDTO
     {
         public string CharacterName { get; set; } = string.Empty;
-        public Place Area { get; set; }
+        public Place Place { get; set; }
     }
 }

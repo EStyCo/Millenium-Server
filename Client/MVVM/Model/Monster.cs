@@ -11,6 +11,7 @@ namespace Client.MVVM.Model
     public class Monster
     {
         public int Id { get; set; }
+        public bool IsTarget { get; set; } = false;
         public int CurrentHP { get; set; }
         public int MaxHP { get; set; }
         public string Name { get; set; } = string.Empty;

@@ -36,7 +36,7 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CurrentArea")
+                    b.Property<int>("CurrentArea")
                         .HasColumnType("int");
 
                     b.Property<int>("Exp")

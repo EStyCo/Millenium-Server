@@ -11,8 +11,8 @@ using Server.Models;
 namespace Server.Migrations
 {
     [DbContext(typeof(DbUserContext))]
-    [Migration("20240213193958_initial")]
-    partial class initial
+    [Migration("20240306050604_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,7 +39,7 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CurrentArea")
+                    b.Property<int>("CurrentArea")
                         .HasColumnType("int");
 
                     b.Property<int>("Exp")

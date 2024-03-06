@@ -9,14 +9,14 @@ namespace Client
 {
     public partial class AppShell : Shell
     {
-        public static readonly BindableProperty ShowTabsProperty = BindableProperty.Create(nameof(ShowTabs), typeof(bool), typeof(AppShell), false);
-        public bool ShowTabs { get => (bool)GetValue(ShowTabsProperty); set => SetValue(ShowTabsProperty, value); }
+        /*public static readonly BindableProperty ShowTabsProperty = BindableProperty.Create(nameof(ShowTabs), typeof(bool), typeof(AppShell), false);
+        public bool ShowTabs { get => (bool)GetValue(ShowTabsProperty); set => SetValue(ShowTabsProperty, value); }*/
 
         public AppShell()
         {
             InitializeComponent();
 
-            ShowTabs = false; 
+            //ShowTabs = false; 
             BindingContext = this;
 
             Routing.RegisterRoute(Place.Town.ToString(), typeof(TownPage));

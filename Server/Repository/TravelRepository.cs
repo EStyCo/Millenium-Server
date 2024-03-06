@@ -25,7 +25,7 @@ namespace Server.Repository
                 return new TravelDTO
                 {
                     CharacterName = user.CharacterName,
-                    Area = user.CurrentArea
+                    Place = user.CurrentArea
                 };
             }
 
@@ -39,12 +39,12 @@ namespace Server.Repository
 
             if (user != null)
             {
-                user.CurrentArea = travel.Area;
+                user.CurrentArea = travel.Place;
                 await dbContext.SaveChangesAsync();
                 return new TravelDTO
                 {
                     CharacterName = user.CharacterName,
-                    Area = user.CurrentArea
+                    Place = user.CurrentArea
                 };
             }
 

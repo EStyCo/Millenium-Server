@@ -7,6 +7,7 @@ using Client.MVVM.ViewModel.CharacterModal;
 using Client.MVVM.ViewModel.Town;
 using Client.Services;
 using Client.Services.IServices;
+using CommunityToolkit.Maui.Core;
 using Microsoft.Extensions.Logging;
 
 namespace Client
@@ -18,6 +19,7 @@ namespace Client
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkitCore()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

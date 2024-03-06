@@ -27,9 +27,10 @@ namespace Client.Services
                 .WithUrl($"{baseUrl}/GladeHub")
                 .Build();
 
-            connection.On<List<Monster>>("UpdateList", async (List<Monster> newList) =>
+            connection.On<List<Monster>>("UpdateList", (List<Monster> newList) =>
             {
                 viewModel.Monsters = newList;
+                viewModel.SelectMonster();
             });
 
             try

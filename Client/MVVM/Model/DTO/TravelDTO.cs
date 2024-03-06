@@ -4,7 +4,7 @@ namespace Client.MVVM.Model.DTO
 {
     public class TravelDTO
     {
-        public string CharacterName { get; set; }
+        public string CharacterName { get; set; } = string.Empty;
         public Place Place { get; set; }
     }
 }

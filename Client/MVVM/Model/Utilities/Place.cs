@@ -2,9 +2,9 @@
 {
     public enum Place
     {
-        Town,
-        Glade,
-        Wood,
-        Battle,
+        Town = 0,
+        Glade = 1,
+        Wood = 2,
+        Battle = 3,
     }
 }

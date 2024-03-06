@@ -10,47 +10,146 @@
                         IsEnabled="False"/>
     </Shell.BackButtonBehavior>
 
-    <VerticalStackLayout>
-        <Label 
-            Text="Поляна"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        
-        <Button Text="Добавить"
-                HorizontalOptions="Start"
-                Command="{Binding AddMonsterCommand}"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-        <ListView ItemsSource="{Binding Monsters}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Frame HorizontalOptions="Center">
-                            <HorizontalStackLayout Spacing="15" VerticalOptions="Center">
-                                <Image Source="{Binding ImagePath}" 
-                                       WidthRequest="75" 
-                                       HeightRequest="75" 
-                                       Aspect="AspectFit" />
-                                <Label Text="{Binding Name}" VerticalOptions="Center"/>
-                                <HorizontalStackLayout VerticalOptions="Center">
-                                    <Label Text="{Binding CurrentHP}" />
-                                    <Label Text="/" />
-                                    <Label Text="{Binding MaxHP}" />
-                                    <Label Text="HP" />
-                                </HorizontalStackLayout>
-                                <Button Text="Attack" 
-                                        BackgroundColor="MediumPurple"
-                                        VerticalOptions="Center"
-                                        Command="{Binding Source={x:Reference Name=GladePage1}, Path=BindingContext.DeleteMonsterCommand}"
-                                        CommandParameter="{Binding Id}" />
+
+        <VerticalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Button Text="{Binding UserStore.Character.CharacterName}"
+                        TextColor="Black"
+                        BackgroundColor="AliceBlue"
+                        Command="{Binding ShowCharacterCommand}"/>
+                <Button Text="SpellBook"
+                        BackgroundColor="AliceBlue"
+                        TextColor="Black"
+                        Command="{Binding ShowSpellBookCommand}"/>
+                <Button Text="Inventory"
+                        BackgroundColor="AliceBlue"
+                        TextColor="Black"
+                        Command="{Binding ShowInventoryCommand}"/>
+                <Button Text="Add"
+                        HorizontalOptions="Start"
+                        Command="{Binding AddMonsterCommand}"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" 
+                                   Spacing="10">
+                <Frame HeightRequest="55"
+                        CornerRadius="250">
+                    <HorizontalStackLayout>
+                        <Label Text="{Binding HP.HealthPoint}"
+                               TextColor="PaleVioletRed"/>
+                        <Label Text="/200"
+                               TextColor="PaleVioletRed"/>
+                    </HorizontalStackLayout>
+                </Frame>
+                <Frame HeightRequest="55"
+                       CornerRadius="250">
+                    <HorizontalStackLayout>
+                        <Label Text="{Binding HP.ManaPoint}"
+                               TextColor="LightSkyBlue"/>
+                        <Label Text="/200"
+                               TextColor="LightSkyBlue"/>
+                    </HorizontalStackLayout>
+                </Frame>
+                <ImageButton Source="movement"
+                             BackgroundColor="LightGray"
+                             CornerRadius="5"
+                             HeightRequest="40"
+                             WidthRequest="40"
+                             Command="{Binding ShowMovementCommand}" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1"
+                    VerticalOptions="StartAndExpand"
+                    HorizontalOptions="Center">
+            <CollectionView ItemsSource="{Binding Monsters}">
+                <CollectionView.ItemTemplate >
+                    <DataTemplate>
+                        <Frame>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding IsTarget}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="Gray" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Frame" Binding="{Binding IsTarget}" Value="False">
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                            <HorizontalStackLayout>
+                                <VerticalStackLayout>
+                                    <Image Source="{Binding ImagePath}" 
+                                           WidthRequest="75" 
+                                           HeightRequest="75" 
+                                           Aspect="Fill" />
+                                    <Label Text="{Binding Name}" VerticalOptions="Center"/>
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout>
+                                    <HorizontalStackLayout VerticalOptions="Center">
+                                        <Label Text="{Binding CurrentHP}" />
+                                        <Label Text="/" />
+                                        <Label Text="{Binding MaxHP}" />
+                                        <Label Text="HP" />
+                                    </HorizontalStackLayout>
+                                    <Button Text="Attack" 
+                                    BackgroundColor="MediumPurple"
+                                    VerticalOptions="Center"
+                                    Command="{Binding Source={x:Reference Name=GladePage1}, Path=BindingContext.DeleteMonsterCommand}"
+                                    CommandParameter="{Binding Id}" />
+                                    <Button Text="Target" 
+                                    BackgroundColor="PaleVioletRed"
+                                    VerticalOptions="Center"
+                                    Command="{Binding Source={x:Reference Name=GladePage1}, Path=BindingContext.SelectMonsterCommand}"
+                                    CommandParameter="{Binding Id}" />
+                                </VerticalStackLayout>
                             </HorizontalStackLayout>
                         </Frame>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        
-        <Button Text="В город"
-                HorizontalOptions="Center"
-                Command="{Binding GoToTownCommand}"/>
-    </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
+        <VerticalStackLayout Grid.Row="2">
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsShowMenu}">
+                <Button Text="В город"
+                        HorizontalOptions="Center"
+                        Command="{Binding GoToTownCommand}"/>
+                <Button Text="Дальше"
+                        HorizontalOptions="Center"
+                        Command="{Binding GoToTownCommand}"/>
+            </HorizontalStackLayout>
+
+            <Frame>
+                <ScrollView HorizontalOptions="Center"
+                            Orientation="Horizontal"
+                            HorizontalScrollBarVisibility="Never">
+
+                    <CollectionView ItemsSource="{Binding Skills}"
+                        HorizontalScrollBarVisibility="Never"
+                        HorizontalOptions="Center">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Button Text="{Binding}" 
+                                            BackgroundColor="MediumPurple"
+                                            VerticalOptions="Center"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </Frame>
+        </VerticalStackLayout>
+    </Grid>
+
+
 </ContentPage>

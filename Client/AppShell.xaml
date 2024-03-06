@@ -9,12 +9,19 @@
     Shell.FlyoutBehavior="Disabled"
     Title="Client">
 
-    <TabBar x:Name="Mybar">
+
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <!--<TabBar x:Name="Mybar">
         <Tab Title="Main">
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"/>
         </Tab>
         <Tab Title="Chating" IsVisible="{Binding ShowTabs}">
             <ShellContent ContentTemplate="{DataTemplate views:ChatPage}" Route="ChatPage"/>
         </Tab>
-    </TabBar>
+    </TabBar>-->
 </Shell>

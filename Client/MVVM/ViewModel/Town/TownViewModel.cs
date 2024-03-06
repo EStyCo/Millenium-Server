@@ -44,7 +44,7 @@ namespace Client.MVVM.ViewModel.Town
             ShowInventoryCommand = new Command(async () => await ShowInventory());
 
 
-            Shell.Current.SetValue(AppShell.ShowTabsProperty, true);
+            //Shell.Current.SetValue(AppShell.ShowTabsProperty, true);
         }
 
         private async Task BreakCharacter()
