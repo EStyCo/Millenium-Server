@@ -15,7 +15,6 @@ namespace Server.Models.Locations
             userStorage = _userStorage;
         }
 
-
         public override async Task AddMonster()
         {
             await Task.Delay(10);
@@ -49,13 +48,25 @@ namespace Server.Models.Locations
             await UpdateMonsters();
         }
 
-        public override async Task<List<Monster>> GetMonster()
+        public override async Task<List<MonsterDTO>> GetMonster()
         {
             await Task.Delay(10);
 
             if (Monsters.Count > 0)
-            { 
-                return Monsters;
+            {
+                List<MonsterDTO> monsterList = new();
+                foreach (var m in Monsters) 
+                { 
+                    MonsterDTO mDTO = new();
+                    mDTO.Id = m.Id;
+                    mDTO.CurrentHP = m.CurrentHP;
+                    mDTO.MaxHP = m.MaxHP;
+                    mDTO.Name = m.Name;
+                    mDTO.ImagePath = m.ImagePath;
+                    monsterList.Add(mDTO);
+                }
+
+                return monsterList;
             }
 
             return null;
@@ -63,7 +74,7 @@ namespace Server.Models.Locations
 
         public override async Task UpdateMonsters()
         {
-            await Clients.All.SendAsync("UpdateList", Monsters);
+            await Clients.All.SendAsync("UpdateList", await GetMonster());
         }
 
         public override async Task AttackMonster(AttackMonsterDTO attackMonster)

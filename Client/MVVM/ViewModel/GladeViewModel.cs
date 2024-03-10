@@ -13,53 +13,53 @@ namespace Client.MVVM.ViewModel
     [AddINotifyPropertyChangedInterface]
     public class GladeViewModel 
     {
-        private readonly PlaceService placeService;
+        public PlaceService PlaceService { get; set; }
+        private readonly UserStore userStore;
         private readonly MonsterService monsterService;
         public Router Router { get; set; }
         public HP HP { get; set; }
-        private int targetId = 999;
-        public List<Monster> Monsters { get; set; }
         public List<string> Skills { get; set; } = new List<string>() { "Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5", "Skill 6" };
 
         public ICommand GoToTownCommand { get; set; }
         public ICommand AddMonsterCommand { get; set; }
         public ICommand DeleteMonsterCommand { get; set; }
-        public ICommand SelectMonsterCommand { get; set; }
+        //public ICommand SelectMonsterCommand { get; set; }
 
         public GladeViewModel(MonsterService _monsterService,
+                              UserStore _userStore,
                               Router _router,
                               HP _HP)
         {
-            placeService = new(this);
+            userStore = _userStore;
             monsterService = _monsterService;
             Router = _router;
             HP = _HP;
-            Monsters = new();
+            PlaceService = new(this, userStore, monsterService);
 
             AddMonsterCommand = new Command(async () => await AddMonster());
             DeleteMonsterCommand = new Command<int>(async (id) => await DeleteMonster(id));
-            SelectMonsterCommand = new Command<int>(async (id) => await SelectMonster(id));
+            //SelectMonsterCommand = new Command<int>(async (id) => await SelectMonster(id));
 
             LoadMonsters();
         }
 
-        private async Task SelectMonster(int id)
+        /*private async Task SelectMonster(int id)
         {
-            foreach (var item in Monsters)
+            foreach (var item in placeService.Monsters)
             {
                 item.IsTarget = false;
             }
 
-            var monster = Monsters.FirstOrDefault(x => x.Id == id);
+            var monster = placeService.Monsters.FirstOrDefault(x => x.Id == id);
 
             if(monster != null)
             { 
                 monster.IsTarget = true;
-                targetId = id;
+                placeService.targetId = id;
             }
-        }
+        }*/
 
-        public void SelectMonster()
+        /*public void SelectMonster()
         {
             var monster = Monsters.FirstOrDefault(x => x.Id == targetId);
 
@@ -67,11 +67,11 @@ namespace Client.MVVM.ViewModel
             {
                 monster.IsTarget = true;
             }
-        }
+        }*/
 
         private async Task LoadMonsters()
         {
-            await placeService.ConnectToHub();
+            await PlaceService.ConnectToHub();
         }
 
         private async Task AddMonster()

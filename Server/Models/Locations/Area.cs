@@ -12,7 +12,7 @@ namespace Server.Models.Locations
         protected List<Monster> Monsters = new();
         public abstract Task AddMonster();
         public abstract Task DeleteMonster(int id);
-        public abstract Task<List<Monster>> GetMonster();
+        public abstract Task<List<MonsterDTO>> GetMonster();
         public abstract Task UpdateMonsters();
         public abstract Task AttackMonster(AttackMonsterDTO attackMonster);
 
