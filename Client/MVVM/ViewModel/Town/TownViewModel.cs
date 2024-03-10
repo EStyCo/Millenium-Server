@@ -12,25 +12,20 @@ namespace Client.MVVM.ViewModel.Town
     public class TownViewModel
     {
         public Router Router { get; set; }
-        private readonly TravelService travelService;
-        private readonly VitalityService vitalityService;
         public UserStore UserStore {  get; set; }
-        public HP HP { get; set; }
 
+
+        private readonly TravelService travelService;
         public ICommand BreakCharacterCommand { get; set; }
 
 
         public TownViewModel(UserStore _userStore, 
-                             VitalityService _vitalityService, 
                              TravelService _travelService,
-                             Router _Router, 
-                             HP _HP) 
+                             Router _Router) 
         {
             UserStore = _userStore;
-            vitalityService = _vitalityService;
             travelService = _travelService;
             Router = _Router;
-            HP = _HP;
 
             BreakCharacterCommand = new Command(async () => await BreakCharacter());
         }

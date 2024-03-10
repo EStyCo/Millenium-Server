@@ -11,6 +11,12 @@
                         IsEnabled="False"/>
     </Shell.BackButtonBehavior>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Utilities:InverseBooleanConverter x:Key="Converter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -46,16 +52,16 @@
                         CornerRadius="250">
                     <HorizontalStackLayout>
                         <HorizontalStackLayout>
-                            <Label Text="{Binding HP.CurrentHP}" TextColor="PaleVioletRed"/>
+                            <Label Text="{Binding UserStore.VitalityService.CurrentHP}" TextColor="PaleVioletRed"/>
                             <Label Text="/" TextColor="PaleVioletRed"/>
-                            <Label Text="{Binding HP.MaxHP}" TextColor="PaleVioletRed"/>
+                            <Label Text="{Binding UserStore.VitalityService.MaxHP}" TextColor="PaleVioletRed"/>
                         </HorizontalStackLayout>
                     </HorizontalStackLayout>
                 </Frame>
                 <Frame HeightRequest="55"
                        CornerRadius="250">
                     <HorizontalStackLayout>
-                        <Label Text="{Binding HP.ManaPoint}"
+                        <Label Text="{Binding UserStore.VitalityService.ManaPoint}"
                                TextColor="LightSkyBlue"/>
                         <Label Text="/200"
                                TextColor="LightSkyBlue"/>
@@ -133,7 +139,7 @@
                 <ScrollView HorizontalOptions="Center"
                             Orientation="Horizontal"
                             HorizontalScrollBarVisibility="Never">
-                    <CollectionView ItemsSource="{Binding Skills}"
+                    <CollectionView ItemsSource="{Binding UserStore.SpellService.SpellList}"
                         HorizontalScrollBarVisibility="Never"
                         HorizontalOptions="Center">
                         <CollectionView.ItemsLayout>
@@ -142,12 +148,17 @@
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <StackLayout>
-                                    <Button Text="{Binding}" 
+                                <VerticalStackLayout>
+                                    <Button Text="{Binding Name}"
+                                            IsEnabled="{Binding IsReady}"
                                             BackgroundColor="MediumPurple"
                                             VerticalOptions="Center"
-                                            Command="{Binding Source={x:Reference Name=Page}, Path=BindingContext.PlaceService.AttackTargetCommand}"/>
-                                </StackLayout>
+                                            Command="{Binding Source={x:Reference Name=Page}, Path=BindingContext.PlaceService.AttackTargetCommand}"
+                                            CommandParameter="{Binding Id}"/>
+                                    <Label Text="{Binding CoolDown}"
+                                           IsVisible="{Binding IsReady, Converter={StaticResource Converter}}"
+                                           HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

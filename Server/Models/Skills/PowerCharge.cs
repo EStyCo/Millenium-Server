@@ -3,12 +3,12 @@ using static Server.Models.ActiveUser;
 
 namespace Server.Models.Skills
 {
-    public class Simple : Skill
+    public class PowerCharge : Skill
     {
-        public Simple(int _id, SendRestTimeDelegate _SendDelegate)
+        public PowerCharge(int _id, SendRestTimeDelegate _SendDelegate)
         {
-            Name = "Удар с правой";
-            CoolDown = 7;
+            Name = "Мощный удар";
+            CoolDown = 12;
             Id = _id;
             SendRestDelegate = _SendDelegate;
         }
@@ -19,7 +19,7 @@ namespace Server.Models.Skills
             if (IsReady)
             {
                 StartRest();
-                return (c.Strength * 2) + c.Strength * (c.Agility / 100);
+                return ((c.Strength * 2) + c.Strength * (c.Agility / 100)) * 2;
             }
 
             return 0;
@@ -32,7 +32,7 @@ namespace Server.Models.Skills
             SendRestDelegate?.Invoke(Id, RestSeconds);
 
             while (RestSeconds > 0)
-            { 
+            {
                 await Task.Delay(1000);
                 RestSeconds--;
                 SendRestDelegate?.Invoke(Id, RestSeconds);

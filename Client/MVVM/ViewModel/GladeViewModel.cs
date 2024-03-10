@@ -14,60 +14,29 @@ namespace Client.MVVM.ViewModel
     public class GladeViewModel 
     {
         public PlaceService PlaceService { get; set; }
-        private readonly UserStore userStore;
+        public UserStore UserStore { get; set; }
         private readonly MonsterService monsterService;
         public Router Router { get; set; }
-        public HP HP { get; set; }
         public List<string> Skills { get; set; } = new List<string>() { "Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5", "Skill 6" };
 
         public ICommand GoToTownCommand { get; set; }
         public ICommand AddMonsterCommand { get; set; }
         public ICommand DeleteMonsterCommand { get; set; }
-        //public ICommand SelectMonsterCommand { get; set; }
 
         public GladeViewModel(MonsterService _monsterService,
-                              UserStore _userStore,
-                              Router _router,
-                              HP _HP)
+                              UserStore _UserStore,
+                              Router _router)
         {
-            userStore = _userStore;
+            UserStore = _UserStore;
             monsterService = _monsterService;
             Router = _router;
-            HP = _HP;
-            PlaceService = new(this, userStore, monsterService);
+            PlaceService = new(this, UserStore, monsterService);
 
             AddMonsterCommand = new Command(async () => await AddMonster());
             DeleteMonsterCommand = new Command<int>(async (id) => await DeleteMonster(id));
-            //SelectMonsterCommand = new Command<int>(async (id) => await SelectMonster(id));
 
             LoadMonsters();
         }
-
-        /*private async Task SelectMonster(int id)
-        {
-            foreach (var item in placeService.Monsters)
-            {
-                item.IsTarget = false;
-            }
-
-            var monster = placeService.Monsters.FirstOrDefault(x => x.Id == id);
-
-            if(monster != null)
-            { 
-                monster.IsTarget = true;
-                placeService.targetId = id;
-            }
-        }*/
-
-        /*public void SelectMonster()
-        {
-            var monster = Monsters.FirstOrDefault(x => x.Id == targetId);
-
-            if (monster != null)
-            {
-                monster.IsTarget = true;
-            }
-        }*/
 
         private async Task LoadMonsters()
         {

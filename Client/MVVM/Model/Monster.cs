@@ -19,27 +19,5 @@ namespace Client.MVVM.Model
         public int MaxHP { get; set; }
         public string Name { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
-
-
-        private readonly UserStore userStore;
-        private readonly MonsterService monsterService;
-        //public ICommand AttackTargetCommand { get; set; }
-
-        public Monster(UserStore _userStore, MonsterService _monsterService)
-        {
-            userStore = _userStore;
-            monsterService = _monsterService;
-            //AttackTargetCommand = new Command(async () => await Attack());
-        }
-
-        private async Task Attack()
-        {
-            AttackMonsterDTO attack = new();
-            attack.IdMonster = Id;
-            attack.NameCharacter = userStore.Character.CharacterName;
-            attack.SkillNaming = "Удар с правой";
-
-            await monsterService.AttackMonster<APIResponse>(attack);
-        }
     }
 }

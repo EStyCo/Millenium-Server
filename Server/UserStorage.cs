@@ -33,7 +33,10 @@ namespace Server
                 newUser.Character = character;
                 ActiveUsers.Add(newUser);
 
-                await newUser.StartHub();
+                await Task.WhenAll(newUser.StartVitalityConnection(), newUser.StartSpellConnection());
+
+                /*await newUser.StartVitalityConnection();
+                await newUser.StartSpellConnection();*/
             }
         }
 

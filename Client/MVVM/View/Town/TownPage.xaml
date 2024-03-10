@@ -40,15 +40,15 @@
                 <Frame HeightRequest="55"
                        CornerRadius="250">
                     <HorizontalStackLayout>
-                        <Label Text="{Binding HP.CurrentHP}" TextColor="PaleVioletRed"/>
+                        <Label Text="{Binding UserStore.VitalityService.CurrentHP}" TextColor="PaleVioletRed"/>
                         <Label Text="/" TextColor="PaleVioletRed"/>
-                        <Label Text="{Binding HP.MaxHP}" TextColor="PaleVioletRed"/>
+                        <Label Text="{Binding UserStore.VitalityService.MaxHP}" TextColor="PaleVioletRed"/>
                     </HorizontalStackLayout>
                 </Frame>
                 <Frame HeightRequest="55"
                        CornerRadius="250">
                     <HorizontalStackLayout>
-                        <Label Text="{Binding HP.ManaPoint}"
+                        <Label Text="{Binding UserStore.VitalityService.ManaPoint}"
                            TextColor="LightSkyBlue"/>
                         <Label Text="/200"
                            TextColor="LightSkyBlue"/>

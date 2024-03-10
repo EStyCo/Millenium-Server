@@ -52,8 +52,6 @@ namespace Client
             builder.Services.AddSingleton<Router>();
             builder.Services.AddTransient<MonsterService>();
             builder.Services.AddTransient<TravelService>();
-            builder.Services.AddSingleton<VitalityService>();
-            builder.Services.AddSingleton<HP>();
 
 #if DEBUG
             builder.Logging.AddDebug();

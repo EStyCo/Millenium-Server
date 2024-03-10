@@ -24,7 +24,7 @@ namespace Server.Models.Locations
             {
                 monster.Id = 0;
             }
-            else 
+            else
             {
                 int maxId = Monsters.Max(x => x.Id);
                 monster.Id = maxId + 1;
@@ -41,7 +41,7 @@ namespace Server.Models.Locations
             var monster = Monsters.FirstOrDefault(x => x.Id == id);
 
             if (monster != null)
-            { 
+            {
                 Monsters.Remove(monster);
             }
 
@@ -51,12 +51,12 @@ namespace Server.Models.Locations
         public override async Task<List<MonsterDTO>> GetMonster()
         {
             await Task.Delay(10);
+            List<MonsterDTO> monsterList = new();
 
             if (Monsters.Count > 0)
             {
-                List<MonsterDTO> monsterList = new();
-                foreach (var m in Monsters) 
-                { 
+                foreach (var m in Monsters)
+                {
                     MonsterDTO mDTO = new();
                     mDTO.Id = m.Id;
                     mDTO.CurrentHP = m.CurrentHP;
@@ -66,10 +66,9 @@ namespace Server.Models.Locations
                     monsterList.Add(mDTO);
                 }
 
-                return monsterList;
             }
 
-            return null;
+            return monsterList;
         }
 
         public override async Task UpdateMonsters()
@@ -78,14 +77,14 @@ namespace Server.Models.Locations
         }
 
         public override async Task AttackMonster(AttackMonsterDTO attackMonster)
-        { 
+        {
             var monster = Monsters.FirstOrDefault(x => x.Id == attackMonster.IdMonster);
             var character = userStorage.ActiveUsers.FirstOrDefault(x => x.Character.CharacterName == attackMonster.NameCharacter);
 
             if (monster != null && character != null)
             {
-                var skill = character.ActiveSkills.FirstOrDefault(x => x.Name == attackMonster.SkillNaming);
-                var damage = skill.Attack(character.Character);
+                var skill = character.ActiveSkills.FirstOrDefault(x => x.Id == attackMonster.SkillId);
+                var damage = await skill.Attack(character.Character);
                 var hp = monster.CurrentHP -= damage;
 
                 if (hp <= 0)

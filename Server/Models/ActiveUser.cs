@@ -20,9 +20,10 @@ namespace Server.Models
         public int regenRateMP;
 
 
+        public delegate Task SendRestTimeDelegate(int id, int time);
         public int RegenRateMP { get { return regenRateMP = Consider.RegenRateMP(Character); } }
         public CharacterDTO Character { get; set; }
-        public List<Simple> ActiveSkills { get; set; } = new List<Simple> { new Simple(), new Simple(), new Simple(), new Simple() };
+        public List<Skill> ActiveSkills { get; set; }
 
         private readonly IHubContext<UserStorage> hubContext;
 
@@ -30,17 +31,51 @@ namespace Server.Models
         {
             hubContext = _hubContext;
 
+            CreateSpellList();
         }
 
-        public async Task StartHub()
+        public async Task StartVitalityConnection()
         {
-
             while (true)
             {
                 await SendHP();
                 await SendMP();
 
                 await Task.Delay(1000);
+            }
+        }
+
+        public async Task StartSpellConnection()
+        {
+            List<SpellDTO> spellList = new();
+
+            foreach (Skill spell in ActiveSkills)
+            {
+                SpellDTO spellDTO = new();
+                spellDTO.Id = spell.Id;
+                spellDTO.Name = spell.Name;
+                spellDTO.IsReady = spell.IsReady;
+                spellDTO.CoolDown = spell.RestSeconds;
+
+                spellList.Add(spellDTO);
+            }
+            await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateSpellList", spellList);
+        }
+
+        public async Task SendRestTime(int id, int time)
+        {
+            var spell = ActiveSkills.FirstOrDefault(x => x.Id == id);
+            if (spell != null)
+            {
+                SpellDTO spellDTO = new()
+                {
+                    Id = spell.Id,
+                    Name = spell.Name,
+                    IsReady = spell.IsReady,
+                    CoolDown = spell.RestSeconds,
+                };
+
+                await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateSpell", spellDTO);
             }
         }
 
@@ -66,6 +101,18 @@ namespace Server.Models
             }
 
             await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateMP", sendMP);
+        }
+
+        private void CreateSpellList()
+        {
+            SendRestTimeDelegate sendDelegate;
+            sendDelegate = SendRestTime;
+            ActiveSkills = new();
+
+            Simple skill = new(ActiveSkills.Count, sendDelegate);
+            ActiveSkills.Add(skill);
+            PowerCharge pwr = new(ActiveSkills.Count, sendDelegate);
+            ActiveSkills.Add(pwr);
         }
     }
 }

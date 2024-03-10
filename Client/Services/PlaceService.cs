@@ -3,11 +3,6 @@ using Client.MVVM.Model.DTO;
 using Client.MVVM.ViewModel;
 using Microsoft.AspNetCore.SignalR.Client;
 using PropertyChanged;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Client.Services
@@ -27,15 +22,15 @@ namespace Client.Services
         public ICommand AttackTargetCommand { get; set; }
         public ICommand SelectMonsterCommand { get; set; }
 
-        public PlaceService(GladeViewModel _viewModel, 
-                            UserStore _userStore, 
+        public PlaceService(GladeViewModel _viewModel,
+                            UserStore _userStore,
                             MonsterService _monsterService)
         {
             viewModel = _viewModel;
             userStore = _userStore;
             monsterService = _monsterService;
 
-            AttackTargetCommand = new Command(async () => await Attack());
+            AttackTargetCommand = new Command<int>(async (spellId) => await Attack(spellId));
             SelectMonsterCommand = new Command<int>(async (id) => await SelectMonster(id));
         }
 
@@ -48,9 +43,10 @@ namespace Client.Services
             connection.On<List<MonsterDTO>>("UpdateList", (List<MonsterDTO> mDTOList) =>
             {
                 Monsters = new();
-                foreach (MonsterDTO mDTO in mDTOList) 
+
+                foreach (MonsterDTO mDTO in mDTOList)
                 {
-                    Monster m = new(userStore, monsterService);
+                    Monster m = new();
                     m.Id = mDTO.Id;
                     m.CurrentHP = mDTO.CurrentHP;
                     m.MaxHP = mDTO.MaxHP;
@@ -77,12 +73,12 @@ namespace Client.Services
             await connection.StopAsync();
         }
 
-        private async Task Attack()
+        private async Task Attack(int spellId)
         {
             AttackMonsterDTO attack = new();
             attack.IdMonster = targetId;
             attack.NameCharacter = userStore.Character.CharacterName;
-            attack.SkillNaming = "Удар с правой";
+            attack.SkillId = spellId;
 
             await monsterService.AttackMonster<APIResponse>(attack);
         }
