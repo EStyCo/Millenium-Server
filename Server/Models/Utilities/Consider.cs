@@ -6,12 +6,12 @@ namespace Server.Models.Utilities
     {
         public static int MaxHP(CharacterDTO character)
         {
-            return 200;
+            return (int)(100 + (character.Strength * 0.20) + (character.Strength + character.Agility + character.Level));
         }
 
         public static int MaxMP(CharacterDTO character)
         {
-            return 200;
+            return (int)(100 + (character.Intelligence * 0.20) + (character.Intelligence + character.Agility + character.Level));
         }
 
         public static int RegenRateHP(CharacterDTO character)

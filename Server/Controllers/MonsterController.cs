@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
+using Server.Models.DTO;
 using Server.Models.Locations;
 using System.Net;
 
@@ -47,6 +48,16 @@ namespace Server.Controllers
             response.StatusCode = HttpStatusCode.OK;
             response.IsSuccess = true;
             response.Result = monsters;
+            return Ok(response);
+        }
+
+        [HttpPost("attack")]
+        public async Task<IActionResult> AttackMonster(AttackMonsterDTO attackMonster)
+        {
+            await glade.AttackMonster(attackMonster);
+
+            response.StatusCode = HttpStatusCode.OK;
+            response.IsSuccess = true;
             return Ok(response);
         }
     }

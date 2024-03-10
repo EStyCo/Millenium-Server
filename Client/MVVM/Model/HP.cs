@@ -10,12 +10,14 @@ namespace Client.MVVM.Model
     [AddINotifyPropertyChangedInterface]
     public class HP
     {
-        public int HealthPoint { get; set; }
+        public int CurrentHP { get; set; }
+        public int MaxHP { get; set; }
         public int ManaPoint { get; set; }
 
-        public async Task SetHP(int hp)
-        { 
-            HealthPoint = hp;
+        public async Task SetHP(int[] newHP)
+        {
+            CurrentHP = newHP[0];
+            MaxHP = newHP[1];
         }
 
         public async Task SetMP(int mp)

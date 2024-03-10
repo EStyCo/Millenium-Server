@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Server.Hubs;
 using Server.Models.DTO;
+using Server.Models.Skills;
 using Server.Models.Utilities;
 
 namespace Server.Models
@@ -21,6 +22,7 @@ namespace Server.Models
 
         public int RegenRateMP { get { return regenRateMP = Consider.RegenRateMP(Character); } }
         public CharacterDTO Character { get; set; }
+        public List<Simple> ActiveSkills { get; set; } = new List<Simple> { new Simple(), new Simple(), new Simple(), new Simple() };
 
         private readonly IHubContext<UserStorage> hubContext;
 
@@ -44,11 +46,11 @@ namespace Server.Models
 
         public async Task SendHP()
         {
-            int sendHP = maxHP;
+            int[] sendHP = { maxHP, maxHP };
 
             if (CurrentHP < MaxHP)
             {
-                sendHP = CurrentHP += RegenRateHP;
+                sendHP[0] = CurrentHP += RegenRateHP;
             }
 
             await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateHP", sendHP);

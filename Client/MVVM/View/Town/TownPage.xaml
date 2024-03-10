@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Utilities="clr-namespace:Client.MVVM.Model.Utilities"
              x:Class="Client.MVVM.View.Town.TownPage">
 
     <Shell.BackButtonBehavior>
@@ -21,25 +22,27 @@
                 <Button Text="{Binding UserStore.Character.CharacterName}"
                     TextColor="Black"
                     BackgroundColor="AliceBlue"
-                    Command="{Binding ShowCharacterCommand}"/>
+                    Command="{Binding Router.GoModalAreaCommand}"
+                    CommandParameter="{x:Static Utilities:ModalArea.Character}" />
                 <Button Text="SpellBook"
                     BackgroundColor="AliceBlue"
                     TextColor="Black"
-                    Command="{Binding ShowSpellBookCommand}"/>
+                    Command="{Binding Router.GoModalAreaCommand}"
+                    CommandParameter="{x:Static Utilities:ModalArea.SpellBook}" />
                 <Button Text="Inventory"
                     BackgroundColor="AliceBlue"
                     TextColor="Black"
-                    Command="{Binding ShowInventoryCommand}"/>
+                    Command="{Binding Router.GoModalAreaCommand}"
+                    CommandParameter="{x:Static Utilities:ModalArea.Inventory}" />
             </HorizontalStackLayout>
 
             <HorizontalStackLayout HorizontalOptions="Center">
                 <Frame HeightRequest="55"
                        CornerRadius="250">
                     <HorizontalStackLayout>
-                        <Label Text="{Binding HP.HealthPoint}"
-                           TextColor="PaleVioletRed"/>
-                        <Label Text="/200"
-                           TextColor="PaleVioletRed"/>
+                        <Label Text="{Binding HP.CurrentHP}" TextColor="PaleVioletRed"/>
+                        <Label Text="/" TextColor="PaleVioletRed"/>
+                        <Label Text="{Binding HP.MaxHP}" TextColor="PaleVioletRed"/>
                     </HorizontalStackLayout>
                 </Frame>
                 <Frame HeightRequest="55"
@@ -74,7 +77,8 @@
 
                 <Button Text="Выйти из города"
                         Margin="0,20,0,0"
-                        Command="{Binding GoToGladeCommand}"/>
+                        Command="{Binding Router.GoAreaCommand}"
+                        CommandParameter="{x:Static Utilities:Place.Glade}" />
             </VerticalStackLayout>
         </VerticalStackLayout>
     </Grid>

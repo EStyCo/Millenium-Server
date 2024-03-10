@@ -26,7 +26,7 @@ namespace Client.MVVM.ViewModel.CharacterModal
 
         private async Task Return()
         {
-            await router.GoToCurrentArea();
+            await router.GoCurrentArea();
         }
 
         public void Dispose()

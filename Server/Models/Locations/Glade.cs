@@ -1,14 +1,18 @@
 ﻿
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Server.Models.DTO;
 using Server.Models.Monsters;
 
 namespace Server.Models.Locations
 {
     public class Glade : Area
     {
-        public Glade()
+        private readonly UserStorage userStorage;
+        public Glade(UserStorage _userStorage)
         {
             Monsters.Add(new Goblin());
+            userStorage = _userStorage;
         }
 
 
@@ -60,6 +64,26 @@ namespace Server.Models.Locations
         public override async Task UpdateMonsters()
         {
             await Clients.All.SendAsync("UpdateList", Monsters);
+        }
+
+        public override async Task AttackMonster(AttackMonsterDTO attackMonster)
+        { 
+            var monster = Monsters.FirstOrDefault(x => x.Id == attackMonster.IdMonster);
+            var character = userStorage.ActiveUsers.FirstOrDefault(x => x.Character.CharacterName == attackMonster.NameCharacter);
+
+            if (monster != null && character != null)
+            {
+                var skill = character.ActiveSkills.FirstOrDefault(x => x.Name == attackMonster.SkillNaming);
+                var damage = skill.Attack(character.Character);
+                var hp = monster.CurrentHP -= damage;
+
+                if (hp <= 0)
+                {
+                    Monsters.Remove(monster);
+                }
+
+                await UpdateMonsters();
+            }
         }
     }
 }

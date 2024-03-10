@@ -4,8 +4,8 @@
     {
         public Goblin()
         {
-            CurrentHP = 25;
-            MaxHP = 25;
+            CurrentHP = 64;
+            MaxHP = 64;
             Name = "Goblin " + GetRandomName();
             ImagePath = "goblin_image.png";
         }

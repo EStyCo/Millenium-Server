@@ -1,4 +1,5 @@
 ﻿using Client.MVVM.Model;
+using Client.MVVM.Model.DTO;
 using Client.MVVM.Model.Utilities;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -44,6 +45,16 @@ namespace Client.Services
                 ApiType = ApiType.POST,
                 Data = id,
                 Url = baseUrl + serviceUrl + "/delete"
+            });
+        }
+
+        public async Task<T> AttackMonster<T>(AttackMonsterDTO attackMonster)
+        {
+            return await SendAsync<T>(new APIRequest()
+            {
+                ApiType = ApiType.POST,
+                Data = attackMonster,
+                Url = baseUrl + serviceUrl + "/attack"
             });
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Server.Models.DTO;
 using Server.Models.Monsters;
 using Server.Models.Utilities;
 using System.Diagnostics;
@@ -13,6 +14,7 @@ namespace Server.Models.Locations
         public abstract Task DeleteMonster(int id);
         public abstract Task<List<Monster>> GetMonster();
         public abstract Task UpdateMonsters();
+        public abstract Task AttackMonster(AttackMonsterDTO attackMonster);
 
         public override async Task OnConnectedAsync()
         {

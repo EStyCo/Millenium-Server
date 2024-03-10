@@ -27,7 +27,7 @@ namespace Client.Services
                 .WithUrl($"{baseUrl}/UserStorage")
                 .Build();
 
-            connection.On<int>("UpdateHP", async (int newHP) =>
+            connection.On<int[]>("UpdateHP", async (int[] newHP) =>
             {
                 await hp.SetHP(newHP);
             });

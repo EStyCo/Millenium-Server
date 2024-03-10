@@ -13,7 +13,6 @@ namespace Server
         private readonly IServiceFactory<UserRepository> userRepositoryFactory;
         private readonly IHubContext<UserStorage> hubContext;
 
-
         public List<ActiveUser> ActiveUsers = new List<ActiveUser>();
 
         public UserStorage(IHubContext<UserStorage> _hubContext, IServiceFactory<UserRepository> _userRepositoryFactory)
@@ -36,8 +35,6 @@ namespace Server
 
                 await newUser.StartHub();
             }
-
-            return;
         }
 
         public async Task BreakCharacter(string playerName)

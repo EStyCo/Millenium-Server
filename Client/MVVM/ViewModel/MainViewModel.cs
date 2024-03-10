@@ -53,7 +53,7 @@ namespace Client.MVVM.ViewModel
                 var loginResponse = JsonConvert.DeserializeObject<LoginResponseDTO>(Convert.ToString(response.Result));
                 userStore.Character = mapper.Map<Character>(loginResponse.Character);
 
-                await router.GoToCurrentArea();
+                await router.GoCurrentArea();
 
                 await vitalityService.ConnectionToHub();
             }
