@@ -5,12 +5,12 @@ namespace Server.Models.Skills
 {
     public class PowerCharge : Skill
     {
-        public PowerCharge(int _id, SendRestTimeDelegate _SendDelegate)
+        public PowerCharge()
         {
             Name = "Мощный удар";
+            Description = "Мощный удар, превосходящий обычный удар примерно в 2 раза";
+            ImagePath = "spell_powercharge.png";
             CoolDown = 12;
-            Id = _id;
-            SendRestDelegate = _SendDelegate;
         }
 
         public async override Task<int> Attack(CharacterDTO c)

@@ -28,15 +28,11 @@ namespace Server
 
             if (character != null)
             {
-                ActiveUser newUser = new(hubContext);
+                ActiveUser newUser = new(hubContext, character);
                 newUser.ConnectionId = Context.ConnectionId;
-                newUser.Character = character;
                 ActiveUsers.Add(newUser);
 
-                await Task.WhenAll(newUser.StartVitalityConnection(), newUser.StartSpellConnection());
-
-                /*await newUser.StartVitalityConnection();
-                await newUser.StartSpellConnection();*/
+                await Task.WhenAll(newUser.StartVitalityConnection(), newUser.UpdateSpellList(character));
             }
         }
 

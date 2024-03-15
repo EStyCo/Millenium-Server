@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Models;
 
@@ -10,9 +11,11 @@ using Server.Models;
 namespace Server.Migrations
 {
     [DbContext(typeof(DbUserContext))]
-    partial class DbUserContextModelSnapshot : ModelSnapshot
+    [Migration("20240312032035_AddSkills")]
+    partial class AddSkills
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,9 +46,6 @@ namespace Server.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("FreePoints")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FreelSpellPoints")
                         .HasColumnType("int");
 
                     b.Property<int>("Gender")
@@ -79,9 +79,6 @@ namespace Server.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("TotalPoints")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TotalSpellPoints")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

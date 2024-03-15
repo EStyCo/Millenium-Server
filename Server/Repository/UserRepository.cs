@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Server.Models;
 using Server.Models.DTO;
-using Server.Models.Locations;
+using Server.Models.Skills;
+using Server.Models.Skills.LearningMaster;
 using Server.Models.Utilities;
 
 namespace Server.Repository
@@ -9,10 +11,12 @@ namespace Server.Repository
     public class UserRepository
     {
         private readonly DbUserContext dbContext;
+        private readonly IMapper mapper;
 
-        public UserRepository(DbUserContext _dbContext)
+        public UserRepository(DbUserContext _dbContext, IMapper _mapper)
         {
             dbContext = _dbContext;
+            mapper = _mapper;
         }
 
         public async Task<bool> IsUniqueUser(string email)
@@ -34,27 +38,12 @@ namespace Server.Repository
                 .Include(x => x.Character)
                 .FirstOrDefaultAsync(x => x.Email == email.ToLower() && x.Password == password);
 
-            CharacterDTO character = new();
-            LoginResponseDTO loginResponseDTO = new();
+            if (user == null) return null;
 
-            if (user != null)
+            return new LoginResponseDTO
             {
-                character.CharacterName = user.Character.CharacterName;
-                character.Race = user.Character.Race;
-                character.Gender = user.Character.Gender;
-                character.Level = user.Character.Level;
-                character.Exp = user.Character.Exp;
-                character.TotalPoints = user.Character.TotalPoints;
-                character.FreePoints = user.Character.FreePoints;
-                character.Strength = user.Character.Strength;
-                character.Agility = user.Character.Agility;
-                character.Intelligence = user.Character.Intelligence;
-
-                loginResponseDTO.Character = character ;
-                return loginResponseDTO;
-            }
-
-            return loginResponseDTO;
+                Character = mapper.Map<CharacterDTO>(user.Character)
+            };
         }
 
         public async Task<bool> Registration(RegistrationRequestDTO regDTO)
@@ -89,28 +78,100 @@ namespace Server.Repository
         }
 
         public async Task<CharacterDTO> GetCharacter(string name)
-        { 
+        {
+            var character = dbContext.Characters
+                .FirstOrDefault(x => x.CharacterName == name);
+
+            if (character == null) return null;
+
+            return mapper.Map<CharacterDTO>(character);
+        }
+
+        public async Task<LearningResponseDTO> GetSkills(string name)
+        {
+            await Task.Delay(10);
             var character = dbContext.Characters
                 .FirstOrDefault(x => x.CharacterName == name);
 
             if (character != null)
             {
-                return new CharacterDTO()
+                List<SkillType> skillTypeList = new() {character.Skill1,
+                                                       character.Skill2,
+                                                       character.Skill3,
+                                                       character.Skill4,
+                                                       character.Skill5 };
+
+                return new LearningResponseDTO()
                 {
-                    CharacterName = character.CharacterName,
-                    Race = character.Race,
-                    Gender = character.Gender,
-                    CurrentArea = character.CurrentArea,
-                    Level = character.Level,
-                    Exp = character.Exp,
-                    TotalPoints = character.TotalPoints,
                     FreePoints = character.FreePoints,
-                    Strength = character.Strength,
-                    Agility = character.Agility,
-                    Intelligence = character.Intelligence,
+                    AllSkills = new SkillCollection().CreateLearningList(skillTypeList)
                 };
             }
             return null;
+        }
+
+        public async Task<CharacterDTO> LearnSkill(LearnSkillDTO dto)
+        {
+            var character = dbContext.Characters
+                .FirstOrDefault(x => x.CharacterName == dto.CharacterName);
+
+            if (character == null)
+                return null;
+
+            var skillTypeList = new List<SkillType>
+            {
+                character.Skill1, character.Skill2, character.Skill3, character.Skill4, character.Skill5
+            };
+
+            if (!skillTypeList.Contains(SkillType.None) || skillTypeList.Contains(dto.SkillType))
+                return null;
+
+            var index = skillTypeList.FindIndex(x => x == SkillType.None);
+            if (index != -1)
+            {
+                skillTypeList[index] = dto.SkillType;
+            }
+            else return null;
+
+            character.Skill1 = skillTypeList[0];
+            character.Skill2 = skillTypeList[1];
+            character.Skill3 = skillTypeList[2];
+            character.Skill4 = skillTypeList[3];
+            character.Skill5 = skillTypeList[4];
+
+            await dbContext.SaveChangesAsync();
+
+            return mapper.Map<CharacterDTO>(character);
+        }
+        public async Task<CharacterDTO> ForgotSkill(LearnSkillDTO dto)
+        {
+            var character = dbContext.Characters
+                .FirstOrDefault(x => x.CharacterName == dto.CharacterName);
+
+            if (character == null )
+                return null;
+
+            var skillTypeList = new List<SkillType>
+            {
+                character.Skill1, character.Skill2, character.Skill3, character.Skill4, character.Skill5
+            };
+
+            var index = skillTypeList.FindIndex(x => x == dto.SkillType);
+            if (index != -1)
+            {
+                skillTypeList[index] = SkillType.None;
+            }
+            else return null;
+
+            character.Skill1 = skillTypeList[0];
+            character.Skill2 = skillTypeList[1];
+            character.Skill3 = skillTypeList[2];
+            character.Skill4 = skillTypeList[3];
+            character.Skill5 = skillTypeList[4];
+
+            await dbContext.SaveChangesAsync();
+
+            return mapper.Map<CharacterDTO>(character);
         }
     }
 }

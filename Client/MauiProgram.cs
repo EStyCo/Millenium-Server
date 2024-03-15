@@ -39,6 +39,9 @@ namespace Client
             builder.Services.AddTransient<TownPage>();
             builder.Services.AddTransient<TownViewModel>();
 
+            builder.Services.AddTransient<SpellMasterPage>();
+            builder.Services.AddTransient<SpellMasterViewModel>();
+
             builder.Services.AddTransient<GladePage>();
             builder.Services.AddTransient<GladeViewModel>();
 
@@ -52,6 +55,7 @@ namespace Client
             builder.Services.AddSingleton<Router>();
             builder.Services.AddTransient<MonsterService>();
             builder.Services.AddTransient<TravelService>();
+            builder.Services.AddTransient<LearningService>();
 
 #if DEBUG
             builder.Logging.AddDebug();

@@ -2,6 +2,7 @@
 using Client.MVVM.View;
 using Client.MVVM.View.CharacterModal;
 using Client.MVVM.View.Town;
+using Client.MVVM.ViewModel.Town;
 using Client.Services;
 using Microsoft.Maui.Controls.Xaml;
 
@@ -21,6 +22,7 @@ namespace Client
 
             Routing.RegisterRoute(Place.Town.ToString(), typeof(TownPage));
             Routing.RegisterRoute(Place.Glade.ToString(), typeof(GladePage));
+            Routing.RegisterRoute(Place.SpellMaster.ToString(), typeof(SpellMasterPage));
 
             Routing.RegisterRoute(ModalArea.Character.ToString(), typeof(CharacterPage));
             Routing.RegisterRoute(ModalArea.SpellBook.ToString(), typeof(SpellBookPage));

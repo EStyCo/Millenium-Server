@@ -71,9 +71,15 @@
 
                 <Button Text="Break"
                         WidthRequest="200"
-                        Command="{Binding BreakCharacterCommand}"/>
-                <Button Text="Таверна"/>
-                <Button Text="Магазин"/>
+                        Command="{Binding BreakCharacterCommand}"
+                        IsEnabled="False"/>
+                <Button Text="Таверна"
+                        IsEnabled="False"/>
+                <Button Text="Мастер"
+                        Command="{Binding Router.GoAreaCommand}"
+                        CommandParameter="{x:Static Utilities:Place.SpellMaster}" />
+                <Button Text="Магазин"
+                        IsEnabled="False"/>
 
                 <Button Text="Выйти из города"
                         Margin="0,20,0,0"

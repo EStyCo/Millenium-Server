@@ -6,5 +6,6 @@
         Glade = 1,
         Wood = 2,
         Battle = 3,
+        SpellMaster = 4
     }
 }

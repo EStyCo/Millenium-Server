@@ -5,12 +5,12 @@ namespace Server.Models.Skills
 {
     public class Simple : Skill
     {
-        public Simple(int _id, SendRestTimeDelegate _SendDelegate)
+        public Simple()
         {
             Name = "Удар с правой";
+            Description = "Обычный удар с правой, ничего выдающегося.";
+            ImagePath = "spell_simple.png";
             CoolDown = 7;
-            Id = _id;
-            SendRestDelegate = _SendDelegate;
         }
 
         public async override Task<int> Attack(CharacterDTO c)

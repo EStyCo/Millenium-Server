@@ -1,15 +1,14 @@
-﻿using PropertyChanged;
+﻿using Server.Models.Utilities;
 
-namespace Client.MVVM.Model.DTO
+namespace Server.Models.Skills.LearningMaster
 {
-    [AddINotifyPropertyChangedInterface]
-    public class SpellDTO
+    public class SpellMasterDTO
     {
-        public int Id { get; set; }
+        public SkillType SkillType { get; set; }
         public string Name { get; set; } = string.Empty;
         public int CoolDown { get; set; }
         public string Description { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
-        public bool IsReady { get; set; } = false;
+        public bool IsLearning { get; set; } = false;
     }
 }

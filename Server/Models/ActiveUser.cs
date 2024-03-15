@@ -27,11 +27,11 @@ namespace Server.Models
 
         private readonly IHubContext<UserStorage> hubContext;
 
-        public ActiveUser(IHubContext<UserStorage> _hubContext)
+        public ActiveUser(IHubContext<UserStorage> _hubContext, 
+                          CharacterDTO _character)
         {
             hubContext = _hubContext;
-
-            CreateSpellList();
+            Character = _character;
         }
 
         public async Task StartVitalityConnection()
@@ -45,8 +45,10 @@ namespace Server.Models
             }
         }
 
-        public async Task StartSpellConnection()
+        public async Task UpdateSpellList(CharacterDTO character)
         {
+            await CreateSpellList(character);
+
             List<SpellDTO> spellList = new();
 
             foreach (Skill spell in ActiveSkills)
@@ -103,16 +105,20 @@ namespace Server.Models
             await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateMP", sendMP);
         }
 
-        private void CreateSpellList()
+        private async Task CreateSpellList(CharacterDTO character)
         {
+            await Task.Delay(10);
+
+            List<SkillType> skills = new() {character.Skill1, 
+                                            character.Skill2, 
+                                            character.Skill3, 
+                                            character.Skill4, 
+                                            character.Skill5 };
+
             SendRestTimeDelegate sendDelegate;
             sendDelegate = SendRestTime;
-            ActiveSkills = new();
 
-            Simple skill = new(ActiveSkills.Count, sendDelegate);
-            ActiveSkills.Add(skill);
-            PowerCharge pwr = new(ActiveSkills.Count, sendDelegate);
-            ActiveSkills.Add(pwr);
+            ActiveSkills = new SkillCollection().CreateSkillList(skills, sendDelegate);
         }
     }
 }

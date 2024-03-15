@@ -28,7 +28,7 @@ namespace WebApplication1.Controllers
         {
             var userResponse = await userRep.LoginUser(user.Email, user.Password);
 
-            if (userResponse.Character == null)
+            if (userResponse == null)
             {
                 response.StatusCode = HttpStatusCode.BadRequest;
                 response.IsSuccess = false;
