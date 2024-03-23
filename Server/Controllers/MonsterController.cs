@@ -11,17 +11,19 @@ namespace Server.Controllers
     [ApiController]
     public class MonsterController : ControllerBase
     {
+        private readonly UserStorage userStorage;
         private readonly Glade glade;
         protected APIResponse response;
 
-        public MonsterController(Glade _glade) 
+        public MonsterController(Glade _glade, UserStorage _userStorage) 
         { 
             glade = _glade;
+            userStorage = _userStorage;
             response = new();
         }
 
         [HttpGet("add")]
-        public async Task<IActionResult> AddMoster()
+        public async Task<IActionResult> AddMonster()
         {
             await glade.AddMonster();
 
@@ -54,7 +56,8 @@ namespace Server.Controllers
         [HttpPost("attack")]
         public async Task<IActionResult> AttackMonster(AttackMonsterDTO attackMonster)
         {
-            await glade.AttackMonster(attackMonster);
+            var character = userStorage.ActiveUsers.FirstOrDefault(x => x.Character.CharacterName == attackMonster.NameCharacter);
+            await glade.AttackMonster(attackMonster, character);
 
             response.StatusCode = HttpStatusCode.OK;
             response.IsSuccess = true;

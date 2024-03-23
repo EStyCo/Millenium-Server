@@ -14,7 +14,7 @@ namespace Server.Models.Locations
         public abstract Task DeleteMonster(int id);
         public abstract Task<List<MonsterDTO>> GetMonster();
         public abstract Task UpdateMonsters();
-        public abstract Task AttackMonster(AttackMonsterDTO attackMonster);
+        public abstract Task AttackMonster(AttackMonsterDTO attackMonster, ActiveUser character);
 
         public override async Task OnConnectedAsync()
         {

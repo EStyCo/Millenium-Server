@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore;
-using Server.Hubs;
 using Server.Models;
-using Server.Models.DTO;
 using Server.Models.Interfaces;
 using Server.Repository;
 

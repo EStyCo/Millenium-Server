@@ -1,6 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.SignalR;
 using Server.Models.DTO;
 using Server.Models.Monsters;
 
@@ -8,11 +6,10 @@ namespace Server.Models.Locations
 {
     public class Glade : Area
     {
-        private readonly UserStorage userStorage;
-        public Glade(UserStorage _userStorage)
+        public Glade()
         {
             Monsters.Add(new Goblin());
-            userStorage = _userStorage;
+            Monsters.Add(new Goblin());
         }
 
         public override async Task AddMonster()
@@ -57,15 +54,15 @@ namespace Server.Models.Locations
             {
                 foreach (var m in Monsters)
                 {
-                    MonsterDTO mDTO = new();
-                    mDTO.Id = m.Id;
-                    mDTO.CurrentHP = m.CurrentHP;
-                    mDTO.MaxHP = m.MaxHP;
-                    mDTO.Name = m.Name;
-                    mDTO.ImagePath = m.ImagePath;
-                    monsterList.Add(mDTO);
+                    monsterList.Add(new MonsterDTO
+                    {
+                        Id = m.Id,
+                        CurrentHP = m.CurrentHP,
+                        MaxHP = m.MaxHP,
+                        Name = m.Name,
+                        ImagePath = m.ImagePath
+                    });
                 }
-
             }
 
             return monsterList;
@@ -76,10 +73,9 @@ namespace Server.Models.Locations
             await Clients.All.SendAsync("UpdateList", await GetMonster());
         }
 
-        public override async Task AttackMonster(AttackMonsterDTO attackMonster)
+        public override async Task AttackMonster(AttackMonsterDTO attackMonster, ActiveUser character)
         {
             var monster = Monsters.FirstOrDefault(x => x.Id == attackMonster.IdMonster);
-            var character = userStorage.ActiveUsers.FirstOrDefault(x => x.Character.CharacterName == attackMonster.NameCharacter);
 
             if (monster != null && character != null)
             {
