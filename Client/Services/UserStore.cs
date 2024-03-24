@@ -32,16 +32,19 @@ namespace Client.Services
                 .WithUrl($"{baseUrl}/UserStorage")
                 .Build();
 
-            connection.On<int[]>("UpdateHP", (int[] newHP) =>
+            connection.On("UpdateHP", (int[] newHP) =>
             {
                 VitalityService.CurrentHP = newHP[0];
                 VitalityService.MaxHP = newHP[1];
             });
-            connection.On<int>("UpdateMP", (int newMP) =>
+
+            connection.On("UpdateMP", (int[] newMP) =>
             {
-                VitalityService.ManaPoint = newMP;
+                VitalityService.CurrentMP = newMP[0];
+                VitalityService.MaxMP = newMP[1];
             });
-            connection.On<List<SpellDTO>>("UpdateSpellList", (List<SpellDTO> newList) =>
+
+            connection.On("UpdateSpellList", (List<SpellDTO> newList) =>
             {
                 SpellService.SpellList = newList;
             });

@@ -95,11 +95,11 @@ namespace Server.Models
 
         public async Task SendMP()
         {
-            int sendMP = maxMP;
+            int[] sendMP = { maxMP, maxMP };
 
             if (CurrentMP < MaxMP)
             {
-                sendMP = CurrentMP += RegenRateMP;
+                sendMP[0] = CurrentMP += RegenRateMP;
             }
 
             await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateMP", sendMP);

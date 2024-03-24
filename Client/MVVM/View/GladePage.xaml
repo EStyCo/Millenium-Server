@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Client.MVVM.View.GladePage"
+             xmlns:Hud="clr-namespace:Client.MVVM.View.Samples"
              xmlns:Utilities="clr-namespace:Client.MVVM.Model.Utilities"
              x:Name="Page">
 
@@ -25,7 +26,7 @@
         </Grid.RowDefinitions>
 
 
-        <VerticalStackLayout>
+        <VerticalStackLayout Grid.Row="0" VerticalOptions="StartAndExpand">
             <HorizontalStackLayout HorizontalOptions="Center">
                 <Button Text="{Binding UserStore.Character.CharacterName}"
                         TextColor="Black"
@@ -46,34 +47,9 @@
                         HorizontalOptions="Start"
                         Command="{Binding AddMonsterCommand}"/>
             </HorizontalStackLayout>
-            <HorizontalStackLayout HorizontalOptions="Center" 
-                                   Spacing="10">
-                <Frame HeightRequest="55"
-                        CornerRadius="250">
-                    <HorizontalStackLayout>
-                        <HorizontalStackLayout>
-                            <Label Text="{Binding UserStore.VitalityService.CurrentHP}" TextColor="PaleVioletRed"/>
-                            <Label Text="/" TextColor="PaleVioletRed"/>
-                            <Label Text="{Binding UserStore.VitalityService.MaxHP}" TextColor="PaleVioletRed"/>
-                        </HorizontalStackLayout>
-                    </HorizontalStackLayout>
-                </Frame>
-                <Frame HeightRequest="55"
-                       CornerRadius="250">
-                    <HorizontalStackLayout>
-                        <Label Text="{Binding UserStore.VitalityService.ManaPoint}"
-                               TextColor="LightSkyBlue"/>
-                        <Label Text="/200"
-                               TextColor="LightSkyBlue"/>
-                    </HorizontalStackLayout>
-                </Frame>
-                <ImageButton Source="movement"
-                             BackgroundColor="LightGray"
-                             CornerRadius="5"
-                             HeightRequest="40"
-                             WidthRequest="40"
-                             Command="{Binding Router.ShowMoveMenuCommand}" />
-            </HorizontalStackLayout>
+
+            <Hud:HUD HeightRequest="55" />
+
         </VerticalStackLayout>
 
         <ScrollView Grid.Row="1"

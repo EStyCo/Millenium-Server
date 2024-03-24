@@ -95,6 +95,9 @@
 	  <MauiXaml Update="MVVM\View\RegistrationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\View\Samples\HUD.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\View\Town\SpellMasterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

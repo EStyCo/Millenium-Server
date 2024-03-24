@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Hud="clr-namespace:Client.MVVM.View.Samples"
              xmlns:Utilities="clr-namespace:Client.MVVM.Model.Utilities"
              x:Class="Client.MVVM.View.Town.TownPage">
 
@@ -36,25 +37,8 @@
                     CommandParameter="{x:Static Utilities:ModalArea.Inventory}" />
             </HorizontalStackLayout>
 
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Frame HeightRequest="55"
-                       CornerRadius="250">
-                    <HorizontalStackLayout>
-                        <Label Text="{Binding UserStore.VitalityService.CurrentHP}" TextColor="PaleVioletRed"/>
-                        <Label Text="/" TextColor="PaleVioletRed"/>
-                        <Label Text="{Binding UserStore.VitalityService.MaxHP}" TextColor="PaleVioletRed"/>
-                    </HorizontalStackLayout>
-                </Frame>
-                <Frame HeightRequest="55"
-                       CornerRadius="250">
-                    <HorizontalStackLayout>
-                        <Label Text="{Binding UserStore.VitalityService.ManaPoint}"
-                           TextColor="LightSkyBlue"/>
-                        <Label Text="/200"
-                           TextColor="LightSkyBlue"/>
-                    </HorizontalStackLayout>
-                </Frame>
-            </HorizontalStackLayout>
+            <Hud:HUD HeightRequest="55" />
+            
         </VerticalStackLayout>
 
 
