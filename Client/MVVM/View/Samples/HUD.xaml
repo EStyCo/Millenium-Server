@@ -10,10 +10,12 @@
 
         <Button Text="{Binding UserStore.VitalityService.HudHP}"
                 TextColor="PaleVioletRed"
+                BorderColor="Transparent"
                 BackgroundColor="LightGray"
                 BorderWidth="10"/>
 
         <Button Text="{Binding UserStore.VitalityService.HudMP}"
+                BorderColor="Transparent"
                 TextColor="DeepSkyBlue"
                 BackgroundColor="LightGray"
                 BorderWidth="10"/>

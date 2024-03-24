@@ -32,15 +32,16 @@ namespace Server.Repository
             return null;
         }
 
-        public async Task<TravelDTO> GoNewArea(TravelDTO travel)
+        public async Task<TravelDTO> GoNewArea(TravelDTO dto)
         {
             var user = await dbContext.Characters
-                .FirstOrDefaultAsync(x => x.CharacterName == travel.CharacterName);
+                .FirstOrDefaultAsync(x => x.CharacterName == dto.CharacterName);
 
             if (user != null)
             {
-                user.CurrentArea = travel.Place;
+                user.CurrentArea = dto.Place;
                 await dbContext.SaveChangesAsync();
+
                 return new TravelDTO
                 {
                     CharacterName = user.CharacterName,

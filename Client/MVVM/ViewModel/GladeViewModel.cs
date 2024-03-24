@@ -34,7 +34,7 @@ namespace Client.MVVM.ViewModel
             AddMonsterCommand = new Command(async () => await AddMonster());
             DeleteMonsterCommand = new Command<int>(async (id) => await DeleteMonster(id));
 
-            LoadMonsters();
+            PlaceService.ConnectToHub();
         }
 
         private async Task LoadMonsters()

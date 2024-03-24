@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Server.Models;
 using Server.Models.DTO;
+using Server.Models.Monsters;
 
 namespace Server
 {
@@ -9,6 +10,7 @@ namespace Server
         public MappingConfig()
         {
             CreateMap<Character, CharacterDTO>().ReverseMap();
+            CreateMap<Monster, MonsterDTO>().ReverseMap();
         }
     }
 }

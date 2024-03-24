@@ -10,8 +10,6 @@ namespace Client
 {
     public partial class AppShell : Shell
     {
-        /*public static readonly BindableProperty ShowTabsProperty = BindableProperty.Create(nameof(ShowTabs), typeof(bool), typeof(AppShell), false);
-        public bool ShowTabs { get => (bool)GetValue(ShowTabsProperty); set => SetValue(ShowTabsProperty, value); }*/
 
         public AppShell()
         {
@@ -23,6 +21,7 @@ namespace Client
             Routing.RegisterRoute(Place.Town.ToString(), typeof(TownPage));
             Routing.RegisterRoute(Place.Glade.ToString(), typeof(GladePage));
             Routing.RegisterRoute(Place.SpellMaster.ToString(), typeof(SpellMasterPage));
+            Routing.RegisterRoute(Place.DarkWood.ToString(), typeof(DarkWoodPage));
 
             Routing.RegisterRoute(ModalArea.Character.ToString(), typeof(CharacterPage));
             Routing.RegisterRoute(ModalArea.SpellBook.ToString(), typeof(SpellBookPage));

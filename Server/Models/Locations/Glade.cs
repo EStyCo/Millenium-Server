@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.SignalR;
 using Server.Models.DTO;
 using Server.Models.Monsters;
 
@@ -6,10 +7,15 @@ namespace Server.Models.Locations
 {
     public class Glade : Area
     {
-        public Glade()
+        private readonly IMapper mapper;
+
+        public Glade(IMapper _mapper)
         {
-            Monsters.Add(new Goblin());
-            Monsters.Add(new Goblin());
+            mapper = _mapper;
+
+            Monsters.Add(new Goblin() { Id = 0 });
+            Monsters.Add(new Goblin() { Id = 1 });
+            Monsters.Add(new Goblin() { Id = 2 });
         }
 
         public override async Task AddMonster()
@@ -54,14 +60,7 @@ namespace Server.Models.Locations
             {
                 foreach (var m in Monsters)
                 {
-                    monsterList.Add(new MonsterDTO
-                    {
-                        Id = m.Id,
-                        CurrentHP = m.CurrentHP,
-                        MaxHP = m.MaxHP,
-                        Name = m.Name,
-                        ImagePath = m.ImagePath
-                    });
+                    monsterList.Add(mapper.Map<MonsterDTO>(m));
                 }
             }
 
@@ -73,7 +72,7 @@ namespace Server.Models.Locations
             await Clients.All.SendAsync("UpdateList", await GetMonster());
         }
 
-        public override async Task AttackMonster(AttackMonsterDTO attackMonster, ActiveUser character)
+        /*public override async Task AttackMonster(AttackMonsterDTO attackMonster, ActiveUser character)
         {
             var monster = Monsters.FirstOrDefault(x => x.Id == attackMonster.IdMonster);
 
@@ -90,6 +89,6 @@ namespace Server.Models.Locations
 
                 await UpdateMonsters();
             }
-        }
+        }*/
     }
 }

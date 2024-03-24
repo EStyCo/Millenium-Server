@@ -45,7 +45,7 @@ namespace Server.Controllers
         }
 
         [HttpPost("go")]
-        public async Task<IActionResult> GoNewArea([FromBody] TravelDTO travel)
+        public async Task<IActionResult> GoNewArea(TravelDTO travel)
         {
             var travelResponse = await rep.GoNewArea(travel);
 

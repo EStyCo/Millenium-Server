@@ -86,6 +86,9 @@
 	  <MauiXaml Update="MVVM\View\CharacterModal\SpellBookPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\View\DarkWoodPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\View\GladePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

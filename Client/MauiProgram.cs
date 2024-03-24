@@ -29,6 +29,7 @@ namespace Client
             builder.Services.AddAutoMapper(typeof(MappingConfig));
 
             AddCharacterModalPages(builder);
+            AddLocationPages(builder);
 
             builder.Services.AddSingleton<ChatPage>();
             builder.Services.AddSingleton<ChatViewModel>();
@@ -41,9 +42,6 @@ namespace Client
 
             builder.Services.AddTransient<SpellMasterPage>();
             builder.Services.AddTransient<SpellMasterViewModel>();
-
-            builder.Services.AddTransient<GladePage>();
-            builder.Services.AddTransient<GladeViewModel>();
 
             builder.Services.AddTransient<RegistrationPage>();
             builder.Services.AddTransient<RegistrationViewModel>();
@@ -74,6 +72,15 @@ namespace Client
 
             builder.Services.AddTransient<InventoryPage>();
             builder.Services.AddTransient<InventoryViewModel>();
+        }
+
+        private static void AddLocationPages(MauiAppBuilder builder)
+        {
+            builder.Services.AddTransient<GladePage>();
+            builder.Services.AddTransient<GladeViewModel>();
+
+            builder.Services.AddTransient<DarkWoodPage>();
+            builder.Services.AddTransient<DarkWoodViewModel>();
         }
     }
 }

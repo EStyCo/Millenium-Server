@@ -25,6 +25,7 @@ builder.Services.AddSingleton<UserStorage>();
 builder.Services.AddSingleton<IServiceFactory<UserRepository>, ScopedServiceFactory<UserRepository>>();
 
 builder.Services.AddSingleton<Glade>();
+builder.Services.AddSingleton<DarkWood>();
 
 builder.Services.AddDbContext<DbUserContext>(
     options =>
@@ -51,6 +52,7 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapHub<UserStorage>("/UserStorage");
 app.MapHub<Glade>("/GladeHub");
+app.MapHub<DarkWood>("/DarkWoodHub");
 
 app.Run();
 
