@@ -1,11 +1,8 @@
-﻿using Client.MVVM.Model;
+﻿using AutoMapper;
+using Client.MVVM.Model;
 using Client.MVVM.Model.DTO;
-using Client.MVVM.Model.Utilities;
-using Client.MVVM.View.Town;
 using Client.Services;
-using Newtonsoft.Json;
 using PropertyChanged;
-using System.Linq.Expressions;
 using System.Windows.Input;
 
 namespace Client.MVVM.ViewModel
@@ -15,9 +12,10 @@ namespace Client.MVVM.ViewModel
     {
         public PlaceService PlaceService { get; set; }
         public UserStore UserStore { get; set; }
-        private readonly MonsterService monsterService;
         public Router Router { get; set; }
-        public List<string> Skills { get; set; } = new List<string>() { "Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5", "Skill 6" };
+
+        private readonly MonsterService monsterService;
+        private readonly IMapper mapper;
 
         public ICommand GoToTownCommand { get; set; }
         public ICommand AddMonsterCommand { get; set; }
@@ -25,12 +23,13 @@ namespace Client.MVVM.ViewModel
 
         public GladeViewModel(MonsterService _monsterService,
                               UserStore _UserStore,
-                              Router _router)
+                              Router _router,
+                              IMapper mapper)
         {
             UserStore = _UserStore;
             monsterService = _monsterService;
             Router = _router;
-            PlaceService = new(this, UserStore, monsterService);
+            PlaceService = new(UserStore, monsterService, "Glade", mapper);
 
             AddMonsterCommand = new Command(async () => await AddMonster());
             DeleteMonsterCommand = new Command<int>(async (id) => await DeleteMonster(id));
@@ -45,12 +44,19 @@ namespace Client.MVVM.ViewModel
 
         private async Task AddMonster()
         { 
-            await monsterService.AddMonster<APIResponse>();
+            await monsterService.AddMonster<APIResponse>(new PlaceDTO() 
+            { 
+                Place = UserStore.Character.CurrentArea 
+            });
         }
 
         private async Task DeleteMonster(int id)
         {
-            await monsterService.DeleteMonster<APIResponse>(id);
+            await monsterService.DeleteMonster<APIResponse>(new DeleteMonsterDTO() 
+            { 
+                Place = UserStore.Character.CurrentArea,
+                Id = id
+            });
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Server.Models.Locations;
+﻿using Server.Models.Utilities;
 
 namespace Server.Models.DTO
 {
@@ -7,5 +7,6 @@ namespace Server.Models.DTO
         public int IdMonster { get; set; }
         public int SkillId { get; set; }
         public string NameCharacter { get; set; } = string.Empty;
+        public Place Place { get; set; }
     }
 }

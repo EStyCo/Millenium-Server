@@ -9,6 +9,7 @@ namespace Client
         public MappingConfig()
         {
             CreateMap<Character, CharacterDTO>().ReverseMap();
+            CreateMap<Monster, MonsterDTO>().ReverseMap();
         }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Server.Models;
 using Server.Models.DTO;
 using Server.Models.Locations;
+using Server.Models.Utilities;
 using System.Net;
 
 namespace Server.Controllers
@@ -12,20 +13,20 @@ namespace Server.Controllers
     public class MonsterController : ControllerBase
     {
         private readonly UserStorage userStorage;
-        private readonly Glade glade;
+        private readonly AreaStorage areaStorage;
         protected APIResponse response;
 
-        public MonsterController(Glade _glade, UserStorage _userStorage) 
-        { 
-            glade = _glade;
+        public MonsterController(UserStorage _userStorage, AreaStorage _areaStorage) 
+        {
             userStorage = _userStorage;
+            areaStorage = _areaStorage;
             response = new();
         }
 
-        [HttpGet("add")]
-        public async Task<IActionResult> AddMonster()
+        [HttpPost("add")]
+        public async Task<IActionResult> AddMonster(PlaceDTO dto)
         {
-            await glade.AddMonster();
+            await areaStorage.GetArea(dto.Place).AddMonster();
 
             response.StatusCode = HttpStatusCode.OK;
             response.IsSuccess = true;
@@ -33,31 +34,21 @@ namespace Server.Controllers
         }
 
         [HttpPost("delete")]
-        public async Task<IActionResult> DeleteMonster([FromBody] int id)
+        public async Task<IActionResult> DeleteMonster(DeleteMonsterDTO dto)
         {
-            await glade.DeleteMonster(id);
+            await areaStorage.GetArea(dto.Place).DeleteMonster(dto.Id);
 
             response.StatusCode = HttpStatusCode.OK;
             response.IsSuccess = true;
-            return Ok(response);
-        }
-
-        [HttpGet("get")]
-        public async Task<IActionResult> GetMonster()
-        {
-            var monsters = await glade.GetMonster();
-
-            response.StatusCode = HttpStatusCode.OK;
-            response.IsSuccess = true;
-            response.Result = monsters;
             return Ok(response);
         }
 
         [HttpPost("attack")]
-        public async Task<IActionResult> AttackMonster(AttackMonsterDTO attackMonster)
+        public async Task<IActionResult> AttackMonster(AttackMonsterDTO dto)
         {
-            var character = userStorage.ActiveUsers.FirstOrDefault(x => x.Character.CharacterName == attackMonster.NameCharacter);
-            await glade.AttackMonster(attackMonster, character);
+            var character = userStorage.ActiveUsers.FirstOrDefault(x => x.Character.CharacterName == dto.NameCharacter);
+
+            await areaStorage.GetArea(dto.Place).AttackMonster(dto, character);
 
             response.StatusCode = HttpStatusCode.OK;
             response.IsSuccess = true;

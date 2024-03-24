@@ -15,40 +15,32 @@ namespace Client.Services
             clientFactory = _clientFactory;
         }
 
-        public async Task<T> GetMonsters<T>()
+        public async Task<T> AddMonster<T>(PlaceDTO dto)
         {
             return await SendAsync<T>(new APIRequest()
             {
-                ApiType = ApiType.GET,
-                Url = baseUrl + serviceUrl + "/get"
-            });
-        }
-
-        public async Task<T> AddMonster<T>()
-        {
-            return await SendAsync<T>(new APIRequest()
-            {
-                ApiType = ApiType.GET,
+                ApiType = ApiType.POST,
+                Data = dto,
                 Url = baseUrl + serviceUrl + "/add"
             });
         }
 
-        public async Task<T> DeleteMonster<T>(int id)
+        public async Task<T> DeleteMonster<T>(DeleteMonsterDTO dto)
         {
             return await SendAsync<T>(new APIRequest()
             {
                 ApiType = ApiType.POST,
-                Data = id,
+                Data = dto,
                 Url = baseUrl + serviceUrl + "/delete"
             });
         }
 
-        public async Task<T> AttackMonster<T>(AttackMonsterDTO attackMonster)
+        public async Task<T> AttackMonster<T>(AttackMonsterDTO dto)
         {
             return await SendAsync<T>(new APIRequest()
             {
                 ApiType = ApiType.POST,
-                Data = attackMonster,
+                Data = dto,
                 Url = baseUrl + serviceUrl + "/attack"
             });
         }

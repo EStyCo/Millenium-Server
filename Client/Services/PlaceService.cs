@@ -1,4 +1,5 @@
-﻿using Client.MVVM.Model;
+﻿using AutoMapper;
+using Client.MVVM.Model;
 using Client.MVVM.Model.DTO;
 using Client.MVVM.ViewModel;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -11,8 +12,10 @@ namespace Client.Services
     public class PlaceService
     {
         private readonly string baseUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5266" : "https://localhost:7082";
+        private readonly string hubUrl = string.Empty;
         private HubConnection connection;
-        private readonly GladeViewModel viewModel;
+        private readonly IMapper mapper;
+
         private readonly UserStore userStore;
         private readonly MonsterService monsterService;
 
@@ -22,13 +25,15 @@ namespace Client.Services
         public ICommand AttackTargetCommand { get; set; }
         public ICommand SelectMonsterCommand { get; set; }
 
-        public PlaceService(GladeViewModel _viewModel,
-                            UserStore _userStore,
-                            MonsterService _monsterService)
+        public PlaceService(UserStore _userStore,
+                            MonsterService _monsterService,
+                            string _hubUrl,
+                            IMapper _mapper)
         {
-            viewModel = _viewModel;
             userStore = _userStore;
             monsterService = _monsterService;
+            hubUrl = _hubUrl;
+            mapper = _mapper;
 
             AttackTargetCommand = new Command<int>(async (spellId) => await Attack(spellId));
             SelectMonsterCommand = new Command<int>(async (id) => await SelectMonster(id));
@@ -37,22 +42,16 @@ namespace Client.Services
         public async Task ConnectToHub()
         {
             connection = new HubConnectionBuilder()
-                .WithUrl($"{baseUrl}/GladeHub")
+                .WithUrl($"{baseUrl}/{hubUrl}Hub")
                 .Build();
 
-            connection.On<List<MonsterDTO>>("UpdateList", (List<MonsterDTO> mDTOList) =>
+            connection.On("UpdateList", (List<MonsterDTO> mList) =>
             {
                 Monsters = new();
 
-                foreach (MonsterDTO mDTO in mDTOList)
+                foreach (var m in mList)
                 {
-                    Monster m = new();
-                    m.Id = mDTO.Id;
-                    m.CurrentHP = mDTO.CurrentHP;
-                    m.MaxHP = mDTO.MaxHP;
-                    m.Name = mDTO.Name;
-                    m.ImagePath = mDTO.ImagePath;
-                    Monsters.Add(m);
+                    Monsters.Add(mapper.Map<Monster>(m));
                 }
                 SelectMonster();
             });
@@ -75,12 +74,13 @@ namespace Client.Services
 
         private async Task Attack(int spellId)
         {
-            AttackMonsterDTO attack = new();
-            attack.IdMonster = targetId;
-            attack.NameCharacter = userStore.Character.CharacterName;
-            attack.SkillId = spellId;
-
-            await monsterService.AttackMonster<APIResponse>(attack);
+            await monsterService.AttackMonster<APIResponse>(new()
+            {
+                IdMonster = targetId,
+                NameCharacter = userStore.Character.CharacterName,
+                Place = userStore.Character.CurrentArea,
+                SkillId = spellId
+            });
         }
 
         private async Task SelectMonster(int id)

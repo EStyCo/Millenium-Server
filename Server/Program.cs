@@ -20,6 +20,7 @@ builder.Services.AddAutoMapper(typeof(MappingConfig));
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<TravelRepository>();
 
+builder.Services.AddTransient<AreaStorage>();
 builder.Services.AddSingleton<UserStorage>();
 builder.Services.AddSingleton<IServiceFactory<UserRepository>, ScopedServiceFactory<UserRepository>>();
 
