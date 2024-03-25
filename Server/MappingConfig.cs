@@ -10,6 +10,9 @@ namespace Server
         public MappingConfig()
         {
             CreateMap<Character, CharacterDTO>().ReverseMap();
+            CreateMap<StatDTO, CharacterDTO>().ReverseMap();
+            CreateMap<UpdateStatDTO, CharacterDTO>();
+            CreateMap<UpdateStatDTO, Character>();
             CreateMap<Monster, MonsterDTO>().ReverseMap();
         }
     }

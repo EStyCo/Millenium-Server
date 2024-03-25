@@ -9,7 +9,8 @@ namespace Server.Models.DTO
         public Gender Gender { get; set; }
         public Place CurrentArea { get; set; }
         public int Level { get; set; } = 1;
-        public int Exp { get; set; } = 0;
+        public int CurrentEXP { get; set; } = 0;
+        public int ToLevelExp { get; set; } = 0;
         public int TotalSpellPoints { get; set; } = 0;
         public int FreelSpellPoints { get; set; } = 0;
         public int TotalPoints { get; set; } = 0;

@@ -143,12 +143,13 @@ namespace Server.Repository
 
             return mapper.Map<CharacterDTO>(character);
         }
+
         public async Task<CharacterDTO> ForgotSkill(LearnSkillDTO dto)
         {
             var character = dbContext.Characters
                 .FirstOrDefault(x => x.CharacterName == dto.CharacterName);
 
-            if (character == null )
+            if (character == null)
                 return null;
 
             var skillTypeList = new List<SkillType>
@@ -169,6 +170,19 @@ namespace Server.Repository
             character.Skill4 = skillTypeList[3];
             character.Skill5 = skillTypeList[4];
 
+            await dbContext.SaveChangesAsync();
+
+            return mapper.Map<CharacterDTO>(character);
+        }
+
+        public async Task<CharacterDTO> UpdateStats(UpdateStatDTO dto)
+        {
+            var character = dbContext.Characters
+                .FirstOrDefault(x => x.CharacterName == dto.Name);
+
+            if (!StatValidator.CheckStats(character, dto)) return null;
+
+            character = mapper.Map<Character>(dto);
             await dbContext.SaveChangesAsync();
 
             return mapper.Map<CharacterDTO>(character);

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Server.Models;
 using Server.Models.DTO;
-using Server.Models.Utilities;
 
 namespace Server.Repository
 {

@@ -10,31 +10,130 @@
                             IsEnabled="False"/>
     </Shell.BackButtonBehavior>
 
-    <VerticalStackLayout>
-        
-        <Button Text="Return"
-            HorizontalOptions="Start"
-            Command="{Binding ReturnCommand}"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-        <Label 
-            Text="Character"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-        <Label 
-            Text="{Binding UserStore.Character.CharacterName}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            <HorizontalStackLayout VerticalOptions="Center"
+                                   Margin="20,0,0,10"
+                                   Grid.Column="0">
+                <ImageButton Source="return_ico.png"
+                     VerticalOptions="Center"
+                     BackgroundColor="LightGray"
+                     CornerRadius="5"
+                     HeightRequest="40"
+                     WidthRequest="40"
+                     Command="{Binding ReturnCommand}" />
+                <Label Margin="40,0,0,0" 
+               Text="{Binding UserStore.Character.CharacterName}"
+               FontSize="Large"
+               VerticalOptions="Center"/>
+            </HorizontalStackLayout>
 
-        <Label 
-             Text="{Binding UserStore.Character.Race}"
-             VerticalOptions="Center" 
-             HorizontalOptions="Center" />
+            <BoxView Color="DarkGray" HeightRequest="1.5" HorizontalOptions="FillAndExpand" VerticalOptions="End" Grid.Column="0" />
+        </Grid>
 
-        <Label 
-             Text="{Binding UserStore.Character.Level}"
-             VerticalOptions="Center" 
-             HorizontalOptions="Center" />
+        <VerticalStackLayout Grid.Row="1">
+            <StackLayout HorizontalOptions="Start"
+                             Margin="20,20,20,20">
+                <Image Source="warrior_image.png"
+                           HeightRequest="200"
+                           WidthRequest="300"/>
+            </StackLayout>
 
-    </VerticalStackLayout>
+            <BoxView Color="DarkGray" HeightRequest="1.5" HorizontalOptions="FillAndExpand" VerticalOptions="End" />
+
+            <StackLayout Margin="10,5,0,0">
+                <HorizontalStackLayout>
+                    <Label Text="Уровень:"
+                               Margin="0,0,5,0"/>
+                    <Label Text="{Binding UserStore.Character.Level}"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="{Binding UserStore.Character.Exp}"
+                               Margin="0,0,5,0"/>
+                    <Label Text="/"
+                               Margin="0,0,5,0"/>
+                    <Label Text="{Binding UserStore.Character.Exp}"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="Свободные очки:"
+                               Margin="0,0,5,0"/>
+                    <Label Text="{Binding UserStore.Character.FreePoints}"/>
+                </HorizontalStackLayout>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=".8*"/>
+                        <RowDefinition Height=".8*"/>
+                        <RowDefinition Height=".8*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <StackLayout Orientation="Horizontal" 
+                                     VerticalOptions="Center">
+                        <Label Text="Сила:"
+                                   Margin="0,0,5,0"/>
+                        <Label Text="{Binding UserStore.Character.Strength}"/>
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="1">
+                        <Button Text="+"
+                                    FontSize="Subtitle"
+                                    CornerRadius="20"
+                                    VerticalOptions="Center"
+                                    Scale=".5"/>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="1"
+                                     Orientation="Horizontal" 
+                                     VerticalOptions="Center">
+                        <Label Text="Ловкость:"
+                                       Margin="0,0,5,0"
+                                       Grid.Column="0"/>
+                        <Label Text="{Binding UserStore.Character.Agility}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1"
+                                     Grid.Row="1">
+                        <Button Text="+"
+                                    FontSize="Subtitle"
+                                    CornerRadius="20"
+                                    VerticalOptions="Center"
+                                    Scale=".5"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" 
+                                     VerticalOptions="Center"
+                                     Grid.Row="2">
+                        <Label Text="Интеллект:"
+                                   Margin="0,0,5,0"
+                                   Grid.Column="0"/>
+                        <Label Text="{Binding UserStore.Character.Intelligence}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1"
+                                     Grid.Row="2">
+                        <Button Text="+"
+                                    FontSize="Subtitle"
+                                    CornerRadius="20"
+                                    VerticalOptions="Center"
+                                    Scale=".5"/>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

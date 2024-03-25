@@ -20,7 +20,7 @@
                 BackgroundColor="LightGray"
                 BorderWidth="10"/>
         
-        <ImageButton Source="movement"
+        <ImageButton Source="movement.png"
                  BackgroundColor="LightGray"
                  CornerRadius="5"
                  HeightRequest="40"

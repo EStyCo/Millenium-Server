@@ -9,7 +9,8 @@ namespace Client.MVVM.Model
         public Gender Gender { get; set; }
         public Place CurrentArea { get; set; }
         public int Level { get; set; } = 1;
-        public int Exp { get; set; } = 0;
+        public int CurrentEXP { get; set; } = 0;
+        public int ToLevelExp { get; set; } = 0;
         public int TotalPoints { get; set; } = 0;
         public int FreePoints { get; set; } = 5;
         public int Strength { get; set; } = 5;
