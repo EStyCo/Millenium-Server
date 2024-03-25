@@ -177,8 +177,8 @@ namespace Server.Repository
 
         public async Task<CharacterDTO> UpdateStats(UpdateStatDTO dto)
         {
-            var character = dbContext.Characters
-                .FirstOrDefault(x => x.CharacterName == dto.Name);
+            var character = await dbContext.Characters
+                .FirstOrDefaultAsync(x => x.CharacterName == dto.Name);
 
             if (!StatValidator.CheckStats(character, dto)) return null;
 
@@ -190,9 +190,9 @@ namespace Server.Repository
 
         public async Task<bool> UserExists(string name)
         {
-            var character = dbContext.Characters
+            var character = await dbContext.Characters
                 .AsNoTracking()
-                .FirstOrDefault(x => x.CharacterName == name);
+                .FirstOrDefaultAsync(x => x.CharacterName == name);
 
             return character != null;
         }
