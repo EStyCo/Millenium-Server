@@ -3,6 +3,7 @@ using Server.Models;
 using Server.Models.DTO;
 using Server.Models.Interfaces;
 using Server.Repository;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Server
 {
@@ -38,19 +39,14 @@ namespace Server
         public async Task<CharacterDTO> UpdateStats(UpdateStatDTO dto)
         {
             var user = ActiveUsers.FirstOrDefault(x => x.Character.CharacterName == dto.Name);
+            var userRep = userRepositoryFactory.Create();
 
-            if (user != null)
-            {
-                var userRepository = userRepositoryFactory.Create();
-                var character = await userRepository.UpdateStats(dto);
+            if (user == null || !await userRep.UserExists(dto.Name)) return null;
 
-                if (character == null) return null;
+            var character = await userRep.UpdateStats(dto);
 
-                user.Character = character;
-                return character;
-            }
-
-            return null;
+            user.Character = character;
+            return character;
         }
 
 

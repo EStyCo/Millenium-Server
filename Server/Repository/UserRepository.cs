@@ -187,5 +187,14 @@ namespace Server.Repository
 
             return mapper.Map<CharacterDTO>(character);
         }
+
+        public async Task<bool> UserExists(string name)
+        {
+            var character = dbContext.Characters
+                .AsNoTracking()
+                .FirstOrDefault(x => x.CharacterName == name);
+
+            return character != null;
+        }
     }
 }
