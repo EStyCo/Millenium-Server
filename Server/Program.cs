@@ -30,7 +30,7 @@ builder.Services.AddSingleton<DarkWood>();
 builder.Services.AddDbContext<DbUserContext>(
     options =>
     {
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
+        options.UseSqlite(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
     });
 
 var app = builder.Build();
