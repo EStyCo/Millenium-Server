@@ -49,6 +49,8 @@ namespace Client
             builder.Services.AddHttpClient<IAuthService, AuthService>();
             builder.Services.AddSingleton<IAuthService, AuthService>();
 
+            builder.Services.AddTransient<TestService>();
+
             builder.Services.AddSingleton<UserStore>();
             builder.Services.AddSingleton<Router>();
             builder.Services.AddTransient<MonsterService>();

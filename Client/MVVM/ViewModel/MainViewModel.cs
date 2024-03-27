@@ -18,6 +18,7 @@ namespace Client.MVVM.ViewModel
         private readonly IAuthService authService;
         private readonly IMapper mapper;
         private readonly UserStore userStore;
+        private readonly TestService testService;
         private readonly Router router;
         public LoginRequestDTO UserLogin { get; set; }
         public bool isLoading { get; set; } = false;
@@ -26,11 +27,14 @@ namespace Client.MVVM.ViewModel
         public ICommand LoginCommand { get; set; }
         public ICommand GoToRegisterCommand { get; set; }
 
-        public MainViewModel(IAuthService _authService, 
-                             IMapper _mapper, 
-                             RegistrationPage _registrationPage, 
+        public ICommand TestCommand { get; set; }
+
+        public MainViewModel(IAuthService _authService,
+                             IMapper _mapper,
+                             RegistrationPage _registrationPage,
                              UserStore _userStore,
-                             Router _router)
+                             Router _router,
+                             TestService _testService)
         {
             authService = _authService;
             mapper = _mapper;
@@ -40,6 +44,8 @@ namespace Client.MVVM.ViewModel
 
             LoginCommand = new Command(async () => await Login());
             GoToRegisterCommand = new Command(async () => await PushRegisterPage());
+            TestCommand = new Command(async () => await Test());
+            testService = _testService;
         }
 
         private async Task Login()
@@ -70,6 +76,13 @@ namespace Client.MVVM.ViewModel
         private async Task PushRegisterPage()
         {
             await Shell.Current.GoToAsync(nameof(RegistrationPage));
+        }
+
+        private async Task Test()
+        {
+            var response = await testService.Test<string>();
+
+            await Shell.Current.DisplayAlert("",$"{response}","oke");
         }
     }
 }
