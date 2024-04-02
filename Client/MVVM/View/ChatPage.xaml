@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.MVVM.View.ChatPage"
+             Title="Chat">
+    
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior 
+                            IsVisible="False"
+                            IsEnabled="False"/>
+    </Shell.BackButtonBehavior>
+
+    <VerticalStackLayout HorizontalOptions="Center"
+                             VerticalOptions="End"
+                             Spacing="5">
+        <VerticalStackLayout>
+            <Label Text="It`s Chat"/>
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout VerticalOptions="End">
+            <Entry Placeholder="Введите сообщение"
+                   IsSpellCheckEnabled="False"
+                   MaxLength="20" 
+                   WidthRequest="200"/>
+            <Button HorizontalOptions="Center" 
+                    VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+    
+</ContentPage>

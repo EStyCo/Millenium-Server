@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Hud="clr-namespace:Client.MVVM.View.Samples"
+             xmlns:Utilities="clr-namespace:Client.MVVM.Model.Utilities"
+             x:Class="Client.MVVM.View.Town.TownPage">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior 
+                        IsVisible="False"
+                        IsEnabled="False"/>
+    </Shell.BackButtonBehavior>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <VerticalStackLayout Spacing="3"
+                             Margin="0,10,0,0">
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Button Text="{Binding UserStore.Character.CharacterName}"
+                    TextColor="Black"
+                    BackgroundColor="AliceBlue"
+                    Command="{Binding Router.GoModalAreaCommand}"
+                    CommandParameter="{x:Static Utilities:ModalArea.Character}" />
+                <Button Text="SpellBook"
+                    BackgroundColor="AliceBlue"
+                    TextColor="Black"
+                    Command="{Binding Router.GoModalAreaCommand}"
+                    CommandParameter="{x:Static Utilities:ModalArea.SpellBook}" />
+                <Button Text="Inventory"
+                    BackgroundColor="AliceBlue"
+                    TextColor="Black"
+                    Command="{Binding Router.GoModalAreaCommand}"
+                    CommandParameter="{x:Static Utilities:ModalArea.Inventory}" />
+            </HorizontalStackLayout>
+
+            <Hud:HUD HeightRequest="55" />
+            
+        </VerticalStackLayout>
+
+
+        <VerticalStackLayout Grid.Row="1"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center">
+            
+            <VerticalStackLayout WidthRequest="200"
+                                 Spacing="5">
+                <Frame WidthRequest="300"
+                       Margin="0,0,0,25">
+                    <Label Text="Рад приветствовать тебя Путник в Нашем городе"/>
+                </Frame>
+
+                <Button Text="Break"
+                        WidthRequest="200"
+                        Command="{Binding BreakCharacterCommand}"
+                        IsEnabled="False"/>
+                <Button Text="Таверна"
+                        IsEnabled="False"/>
+                <Button Text="Мастер"
+                        Command="{Binding Router.GoAreaCommand}"
+                        CommandParameter="{x:Static Utilities:Place.SpellMaster}" />
+                <Button Text="Магазин"
+                        IsEnabled="False"/>
+
+                <Button Text="Выйти из города"
+                        Margin="0,20,0,0"
+                        Command="{Binding Router.GoAreaCommand}"
+                        CommandParameter="{x:Static Utilities:Place.Glade}" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

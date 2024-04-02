@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.MVVM.View.GladePage"
+             xmlns:Hud="clr-namespace:Client.MVVM.View.Samples"
+             xmlns:Utilities="clr-namespace:Client.MVVM.Model.Utilities"
+             x:Name="Page">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior 
+                        IsVisible="False"
+                        IsEnabled="False"/>
+    </Shell.BackButtonBehavior>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Utilities:InverseBooleanConverter x:Key="Converter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+
+        <VerticalStackLayout Grid.Row="0" VerticalOptions="StartAndExpand">
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Button Text="{Binding UserStore.Character.CharacterName}"
+                        TextColor="Black"
+                        BackgroundColor="AliceBlue"
+                        Command="{Binding Router.GoModalAreaCommand}"
+                        CommandParameter="{x:Static Utilities:ModalArea.Character}" />
+                <Button Text="SpellBook"
+                        BackgroundColor="AliceBlue"
+                        TextColor="Black"
+                        Command="{Binding Router.GoModalAreaCommand}"
+                        CommandParameter="{x:Static Utilities:ModalArea.SpellBook}" />
+                <Button Text="Inventory"
+                        BackgroundColor="AliceBlue"
+                        TextColor="Black"
+                        Command="{Binding Router.GoModalAreaCommand}"
+                        CommandParameter="{x:Static Utilities:ModalArea.Inventory}" />
+                <Button Text="Add"
+                        HorizontalOptions="Start"
+                        Command="{Binding AddMonsterCommand}"/>
+            </HorizontalStackLayout>
+
+            <Hud:HUD HeightRequest="55" />
+
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1"
+                    VerticalOptions="StartAndExpand"
+                    HorizontalOptions="Center">
+            <CollectionView ItemsSource="{Binding PlaceService.Monsters}">
+                <CollectionView.ItemTemplate >
+                    <DataTemplate>
+                        <Frame>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding IsTarget}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="Gray" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Frame" Binding="{Binding IsTarget}" Value="False">
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                            <HorizontalStackLayout>
+                                <VerticalStackLayout>
+                                    <Image Source="{Binding ImagePath}" 
+                                           WidthRequest="75" 
+                                           HeightRequest="75" 
+                                           Aspect="Fill" />
+                                    <Label Text="{Binding Name}" VerticalOptions="Center"/>
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout>
+                                    <HorizontalStackLayout VerticalOptions="Center">
+                                        <Label Text="{Binding CurrentHP}" />
+                                        <Label Text="/" />
+                                        <Label Text="{Binding MaxHP}" />
+                                        <Label Text="HP" />
+                                    </HorizontalStackLayout>
+                                    <Button Text="Attack" 
+                                    BackgroundColor="MediumPurple"
+                                    VerticalOptions="Center"
+                                    Command="{Binding Source={x:Reference Name=Page}, Path=BindingContext.PlaceService.DeleteMonsterCommand}"
+                                    CommandParameter="{Binding Id}" />
+                                    <Button Text="Target" 
+                                    BackgroundColor="PaleVioletRed"
+                                    VerticalOptions="Center"
+                                    Command="{Binding Source={x:Reference Name=Page}, Path=BindingContext.PlaceService.SelectMonsterCommand}"
+                                    CommandParameter="{Binding Id}" />
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
+        <VerticalStackLayout Grid.Row="2">
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand" IsVisible="{Binding Router.IsShowMenu}">
+                <Button Text="В город"
+                        HorizontalOptions="Center"
+                        Command="{Binding Router.GoAreaCommand}"
+                        CommandParameter="{x:Static Utilities:Place.Town}" />
+                <Button Text="Темный лес"
+                        HorizontalOptions="Center"
+                        Command="{Binding Router.GoAreaCommand}"
+                        CommandParameter="{x:Static Utilities:Place.DarkWood}" />
+            </HorizontalStackLayout>
+
+            <Frame>
+                <ScrollView HorizontalOptions="Center"
+                            Orientation="Horizontal"
+                            HorizontalScrollBarVisibility="Never">
+                    <CollectionView ItemsSource="{Binding UserStore.SpellService.SpellList}"
+                        HorizontalScrollBarVisibility="Never"
+                        HorizontalOptions="Center">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <VerticalStackLayout>
+                                    <Button Text="{Binding Name}"
+                                            IsEnabled="{Binding IsReady}"
+                                            BackgroundColor="MediumPurple"
+                                            VerticalOptions="Center"
+                                            Command="{Binding Source={x:Reference Name=Page}, Path=BindingContext.PlaceService.AttackTargetCommand}"
+                                            CommandParameter="{Binding Id}"/>
+                                    <Label Text="{Binding CoolDown}"
+                                           IsVisible="{Binding IsReady, Converter={StaticResource Converter}}"
+                                           HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </Frame>
+        </VerticalStackLayout>
+    </Grid>
+
+
+</ContentPage>

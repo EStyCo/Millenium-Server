@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.MainPage">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior 
+                        IsVisible="False"
+                        IsEnabled="False"/>
+    </Shell.BackButtonBehavior>
+    
+    <VerticalStackLayout
+        HorizontalOptions="Center" 
+        VerticalOptions="Center"
+        Padding="30,0"
+        Spacing="25">
+
+        <ActivityIndicator
+            IsRunning="{Binding isLoading}"
+            IsVisible="{Binding isLoading}"
+            Color="Blue"
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand" />
+        <Frame>
+             <Label x:Name="txtLabel"
+                    Text="Вход в систему"/>
+        </Frame>
+        <Entry Text="{Binding UserLogin.Email}"
+               Placeholder="Эл. почта"
+               IsSpellCheckEnabled="False"
+               IsEnabled="{Binding canWriting}"/>
+        <Entry Text="{Binding UserLogin.Password}"
+               IsSpellCheckEnabled="False"
+               Placeholder="Пароль"
+               IsEnabled="{Binding canWriting}"/>
+
+        <Button Text="Вход"
+                Command="{Binding LoginCommand}"/>
+
+        <Frame>
+            <Label Text="{Binding Response}"/>
+        </Frame>
+
+        <Button Text="Регистрация"
+            Command="{Binding GoToRegisterCommand}"/>
+
+        <Button Text="Test"
+            Command="{Binding TestCommand}"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>
