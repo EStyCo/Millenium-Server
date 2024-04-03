@@ -4,6 +4,7 @@ using Client.MVVM.Model.Utilities;
 using Newtonsoft.Json;
 using PropertyChanged;
 using System.Windows.Input;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Client.Services
 {
@@ -57,7 +58,6 @@ namespace Client.Services
 
         public async Task GoNewArea(Place place)
         {
-
             var response = await travelService.PushNewPage<APIResponse>(new TravelDTO
             {
                 CharacterName = userStore.Character.CharacterName,
@@ -70,10 +70,10 @@ namespace Client.Services
                 IsShowMenu = false;
                 await Shell.Current.GoToAsync(place.ToString());
             }
-            else if(response.ErrorMessages.Count > 0)
+            else
             {
-                var error = response.ErrorMessages;
-                await Application.Current.MainPage.DisplayAlert("", $"{error.FirstOrDefault()}", "Понято");
+                var error = response?.ErrorMessages;
+                await Application.Current.MainPage.DisplayAlert("", $"Движение невозможно! \n{error?.FirstOrDefault()}", "Понято");
             }
         }
 

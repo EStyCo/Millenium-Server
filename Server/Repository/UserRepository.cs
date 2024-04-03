@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Server.Models;
 using Server.Models.DTO;
+using Server.Models.DTO.Auth;
 using Server.Models.Skills;
 using Server.Models.Skills.LearningMaster;
 using Server.Models.Utilities;
@@ -46,7 +47,7 @@ namespace Server.Repository
             };
         }
 
-        public async Task<bool> Registration(RegistrationRequestDTO regDTO)
+        public async Task<bool> Registration(RegRequestDTO regDTO)
         {
             if (regDTO != null)
             {

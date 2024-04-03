@@ -47,7 +47,7 @@ namespace Client
             builder.Services.AddTransient<RegistrationViewModel>();
 
             builder.Services.AddHttpClient<IAuthService, AuthService>();
-            builder.Services.AddSingleton<IAuthService, AuthService>();
+            builder.Services.AddTransient<IAuthService, AuthService>();
 
             builder.Services.AddTransient<TestService>();
 

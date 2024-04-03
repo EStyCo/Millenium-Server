@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Client.MVVM.Model;
 using Client.MVVM.Model.DTO;
+using Client.MVVM.Model.Utilities;
 using Client.MVVM.ViewModel;
 using Microsoft.AspNetCore.SignalR.Client;
 using PropertyChanged;
@@ -11,7 +12,6 @@ namespace Client.Services
     [AddINotifyPropertyChangedInterface]
     public class PlaceService
     {
-        private readonly string baseUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5266" : "https://localhost:7082";
         private readonly string hubUrl = string.Empty;
         private HubConnection connection;
         private readonly IMapper mapper;
@@ -42,7 +42,7 @@ namespace Client.Services
         public async Task ConnectToHub()
         {
             connection = new HubConnectionBuilder()
-                .WithUrl($"{baseUrl}/{hubUrl}Hub")
+                .WithUrl($"{BaseUrl.Get()}/{hubUrl}Hub")
                 .Build();
 
             connection.On("UpdateList", (List<MonsterDTO> mList) =>

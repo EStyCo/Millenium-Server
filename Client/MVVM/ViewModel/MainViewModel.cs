@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Client.MVVM.Model;
 using Client.MVVM.Model.DTO;
+using Client.MVVM.Model.DTO.Auth;
 using Client.MVVM.Model.Utilities;
 using Client.MVVM.View;
 using Client.MVVM.View.Town;
@@ -21,6 +22,7 @@ namespace Client.MVVM.ViewModel
         private readonly TestService testService;
         private readonly Router router;
         public LoginRequestDTO UserLogin { get; set; }
+        public bool IsVPS { get; set; } = false;
         public bool isLoading { get; set; } = false;
         public bool canWriting { get; set; } = true;
         public string Response { get; set; } = string.Empty;

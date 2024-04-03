@@ -9,6 +9,9 @@ using Server.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
+    policy.SetIsOriginAllowed(_ => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
+
 // Add services to the container.
 builder.Services.AddSignalR();
 builder.Services.AddControllers();
@@ -47,21 +50,17 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 #endif
 
+
+app.UseCors();
 //app.UseAuthorization();
 
 app.MapControllers();
 app.UseRouting();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapHub<UserStorage>("/UserStorage");
-    endpoints.MapHub<Glade>("/GladeHub");
-    endpoints.MapHub<DarkWood>("/DarkWoodHub");
-});
 
-/*app.MapHub<UserStorage>("/UserStorage");
+app.MapHub<UserStorage>("/UserStorage");
 app.MapHub<Glade>("/GladeHub");
-app.MapHub<DarkWood>("/DarkWoodHub");*/
+app.MapHub<DarkWood>("/DarkWoodHub");
 
 app.Run();
 

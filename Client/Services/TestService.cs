@@ -26,7 +26,7 @@ namespace Client.Services
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = ApiType.GET,
-                Url = baseUrl + serviceUrl
+                Url = BaseUrl.Get() + serviceUrl
             });
         }
     }

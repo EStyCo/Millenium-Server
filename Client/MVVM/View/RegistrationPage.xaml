@@ -19,22 +19,22 @@
             <Label Text="Регистрация нового персонажа"/>
         </Frame>
 
-        <Entry Text="{Binding UserRegister.CharacterName}"
+        <Entry Text="{Binding UserData.CharacterName}"
                IsSpellCheckEnabled="False"
                IsEnabled="{Binding canWriting}"
                Placeholder="Имя персонажа"/>
 
-        <Entry Text="{Binding UserRegister.Email}"
+        <Entry Text="{Binding UserData.Email}"
                IsSpellCheckEnabled="False"
                IsEnabled="{Binding canWriting}"
                Placeholder="Эл. почта"/>
 
-        <Entry Text="{Binding UserRegister.Password}"
+        <Entry Text="{Binding UserData.Password}"
                Placeholder="Пароль"
                IsSpellCheckEnabled="False"
                IsEnabled="{Binding canWriting}"/>
 
-        <Entry Text="{Binding UserRegister.Race}"
+        <Entry Text="{Binding UserData.Race}"
                Placeholder="Раса персонажа"
                IsSpellCheckEnabled="False"
                IsEnabled="{Binding canWriting}"/>

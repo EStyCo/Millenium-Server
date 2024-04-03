@@ -9,7 +9,6 @@ namespace Client.Services
 {
     public class BaseService : IBaseService
     {
-        public string baseUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://147.45.75.109:5000" : "http://147.45.75.109:5000";
         public APIResponse responseModel { get; set; }
         public IHttpClientFactory hhtpClient { get; set; }
 

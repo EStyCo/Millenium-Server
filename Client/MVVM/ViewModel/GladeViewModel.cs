@@ -29,12 +29,12 @@ namespace Client.MVVM.ViewModel
             UserStore = _UserStore;
             monsterService = _monsterService;
             Router = _router;
-            //PlaceService = new(UserStore, monsterService, "Glade", mapper);
+            PlaceService = new(UserStore, monsterService, "Glade", mapper);
 
             AddMonsterCommand = new Command(async () => await AddMonster());
             DeleteMonsterCommand = new Command<int>(async (id) => await DeleteMonster(id));
 
-            PlaceService.ConnectToHub();
+            PlaceService?.ConnectToHub();
         }
 
         private async Task LoadMonsters()

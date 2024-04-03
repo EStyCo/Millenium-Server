@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Server;
 using Server.Models;
-using Server.Models.DTO;
+using Server.Models.DTO.Auth;
 using Server.Repository;
 using System.Net;
 
@@ -46,7 +46,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost("reg")]
-        public async Task<ActionResult> AddUser(RegistrationRequestDTO user)
+        public async Task<ActionResult> AddUser([FromBody] RegRequestDTO dto)
         {
             /*bool ifUserNameUnique = await userRep.IsUniqueUser( user.Email);
             if (!ifUserNameUnique)
@@ -57,16 +57,18 @@ namespace WebApplication1.Controllers
                 return BadRequest(response);
             }*/
 
-            var userResponse = await userRep.Registration(user);
+            var userResponse = await userRep.Registration(dto);
 
             if (!userResponse)
             {
                 response.StatusCode = HttpStatusCode.BadRequest;
                 response.IsSuccess = false;
-                response.ErrorMessages.Add("Ошибка");
+                response.ErrorMessages.Add("Ошибка регистрации");
 
                 return BadRequest(response);
             }
+
+            //RegResponseDTO result = new(){ Name = dto.CharacterName, IsSuccess = userResponse };
 
             response.StatusCode = HttpStatusCode.OK;
             response.IsSuccess = true;

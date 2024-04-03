@@ -1,5 +1,6 @@
 ﻿using Client.MVVM.Model;
 using Client.MVVM.Model.DTO;
+using Client.MVVM.Model.DTO.Auth;
 using Client.MVVM.Model.Utilities;
 using Client.Services.IServices;
 using Microsoft.Extensions.Configuration;
@@ -27,17 +28,17 @@ namespace Client.Services
             {
                 ApiType = ApiType.POST,
                 Data = obj,
-                Url = baseUrl + serviceUrl + "/login"
+                Url = BaseUrl.Get() + serviceUrl + "/login"
             });
         }
 
-        public Task<T> RegisterAsync<T>(RegistrationRequestDTO obj)
+        public Task<T> RegisterAsync<T>(RegRequestDTO obj)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = ApiType.POST,
                 Data = obj,
-                Url = baseUrl + serviceUrl + "/reg"
+                Url = BaseUrl.Get() + serviceUrl + "/reg"
             });
         }
     }

@@ -1,14 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Client.MainPage">
+             x:Class="Client.MainPage"
+             xmlns:converter="clr-namespace:Client.MVVM.Model.Utilities">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior 
                         IsVisible="False"
                         IsEnabled="False"/>
     </Shell.BackButtonBehavior>
-    
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:UrlConverter x:Key="UrlConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <VerticalStackLayout
         HorizontalOptions="Center" 
         VerticalOptions="Center"
@@ -22,7 +29,7 @@
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="CenterAndExpand" />
         <Frame>
-             <Label x:Name="txtLabel"
+            <Label x:Name="txtLabel"
                     Text="Вход в систему"/>
         </Frame>
         <Entry Text="{Binding UserLogin.Email}"
@@ -34,8 +41,16 @@
                Placeholder="Пароль"
                IsEnabled="{Binding canWriting}"/>
 
-        <Button Text="Вход"
-                Command="{Binding LoginCommand}"/>
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
+            <Button Text="Вход"
+                    Command="{Binding LoginCommand}"
+                    VerticalOptions="Center"/>
+            <VerticalStackLayout>
+                <Label Text="{Binding IsVPS, Converter={StaticResource UrlConverter}}"
+                       HorizontalOptions="Center"/>
+                <Switch IsToggled="{Binding IsVPS}"/>
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
 
         <Frame>
             <Label Text="{Binding Response}"/>

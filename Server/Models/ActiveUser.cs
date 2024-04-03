@@ -9,7 +9,7 @@ namespace Server.Models
     public class ActiveUser
     {
         public string ConnectionId { get; set; } = string.Empty;
-        public int CurrentHP { get; set; }
+        public int CurrentHP { get; set; } = 0;
         public int maxHP;
         public int MaxHP { get { return maxHP = Consider.MaxHP(Character); } }
         public int regenRateHP;

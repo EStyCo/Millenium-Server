@@ -1,14 +1,9 @@
-﻿using Client.MVVM.Model;
-using Client.MVVM.Model.DTO;
+﻿using AutoMapper;
+using Client.MVVM.Model;
+using Client.MVVM.Model.DTO.Auth;
 using Client.Services.IServices;
-using Newtonsoft.Json;
 using PropertyChanged;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Client.MVVM.ViewModel
@@ -17,16 +12,18 @@ namespace Client.MVVM.ViewModel
     public class RegistrationViewModel
     {
         private readonly IAuthService authService;
-        public RegistrationRequestDTO UserRegister { get; set; }
+        private readonly IMapper mapper;
+        public RegData UserData { get; set; }
         public bool isLoading { get; set; } = false;
         public bool canWriting { get; set; } = true;
         public string Response { get; set; } = string.Empty;
         public ICommand RegisterCommand { get; set; }
 
-        public RegistrationViewModel(IAuthService _authService)
+        public RegistrationViewModel(IAuthService _authService, IMapper _mapper)
         {
             authService = _authService;
-            UserRegister = new();
+            mapper = _mapper;
+            UserData = new();
 
             RegisterCommand = new Command(async () => await Register());
         }
@@ -38,8 +35,8 @@ namespace Client.MVVM.ViewModel
             await Task.Delay(1000);
 
             var validationResults = new List<ValidationResult>();
-            var validationContext = new ValidationContext(UserRegister, serviceProvider: null, items: null);
-            var isValid = Validator.TryValidateObject(UserRegister, validationContext, validationResults, validateAllProperties: true);
+            var validationContext = new ValidationContext(UserData, serviceProvider: null, items: null);
+            var isValid = Validator.TryValidateObject(UserData, validationContext, validationResults, validateAllProperties: true);
 
             if (!isValid)
             {
@@ -49,14 +46,14 @@ namespace Client.MVVM.ViewModel
                 return;
             }
 
-            var response = await authService.RegisterAsync<APIResponse>(UserRegister);
+            var response = await authService.RegisterAsync<APIResponse>(mapper.Map<RegRequestDTO>(UserData));
             if (response != null && response.IsSuccess)
             {
                 Response = response.Result.ToString();
             }
             else
             {
-                Response = response.ErrorMessages.FirstOrDefault().ToString();
+                Response = response?.ErrorMessages.FirstOrDefault().ToString();
             }
 
             isLoading = false;

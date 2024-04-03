@@ -28,7 +28,7 @@ namespace Client.MVVM.ViewModel
 
             AddMonsterCommand = new Command(async () => await AddMonster());
 
-            //PlaceService = new(UserStore, monsterService, "DarkWood", mapper);
+            PlaceService = new(UserStore, monsterService, "DarkWood", mapper);
 
             PlaceService.ConnectToHub();
         }

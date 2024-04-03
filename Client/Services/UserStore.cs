@@ -12,7 +12,7 @@ namespace Client.Services
     [AddINotifyPropertyChangedInterface]
     public class UserStore
     {
-        private string baseUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://147.45.75.109:5000" : "http://147.45.75.109:5000";
+        //private string baseUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://147.45.75.109:5000" : "http://147.45.75.109:5000";
         public Character Character { get; set; }
         public SpellService SpellService { get; set; }
         public VitalityService VitalityService { get; set; }
@@ -29,7 +29,7 @@ namespace Client.Services
         public async Task ConnectionHub()
         {
             connection = new HubConnectionBuilder()
-                .WithUrl($"{baseUrl}/UserStorage")
+                .WithUrl($"{BaseUrl.Get()}/UserStorage")
                 .Build();
 
             connection.On("UpdateHP", (int[] newHP) =>
@@ -49,12 +49,12 @@ namespace Client.Services
                 SpellService.SpellList = newList;
             });
 
-            connection.On<SpellDTO>("UpdateSpell", UpdateSpell);
+            connection.On("UpdateSpell", (SpellDTO dto) => UpdateSpell(dto));
 
             try
             {
                 await connection.StartAsync();
-                //await connection.InvokeAsync("ConnectHub", Character.CharacterName);
+                await connection.InvokeAsync("ConnectHub", Character.CharacterName);
             }
             catch (Exception ex)
             {

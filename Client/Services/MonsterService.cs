@@ -21,7 +21,7 @@ namespace Client.Services
             {
                 ApiType = ApiType.POST,
                 Data = dto,
-                Url = baseUrl + serviceUrl + "/add"
+                Url = BaseUrl.Get() + serviceUrl + "/add"
             });
         }
 
@@ -31,7 +31,7 @@ namespace Client.Services
             {
                 ApiType = ApiType.POST,
                 Data = dto,
-                Url = baseUrl + serviceUrl + "/delete"
+                Url = BaseUrl.Get() + serviceUrl + "/delete"
             });
         }
 
@@ -41,7 +41,7 @@ namespace Client.Services
             {
                 ApiType = ApiType.POST,
                 Data = dto,
-                Url = baseUrl + serviceUrl + "/attack"
+                Url = BaseUrl.Get() + serviceUrl + "/attack"
             });
         }
     }
