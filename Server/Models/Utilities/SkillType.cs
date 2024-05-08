@@ -1,6 +1,6 @@
 ﻿namespace Server.Models.Utilities
 {
-    public enum SkillType
+    public enum SpellType
     {
         None = 0,
         Simple = 1,

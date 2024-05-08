@@ -10,12 +10,12 @@ namespace Server.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class StatController : ControllerBase
+    public class StatsController : ControllerBase
     {
         private readonly UserStorage userStorage;
         private readonly IMapper mapper;
 
-        public StatController(UserStorage _userStorage, IMapper _mapper)
+        public StatsController(UserStorage _userStorage, IMapper _mapper)
         {
             userStorage = _userStorage;
             mapper = _mapper;
@@ -24,8 +24,8 @@ namespace Server.Controllers
         [HttpPost("get")]
         public async Task<IActionResult> GetStats(NameRequestDTO dto)
         {
-            CharacterDTO? character = userStorage.ActiveUsers
-                .Where(u => u.Character.CharacterName == dto.Name)
+            Character? character = userStorage.ActiveUsers
+                .Where(u => u.Character.Name == dto.Name)
                 .Select(u => u.Character)
                 .FirstOrDefault();
 
@@ -41,7 +41,7 @@ namespace Server.Controllers
 
             if (character == null) return BadRequest(RespFactory.ReturnBadRequest());
 
-            return Ok(RespFactory.ReturnOk(character));
+            return Ok(RespFactory.ReturnOk());
         }
     }
 }

@@ -6,9 +6,10 @@ using Server.Models.Utilities;
 
 namespace Server.Models
 {
-    public class ActiveUser
+    public class ActiveUser : Entity
     {
         public string ConnectionId { get; set; } = string.Empty;
+        public string UserIdentificator { get; set; } = string.Empty;
         public int CurrentHP { get; set; } = 0;
         public int maxHP;
         public int MaxHP { get { return maxHP = Consider.MaxHP(Character); } }
@@ -20,15 +21,17 @@ namespace Server.Models
         public int regenRateMP;
 
 
-        public delegate Task SendRestTimeDelegate(int id, int time);
+        public bool IsReadyCast { get; set; } = true;
+        public int GlobalRestSeconds { get; set; }
+
         public int RegenRateMP { get { return regenRateMP = Consider.RegenRateMP(Character); } }
-        public CharacterDTO Character { get; set; }
-        public List<Skill> ActiveSkills { get; set; }
+        public Character Character { get; set; }
+        public List<Spell> ActiveSkills { get; set; }
 
         private readonly IHubContext<UserStorage> hubContext;
 
-        public ActiveUser(IHubContext<UserStorage> _hubContext, 
-                          CharacterDTO _character)
+        public ActiveUser(IHubContext<UserStorage> _hubContext,
+                          Character _character)
         {
             hubContext = _hubContext;
             Character = _character;
@@ -45,28 +48,28 @@ namespace Server.Models
             }
         }
 
-        public async Task UpdateSpellList(CharacterDTO character)
+        public async Task UpdateSpellList(Character character)
         {
             await CreateSpellList(character);
 
             List<SpellDTO> spellList = new();
 
-            foreach (Skill spell in ActiveSkills)
+            foreach (Spell spell in ActiveSkills)
             {
                 SpellDTO spellDTO = new();
-                spellDTO.Id = spell.Id;
+                spellDTO.SpellType = spell.SpellType;
                 spellDTO.Name = spell.Name;
                 spellDTO.IsReady = spell.IsReady;
                 spellDTO.CoolDown = spell.RestSeconds;
 
                 spellList.Add(spellDTO);
             }
-            await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateSpellList", spellList);
+            //await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateSpellList", spellList);
         }
 
         public async Task SendRestTime(int id, int time)
         {
-            var spell = ActiveSkills.FirstOrDefault(x => x.Id == id);
+            /*var spell = ActiveSkills.FirstOrDefault(x => x.Id == id);
             if (spell != null)
             {
                 SpellDTO spellDTO = new()
@@ -78,7 +81,7 @@ namespace Server.Models
                 };
 
                 await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateSpell", spellDTO);
-            }
+            }*/
         }
 
         public async Task SendHP()
@@ -105,20 +108,81 @@ namespace Server.Models
             await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateMP", sendMP);
         }
 
-        private async Task CreateSpellList(CharacterDTO character)
+        private async Task CreateSpellList(Character character)
         {
             await Task.Delay(10);
 
-            List<SkillType> skills = new() {character.Skill1, 
-                                            character.Skill2, 
-                                            character.Skill3, 
-                                            character.Skill4, 
-                                            character.Skill5 };
+            List<SpellType> spells = new() {character.Spell1,
+                                            character.Spell2,
+                                            character.Spell3,
+                                            character.Spell4,
+                                            character.Spell5 };
 
-            SendRestTimeDelegate sendDelegate;
-            sendDelegate = SendRestTime;
+            ActiveSkills = new SkillCollection().CreateSkillList(spells);
+        }
 
-            ActiveSkills = new SkillCollection().CreateSkillList(skills, sendDelegate);
+        public async void UseSkill(SpellType type, params Entity[] target)
+        {
+            var skill = ActiveSkills.FirstOrDefault(x => x.GetType() == new SkillCollection().GetSkillType(type));
+
+            if (skill != null)
+            {
+                await skill.Use(this, target);
+
+                skill.IsReady = false;
+                skill.RestSeconds = skill.CoolDown;
+
+                _ = StartRestSkill(skill);
+                _ = StartGlobalRest();
+            }
+        }
+
+        private async Task StartRestSkill(Spell skill)
+        {
+            while (skill.RestSeconds > 0)
+            {
+                await Task.Delay(1000);
+                skill.RestSeconds -= 1;
+            }
+            skill.RestSeconds = 0;
+            skill.IsReady = true;
+        }
+
+        private async Task StartGlobalRest()
+        {
+            foreach (var skill in ActiveSkills)
+            {
+                if (skill.RestSeconds <= 5 && !skill.IsReady)
+                {
+                    skill.RestSeconds = 5;
+                    skill.IsReady = false;
+                    _ = StartRestSkill(skill);
+                }
+                else if(skill.IsReady)
+                {
+                    skill.RestSeconds = 5;
+                    skill.IsReady = false;
+                    _ = StartRestSkill(skill);
+                }
+            }
+        }
+
+        public List<RestTimeDTO> GetRestTime()
+        {
+            List<RestTimeDTO> listRestTime = new();
+
+            foreach (var skill in ActiveSkills)
+            {
+                listRestTime.Add(new RestTimeDTO
+                {
+                    SpellType = skill.SpellType,
+                    Name = skill.Name,
+                    RestSeconds = skill.RestSeconds,
+                    IsReady = skill.IsReady,
+                });
+            }
+
+            return listRestTime;
         }
     }
 }

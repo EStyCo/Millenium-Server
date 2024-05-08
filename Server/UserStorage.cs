@@ -3,7 +3,6 @@ using Server.Models;
 using Server.Models.DTO;
 using Server.Models.Interfaces;
 using Server.Repository;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Server
 {
@@ -11,7 +10,7 @@ namespace Server
     {
         private readonly IServiceFactory<UserRepository> userRepositoryFactory;
         private readonly IHubContext<UserStorage> hubContext;
-
+        public Dictionary<string, CancellationTokenSource> disconnectTokens = new();
         public List<ActiveUser> ActiveUsers { get; private set; }
 
         public UserStorage(IHubContext<UserStorage> _hubContext, IServiceFactory<UserRepository> _userRepositoryFactory)
@@ -26,19 +25,34 @@ namespace Server
             var userRepository = userRepositoryFactory.Create();
             var character = await userRepository.GetCharacter(name);
 
-            if (character != null)
+            if (character == null) return;
+
+            var activeUser = ActiveUsers.FirstOrDefault(x => x.Character.Name == name);
+
+            if (activeUser == null)
             {
                 ActiveUser newUser = new(hubContext, character);
                 newUser.ConnectionId = Context.ConnectionId;
                 ActiveUsers.Add(newUser);
 
-                await Task.WhenAll(newUser.StartVitalityConnection(), newUser.UpdateSpellList(character));
+                _ = newUser.StartVitalityConnection();
+                _ = newUser.UpdateSpellList(character);
+            }
+            else 
+            {
+                if (disconnectTokens.TryGetValue(activeUser.ConnectionId, out var cts))
+                { 
+                    cts.Cancel();
+                    disconnectTokens.Remove(activeUser.ConnectionId);
+                }
+                activeUser.ConnectionId = Context.ConnectionId;
+                _ = activeUser.UpdateSpellList(activeUser.Character);
             }
         }
 
-        public async Task<CharacterDTO> UpdateStats(UpdateStatDTO dto)
+        public async Task<Character> UpdateStats(UpdateStatDTO dto)
         {
-            var user = ActiveUsers.FirstOrDefault(x => x.Character.CharacterName == dto.Name);
+            var user = ActiveUsers.FirstOrDefault(x => x.Character.Name == dto.Name);
             var userRep = userRepositoryFactory.Create();
 
             if (user == null || !await userRep.UserExists(dto.Name)) return null;
@@ -49,17 +63,24 @@ namespace Server
             return character;
         }
 
-
-        public async Task BreakCharacter(string playerName)
+        public override async Task OnDisconnectedAsync(Exception exception)
         {
-            var user = ActiveUsers.FirstOrDefault(x => x.Character.CharacterName == playerName);
+            var connectionId = Context.ConnectionId;
 
-            if (user != null)
+            var userToRemove = ActiveUsers.FirstOrDefault(user => user.ConnectionId == connectionId);
+            if (userToRemove != null)
             {
-                await Task.Delay(10);
-                user.CurrentHP = new Random().Next(50, user.maxHP);
-                user.CurrentMP = new Random().Next(50, user.maxMP);
+                var cts = new CancellationTokenSource();
+                disconnectTokens.Add(connectionId, cts);
+
+                Task.Delay(TimeSpan.FromMinutes(1), cts.Token).ContinueWith(_ =>
+                {
+                    ActiveUsers.Remove(userToRemove);
+                    disconnectTokens.Remove(connectionId);
+                }, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnRanToCompletion); ;
             }
+
+            await base.OnDisconnectedAsync(exception);
         }
     }
 }

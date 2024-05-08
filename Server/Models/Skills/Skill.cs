@@ -1,25 +1,18 @@
-﻿using Server.Models.DTO;
-using static Server.Models.ActiveUser;
+﻿
+using Server.Models.Utilities;
 
 namespace Server.Models.Skills
 {
-    public abstract class Skill
+    public abstract class Spell
     {
-        public int Id { get; set; } = 0;
+        public SpellType SpellType { get; set; }
         public string Name { get; set; } = string.Empty;
         public int CoolDown { get; set; }
-        public int RestSeconds { get; set; } = 0;
-        public bool IsReady { get; set; } = true;
+        public int RestSeconds { get; set; }
         public string Description { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
+        public bool IsReady { get; set; } = true;
 
-        protected SendRestTimeDelegate SendRestDelegate;
-
-        public abstract Task<int> Attack(CharacterDTO c);
-        public void ActivateSkill(int id, SendRestTimeDelegate sendRestDelegate)
-        { 
-            Id = id;
-            SendRestDelegate = sendRestDelegate;
-        }
+        public abstract Task Use(Entity user, params Entity[] target);
     }
 }

@@ -5,8 +5,8 @@ namespace Server.Models.DTO
     public class AttackMonsterDTO
     {
         public int IdMonster { get; set; }
-        public int SkillId { get; set; }
-        public string NameCharacter { get; set; } = string.Empty;
+        public SpellType Type { get; set; }
+        public string Name { get; set; } = string.Empty;
         public Place Place { get; set; }
     }
 }

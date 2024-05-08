@@ -7,36 +7,36 @@ namespace Server.Models.Skills
 {
     public class SkillCollection
     {
-        public List<Skill> CreateSkillList(List<SkillType> ActiveSkills, SendRestTimeDelegate sendRestDelegate)
+        public List<Spell> CreateSkillList(List<SpellType> ActiveSkilll)
         {
-            List<Skill> skillList = new();
+            List<Spell> spellList = new();
 
-            foreach (var skill in ActiveSkills)
+            foreach (var skill in ActiveSkilll)
             {
-                Skill type = PickSkill(skill);
+                Spell type = PickSkill(skill);
                 if (type != null)
                 {
-                    skillList.Add(type);
-                    type.ActivateSkill(skillList.Count, sendRestDelegate);
+                    spellList.Add(type);
+                    type.SpellType = skill;
                 }
             }
 
-            return skillList;
+            return spellList;
         }
 
-        public List<SpellMasterDTO> CreateLearningList(List<SkillType> ActiveSkills)
+        public List<MentorSpellDTO> CreateLearningList(List<SpellType> ActiveSkills)
         {
-            List<SkillType> allSkillsType = AllSkillsType();
-            List<SpellMasterDTO> skillList = new();
+            List<SpellType> allSkillsType = AllSkillsType();
+            List<MentorSpellDTO> skillList = new();
 
             foreach (var item in allSkillsType)
             {
-                Skill skill = PickSkill(item);
+                Spell skill = PickSkill(item);
                 if (skill != null)
                 {
-                    SpellMasterDTO dto = new()
+                    MentorSpellDTO dto = new()
                     {
-                        SkillType = item,
+                        SpellType = skill.SpellType,
                         Name = skill.Name,
                         CoolDown = skill.CoolDown,
                         Description = skill.Description,
@@ -52,26 +52,63 @@ namespace Server.Models.Skills
             return skillList;
         }
 
-        private Skill PickSkill(SkillType skill)
+        public Spell PickSkill(SpellType skill)
         {
             switch (skill)
             {
-                case SkillType.Simple:
+                case SpellType.Simple:
                     return new Simple();
-                case SkillType.PowerCharge:
+                case SpellType.PowerCharge:
                     return new PowerCharge();
                 default:
                     return null;
             }
         }
 
-        private List<SkillType> AllSkillsType()
+        public Type GetSkillType(SpellType skill)
         {
-            return new List<SkillType>()
+            switch (skill)
             {
-                SkillType.Simple,
-                SkillType.PowerCharge
+                case SpellType.Simple:
+                    return typeof(Simple);
+                case SpellType.PowerCharge:
+                    return typeof(PowerCharge);
+                default:
+                    return null;
+            }
+        }
+
+        private List<SpellType> AllSkillsType()
+        {
+            return new List<SpellType>()
+            {
+                SpellType.Simple,
+                SpellType.PowerCharge
             };
+        }
+
+        public SkillInfo Info(SpellType type)
+        {
+            switch (type)
+            {
+                case SpellType.Simple:
+                    return new SkillInfo
+                    {
+                        Name = "Простой удар",
+                        CoolDown = 7,
+                        Description = "Обычный удар с правой, ничего выдающегося.",
+                        ImagePath = "spell_simple.png"
+                    };
+                case SpellType.PowerCharge:
+                    return new SkillInfo
+                    {
+                        Name = "Сильный удар",
+                        CoolDown = 15,
+                        Description = "Мощный удар, превосходящий обычный удар примерно в 2 раза.",
+                        ImagePath = "spell_simple.png"
+                    };
+                default: return new SkillInfo();
+            }
         }
     }
 }

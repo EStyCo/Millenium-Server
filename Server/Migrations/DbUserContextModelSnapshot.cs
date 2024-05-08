@@ -14,7 +14,7 @@ namespace Server.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.3");
 
             modelBuilder.Entity("Server.Models.Character", b =>
                 {
@@ -24,10 +24,6 @@ namespace Server.Migrations
 
                     b.Property<int>("Agility")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("CharacterName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<int>("CurrentArea")
                         .HasColumnType("INTEGER");
@@ -50,22 +46,26 @@ namespace Server.Migrations
                     b.Property<int>("Level")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Race")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Skill1")
+                    b.Property<int>("Spell1")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Skill2")
+                    b.Property<int>("Spell2")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Skill3")
+                    b.Property<int>("Spell3")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Skill4")
+                    b.Property<int>("Spell4")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Skill5")
+                    b.Property<int>("Spell5")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Strength")

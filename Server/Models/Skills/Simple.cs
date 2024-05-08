@@ -1,45 +1,35 @@
 ﻿using Server.Models.DTO;
+using Server.Models.Monsters;
+using Server.Models.Utilities;
 using static Server.Models.ActiveUser;
 
 namespace Server.Models.Skills
 {
-    public class Simple : Skill
+    public class Simple : Spell
     {
         public Simple()
         {
-            Name = "Удар с правой";
+            SpellType = SpellType.Simple;
+            Name = "Простой удар";
+            CoolDown = 7;
             Description = "Обычный удар с правой, ничего выдающегося.";
             ImagePath = "spell_simple.png";
-            CoolDown = 7;
         }
 
-        public async override Task<int> Attack(CharacterDTO c)
+        public override Task Use(Entity user, params Entity[] target)
         {
-            await Task.Delay(1);
-            if (IsReady)
+            if (user is ActiveUser and not null ||
+                target[0] is Monster and not null)
             {
-                StartRest();
-                return (c.Strength * 2) + c.Strength * (c.Agility / 100);
+                var activeUser = user as ActiveUser;
+                var c = activeUser?.Character;
+                var damage = (c.Strength * 2) + c.Strength * (c.Agility / 100);
+
+                var monster = target[0] as Monster;
+                monster.CurrentHP -= damage;
             }
 
-            return 0;
-        }
-
-        public async Task StartRest()
-        {
-            IsReady = false;
-            RestSeconds = CoolDown;
-            SendRestDelegate?.Invoke(Id, RestSeconds);
-
-            while (RestSeconds > 0)
-            { 
-                await Task.Delay(1000);
-                RestSeconds--;
-                SendRestDelegate?.Invoke(Id, RestSeconds);
-            }
-
-            IsReady = true;
-            SendRestDelegate?.Invoke(Id, RestSeconds);
+            return Task.CompletedTask;
         }
     }
 }

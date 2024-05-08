@@ -5,7 +5,7 @@ namespace Server.Models
     public class Character
     {
         public int Id { get; set; }
-        public string CharacterName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
         public Race Race { get; set; }
         public Gender Gender { get; set; }
         public Place CurrentArea { get; set; }
@@ -19,11 +19,11 @@ namespace Server.Models
         public int Strength { get; set; } = 5;
         public int Agility { get; set; } = 5;
         public int Intelligence { get; set; } = 5;
-        public SkillType Skill1 { get; set; } = 0;
-        public SkillType Skill2 { get; set; } = 0;
-        public SkillType Skill3 { get; set; } = 0;
-        public SkillType Skill4 { get; set; } = 0;
-        public SkillType Skill5 { get; set; } = 0;
+        public SpellType Spell1 { get; set; } = 0;
+        public SpellType Spell2 { get; set; } = 0;
+        public SpellType Spell3 { get; set; } = 0;
+        public SpellType Spell4 { get; set; } = 0;
+        public SpellType Spell5 { get; set; } = 0;
         public User User { get; set; }
     }
 }

@@ -25,9 +25,9 @@ namespace Server.Controllers
         }
 
         [HttpPost("get")]
-        public async Task<IActionResult> GetArea([FromBody] TravelDTO travel)
+        public async Task<IActionResult> GetArea(NameRequestDTO dto)
         {
-            var travelResponse = await rep.GetArea(travel);
+            var travelResponse = await rep.GetArea(dto);
 
             if (travelResponse == null)
             {
@@ -45,7 +45,7 @@ namespace Server.Controllers
         }
 
         [HttpPost("go")]
-        public async Task<IActionResult> GoNewArea([FromBody] TravelDTO travel)
+        public async Task<IActionResult> GoNewArea(TravelDTO travel)
         {
             var travelResponse = await rep.GoNewArea(travel);
 
@@ -57,17 +57,6 @@ namespace Server.Controllers
 
                 return BadRequest(response);
             }
-
-            response.StatusCode = HttpStatusCode.OK;
-            response.IsSuccess = true;
-            response.Result = true;
-            return Ok(response);
-        }
-
-        [HttpPost("break")]
-        public async Task<IActionResult> BreakChar([FromBody] string name)
-        {
-            await userStorage.BreakCharacter(name);
 
             response.StatusCode = HttpStatusCode.OK;
             response.IsSuccess = true;

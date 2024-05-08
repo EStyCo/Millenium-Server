@@ -2,6 +2,7 @@
 using Server.Models;
 using Server.Models.DTO;
 using Server.Models.Locations;
+using Server.Models.Utilities;
 using System.Net;
 
 namespace Server.Controllers
@@ -14,7 +15,7 @@ namespace Server.Controllers
         private readonly AreaStorage areaStorage;
         protected APIResponse response;
 
-        public MonsterController(UserStorage _userStorage, AreaStorage _areaStorage) 
+        public MonsterController(UserStorage _userStorage, AreaStorage _areaStorage)
         {
             userStorage = _userStorage;
             areaStorage = _areaStorage;
@@ -44,13 +45,42 @@ namespace Server.Controllers
         [HttpPost("attack")]
         public async Task<IActionResult> AttackMonster(AttackMonsterDTO dto)
         {
-            var character = userStorage.ActiveUsers.FirstOrDefault(x => x.Character.CharacterName == dto.NameCharacter);
+            var character = userStorage.ActiveUsers.FirstOrDefault(x => x.Character.Name == dto.Name);
+
+            if (character == null || !character.IsReadyCast)
+            {
+                return BadRequest(RespFactory.ReturnBadRequest());
+            }
 
             await areaStorage.GetArea(dto.Place).AttackMonster(dto, character);
+            return Ok(RespFactory.ReturnOk());
+        }
 
-            response.StatusCode = HttpStatusCode.OK;
-            response.IsSuccess = true;
-            return Ok(response);
+        [HttpPost("rest")]
+        public async Task<IActionResult> GetRestTime(NameRequestDTO dto)
+        {
+            var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Character.Name == dto.Name);
+
+            if (user == null)
+            {
+                return BadRequest(RespFactory.ReturnBadRequest());
+            }
+
+            var result = user.GetRestTime();
+            return Ok(RespFactory.ReturnOk(result));
+        }
+
+        [HttpPost("getMonsters")]
+        public async Task<IActionResult> GetMonsters(PlaceDTO dto)
+        {
+            List<MonsterDTO> monsters = await areaStorage.GetArea(dto.Place).GetMonster();
+
+            if (monsters == null)
+            {
+                return BadRequest(RespFactory.ReturnBadRequest());
+            }
+
+            return Ok(RespFactory.ReturnOk(new CustomList<MonsterDTO>(monsters)));
         }
     }
 }

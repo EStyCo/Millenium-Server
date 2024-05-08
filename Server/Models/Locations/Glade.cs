@@ -69,7 +69,7 @@ namespace Server.Models.Locations
 
         public override async Task UpdateMonsters()
         {
-            await Clients.All.SendAsync("UpdateList", await GetMonster());
+            await Clients?.All.SendAsync("UpdateList", await GetMonster());
         }
 
         /*public override async Task AttackMonster(AttackMonsterDTO attackMonster, ActiveUser character)

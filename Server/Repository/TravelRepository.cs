@@ -13,17 +13,17 @@ namespace Server.Repository
             dbContext = _dbContext;
         }
 
-        public async Task<TravelDTO> GetArea(TravelDTO travel)
+        public async Task<TravelDTO> GetArea(NameRequestDTO dto)
         {
             var user = await dbContext.Characters
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.CharacterName == travel.CharacterName);
+                .FirstOrDefaultAsync(x => x.Name == dto.Name);
 
             if (user != null)
             {
                 return new TravelDTO
                 {
-                    CharacterName = user.CharacterName,
+                    Name = user.Name,
                     Place = user.CurrentArea
                 };
             }
@@ -34,7 +34,7 @@ namespace Server.Repository
         public async Task<TravelDTO> GoNewArea(TravelDTO dto)
         {
             var user = await dbContext.Characters
-                .FirstOrDefaultAsync(x => x.CharacterName == dto.CharacterName);
+                .FirstOrDefaultAsync(x => x.Name == dto.Name);
 
             if (user != null)
             {
@@ -43,7 +43,7 @@ namespace Server.Repository
 
                 return new TravelDTO
                 {
-                    CharacterName = user.CharacterName,
+                    Name = user.Name,
                     Place = user.CurrentArea
                 };
             }

@@ -59,7 +59,7 @@ namespace Server.Repository
 
                 var character = new Character
                 {
-                    CharacterName = regDTO.CharacterName,
+                    Name = regDTO.Name,
                     Gender = Gender.male,
                     Race = Race.Human,
                     CurrentArea = Place.Town,
@@ -78,122 +78,124 @@ namespace Server.Repository
             return false;
         }
 
-        public async Task<CharacterDTO> GetCharacter(string name)
+        public async Task<Character> GetCharacter(string name)
         {
-            var character = dbContext.Characters
-                .FirstOrDefault(x => x.CharacterName == name);
-
-            if (character == null) return null;
-
-            return mapper.Map<CharacterDTO>(character);
+            return await dbContext.Characters.FirstOrDefaultAsync(x => x.Name == name);
         }
 
-        public async Task<LearningResponseDTO> GetSkills(string name)
+        public async Task<MentorSpellListResponseDTO> GetSkills(string name)
         {
             await Task.Delay(10);
             var character = dbContext.Characters
-                .FirstOrDefault(x => x.CharacterName == name);
+                .FirstOrDefault(x => x.Name == name);
 
             if (character != null)
             {
-                List<SkillType> skillTypeList = new() {character.Skill1,
-                                                       character.Skill2,
-                                                       character.Skill3,
-                                                       character.Skill4,
-                                                       character.Skill5 };
+                List<SpellType> spellTypeList = new() {character.Spell1,
+                                                       character.Spell2,
+                                                       character.Spell3,
+                                                       character.Spell4,
+                                                       character.Spell5 };
 
-                return new LearningResponseDTO()
+                return new MentorSpellListResponseDTO()
                 {
                     FreePoints = character.FreePoints,
-                    AllSkills = new SkillCollection().CreateLearningList(skillTypeList)
+                    SpellList = new SkillCollection().CreateLearningList(spellTypeList)
                 };
             }
             return null;
         }
 
-        public async Task<CharacterDTO> LearnSkill(LearnSkillDTO dto)
+        public async Task<Character> LearnSkill(SpellRequestDTO dto)
         {
             var character = dbContext.Characters
-                .FirstOrDefault(x => x.CharacterName == dto.CharacterName);
+                .FirstOrDefault(x => x.Name == dto.Name);
 
             if (character == null)
                 return null;
 
-            var skillTypeList = new List<SkillType>
+            var skillTypeList = new List<SpellType>
             {
-                character.Skill1, character.Skill2, character.Skill3, character.Skill4, character.Skill5
+                character.Spell1, character.Spell2, character.Spell3, character.Spell4, character.Spell5
             };
 
-            if (!skillTypeList.Contains(SkillType.None) || skillTypeList.Contains(dto.SkillType))
+            if (!skillTypeList.Contains(SpellType.None) || skillTypeList.Contains(dto.SpellType) || character.FreelSpellPoints <= 0)
                 return null;
 
-            var index = skillTypeList.FindIndex(x => x == SkillType.None);
+            var index = skillTypeList.FindIndex(x => x == SpellType.None);
             if (index != -1)
             {
-                skillTypeList[index] = dto.SkillType;
+                skillTypeList[index] = dto.SpellType;
+                character.FreePoints--;
             }
             else return null;
 
-            character.Skill1 = skillTypeList[0];
-            character.Skill2 = skillTypeList[1];
-            character.Skill3 = skillTypeList[2];
-            character.Skill4 = skillTypeList[3];
-            character.Skill5 = skillTypeList[4];
+            character.Spell1 = skillTypeList[0];
+            character.Spell2 = skillTypeList[1];
+            character.Spell3 = skillTypeList[2];
+            character.Spell4 = skillTypeList[3];
+            character.Spell5 = skillTypeList[4];
 
             await dbContext.SaveChangesAsync();
 
-            return mapper.Map<CharacterDTO>(character);
+            return character;
         }
 
-        public async Task<CharacterDTO> ForgotSkill(LearnSkillDTO dto)
+        public async Task<Character> ForgotSkill(SpellRequestDTO dto)
         {
             var character = dbContext.Characters
-                .FirstOrDefault(x => x.CharacterName == dto.CharacterName);
+                .FirstOrDefault(x => x.Name == dto.Name);
 
             if (character == null)
                 return null;
 
-            var skillTypeList = new List<SkillType>
+            var skillTypeList = new List<SpellType>
             {
-                character.Skill1, character.Skill2, character.Skill3, character.Skill4, character.Skill5
+                character.Spell1, character.Spell2, character.Spell3, character.Spell4, character.Spell5
             };
 
-            var index = skillTypeList.FindIndex(x => x == dto.SkillType);
+            var index = skillTypeList.FindIndex(x => x == dto.SpellType);
             if (index != -1)
             {
-                skillTypeList[index] = SkillType.None;
+                skillTypeList[index] = SpellType.None;
+                character.FreePoints++;
             }
             else return null;
 
-            character.Skill1 = skillTypeList[0];
-            character.Skill2 = skillTypeList[1];
-            character.Skill3 = skillTypeList[2];
-            character.Skill4 = skillTypeList[3];
-            character.Skill5 = skillTypeList[4];
+            character.Spell1 = skillTypeList[0];
+            character.Spell2 = skillTypeList[1];
+            character.Spell3 = skillTypeList[2];
+            character.Spell4 = skillTypeList[3];
+            character.Spell5 = skillTypeList[4];
 
             await dbContext.SaveChangesAsync();
 
-            return mapper.Map<CharacterDTO>(character);
+            return character;
         }
 
-        public async Task<CharacterDTO> UpdateStats(UpdateStatDTO dto)
+        public async Task<Character> UpdateStats(UpdateStatDTO dto)
         {
             var character = await dbContext.Characters
-                .FirstOrDefaultAsync(x => x.CharacterName == dto.Name);
+                .FirstOrDefaultAsync(x => x.Name == dto.Name);
 
             if (!StatValidator.CheckStats(character, dto)) return null;
 
-            character = mapper.Map<Character>(dto);
+            character.Strength = dto.Strength;
+            character.Agility = dto.Agility;
+            character.Intelligence = dto.Intelligence;
+            character.FreePoints = dto.FreePoints;
+
+            //character = mapper.Map<Character>(dto);
             await dbContext.SaveChangesAsync();
 
-            return mapper.Map<CharacterDTO>(character);
+            return character;
         }
 
         public async Task<bool> UserExists(string name)
         {
             var character = await dbContext.Characters
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.CharacterName == name);
+                .FirstOrDefaultAsync(x => x.Name == name);
 
             return character != null;
         }

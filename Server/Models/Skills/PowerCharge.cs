@@ -1,19 +1,27 @@
 ﻿using Server.Models.DTO;
+using Server.Models.Utilities;
 using static Server.Models.ActiveUser;
 
 namespace Server.Models.Skills
 {
-    public class PowerCharge : Skill
+    public class PowerCharge : Spell
     {
         public PowerCharge()
         {
-            Name = "Мощный удар";
-            Description = "Мощный удар, превосходящий обычный удар примерно в 2 раза";
-            ImagePath = "spell_powercharge.png";
-            CoolDown = 12;
+            SpellType = SpellType.PowerCharge;
+            Name = "Сильный удар";
+            CoolDown = 15;
+            Description = "За мощь, нужно платить временем.";
+            ImagePath = "spell_simple.png";
         }
 
-        public async override Task<int> Attack(CharacterDTO c)
+        public override Task Use(Entity user, params Entity[] target)
+        {
+            return Task.CompletedTask;
+        }
+
+
+        /*public async override Task<int> Attack(CharacterDTO c)
         {
             await Task.Delay(1);
             if (IsReady)
@@ -40,6 +48,7 @@ namespace Server.Models.Skills
 
             IsReady = true;
             SendRestDelegate?.Invoke(Id, RestSeconds);
-        }
+        }*/
+
     }
 }

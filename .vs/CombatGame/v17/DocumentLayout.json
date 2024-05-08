@@ -3,68 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\source\\repos\\CombatGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\mappingconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\mappingconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\services\\monsterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\services\\monsterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\controllers\\statcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\controllers\\statcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\services\\learningservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\services\\learningservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\controllers\\mentorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\controllers\\mentorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\services\\testservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\services\\testservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Migrations\\20240508092526_removeDTOInActiveUser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Server\\Migrations\\20240508092526_removeDTOInActiveUser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\services\\travelservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\services\\travelservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\services\\placeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\services\\placeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\userstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\userstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\services\\baseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\services\\baseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\activeuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\activeuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\mvvm\\model\\utilities\\urlconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\mvvm\\model\\utilities\\urlconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\mvvm\\viewmodel\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\mvvm\\viewmodel\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\mvvm\\model\\utilities\\baseurl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\mvvm\\model\\utilities\\baseurl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\mvvm\\viewmodel\\gladeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\mvvm\\viewmodel\\gladeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\services\\router.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\services\\router.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\services\\userstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\services\\userstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\mvvm\\view\\gladepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\mvvm\\view\\gladepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|c:\\users\\admin\\source\\repos\\combatgame\\client\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{04FE281B-D74E-47EF-98A3-A0287F7CCAF4}|Client\\Client.csproj|solutionrelative:client\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\utilities\\consider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\utilities\\consider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -73,8 +41,8 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 317,
-          "SelectedChildIndex": 8,
+          "DockedWidth": 227,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -90,210 +58,106 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LearningService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\LearningService.cs",
-              "RelativeDocumentMoniker": "Client\\Services\\LearningService.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\LearningService.cs",
-              "RelativeToolTip": "Client\\Services\\LearningService.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAAABcAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T10:01:13.883Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "TestService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\TestService.cs",
-              "RelativeDocumentMoniker": "Client\\Services\\TestService.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\TestService.cs",
-              "RelativeToolTip": "Client\\Services\\TestService.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAAABwAAAAjAAAA",
+              "Title": "20240508092526_removeDTOInActiveUser.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Migrations\\20240508092526_removeDTOInActiveUser.cs",
+              "RelativeDocumentMoniker": "Server\\Migrations\\20240508092526_removeDTOInActiveUser.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Migrations\\20240508092526_removeDTOInActiveUser.cs",
+              "RelativeToolTip": "Server\\Migrations\\20240508092526_removeDTOInActiveUser.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T10:01:10.285Z",
+              "WhenOpened": "2024-05-08T09:25:26.966Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TravelService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\TravelService.cs",
-              "RelativeDocumentMoniker": "Client\\Services\\TravelService.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\TravelService.cs",
-              "RelativeToolTip": "Client\\Services\\TravelService.cs",
-              "ViewState": "AQIAAB8AAAAAAAAAAAAQwCsAAAAjAAAA",
+              "DocumentIndex": 2,
+              "Title": "MentorController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\MentorController.cs",
+              "RelativeDocumentMoniker": "Server\\Controllers\\MentorController.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\MentorController.cs",
+              "RelativeToolTip": "Server\\Controllers\\MentorController.cs",
+              "ViewState": "AQIAADgAAAAAAAAAAAAqwEEAAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T10:01:04.247Z",
+              "WhenOpened": "2024-05-08T09:23:12.124Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MonsterService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\MonsterService.cs",
-              "RelativeDocumentMoniker": "Client\\Services\\MonsterService.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\MonsterService.cs",
-              "RelativeToolTip": "Client\\Services\\MonsterService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADAAAAAAAAAA",
+              "Title": "StatController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\StatController.cs",
+              "RelativeDocumentMoniker": "Server\\Controllers\\StatController.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\StatController.cs",
+              "RelativeToolTip": "Server\\Controllers\\StatController.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAIAwwCEAAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T10:01:00.24Z",
+              "WhenOpened": "2024-05-08T09:22:24.532Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "MauiProgram.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\MauiProgram.cs",
-              "RelativeDocumentMoniker": "Client\\MauiProgram.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\MauiProgram.cs",
-              "RelativeToolTip": "Client\\MauiProgram.cs",
-              "ViewState": "AQIAACIAAAAAAAAAAAAAADAAAAAqAAAA",
+              "Title": "Consider.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Utilities\\Consider.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Utilities\\Consider.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Utilities\\Consider.cs",
+              "RelativeToolTip": "Server\\Models\\Utilities\\Consider.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T09:55:23.476Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\AuthService.cs",
-              "RelativeDocumentMoniker": "Client\\Services\\AuthService.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\AuthService.cs",
-              "RelativeToolTip": "Client\\Services\\AuthService.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAQwBkAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T09:53:33.515Z",
+              "WhenOpened": "2024-05-08T09:21:55.517Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "BaseService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\BaseService.cs",
-              "RelativeDocumentMoniker": "Client\\Services\\BaseService.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\BaseService.cs",
-              "RelativeToolTip": "Client\\Services\\BaseService.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABIAAAAJAAAA",
+              "Title": "ActiveUser.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\ActiveUser.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\ActiveUser.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\ActiveUser.cs",
+              "RelativeToolTip": "Server\\Models\\ActiveUser.cs",
+              "ViewState": "AQIAAGMAAAAAAAAAAAAqwHEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T09:48:57.596Z",
+              "WhenOpened": "2024-05-08T09:15:04.212Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "PlaceService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\PlaceService.cs",
-              "RelativeDocumentMoniker": "Client\\Services\\PlaceService.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\PlaceService.cs",
-              "RelativeToolTip": "Client\\Services\\PlaceService.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAA1wCwAAAApAAAA",
+              "Title": "UserStorage.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\UserStorage.cs",
+              "RelativeDocumentMoniker": "Server\\UserStorage.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\UserStorage.cs",
+              "RelativeToolTip": "Server\\UserStorage.cs",
+              "ViewState": "AQIAACwAAAAAAAAAAAASwD4AAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T09:43:05.436Z",
+              "WhenOpened": "2024-05-08T09:09:58.448Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Router.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\Router.cs",
-              "RelativeDocumentMoniker": "Client\\Services\\Router.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\Router.cs",
-              "RelativeToolTip": "Client\\Services\\Router.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAA5wAAAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "MappingConfig.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\MappingConfig.cs",
+              "RelativeDocumentMoniker": "Server\\MappingConfig.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\MappingConfig.cs*",
+              "RelativeToolTip": "Server\\MappingConfig.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T09:43:01.548Z",
+              "WhenOpened": "2024-05-08T09:06:23.365Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "UserStore.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\UserStore.cs",
-              "RelativeDocumentMoniker": "Client\\Services\\UserStore.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\Services\\UserStore.cs",
-              "RelativeToolTip": "Client\\Services\\UserStore.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAAAAABEAAAA8AAAA",
+              "DocumentIndex": 4,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Repository\\UserRepository.cs",
+              "RelativeDocumentMoniker": "Server\\Repository\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Repository\\UserRepository.cs",
+              "RelativeToolTip": "Server\\Repository\\UserRepository.cs",
+              "ViewState": "AQIAAGYAAAAAAAAAAAAqwIkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T09:42:45.658Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "GladeViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\MVVM\\ViewModel\\GladeViewModel.cs",
-              "RelativeDocumentMoniker": "Client\\MVVM\\ViewModel\\GladeViewModel.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\MVVM\\ViewModel\\GladeViewModel.cs",
-              "RelativeToolTip": "Client\\MVVM\\ViewModel\\GladeViewModel.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAwAAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T09:37:57.992Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "MainViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\MVVM\\ViewModel\\MainViewModel.cs",
-              "RelativeDocumentMoniker": "Client\\MVVM\\ViewModel\\MainViewModel.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\MVVM\\ViewModel\\MainViewModel.cs",
-              "RelativeToolTip": "Client\\MVVM\\ViewModel\\MainViewModel.cs",
-              "ViewState": "AQIAAC4AAAAAAAAAAAAAwDkAAAAxAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T09:23:23.978Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "MainPage.xaml",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\MainPage.xaml",
-              "RelativeDocumentMoniker": "Client\\MainPage.xaml",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\MainPage.xaml",
-              "RelativeToolTip": "Client\\MainPage.xaml",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAAAC0AAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-03T09:02:42.772Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "GladePage.xaml",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\MVVM\\View\\GladePage.xaml",
-              "RelativeDocumentMoniker": "Client\\MVVM\\View\\GladePage.xaml",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\MVVM\\View\\GladePage.xaml",
-              "RelativeToolTip": "Client\\MVVM\\View\\GladePage.xaml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-03T09:20:13.721Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "UrlConverter.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\MVVM\\Model\\Utilities\\UrlConverter.cs",
-              "RelativeDocumentMoniker": "Client\\MVVM\\Model\\Utilities\\UrlConverter.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\MVVM\\Model\\Utilities\\UrlConverter.cs",
-              "RelativeToolTip": "Client\\MVVM\\Model\\Utilities\\UrlConverter.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T09:11:28.712Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "BaseUrl.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\MVVM\\Model\\Utilities\\BaseUrl.cs",
-              "RelativeDocumentMoniker": "Client\\MVVM\\Model\\Utilities\\BaseUrl.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Client\\MVVM\\Model\\Utilities\\BaseUrl.cs",
-              "RelativeToolTip": "Client\\MVVM\\Model\\Utilities\\BaseUrl.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T09:02:22.331Z",
+              "WhenOpened": "2024-05-08T08:41:17.657Z",
               "EditorCaption": ""
             }
           ]

@@ -2,7 +2,7 @@
 
 namespace Server.Models.Monsters
 {
-    public abstract class Monster
+    public abstract class Monster : Entity
     {
         public int Id { get; set; }
         public int CurrentHP { get; set; }

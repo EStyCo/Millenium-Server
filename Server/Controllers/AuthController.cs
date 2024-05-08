@@ -37,7 +37,7 @@ namespace WebApplication1.Controllers
                 return BadRequest(response);
             }
 
-            Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] {userResponse.Character.CharacterName} Авторизован.");
+            Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] {userResponse.Character.Name} Авторизован.");
 
             response.StatusCode = HttpStatusCode.OK;
             response.IsSuccess = true;
