@@ -21,11 +21,7 @@ namespace Server.Repository
 
             if (user != null)
             {
-                return new TravelDTO
-                {
-                    Name = user.Name,
-                    Place = user.CurrentArea
-                };
+                return new TravelDTO(user.Name, user.Place);
             }
 
             return null;
@@ -36,19 +32,12 @@ namespace Server.Repository
             var user = await dbContext.Characters
                 .FirstOrDefaultAsync(x => x.Name == dto.Name);
 
-            if (user != null)
-            {
-                user.CurrentArea = dto.Place;
-                await dbContext.SaveChangesAsync();
+            if (user == null) return null;
 
-                return new TravelDTO
-                {
-                    Name = user.Name,
-                    Place = user.CurrentArea
-                };
-            }
+            user.Place = dto.Place;
+            await dbContext.SaveChangesAsync();
 
-            return null;
+            return new TravelDTO(user.Name, user.Place);
         }
     }
 }

@@ -7,6 +7,6 @@ namespace Server.Models.DTO
         public int IdMonster { get; set; }
         public SpellType Type { get; set; }
         public string Name { get; set; } = string.Empty;
-        public Place Place { get; set; }
+        public string Place { get; set; } = string.Empty;
     }
 }

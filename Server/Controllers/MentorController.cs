@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Server.Models;
 using Server.Models.DTO;
 using Server.Models.Skills.LearningMaster;
+using Server.Models.Utilities;
 using Server.Repository;
 using System.Net;
 
@@ -12,14 +14,12 @@ namespace Server.Controllers
     public class MentorController : ControllerBase
     {
         private readonly UserRepository userRepository;
-        private readonly UserStorage userStorage;
-        protected APIResponse response;
+        private readonly UserStorage storage;
 
-        public MentorController(UserRepository _userRepository, UserStorage _userStorage)
+        public MentorController(UserRepository _userRepository, UserStorage _storage)
         {
             userRepository = _userRepository;
-            response = new();
-            userStorage = _userStorage;
+            storage = _storage;
         }
 
         [HttpPost("get")]
@@ -29,55 +29,38 @@ namespace Server.Controllers
 
             if (skillList == null)
             {
-                response.StatusCode = HttpStatusCode.BadRequest;
-                response.IsSuccess = false;
-                return BadRequest(response);
+                return BadRequest(RespFactory.ReturnBadRequest());
             }
 
-            response.StatusCode = HttpStatusCode.OK;
-            response.IsSuccess = true;
-            response.Result = skillList;
-            return Ok(response);
+            return Ok(RespFactory.ReturnOk(skillList));
         }
 
         [HttpPost("learn")]
         public async Task<IActionResult> LearnSkill(SpellRequestDTO dto)
         {
             var character = await userRepository.LearnSkill(dto);
-            var activeCharacter = userStorage.ActiveUsers.FirstOrDefault(x => x.Character.Name == dto.Name);
+            var user = storage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
 
-            if (character == null || activeCharacter == null)
+            if (character != null && user != null)
             {
-                response.StatusCode = HttpStatusCode.BadRequest;
-                response.IsSuccess = false;
-                return BadRequest(response);
+                user.CreateSpellList(character);
             }
 
-            await activeCharacter.UpdateSpellList(character);
-
-            response.StatusCode = HttpStatusCode.OK;
-            response.IsSuccess = true;
-            return Ok(response);
+            return Ok(RespFactory.ReturnOk());
         }
 
         [HttpPost("forgot")]
         public async Task<IActionResult> ForgotSkill(SpellRequestDTO dto)
         {
             var character = await userRepository.ForgotSkill(dto);
-            var activeCharacter = userStorage.ActiveUsers.FirstOrDefault(x => x.Character.Name == dto.Name);
+            var activeCharacter = storage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
 
             if (character == null || activeCharacter == null)
             {
-                response.StatusCode = HttpStatusCode.BadRequest;
-                response.IsSuccess = false;
-                return BadRequest(response);
+                return BadRequest(RespFactory.ReturnBadRequest());
             }
 
-            await activeCharacter.UpdateSpellList(character);
-
-            response.StatusCode = HttpStatusCode.OK;
-            response.IsSuccess = true;
-            return Ok(response);
+            return Ok(RespFactory.ReturnOk());
         }
     }
 }

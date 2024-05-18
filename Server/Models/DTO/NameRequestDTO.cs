@@ -2,6 +2,11 @@
 {
     public class NameRequestDTO
     {
-        public string Name { get; set; }
+        public NameRequestDTO(string name)
+        {
+            Name = name;
+        }
+
+        public string Name { get; }
     }
 }

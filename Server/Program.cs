@@ -2,9 +2,12 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Server;
 using Server.Hubs;
+using Server.Hubs.Locations;
+using Server.Hubs.Locations.BasePlaces;
+using Server.Hubs.Locations.BattlePlaces;
+using Server.Hubs.Locations.CalmPlaces;
 using Server.Models;
 using Server.Models.Interfaces;
-using Server.Models.Locations;
 using Server.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,8 +30,10 @@ builder.Services.AddTransient<AreaStorage>();
 builder.Services.AddSingleton<UserStorage>();
 builder.Services.AddSingleton<IServiceFactory<UserRepository>, ScopedServiceFactory<UserRepository>>();
 
-builder.Services.AddSingleton<Glade>();
-builder.Services.AddSingleton<DarkWood>();
+builder.Services.AddSingleton<BattlePlace, DarkWood>();
+builder.Services.AddSingleton<BattlePlace, Glade>();
+builder.Services.AddSingleton<Town>();
+//builder.Services.AddSingleton<DarkWood>();
 
 builder.Services.AddDbContext<DbUserContext>(
     options =>
@@ -59,8 +64,9 @@ app.UseRouting();
 
 
 app.MapHub<UserStorage>("/UserStorage");
-app.MapHub<Glade>("/GladeHub");
-app.MapHub<DarkWood>("/DarkWoodHub");
+app.MapHub<PlaceHub>("/GladeHub");
+//app.MapHub<Town>("/Town");
+//app.MapHub<DarkWood>("/DarkWoodHub");
 
 app.Run();
 
@@ -69,3 +75,4 @@ app.Run();
     optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
     return new DbUserContext(optionsBuilder.Options);
 });*/
+

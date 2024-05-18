@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Server.Models;
+using Server.Hubs.Locations;
 using Server.Models.DTO;
-using Server.Models.Locations;
+using Server.Models.Monsters;
 using Server.Models.Utilities;
-using System.Net;
+using Server.Repository;
 
 namespace Server.Controllers
 {
@@ -13,74 +13,50 @@ namespace Server.Controllers
     {
         private readonly UserStorage userStorage;
         private readonly AreaStorage areaStorage;
-        protected APIResponse response;
+        private readonly UserRepository userRepository;
 
-        public MonsterController(UserStorage _userStorage, AreaStorage _areaStorage)
+        public MonsterController(UserStorage _userStorage,
+                                 AreaStorage _areaStorage,
+                                 UserRepository _userRepository)
         {
             userStorage = _userStorage;
             areaStorage = _areaStorage;
-            response = new();
+            userRepository = _userRepository;
         }
 
         [HttpPost("add")]
         public async Task<IActionResult> AddMonster(PlaceDTO dto)
         {
-            await areaStorage.GetArea(dto.Place).AddMonster();
+            await areaStorage.GetBattlePlace(dto.Place)?.AddMonster();
 
-            response.StatusCode = HttpStatusCode.OK;
-            response.IsSuccess = true;
-            return Ok(response);
-        }
-
-        [HttpPost("delete")]
-        public async Task<IActionResult> DeleteMonster(DeleteMonsterDTO dto)
-        {
-            await areaStorage.GetArea(dto.Place).DeleteMonster(dto.Id);
-
-            response.StatusCode = HttpStatusCode.OK;
-            response.IsSuccess = true;
-            return Ok(response);
+            return Ok(RespFactory.ReturnOk());
         }
 
         [HttpPost("attack")]
         public async Task<IActionResult> AttackMonster(AttackMonsterDTO dto)
         {
-            var character = userStorage.ActiveUsers.FirstOrDefault(x => x.Character.Name == dto.Name);
+            var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
 
-            if (character == null || !character.IsReadyCast)
+            if (user != null && user.IsReadyCast)
             {
-                return BadRequest(RespFactory.ReturnBadRequest());
+                int addingExp = await areaStorage.GetBattlePlace(dto.Place).AttackMonster(dto, user);
+
+                if (addingExp > 0)
+                {
+                    userStorage.AddExp(new UpdateExpDTO { Name = dto.Name, Exp = addingExp });
+                    await userRepository.UpdateExp(addingExp, user.Name);
+                }
             }
 
-            await areaStorage.GetArea(dto.Place).AttackMonster(dto, character);
             return Ok(RespFactory.ReturnOk());
-        }
-
-        [HttpPost("rest")]
-        public async Task<IActionResult> GetRestTime(NameRequestDTO dto)
-        {
-            var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Character.Name == dto.Name);
-
-            if (user == null)
-            {
-                return BadRequest(RespFactory.ReturnBadRequest());
-            }
-
-            var result = user.GetRestTime();
-            return Ok(RespFactory.ReturnOk(result));
         }
 
         [HttpPost("getMonsters")]
         public async Task<IActionResult> GetMonsters(PlaceDTO dto)
         {
-            List<MonsterDTO> monsters = await areaStorage.GetArea(dto.Place).GetMonster();
+            var monsters = areaStorage.GetBattlePlace(dto.Place).Monsters ?? new();
 
-            if (monsters == null)
-            {
-                return BadRequest(RespFactory.ReturnBadRequest());
-            }
-
-            return Ok(RespFactory.ReturnOk(new CustomList<MonsterDTO>(monsters)));
+            return Ok(RespFactory.ReturnOk(monsters));
         }
     }
 }

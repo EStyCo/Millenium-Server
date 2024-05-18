@@ -1,69 +1,81 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.SignalR;
+using Server.Controllers;
 using Server.Models;
 using Server.Models.DTO;
-using Server.Models.Interfaces;
-using Server.Repository;
+using Server.Models.EntityFramework;
 
 namespace Server
 {
     public class UserStorage : Hub
     {
-        private readonly IServiceFactory<UserRepository> userRepositoryFactory;
+        //private readonly IServiceFactory<UserRepository> userRepositoryFactory;
         private readonly IHubContext<UserStorage> hubContext;
+        private readonly IMapper mapper;
         public Dictionary<string, CancellationTokenSource> disconnectTokens = new();
         public List<ActiveUser> ActiveUsers { get; private set; }
 
-        public UserStorage(IHubContext<UserStorage> _hubContext, IServiceFactory<UserRepository> _userRepositoryFactory)
+        public UserStorage(IHubContext<UserStorage> _hubContext,
+                           IMapper _mapper)
+
         {
             hubContext = _hubContext;
-            userRepositoryFactory = _userRepositoryFactory;
+            mapper = _mapper;
             ActiveUsers = new();
         }
 
-        public async Task ConnectHub(string name)
+        public void ConnectHub(string name)
         {
-            var userRepository = userRepositoryFactory.Create();
-            var character = await userRepository.GetCharacter(name);
+            var activeUser = ActiveUsers.FirstOrDefault(x => x.Name == name);
 
-            if (character == null) return;
+            if (activeUser != null)
+            {
+                activeUser.ChangeConnectionId(Context.ConnectionId);
+            }
+        }
 
-            var activeUser = ActiveUsers.FirstOrDefault(x => x.Character.Name == name);
+        public void AddActiveUser(Stats stats, Character character)
+        {
+            var activeUser = ActiveUsers.FirstOrDefault(x => x.Name == character.Name);
 
             if (activeUser == null)
             {
-                ActiveUser newUser = new(hubContext, character);
-                newUser.ConnectionId = Context.ConnectionId;
+                ActiveUser newUser = new(hubContext, stats, character.Name);
                 ActiveUsers.Add(newUser);
-
-                _ = newUser.StartVitalityConnection();
-                _ = newUser.UpdateSpellList(character);
+                newUser.CreateSpellList(character);
             }
-            else 
+            else
             {
                 if (disconnectTokens.TryGetValue(activeUser.ConnectionId, out var cts))
-                { 
+                {
                     cts.Cancel();
                     disconnectTokens.Remove(activeUser.ConnectionId);
                 }
-                activeUser.ConnectionId = Context.ConnectionId;
-                _ = activeUser.UpdateSpellList(activeUser.Character);
+                activeUser.CreateSpellList(character);
             }
         }
 
-        public async Task<Character> UpdateStats(UpdateStatDTO dto)
+/*        public async Task ChangeStats(UpdateStatDTO dto)
         {
-            var user = ActiveUsers.FirstOrDefault(x => x.Character.Name == dto.Name);
             var userRep = userRepositoryFactory.Create();
 
-            if (user == null || !await userRep.UserExists(dto.Name)) return null;
+            var stats = ActiveUsers
+                .Where(x => x.Name == dto.Name)
+                .Select(x => x.Stats)
+                .FirstOrDefault();
 
-            var character = await userRep.UpdateStats(dto);
+            if (stats == null || !await userRep.UserExists(dto.Name)) return;
 
-            user.Character = character;
-            return character;
-        }
+            await userRep.UpdateStats(dto);
 
-        public override async Task OnDisconnectedAsync(Exception exception)
+            var newCounts = await userRep.GetStats(dto.Name);
+            if (newCounts != null)
+            {
+                stats.CreateStats(newCounts);
+            }
+        }*/
+
+        public override async Task OnDisconnectedAsync(Exception? exception)
         {
             var connectionId = Context.ConnectionId;
 
@@ -73,7 +85,7 @@ namespace Server
                 var cts = new CancellationTokenSource();
                 disconnectTokens.Add(connectionId, cts);
 
-                Task.Delay(TimeSpan.FromMinutes(1), cts.Token).ContinueWith(_ =>
+                _ = Task.Delay(TimeSpan.FromMinutes(1), cts.Token).ContinueWith(_ =>
                 {
                     ActiveUsers.Remove(userToRemove);
                     disconnectTokens.Remove(connectionId);
@@ -81,6 +93,14 @@ namespace Server
             }
 
             await base.OnDisconnectedAsync(exception);
+        }
+
+        public void AddExp(UpdateExpDTO dto)
+        {
+            ActiveUsers.Where(x => x.Name == dto.Name)
+                       .Select(x => x.Stats)
+                       .FirstOrDefault()?
+                       .AddExp(dto.Exp);
         }
     }
 }

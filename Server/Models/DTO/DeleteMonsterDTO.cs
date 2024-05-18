@@ -1,10 +1,8 @@
-﻿using Server.Models.Utilities;
-
-namespace Server.Models.DTO
+﻿namespace Server.Models.DTO
 {
     public class DeleteMonsterDTO
     {
-        public Place Place { get; set; }
+        public string Place { get; set; } = string.Empty;
         public int Id { get; set; }
     }
 }

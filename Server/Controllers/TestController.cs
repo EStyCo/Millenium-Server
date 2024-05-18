@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Server.Hubs.Locations.BattlePlaces;
 using Server.Models;
 using Server.Models.Utilities;
+using System.Diagnostics;
 using System.Net;
 
 namespace Server.Controllers
@@ -12,16 +14,12 @@ namespace Server.Controllers
     {
         private readonly UserStorage userStorage;
 
-        protected APIResponse response;
-
         public TestController(UserStorage _userStorage)
         {
             userStorage = _userStorage;
-
-            response = new();
         }
 
-        [HttpGet("activeusers")]
+        [HttpGet("ActiveUsers")]
         public async Task<IActionResult> GetActiveUsers()
         {
             await Task.Delay(10);
@@ -32,7 +30,7 @@ namespace Server.Controllers
             foreach (var user in userStorage.ActiveUsers)
             {
                 int index = userStorage.ActiveUsers.IndexOf(user);
-                result.Add($"[{index}] Name: {user.Character.Name} ConnectionId: {user.ConnectionId}");
+                result.Add($"[{index}] Name: {user.Name} ConnectionId: {user.ConnectionId}");
             }
             return Ok(RespFactory.ReturnOk(result));
         }
@@ -52,24 +50,10 @@ namespace Server.Controllers
             return Ok(RespFactory.ReturnOk(result));
         }
 
-        /*[HttpGet("activeconnection")]
-        public async Task<IActionResult> GetActiveConnection()
-        {
-            var list = await userStorage.Timer();
-            List<string> result = new();
-
-            foreach (var item in list)
-            {
-                result.Add(item.ToString());
-            }
-
-            return Ok(RespFactory.ReturnOk(result));
-        }*/
-
         [HttpGet]
         public async Task<IActionResult> TestServer()
         {
-            await Task.Delay(10);
+            //await Task.Delay(10);
             return Ok(RespFactory.ReturnOk("Server is Active"));
         }
     }

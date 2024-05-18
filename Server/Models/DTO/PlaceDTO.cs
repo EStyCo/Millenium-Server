@@ -1,9 +1,7 @@
-﻿using Server.Models.Utilities;
-
-namespace Server.Models.DTO
+﻿namespace Server.Models.DTO
 {
     public class PlaceDTO
     {
-        public Place Place { get; set; }
+        public string Place { get; set; } = string.Empty;
     }
 }

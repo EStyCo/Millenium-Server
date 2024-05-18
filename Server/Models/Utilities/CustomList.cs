@@ -2,11 +2,11 @@
 {
     public class CustomList<T>
     {
-        public List<T> list { get; set; }
+        public List<T> list { get; set; } = new();
 
-        public CustomList(List<T> _list)
+        public CustomList(IEnumerable<T> _list)
         {
-            list = _list;
+            list.AddRange(_list.ToList());
         }
     }
 }

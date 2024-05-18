@@ -1,10 +1,14 @@
-﻿using Server.Models.Utilities;
-
-namespace Server.Models.DTO
+﻿namespace Server.Models.DTO
 {
     public class TravelDTO
     {
-        public string Name { get; set; } = string.Empty;
-        public Place Place { get; set; }
+        public string Name { get; } = string.Empty;
+        public string Place { get; } = string.Empty;
+
+        public TravelDTO(string name, string place)
+        {
+            Name = name;
+            Place = place;
+        }
     }
 }

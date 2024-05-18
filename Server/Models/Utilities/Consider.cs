@@ -1,28 +1,29 @@
 ﻿using Server.Models.DTO;
+using Server.Models.EntityFramework;
+using Server.Models.Handlers;
 
 namespace Server.Models.Utilities
 {
     public static class Consider
     {
-        public static int MaxHP(Character character)
+        public static int MaxHP(StatsHandler stats)
         {
-            return (int)(100 + (character.Strength * 0.20) + (character.Strength + character.Agility + character.Level));
+            return (int)(100 + (stats.Strength * 0.20) + (stats.Strength + stats.Agility + stats.Level));
         }
 
-        public static int MaxMP(Character character)
+        public static int MaxMP(StatsHandler stats)
         {
-            return (int)(100 + (character.Intelligence * 0.20) + (character.Intelligence + character.Agility + character.Level));
+            return (int)(100 + (stats.Intelligence * 0.20) + (stats.Intelligence + stats.Agility + stats.Level));
         }
 
-        public static int RegenRateHP(Character character)
-        {
-            return new Random().Next(1, 10);
-        }
-
-        public static int RegenRateMP(Character character)
+        public static int RegenRateHP(StatsHandler character)
         {
             return new Random().Next(1, 10);
         }
 
+        public static int RegenRateMP(StatsHandler character)
+        {
+            return new Random().Next(1, 10);
+        }
     }
 }

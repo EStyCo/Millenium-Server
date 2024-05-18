@@ -3,9 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Server.Models;
 using Server.Models.DTO;
 using Server.Models.DTO.Auth;
+using Server.Models.EntityFramework;
 using Server.Models.Skills;
 using Server.Models.Skills.LearningMaster;
 using Server.Models.Utilities;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Server.Repository
 {
@@ -62,10 +64,17 @@ namespace Server.Repository
                     Name = regDTO.Name,
                     Gender = Gender.male,
                     Race = Race.Human,
-                    CurrentArea = Place.Town,
+                    Place = "town",
                     User = user
                 };
+
+                var stats = new Stats
+                {
+                    Character = character
+                };
+
                 user.Character = character;
+                user.Character.Stats = stats;
 
                 dbContext.Users.Add(user);
                 dbContext.Characters.Add(character);
@@ -99,7 +108,7 @@ namespace Server.Repository
 
                 return new MentorSpellListResponseDTO()
                 {
-                    FreePoints = character.FreePoints,
+                    FreePoints = character.FreelSpellPoints,
                     SpellList = new SkillCollection().CreateLearningList(spellTypeList)
                 };
             }
@@ -126,7 +135,7 @@ namespace Server.Repository
             if (index != -1)
             {
                 skillTypeList[index] = dto.SpellType;
-                character.FreePoints--;
+                character.FreelSpellPoints--;
             }
             else return null;
 
@@ -158,7 +167,7 @@ namespace Server.Repository
             if (index != -1)
             {
                 skillTypeList[index] = SpellType.None;
-                character.FreePoints++;
+                character.FreelSpellPoints++;
             }
             else return null;
 
@@ -173,22 +182,39 @@ namespace Server.Repository
             return character;
         }
 
-        public async Task<Character> UpdateStats(UpdateStatDTO dto)
+        public async Task UpdateStats(UpdateStatDTO dto)
         {
-            var character = await dbContext.Characters
-                .FirstOrDefaultAsync(x => x.Name == dto.Name);
+            var stats = await dbContext.Characters
+                .Where(c => c.Name == dto.Name)
+                .Select(c => c.Stats)
+                .FirstOrDefaultAsync();
 
-            if (!StatValidator.CheckStats(character, dto)) return null;
+            if (stats?.ChangeStats(dto) ?? false)
+            {
+                await dbContext.SaveChangesAsync();
+            }
+        }
 
-            character.Strength = dto.Strength;
-            character.Agility = dto.Agility;
-            character.Intelligence = dto.Intelligence;
-            character.FreePoints = dto.FreePoints;
-
-            //character = mapper.Map<Character>(dto);
+        public async Task UpdateExp(int currentExp, string name)
+        {
+            var stats = await dbContext.Characters
+                .Where(c => c.Name == name)
+                .Select(c => c.Stats)
+                .FirstOrDefaultAsync();
+                
+            stats?.ChangeExp(currentExp);
             await dbContext.SaveChangesAsync();
+        }
 
-            return character;
+        public async Task<Stats> GetStats(string name)
+        {
+#pragma warning disable CS8603 
+            return await dbContext.Characters
+                .Where(x => x.Name == name)
+                .Select(x => x.Stats)
+                .AsNoTracking()
+                .FirstOrDefaultAsync() ?? null;
+#pragma warning restore CS8603 
         }
 
         public async Task<bool> UserExists(string name)

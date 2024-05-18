@@ -6,6 +6,7 @@
         {
             CurrentHP = 64;
             MaxHP = 64;
+            Exp = 25;
             Name = "Goblin " + GetRandomName();
             ImagePath = "goblin_image.png";
         }

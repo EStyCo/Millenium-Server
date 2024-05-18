@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Server.Hubs;
 using Server.Models.DTO;
+using Server.Models.EntityFramework;
+using Server.Models.Handlers;
 using Server.Models.Skills;
 using Server.Models.Utilities;
 
@@ -9,116 +11,25 @@ namespace Server.Models
     public class ActiveUser : Entity
     {
         public string ConnectionId { get; set; } = string.Empty;
-        public string UserIdentificator { get; set; } = string.Empty;
-        public int CurrentHP { get; set; } = 0;
-        public int maxHP;
-        public int MaxHP { get { return maxHP = Consider.MaxHP(Character); } }
-        public int regenRateHP;
-        public int RegenRateHP { get { return regenRateHP = Consider.RegenRateHP(Character); } }
-        public int CurrentMP { get; set; }
-        public int maxMP;
-        public int MaxMP { get { return maxMP = Consider.MaxMP(Character); } }
-        public int regenRateMP;
-
-
+        public string Name { get; set; } = string.Empty;
+        public StatsHandler Stats { get; private set; }
+        public VitalityHandler Vitality { get; private set; }
         public bool IsReadyCast { get; set; } = true;
         public int GlobalRestSeconds { get; set; }
-
-        public int RegenRateMP { get { return regenRateMP = Consider.RegenRateMP(Character); } }
-        public Character Character { get; set; }
-        public List<Spell> ActiveSkills { get; set; }
-
-        private readonly IHubContext<UserStorage> hubContext;
+        public List<Spell> ActiveSkills { get; set; } = new();
 
         public ActiveUser(IHubContext<UserStorage> _hubContext,
-                          Character _character)
+                          Stats stats,
+                          string _name)
         {
-            hubContext = _hubContext;
-            Character = _character;
+            Name = _name;
+            Stats = new(stats);
+            Vitality = new(_hubContext, Stats, ConnectionId);
         }
 
-        public async Task StartVitalityConnection()
+        public void CreateSpellList(Character character)
         {
-            while (true)
-            {
-                await SendHP();
-                await SendMP();
-
-                await Task.Delay(1000);
-            }
-        }
-
-        public async Task UpdateSpellList(Character character)
-        {
-            await CreateSpellList(character);
-
-            List<SpellDTO> spellList = new();
-
-            foreach (Spell spell in ActiveSkills)
-            {
-                SpellDTO spellDTO = new();
-                spellDTO.SpellType = spell.SpellType;
-                spellDTO.Name = spell.Name;
-                spellDTO.IsReady = spell.IsReady;
-                spellDTO.CoolDown = spell.RestSeconds;
-
-                spellList.Add(spellDTO);
-            }
-            //await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateSpellList", spellList);
-        }
-
-        public async Task SendRestTime(int id, int time)
-        {
-            /*var spell = ActiveSkills.FirstOrDefault(x => x.Id == id);
-            if (spell != null)
-            {
-                SpellDTO spellDTO = new()
-                {
-                    Id = spell.Id,
-                    Name = spell.Name,
-                    IsReady = spell.IsReady,
-                    CoolDown = spell.RestSeconds,
-                };
-
-                await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateSpell", spellDTO);
-            }*/
-        }
-
-        public async Task SendHP()
-        {
-            int[] sendHP = { maxHP, maxHP };
-
-            if (CurrentHP < MaxHP)
-            {
-                sendHP[0] = CurrentHP += RegenRateHP;
-            }
-
-            await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateHP", sendHP);
-        }
-
-        public async Task SendMP()
-        {
-            int[] sendMP = { maxMP, maxMP };
-
-            if (CurrentMP < MaxMP)
-            {
-                sendMP[0] = CurrentMP += RegenRateMP;
-            }
-
-            await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateMP", sendMP);
-        }
-
-        private async Task CreateSpellList(Character character)
-        {
-            await Task.Delay(10);
-
-            List<SpellType> spells = new() {character.Spell1,
-                                            character.Spell2,
-                                            character.Spell3,
-                                            character.Spell4,
-                                            character.Spell5 };
-
-            ActiveSkills = new SkillCollection().CreateSkillList(spells);
+            ActiveSkills = new SkillCollection().CreateSkillList(new() {character.Spell1, character.Spell2, character.Spell3, character.Spell4, character.Spell5 });
         }
 
         public async void UseSkill(SpellType type, params Entity[] target)
@@ -133,7 +44,7 @@ namespace Server.Models
                 skill.RestSeconds = skill.CoolDown;
 
                 _ = StartRestSkill(skill);
-                _ = StartGlobalRest();
+                StartGlobalRest();
             }
         }
 
@@ -148,7 +59,7 @@ namespace Server.Models
             skill.IsReady = true;
         }
 
-        private async Task StartGlobalRest()
+        private void StartGlobalRest()
         {
             foreach (var skill in ActiveSkills)
             {
@@ -158,7 +69,7 @@ namespace Server.Models
                     skill.IsReady = false;
                     _ = StartRestSkill(skill);
                 }
-                else if(skill.IsReady)
+                else if (skill.IsReady)
                 {
                     skill.RestSeconds = 5;
                     skill.IsReady = false;
@@ -167,22 +78,10 @@ namespace Server.Models
             }
         }
 
-        public List<RestTimeDTO> GetRestTime()
+        public void ChangeConnectionId(string connectionId)
         {
-            List<RestTimeDTO> listRestTime = new();
-
-            foreach (var skill in ActiveSkills)
-            {
-                listRestTime.Add(new RestTimeDTO
-                {
-                    SpellType = skill.SpellType,
-                    Name = skill.Name,
-                    RestSeconds = skill.RestSeconds,
-                    IsReady = skill.IsReady,
-                });
-            }
-
-            return listRestTime;
+            ConnectionId = connectionId;
+            Vitality.ConnectionId = connectionId;
         }
     }
 }

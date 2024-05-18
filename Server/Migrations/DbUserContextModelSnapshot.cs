@@ -16,22 +16,9 @@ namespace Server.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.3");
 
-            modelBuilder.Entity("Server.Models.Character", b =>
+            modelBuilder.Entity("Server.Models.EntityFramework.Character", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Agility")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CurrentArea")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CurrentEXP")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("FreePoints")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("FreelSpellPoints")
@@ -40,13 +27,11 @@ namespace Server.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Intelligence")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Level")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Place")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -68,6 +53,35 @@ namespace Server.Migrations
                     b.Property<int>("Spell5")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("TotalSpellPoints")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Characters");
+                });
+
+            modelBuilder.Entity("Server.Models.EntityFramework.Stats", b =>
+                {
+                    b.Property<int>("CharacterId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Agility")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CurrentExp")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("FreePoints")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Intelligence")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Strength")
                         .HasColumnType("INTEGER");
 
@@ -77,15 +91,12 @@ namespace Server.Migrations
                     b.Property<int>("TotalPoints")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TotalSpellPoints")
-                        .HasColumnType("INTEGER");
+                    b.HasKey("CharacterId");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Characters");
+                    b.ToTable("Stats");
                 });
 
-            modelBuilder.Entity("Server.Models.User", b =>
+            modelBuilder.Entity("Server.Models.EntityFramework.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,20 +121,37 @@ namespace Server.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Server.Models.User", b =>
+            modelBuilder.Entity("Server.Models.EntityFramework.Character", b =>
                 {
-                    b.HasOne("Server.Models.Character", "Character")
+                    b.HasOne("Server.Models.EntityFramework.Stats", "Stats")
+                        .WithOne("Character")
+                        .HasForeignKey("Server.Models.EntityFramework.Character", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Stats");
+                });
+
+            modelBuilder.Entity("Server.Models.EntityFramework.User", b =>
+                {
+                    b.HasOne("Server.Models.EntityFramework.Character", "Character")
                         .WithOne("User")
-                        .HasForeignKey("Server.Models.User", "CharacterId")
+                        .HasForeignKey("Server.Models.EntityFramework.User", "CharacterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Character");
                 });
 
-            modelBuilder.Entity("Server.Models.Character", b =>
+            modelBuilder.Entity("Server.Models.EntityFramework.Character", b =>
                 {
                     b.Navigation("User")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Server.Models.EntityFramework.Stats", b =>
+                {
+                    b.Navigation("Character")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

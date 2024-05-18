@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Server.Models;
+using Server.Models.EntityFramework;
 
 namespace Server.Configurations
 {

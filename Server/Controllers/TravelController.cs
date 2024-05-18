@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Server.Hubs;
-using Server.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Server.Hubs.Locations;
 using Server.Models.DTO;
+using Server.Models.Utilities;
 using Server.Repository;
-using System.Net;
 
 namespace Server.Controllers
 {
@@ -15,13 +12,13 @@ namespace Server.Controllers
     {
         private readonly TravelRepository rep;
         private readonly UserStorage userStorage;
-        protected APIResponse response;
+        private readonly AreaStorage areaStorage;
 
-        public TravelController(TravelRepository _rep, UserStorage _userStorage)
+        public TravelController(TravelRepository _rep, UserStorage _userStorage, AreaStorage _areaStorage)
         {
             rep = _rep;
             userStorage = _userStorage;
-            response = new();
+            areaStorage = _areaStorage;
         }
 
         [HttpPost("get")]
@@ -31,36 +28,30 @@ namespace Server.Controllers
 
             if (travelResponse == null)
             {
-                response.StatusCode = HttpStatusCode.BadRequest;
-                response.IsSuccess = false;
-                response.ErrorMessages.Add("Персонаж не найден!");
-
-                return BadRequest(response);
+                return BadRequest(RespFactory.ReturnBadRequest());
             }
-
-            response.StatusCode = HttpStatusCode.OK;
-            response.IsSuccess = true;
-            response.Result = travelResponse;
-            return Ok(response);
+            return Ok(RespFactory.ReturnOk(travelResponse));
         }
 
         [HttpPost("go")]
-        public async Task<IActionResult> GoNewArea(TravelDTO travel)
+        public async Task<IActionResult> GoNewArea(TravelDTO dto)
         {
-            var travelResponse = await rep.GoNewArea(travel);
+            var currentArea = rep.GetArea(new(dto.Name));
+            var travelResponse = await rep.GoNewArea(dto);
 
-            if (travelResponse == null)
+            var stats = userStorage.ActiveUsers.Where(x => x.Name == dto.Name)
+                .Select(x => x.Stats)
+                .FirstOrDefault();
+
+            if (travelResponse == null || stats == null)
             {
-                response.StatusCode = HttpStatusCode.BadRequest;
-                response.IsSuccess = false;
-                response.ErrorMessages.Add("Движение невозможно!");
-
-                return BadRequest(response);
+                return BadRequest(RespFactory.ReturnBadRequest());
             }
 
-            response.StatusCode = HttpStatusCode.OK;
-            response.IsSuccess = true;
-            return Ok(response);
+            /*await areaStorage.GetPlace(currentArea.Result.Place)?.LeavePlace(dto.Name);
+            await areaStorage.GetPlace(dto.Place)?.EnterPlace(dto.Name, stats.Level);*/
+
+            return Ok(RespFactory.ReturnOk());
         }
     }
 }

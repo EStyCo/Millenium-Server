@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Server.Models.Locations;
+﻿using Microsoft.AspNetCore.Mvc;
 using Server.Models;
 using Server.Models.DTO;
-using System.Net;
 using Server.Models.Utilities;
 using Server.Models.Skills;
 
@@ -13,28 +10,26 @@ namespace Server.Controllers
     [ApiController]
     public class SpellController : ControllerBase
     {
-        private readonly UserStorage userStorage;
+        private readonly UserStorage storage;
         protected APIResponse response = new();
 
-        public SpellController(UserStorage _userStorage)
+        public SpellController(UserStorage _storage)
         {
-            userStorage = _userStorage;
+            storage = _storage;
         }
 
         [HttpPost("getListSpells")]
         public async Task<IActionResult> GetListSpells(NameRequestDTO dto)
         {
-            var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Character.Name == dto.Name);
+            var list = storage.ActiveUsers
+                .Where(x => x.Name == dto.Name)
+                .Select(x => x.ActiveSkills)
+                .First();                
 
-            if (user == null) 
-            {
-                return BadRequest(RespFactory.ReturnBadRequest());
-            }
-
-            return Ok(RespFactory.ReturnOk(new CustomList<Spell>(user.ActiveSkills)));
+            return Ok(RespFactory.ReturnOk(new CustomList<Spell>(list)));
         }
 
-        [HttpPost("getSpell")]
+        /*[HttpPost("getSpell")]
         public async Task<IActionResult> GetSpell(NameRequestDTO dto)
         {
             var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Character.Name == dto.Name);
@@ -45,6 +40,6 @@ namespace Server.Controllers
             }
 
             return Ok(RespFactory.ReturnOk(new CustomList<Spell>(user.ActiveSkills)));
-        }
+        }*/
     }
 }

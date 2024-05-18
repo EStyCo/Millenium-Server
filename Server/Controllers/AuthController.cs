@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Server;
 using Server.Models;
 using Server.Models.DTO.Auth;
+using Server.Models.Utilities;
 using Server.Repository;
 using System.Net;
+using System.Reflection.Metadata.Ecma335;
+using System.Xml.Linq;
 
 namespace WebApplication1.Controllers
 {
@@ -24,29 +27,25 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> LoginUser([FromBody] LoginRequestDTO user)
+        public async Task<IActionResult> LoginUser(LoginRequestDTO dto)
         {
-            var userResponse = await userRep.LoginUser(user.Email, user.Password);
+            var userResponse = await userRep.LoginUser(dto.Email, dto.Password);
+            if (userResponse == null) return BadRequest(RespFactory.ReturnBadRequest());
 
-            if (userResponse == null)
-            {
-                response.StatusCode = HttpStatusCode.BadRequest;
-                response.IsSuccess = false;
-                response.ErrorMessages.Add("Username or password is incorrect!");
+            var character = await userRep.GetCharacter(userResponse.Character.Name);
+            var stats = await userRep.GetStats(userResponse.Character.Name);
 
-                return BadRequest(response);
+            if (character != null && stats != null)
+            { 
+                userStorage.AddActiveUser(stats, character);
             }
 
             Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] {userResponse.Character.Name} Авторизован.");
-
-            response.StatusCode = HttpStatusCode.OK;
-            response.IsSuccess = true;
-            response.Result = userResponse;
-            return Ok(response);
+            return Ok(RespFactory.ReturnOk(userResponse));
         }
 
         [HttpPost("reg")]
-        public async Task<ActionResult> AddUser([FromBody] RegRequestDTO dto)
+        public async Task<ActionResult> AddUser(RegRequestDTO dto)
         {
             /*bool ifUserNameUnique = await userRep.IsUniqueUser( user.Email);
             if (!ifUserNameUnique)
@@ -75,6 +74,5 @@ namespace WebApplication1.Controllers
             response.Result = "Пользователь успешно добавлен!";
             return Ok(response);
         }
-
     }
 }
