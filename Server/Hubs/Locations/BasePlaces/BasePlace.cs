@@ -5,6 +5,7 @@ namespace Server.Hubs.Locations.BasePlaces
 {
     public abstract class BasePlace
     {
+        public string Id { get; set; } = new Random().Next(100).ToString();
         public abstract string NamePlace { get; }
         public abstract Dictionary<string, ActiveUserOnPlace> ActiveUsers { get; protected set; }
 
@@ -15,7 +16,7 @@ namespace Server.Hubs.Locations.BasePlaces
             HubContext = hubContext;
         }
 
-        public async Task EnterPlace(string name, int level, string connectionId)
+        public virtual async Task EnterPlace(string name, int level, string connectionId)
         {
             var user = ActiveUsers.FirstOrDefault(x => x.Key == connectionId);
 
@@ -24,10 +25,10 @@ namespace Server.Hubs.Locations.BasePlaces
             ActiveUsers.Add(connectionId, new(name, level));
 
             if (HubContext.Clients != null)
-                await HubContext.Clients.All.SendAsync("UpdateListUsers", ActiveUsers);
+                await HubContext.Clients.Clients(ActiveUsers.Keys).SendAsync("UpdateListUsers", ActiveUsers.Values.ToList());
         }
 
-        public async Task LeavePlace(string connectionId)
+        public virtual async Task LeavePlace(string connectionId)
         {
             var user = ActiveUsers.FirstOrDefault(x => x.Key == connectionId);
 
@@ -36,7 +37,7 @@ namespace Server.Hubs.Locations.BasePlaces
             ActiveUsers.Remove(user.Key);
 
             if (HubContext.Clients != null)
-                await HubContext.Clients.All.SendAsync("UpdateListUsers", ActiveUsers);
+                await HubContext.Clients.Clients(ActiveUsers.Keys).SendAsync("UpdateListUsers", ActiveUsers.Values.ToList());
         }
     }
 }

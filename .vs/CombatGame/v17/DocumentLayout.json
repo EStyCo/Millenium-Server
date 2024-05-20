@@ -3,40 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\source\\repos\\CombatGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\hubs\\locations\\areastorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\hubs\\locations\\areastorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\hubs\\locations\\baseplaces\\battleplace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\hubs\\locations\\baseplaces\\battleplace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\hubs\\locations\\baseplaces\\baseplace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\hubs\\locations\\baseplaces\\baseplace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\controllers\\travelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\controllers\\travelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\hubs\\placehub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\hubs\\placehub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\hubs\\locations\\baseplaces\\calmplace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\hubs\\locations\\baseplaces\\calmplace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\hubs\\locations\\darkwood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\hubs\\locations\\darkwood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\hubs\\locations\\battleplaces\\glade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\hubs\\locations\\battleplaces\\glade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\hubs\\locations\\calmplaces\\town.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\hubs\\locations\\calmplaces\\town.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\hubs\\locations\\baseplaces\\baseplace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\hubs\\locations\\baseplaces\\baseplace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\controllers\\monstercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\controllers\\monstercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\hubs\\placehub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\hubs\\placehub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\controllers\\travelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\controllers\\travelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\hubs\\locations\\areastorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\hubs\\locations\\areastorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\interfaces\\iareastorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\interfaces\\iareastorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 227,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -62,54 +66,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Town.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\CalmPlaces\\Town.cs",
-              "RelativeDocumentMoniker": "Server\\Hubs\\Locations\\CalmPlaces\\Town.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\CalmPlaces\\Town.cs",
-              "RelativeToolTip": "Server\\Hubs\\Locations\\CalmPlaces\\Town.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAABAAAA",
+              "DocumentIndex": 0,
+              "Title": "BattlePlace.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BasePlaces\\BattlePlace.cs",
+              "RelativeDocumentMoniker": "Server\\Hubs\\Locations\\BasePlaces\\BattlePlace.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BasePlaces\\BattlePlace.cs*",
+              "RelativeToolTip": "Server\\Hubs\\Locations\\BasePlaces\\BattlePlace.cs*",
+              "ViewState": "AQIAACgAAAAAAAAAAAAqwDwAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-18T20:04:32.336Z",
+              "WhenOpened": "2024-05-20T19:21:20.426Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
               "Title": "Glade.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BattlePlaces\\Glade.cs",
               "RelativeDocumentMoniker": "Server\\Hubs\\Locations\\BattlePlaces\\Glade.cs",
               "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BattlePlaces\\Glade.cs",
               "RelativeToolTip": "Server\\Hubs\\Locations\\BattlePlaces\\Glade.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAABaAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACoAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-18T13:23:34.874Z",
+              "WhenOpened": "2024-05-20T19:21:13.233Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "DarkWood.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\DarkWood.cs",
-              "RelativeDocumentMoniker": "Server\\Hubs\\Locations\\DarkWood.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\DarkWood.cs",
-              "RelativeToolTip": "Server\\Hubs\\Locations\\DarkWood.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAdAAAA",
+              "DocumentIndex": 2,
+              "Title": "BasePlace.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BasePlaces\\BasePlace.cs",
+              "RelativeDocumentMoniker": "Server\\Hubs\\Locations\\BasePlaces\\BasePlace.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BasePlaces\\BasePlace.cs*",
+              "RelativeToolTip": "Server\\Hubs\\Locations\\BasePlaces\\BasePlace.cs*",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAIwCUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-18T20:02:25.412Z",
+              "WhenOpened": "2024-05-20T08:35:56.764Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "CalmPlace.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BasePlaces\\CalmPlace.cs",
-              "RelativeDocumentMoniker": "Server\\Hubs\\Locations\\BasePlaces\\CalmPlace.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BasePlaces\\CalmPlace.cs",
-              "RelativeToolTip": "Server\\Hubs\\Locations\\BasePlaces\\CalmPlace.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Title": "TravelController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\TravelController.cs",
+              "RelativeDocumentMoniker": "Server\\Controllers\\TravelController.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\TravelController.cs",
+              "RelativeToolTip": "Server\\Controllers\\TravelController.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAABkAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-18T20:01:53.363Z",
+              "WhenOpened": "2024-05-20T09:14:49.132Z",
               "EditorCaption": ""
             },
             {
@@ -120,61 +124,74 @@
               "RelativeDocumentMoniker": "Server\\Hubs\\PlaceHub.cs",
               "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\PlaceHub.cs",
               "RelativeToolTip": "Server\\Hubs\\PlaceHub.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACUAAAA0AAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABMAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-18T17:25:51.939Z",
+              "WhenOpened": "2024-05-20T09:13:43.535Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "TravelController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\TravelController.cs",
-              "RelativeDocumentMoniker": "Server\\Controllers\\TravelController.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\TravelController.cs",
-              "RelativeToolTip": "Server\\Controllers\\TravelController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "MonsterController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\MonsterController.cs",
+              "RelativeDocumentMoniker": "Server\\Controllers\\MonsterController.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\MonsterController.cs",
+              "RelativeToolTip": "Server\\Controllers\\MonsterController.cs",
+              "ViewState": "AQIAABwAAAAAAAAAAAAgwCUAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-18T15:14:18.99Z",
+              "WhenOpened": "2024-05-20T09:12:52.634Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BasePlace.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BasePlaces\\BasePlace.cs",
-              "RelativeDocumentMoniker": "Server\\Hubs\\Locations\\BasePlaces\\BasePlace.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BasePlaces\\BasePlace.cs",
-              "RelativeToolTip": "Server\\Hubs\\Locations\\BasePlaces\\BasePlace.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACkAAAABAAAA",
+              "DocumentIndex": 9,
+              "Title": "IAreaStorage.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Interfaces\\IAreaStorage.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Interfaces\\IAreaStorage.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Interfaces\\IAreaStorage.cs",
+              "RelativeToolTip": "Server\\Models\\Interfaces\\IAreaStorage.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-18T15:02:17.519Z",
+              "WhenOpened": "2024-05-20T09:02:40.09Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BattlePlace.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BasePlaces\\BattlePlace.cs",
-              "RelativeDocumentMoniker": "Server\\Hubs\\Locations\\BasePlaces\\BattlePlace.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BasePlaces\\BattlePlace.cs",
-              "RelativeToolTip": "Server\\Hubs\\Locations\\BasePlaces\\BattlePlace.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAjAAAA",
+              "DocumentIndex": 8,
+              "Title": "TestController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\TestController.cs",
+              "RelativeDocumentMoniker": "Server\\Controllers\\TestController.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\TestController.cs",
+              "RelativeToolTip": "Server\\Controllers\\TestController.cs",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAAAEgAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-18T13:28:00.141Z",
+              "WhenOpened": "2024-05-20T06:37:04.296Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "AreaStorage.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\AreaStorage.cs",
               "RelativeDocumentMoniker": "Server\\Hubs\\Locations\\AreaStorage.cs",
               "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\AreaStorage.cs",
               "RelativeToolTip": "Server\\Hubs\\Locations\\AreaStorage.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAQwB4AAABVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-18T13:53:52.088Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Program.cs",
+              "RelativeDocumentMoniker": "Server\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Program.cs",
+              "RelativeToolTip": "Server\\Program.cs",
+              "ViewState": "AQIAADQAAAAAAAAAAAAswEAAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-18T20:46:30.466Z",
               "EditorCaption": ""
             }
           ]

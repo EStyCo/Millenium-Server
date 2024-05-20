@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Server.Hubs.Locations;
 using Server.Models.DTO;
+using Server.Models.Interfaces;
 using Server.Models.Monsters;
 using Server.Models.Utilities;
 using Server.Repository;
@@ -12,11 +13,11 @@ namespace Server.Controllers
     public class MonsterController : ControllerBase
     {
         private readonly UserStorage userStorage;
-        private readonly AreaStorage areaStorage;
+        private readonly IAreaStorage areaStorage;
         private readonly UserRepository userRepository;
 
         public MonsterController(UserStorage _userStorage,
-                                 AreaStorage _areaStorage,
+                                 IAreaStorage _areaStorage,
                                  UserRepository _userRepository)
         {
             userStorage = _userStorage;

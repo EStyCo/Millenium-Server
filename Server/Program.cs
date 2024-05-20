@@ -9,6 +9,7 @@ using Server.Hubs.Locations.CalmPlaces;
 using Server.Models;
 using Server.Models.Interfaces;
 using Server.Repository;
+using System.Runtime.CompilerServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,14 +27,11 @@ builder.Services.AddAutoMapper(typeof(MappingConfig));
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<TravelRepository>();
 
-builder.Services.AddTransient<AreaStorage>();
+builder.Services.AddTransient<IAreaStorage, AreaStorage>();
 builder.Services.AddSingleton<UserStorage>();
 builder.Services.AddSingleton<IServiceFactory<UserRepository>, ScopedServiceFactory<UserRepository>>();
 
-builder.Services.AddSingleton<BattlePlace, DarkWood>();
-builder.Services.AddSingleton<BattlePlace, Glade>();
-builder.Services.AddSingleton<Town>();
-//builder.Services.AddSingleton<DarkWood>();
+RegistrationPlaces(builder.Services);
 
 builder.Services.AddDbContext<DbUserContext>(
     options =>
@@ -64,7 +62,7 @@ app.UseRouting();
 
 
 app.MapHub<UserStorage>("/UserStorage");
-app.MapHub<PlaceHub>("/GladeHub");
+app.MapHub<PlaceHub>("/PlaceHub");
 //app.MapHub<Town>("/Town");
 //app.MapHub<DarkWood>("/DarkWoodHub");
 
@@ -76,3 +74,10 @@ app.Run();
     return new DbUserContext(optionsBuilder.Options);
 });*/
 
+void RegistrationPlaces(IServiceCollection services)
+{
+    services.AddSingleton<BasePlace, DarkWood>();
+    services.AddSingleton<BasePlace, Glade>();
+    services.AddSingleton<BasePlace, Town>();
+    //builder.Services.AddSingleton<DarkWood>();
+}

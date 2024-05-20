@@ -13,9 +13,6 @@ namespace Server.Hubs.Locations.BasePlaces
 
         public abstract List<Monster> Monsters { get; protected set; }
         public abstract Task AddMonster();
-        //public abstract Task UpdateMonsters();
-        //public abstract Task<int> AttackMonster(AttackMonsterDTO dto, ActiveUser user);
-
 
         public async Task DeleteMonster(int id)
         {
@@ -31,27 +28,22 @@ namespace Server.Hubs.Locations.BasePlaces
             await UpdateMonsters();
         }
 
-        /*public override async Task OnConnectedAsync()
+        public override async Task EnterPlace(string name, int level, string connectionId)
         {
-            var connectionId = Context.ConnectionId;
-            Console.WriteLine($"{connectionId} - подключился к {NamePlace}");
-            await base.OnConnectedAsync();
-
-            await Clients.Caller.SendAsync("UpdateListMonsters", Monsters);
-            await Clients.Caller.SendAsync("UpdateListUsers", ActiveUsers);
+            await base.EnterPlace(name, level, connectionId);
+            await UpdateMonsters();
         }
 
-        public override async Task OnDisconnectedAsync(Exception? exception)
-        {
-            var connectionId = Context.ConnectionId;
-            Console.WriteLine($"{connectionId} - отключился от {NamePlace} {this.GetHashCode().ToString()}");
-            await base.OnDisconnectedAsync(exception);
-        }*/
+        public override async Task LeavePlace(string connectionId)
+        { 
+            await base.LeavePlace(connectionId);
+            await UpdateMonsters();
+        }
 
         public async Task UpdateMonsters()
         {
             if (HubContext.Clients != null)
-                await HubContext.Clients.All.SendAsync("UpdateListMonsters", Monsters);
+                await HubContext.Clients.Clients(ActiveUsers.Keys).SendAsync("UpdateListMonsters", Monsters);
         }
 
         public async Task<int> AttackMonster(AttackMonsterDTO dto, ActiveUser user)

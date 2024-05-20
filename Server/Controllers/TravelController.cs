@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Server.Hubs.Locations;
 using Server.Models.DTO;
+using Server.Models.Interfaces;
 using Server.Models.Utilities;
 using Server.Repository;
 
@@ -12,9 +13,9 @@ namespace Server.Controllers
     {
         private readonly TravelRepository rep;
         private readonly UserStorage userStorage;
-        private readonly AreaStorage areaStorage;
+        private readonly IAreaStorage areaStorage;
 
-        public TravelController(TravelRepository _rep, UserStorage _userStorage, AreaStorage _areaStorage)
+        public TravelController(TravelRepository _rep, UserStorage _userStorage, IAreaStorage _areaStorage)
         {
             rep = _rep;
             userStorage = _userStorage;

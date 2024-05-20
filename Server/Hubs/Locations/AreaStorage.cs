@@ -1,12 +1,14 @@
 ﻿using Server.Hubs.Locations.BasePlaces;
+using Server.Hubs.Locations.BattlePlaces;
+using Server.Models.Interfaces;
 
 namespace Server.Hubs.Locations
 {
-    public class AreaStorage
+    public class AreaStorage : IAreaStorage
     {
         private readonly IServiceProvider services;
 
-        public AreaStorage( IServiceProvider _services)
+        public AreaStorage(IServiceProvider _services)
         {
             services = _services;
         }
@@ -14,58 +16,26 @@ namespace Server.Hubs.Locations
         public BasePlace? GetPlace(string place)
         {
             return services.GetServices<BasePlace>()
-                           .FirstOrDefault(x => x.NamePlace == place); 
+                           .FirstOrDefault(x => x.NamePlace == place);
         }
 
         public BasePlace? GetPlaceById(string connectionId)
         {
             return services.GetServices<BasePlace>()
-                   .FirstOrDefault(place => place.ActiveUsers.ContainsKey(connectionId));
+                           .FirstOrDefault(place => place.ActiveUsers.ContainsKey(connectionId));
         }
 
-        /*public BasePlace GetCalmPlace(string place)
+        public BattlePlace? GetBattlePlace(string place)
         {
-            switch (place)
-            {
-                case "glade": return glade;
-                //case Place.DarkWood: return darkWood;
-
-                default: return glade;
-            }
-        }*/
-
-        public BattlePlace GetBattlePlace(string place)
-        {
-            var instance = services.GetServices<BattlePlace>().FirstOrDefault(x=> x.NamePlace == place);
-
-            if (instance != null)
-            { 
-                return instance;
-            }
-
-            return null;
-            /*var types = Assembly.GetExecutingAssembly().GetTypes();
-             var matchingType = types
-                .Where(x => x.IsSubclassOf(typeof(BasePlace)) && !x.IsAbstract)
-                .FirstOrDefault(x => (string)x.GetProperty("NamePlace").GetValue(Activator.CreateInstance(x)) == place);*/
-
-
-
-            Console.WriteLine('1');
-
-            /*if (matchingType != null)
-            {
-                return services.GetService(matchingType) as BattlePlace;
-            }*/
-
-
-            /*switch (place)
-            {
-                case "glade": return glade;
-                //case Place.DarkWood: return darkWood;
-
-                default: return glade;
-            }*/
+            return services.GetServices<BasePlace>()
+                           .FirstOrDefault(x => x.NamePlace == place) as BattlePlace;
         }
+
+        public CalmPlace? GetCalmPlace(string place)
+        {
+            return services.GetServices<BasePlace>()
+                           .FirstOrDefault(x => x.NamePlace == place) as CalmPlace;
+        }
+
     }
 }
