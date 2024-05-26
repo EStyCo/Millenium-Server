@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Server.Hubs.Locations;
+using Server.Models.Handlers;
 using Server.Models.Interfaces;
 
 namespace Server.Hubs
@@ -21,7 +22,7 @@ namespace Server.Hubs
             var place = AreaStorage.GetPlace(dto.Place);
             var stats = UserStorage.ActiveUsers.Where(x => x.Name == dto.Name)
                 .Select(x => x.Stats)
-                .FirstOrDefault();
+                .FirstOrDefault() as UserStatsHandler;
 
             if (place == null || stats == null)
             {

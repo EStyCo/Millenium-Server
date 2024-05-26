@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Server.Hubs.Locations;
 using Server.Models.DTO;
 using Server.Models.Interfaces;
-using Server.Models.Monsters;
 using Server.Models.Utilities;
 using Server.Repository;
 
@@ -28,7 +26,7 @@ namespace Server.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> AddMonster(PlaceDTO dto)
         {
-            await areaStorage.GetBattlePlace(dto.Place)?.AddMonster();
+            areaStorage.GetBattlePlace(dto.Place)?.AddMonster();
 
             return Ok(RespFactory.ReturnOk());
         }

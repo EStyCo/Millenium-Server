@@ -1,21 +1,19 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using Server.Models.DTO;
-using Server.Models.EntityFramework;
+﻿using Server.Models.EntityFramework;
 
 namespace Server.Models.Handlers
 {
-    public class StatsHandler
+    public class UserStatsHandler : BaseStatsHandler
     {
         public int Level { get; private set; } = 1;
         public int CurrentExp { get; private set; } = 0;
         public int ToLevelExp { get; private set; } = 0;
         public int TotalPoints { get; private set; } = 0;
         public int FreePoints { get; private set; } = 5;
-        public int Strength { get; private set; } = 5;
-        public int Agility { get; private set; } = 5;
-        public int Intelligence { get; private set; } = 5;
+        public override int Strength { get; protected set; } = 5;
+        public override int Agility { get; protected set; } = 5;
+        public override int Intelligence { get; protected set; } = 5;
 
-        public StatsHandler(Stats _stats)
+        public UserStatsHandler(Stats _stats)
         {
             CreateStats(_stats);
         }
@@ -47,5 +45,26 @@ namespace Server.Models.Handlers
                 ToLevelExp = newLvlPair.Value;
             }
         }
+    }
+}
+
+public abstract class BaseStatsHandler
+{
+    public abstract int Strength { get; protected set; }
+    public abstract int Agility { get; protected set; }
+    public abstract int Intelligence { get; protected set; }
+}
+
+public class MonsterStatsHandler : BaseStatsHandler
+{
+    public override int Strength { get; protected set ; }
+    public override int Agility { get; protected set; }
+    public override int Intelligence { get; protected set; }
+
+    public MonsterStatsHandler(int strength, int agility, int intelligence)
+    {
+        Strength = strength;
+        Agility = agility;
+        Intelligence = intelligence;
     }
 }

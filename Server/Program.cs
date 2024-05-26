@@ -29,7 +29,8 @@ builder.Services.AddScoped<TravelRepository>();
 
 builder.Services.AddTransient<IAreaStorage, AreaStorage>();
 builder.Services.AddSingleton<UserStorage>();
-builder.Services.AddSingleton<IServiceFactory<UserRepository>, ScopedServiceFactory<UserRepository>>();
+//builder.Services.AddSingleton<IServiceFactory<UserRepository>, ScopedServiceFactory<UserRepository>>();
+builder.Services.AddSingleton<IServiceFactory<UserStorage>, ScopedServiceFactory<UserStorage>>();
 
 RegistrationPlaces(builder.Services);
 

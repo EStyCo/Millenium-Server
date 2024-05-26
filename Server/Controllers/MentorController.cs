@@ -1,11 +1,8 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Server.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using Server.Models.DTO;
 using Server.Models.Skills.LearningMaster;
 using Server.Models.Utilities;
 using Server.Repository;
-using System.Net;
 
 namespace Server.Controllers
 {

@@ -11,8 +11,8 @@ namespace Server
         public MappingConfig()
         {
             CreateMap<Character, CharacterDTO>().ReverseMap();
-            CreateMap<StatDTO, StatsHandler>().ReverseMap();
-            CreateMap<Stats, StatsHandler>().ReverseMap();
+            CreateMap<StatDTO, UserStatsHandler>().ReverseMap();
+            CreateMap<Stats, UserStatsHandler>().ReverseMap();
             CreateMap<UpdateStatDTO, CharacterDTO>();
             CreateMap<UpdateStatDTO, Character>();
             CreateMap<Monster, MonsterDTO>().ReverseMap();

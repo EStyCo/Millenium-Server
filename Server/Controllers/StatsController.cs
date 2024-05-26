@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Server.Models;
 using Server.Models.DTO;
-using Server.Models.EntityFramework;
 using Server.Models.Handlers;
 using Server.Models.Utilities;
 using Server.Repository;
-using System.Net;
 
 namespace Server.Controllers
 {
@@ -30,7 +27,7 @@ namespace Server.Controllers
         [HttpPost("get")]
         public async Task<IActionResult> GetStats(NameRequestDTO dto)
         {
-            StatsHandler? stats = userStorage.ActiveUsers
+            BaseStatsHandler? stats = userStorage.ActiveUsers
                 .Where(u => u.Name == dto.Name)
                 .Select(u => u.Stats)
                 .FirstOrDefault();
@@ -55,12 +52,9 @@ namespace Server.Controllers
             var newCounts = await userRep.GetStats(dto.Name);
             if (newCounts != null)
             {
-                stats.CreateStats(newCounts);
+                var s = stats as UserStatsHandler;
+                s?.CreateStats(newCounts);
             }
-
-
-
-
 
            // await userStorage.ChangeStats(dto);
             return Ok(RespFactory.ReturnOk());

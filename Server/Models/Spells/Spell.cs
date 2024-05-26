@@ -13,6 +13,6 @@ namespace Server.Models.Skills
         public string ImagePath { get; set; } = string.Empty;
         public bool IsReady { get; set; } = true;
 
-        public abstract Task Use(Entity user, params Entity[] target);
+        public abstract Tuple<int, string> Use(Entity user, params Entity[] target);
     }
 }

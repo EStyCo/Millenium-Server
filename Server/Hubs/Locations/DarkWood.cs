@@ -17,15 +17,15 @@ namespace Server.Hubs.Locations
         {
             mapper = _mapper;
 
-            Monsters.Add(new Goblin() { Id = 0 });
-            Monsters.Add(new Goblin() { Id = 1 });
-            Monsters.Add(new Goblin() { Id = 2 });
+            //Monsters.Add(new Goblin() { Id = 0 });
+            //Monsters.Add(new Goblin() { Id = 1 });
+            //Monsters.Add(new Goblin() { Id = 2 });
         }
 
 
-        public override async Task AddMonster()
+        public override async void AddMonster()
         {
-            await Task.Delay(10);
+            /*await Task.Delay(10);
 
             var monster = new Goblin();
             if (Monsters.Count == 0)
@@ -37,7 +37,7 @@ namespace Server.Hubs.Locations
                 int maxId = Monsters.Max(x => x.Id);
                 monster.Id = maxId + 1;
             }
-            Monsters.Add(monster);
+            Monsters.Add(monster);*/
 
             await UpdateMonsters();
         }

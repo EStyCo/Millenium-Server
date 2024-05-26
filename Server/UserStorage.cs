@@ -1,9 +1,8 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.SignalR;
-using Server.Controllers;
+﻿using Microsoft.AspNetCore.SignalR;
 using Server.Models;
 using Server.Models.DTO;
 using Server.Models.EntityFramework;
+using Server.Models.Handlers;
 
 namespace Server
 {
@@ -11,16 +10,13 @@ namespace Server
     {
         //private readonly IServiceFactory<UserRepository> userRepositoryFactory;
         private readonly IHubContext<UserStorage> hubContext;
-        private readonly IMapper mapper;
         public Dictionary<string, CancellationTokenSource> disconnectTokens = new();
         public List<ActiveUser> ActiveUsers { get; private set; }
 
-        public UserStorage(IHubContext<UserStorage> _hubContext,
-                           IMapper _mapper)
+        public UserStorage(IHubContext<UserStorage> _hubContext)
 
         {
             hubContext = _hubContext;
-            mapper = _mapper;
             ActiveUsers = new();
         }
 
@@ -40,7 +36,7 @@ namespace Server
 
             if (activeUser == null)
             {
-                ActiveUser newUser = new(hubContext, stats, character.Name);
+                ActiveUser newUser = new(hubContext, stats, character);
                 ActiveUsers.Add(newUser);
                 newUser.CreateSpellList(character);
             }
@@ -55,25 +51,25 @@ namespace Server
             }
         }
 
-/*        public async Task ChangeStats(UpdateStatDTO dto)
-        {
-            var userRep = userRepositoryFactory.Create();
+        /*        public async Task ChangeStats(UpdateStatDTO dto)
+                {
+                    var userRep = userRepositoryFactory.Create();
 
-            var stats = ActiveUsers
-                .Where(x => x.Name == dto.Name)
-                .Select(x => x.Stats)
-                .FirstOrDefault();
+                    var stats = ActiveUsers
+                        .Where(x => x.Name == dto.Name)
+                        .Select(x => x.Stats)
+                        .FirstOrDefault();
 
-            if (stats == null || !await userRep.UserExists(dto.Name)) return;
+                    if (stats == null || !await userRep.UserExists(dto.Name)) return;
 
-            await userRep.UpdateStats(dto);
+                    await userRep.UpdateStats(dto);
 
-            var newCounts = await userRep.GetStats(dto.Name);
-            if (newCounts != null)
-            {
-                stats.CreateStats(newCounts);
-            }
-        }*/
+                    var newCounts = await userRep.GetStats(dto.Name);
+                    if (newCounts != null)
+                    {
+                        stats.CreateStats(newCounts);
+                    }
+                }*/
 
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
@@ -97,10 +93,11 @@ namespace Server
 
         public void AddExp(UpdateExpDTO dto)
         {
-            ActiveUsers.Where(x => x.Name == dto.Name)
+            var stats = ActiveUsers.Where(x => x.Name == dto.Name)
                        .Select(x => x.Stats)
-                       .FirstOrDefault()?
-                       .AddExp(dto.Exp);
+                       .FirstOrDefault() as UserStatsHandler;
+
+            stats?.AddExp(dto.Exp);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Server.Models.Monsters;
-using Server.Models.Utilities;
+﻿using Server.Models.Utilities;
 
 namespace Server.Models.Skills
 {
@@ -14,20 +13,20 @@ namespace Server.Models.Skills
             ImagePath = "simple.png";
         }
 
-        public override Task Use(Entity user, params Entity[] target)
+        public override Tuple<int, string> Use(Entity user, params Entity[] target)
         {
-            if (user is ActiveUser and not null ||
-                target[0] is Monster and not null)
+            if (user is not null ||
+                target.First() is not null)
             {
-                var activeUser = user as ActiveUser;
-                var s = activeUser?.Stats;
+                var s = user.Stats;
                 var damage = (s.Strength * 2) + s.Strength * (s.Agility / 100);
 
-                var monster = target[0] as Monster;
-                monster.CurrentHP -= damage;
+                var resultDamage = target.First().TakeDamage(damage);
+
+                return new(resultDamage, target.First().Name);
             }
 
-            return Task.CompletedTask;
+            return null;
         }
     }
 }

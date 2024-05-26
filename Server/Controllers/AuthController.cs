@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Server;
 using Server.Models;
 using Server.Models.DTO.Auth;
 using Server.Models.Utilities;
 using Server.Repository;
 using System.Net;
-using System.Reflection.Metadata.Ecma335;
-using System.Xml.Linq;
 
 namespace WebApplication1.Controllers
 {
