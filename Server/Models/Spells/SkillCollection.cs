@@ -1,4 +1,6 @@
 ﻿using Server.Models.Skills.LearningMaster;
+using Server.Models.Spells;
+using Server.Models.Spells.Models;
 using Server.Models.Utilities;
 
 namespace Server.Models.Skills
@@ -58,19 +60,14 @@ namespace Server.Models.Skills
                     return new Simple();
                 case SpellType.PowerCharge:
                     return new PowerCharge();
-                default:
-                    return null;
-            }
-        }
-
-        public Type GetSkillType(SpellType skill)
-        {
-            switch (skill)
-            {
-                case SpellType.Simple:
-                    return typeof(Simple);
-                case SpellType.PowerCharge:
-                    return typeof(PowerCharge);
+                case SpellType.LowHealing:
+                    return new LowHealing();
+                case SpellType.Freezing:
+                    return new Freezing();
+                case SpellType.Rest:
+                    return new Rest();
+                case SpellType.Bleeding:
+                    return new Bleeding();
                 default:
                     return null;
             }
@@ -81,7 +78,11 @@ namespace Server.Models.Skills
             return new List<SpellType>()
             {
                 SpellType.Simple,
-                SpellType.PowerCharge
+                SpellType.PowerCharge,
+                SpellType.LowHealing,
+                SpellType.Freezing,
+                SpellType.Rest,
+                SpellType.Bleeding
             };
         }
     }

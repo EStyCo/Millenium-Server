@@ -2,7 +2,7 @@
 using Server.Models;
 using Server.Models.DTO;
 using Server.Models.Utilities;
-using Server.Models.Skills;
+using Server.Models.Spells;
 
 namespace Server.Controllers
 {

@@ -27,7 +27,7 @@ namespace Server.Controllers
         [HttpPost("get")]
         public async Task<IActionResult> GetStats(NameRequestDTO dto)
         {
-            BaseStatsHandler? stats = userStorage.ActiveUsers
+            StatsHandler? stats = userStorage.ActiveUsers
                 .Where(u => u.Name == dto.Name)
                 .Select(u => u.Stats)
                 .FirstOrDefault();

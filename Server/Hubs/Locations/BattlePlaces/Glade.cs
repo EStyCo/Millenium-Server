@@ -21,16 +21,12 @@ namespace Server.Hubs.Locations.BattlePlaces
         {
             mapper = _mapper;
             userStorageFactory = _userStorageFactory;
-
-            AddMonster();
-            AddMonster();
-            AddMonster();
         }
 
 
         public override void AddMonster()
         {
-            var monster = new Goblin(userStorageFactory, NamePlace);
+            var monster = new Goblin(userStorageFactory, this);
             if (Monsters.Count == 0)
             {
                 monster.Id = 0;

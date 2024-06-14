@@ -85,7 +85,7 @@ namespace Server
                 {
                     ActiveUsers.Remove(userToRemove);
                     disconnectTokens.Remove(connectionId);
-                }, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnRanToCompletion); ;
+                }, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnRanToCompletion);;
             }
 
             await base.OnDisconnectedAsync(exception);

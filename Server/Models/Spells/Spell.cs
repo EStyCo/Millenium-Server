@@ -1,7 +1,6 @@
-﻿
-using Server.Models.Utilities;
+﻿using Server.Models.Utilities;
 
-namespace Server.Models.Skills
+namespace Server.Models.Spells
 {
     public abstract class Spell
     {
@@ -13,6 +12,17 @@ namespace Server.Models.Skills
         public string ImagePath { get; set; } = string.Empty;
         public bool IsReady { get; set; } = true;
 
-        public abstract Tuple<int, string> Use(Entity user, params Entity[] target);
+        public abstract void Use(Entity user, params Entity[] targets);
+
+        protected void SendBattleLog(string log, params Entity[] targets) 
+        {
+            foreach (var item in targets)
+            { 
+                var target = item as ActiveUser;
+                if(target == null) continue;
+
+                _ = target.AddBattleLog(log);
+            }
+        }
     }
 }

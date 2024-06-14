@@ -39,7 +39,7 @@ namespace Server.Hubs.Locations
             }
             Monsters.Add(monster);*/
 
-            await UpdateMonsters();
+            UpdateMonsters();
         }
     }
 }

@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Server.Models.EntityFramework;
 using Server.Models.Handlers;
+using Server.Models.Monsters.States;
 using Server.Models.Skills;
+using Server.Models.Spells;
+using Server.Models.Spells.Models;
 using Server.Models.Utilities;
 using System.Text;
 
@@ -13,12 +16,12 @@ namespace Server.Models
         public string ConnectionId { get; set; } = string.Empty;
         public override string Name { get; protected set; } = string.Empty;
         public string Place { get; set; } = string.Empty;
-        public override BaseStatsHandler Stats { get; protected set; }
-        public VitalityHandler Vitality { get; private set; }
-        public bool IsReadyCast { get; set; } = true;
-        public int GlobalRestSeconds { get; set; }
+        public override bool CanAttack { get; set; } = true;
+        public override StatsHandler Stats { get; protected set; }
+        public override VitalityHandler Vitality { get; protected set; }
         public List<Spell> ActiveSkills { get; set; } = new();
         public List<string> BattleLogs { get; set; } = new();
+        public override Dictionary<State, CancellationTokenSource> States { get; protected set; } = new();
 
         public ActiveUser(IHubContext<UserStorage> _hubContext,
                           Stats stats,
@@ -28,7 +31,7 @@ namespace Server.Models
             Name = character.Name;
             Place = character.Place;
             Stats = new UserStatsHandler(stats);
-            Vitality = new(_hubContext, (UserStatsHandler)Stats, ConnectionId);
+            Vitality = new UserVitalityHandler(_hubContext, (UserStatsHandler)Stats, ConnectionId);
         }
 
         public void CreateSpellList(Character character)
@@ -36,22 +39,26 @@ namespace Server.Models
             ActiveSkills = new SkillCollection().CreateSkillList(new() { character.Spell1, character.Spell2, character.Spell3, character.Spell4, character.Spell5 });
         }
 
-        public override async void UseSkill(SpellType type, params Entity[] target)
+        public override void UseSpell(SpellType type, params Entity[] target)
         {
-            var skill = ActiveSkills.FirstOrDefault(x => x.GetType() == new SkillCollection().GetSkillType(type));
+            var skill = ActiveSkills.FirstOrDefault(x => x.GetType() == new SkillCollection().PickSkill(type).GetType());
 
             if (skill != null)
             {
-                var resultUse = skill.Use(this, target);
+                skill.Use(this, target);
 
                 skill.IsReady = false;
                 skill.RestSeconds = skill.CoolDown;
 
-                _ = StartRestSkill(skill);
-                StartGlobalRest();
+                if (skill is not Rest)
+                {
+                    StartGlobalRest();
+                }
 
-                if (resultUse != null)
-                    await AddBattleLog($"Вы ударили {resultUse.Item2} на {resultUse.Item1} урона.");
+                _ = StartRestSkill(skill);
+
+                /*if (resultUse != null)
+                    await AddBattleLog(resultUse);*/
             }
         }
 
@@ -85,10 +92,24 @@ namespace Server.Models
             }
         }
 
+        public void ResetAllSpells()
+        {
+            foreach (var skill in ActiveSkills)
+            {
+                skill.RestSeconds = 0;
+                skill.IsReady = true;
+            }
+        }
+
         public void ChangeConnectionId(string connectionId)
         {
             ConnectionId = connectionId;
-            Vitality.ConnectionId = connectionId;
+
+            var vitality = Vitality as UserVitalityHandler;
+            if (vitality != null)
+            {
+                vitality.ConnectionId = connectionId;
+            }
         }
 
         public async Task AddBattleLog(string str)
@@ -97,19 +118,26 @@ namespace Server.Models
 
             if (BattleLogs.Count > 10) BattleLogs.RemoveAt(0);
 
-            BattleLogs.Add(sb.Insert(0,$"[{DateTime.Now.ToString("HH:mm:ss")}] - ").ToString());
+            BattleLogs.Add(sb.Insert(0, $"[{DateTime.Now.ToString("HH:mm:ss")}] - ").ToString());
 
             if (ConnectionId != string.Empty)
             {
-                await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateLogs", BattleLogs);
+                await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateLogs", BattleLogs.Last());
             }
         }
 
-        public override int TakeDamage(int damage)
+        public override ResultUseSpell TakeDamage(int damage)
         {
             Vitality.TakeDamage(damage);
 
-            return damage;
+            return new(damage, Vitality.CurrentHP, Vitality.MaxHP);
+        }
+
+        public override ResultUseSpell TakeHealing(int healing)
+        {
+            Vitality.TakeHealing(healing);
+
+            return new(healing, Vitality.CurrentHP, Vitality.MaxHP);
         }
     }
 }

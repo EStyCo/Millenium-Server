@@ -9,64 +9,103 @@ namespace Server.Hubs.Locations.BasePlaces
     {
         protected BattlePlace(IHubContext<PlaceHub> hubContext) : base(hubContext)
         {
+            _ = RefreshMonsters();
         }
 
         public abstract List<Monster> Monsters { get; protected set; }
         public abstract void AddMonster();
-        //public abstract Task HitBackMonster(Monster monster, string name);
 
-        public async Task DeleteMonster(int id)
+        public void RemoveMonster(Monster _monster)
         {
-            await Task.Delay(10);
+            var monster = Monsters.FirstOrDefault(x => x == _monster);
+            if (monster != null) Monsters.Remove(monster);
 
-            var monster = Monsters.FirstOrDefault(x => x.Id == id);
-
-            if (monster != null)
-            {
-                Monsters.Remove(monster);
-            }
-
-            await UpdateMonsters();
+            UpdateMonsters();
         }
 
         public override async Task EnterPlace(string name, int level, string connectionId)
         {
             await base.EnterPlace(name, level, connectionId);
-            await UpdateMonsters();
+            UpdateMonsters();
         }
 
         public override async Task LeavePlace(string connectionId)
         {
             await base.LeavePlace(connectionId);
-            await UpdateMonsters();
+            UpdateMonsters();
         }
 
-        public async Task UpdateMonsters()
+        public async void UpdateMonsters()
         {
+            /*List<Monster> removeList = new();
+            foreach (var monster in Monsters)
+            {
+                if (monster.Vitality.CurrentHP <= 0)
+                { 
+                    removeList.Add(monster);
+                }
+            }
+
+            foreach (var monster in removeList) 
+            {
+                Monsters.Remove(monster);
+            }*/
+
             if (HubContext.Clients != null)
-                await HubContext.Clients.Clients(ActiveUsers.Keys).SendAsync("UpdateListMonsters", Monsters);
+            {
+                var dtoList = new List<MonsterDTO>();
+                foreach (var item in Monsters) dtoList.Add(item.ToJson());
+
+                await HubContext.Clients.Clients(ActiveUsers.Keys).SendAsync("UpdateListMonsters", dtoList);
+            }
         }
 
-        public async Task<int> AttackMonster(AttackMonsterDTO dto, ActiveUser user)
+        public int AttackMonster(AttackMonsterDTO dto, ActiveUser user)
         {
             var monster = Monsters.FirstOrDefault(x => x.Id == dto.IdMonster);
             int addingExp = 0;
 
             if (monster != null)
             {
-                user.UseSkill(dto.Type, monster);
+                user.UseSpell(dto.Type, monster);
 
                 if (monster.Target != user.Name) _ = monster.SetTarget(user.Name);
-                if (monster.CurrentHP < 0)
+                if (monster.Vitality.CurrentHP <= 0)
                 {
                     Monsters.Remove(monster);
                     addingExp = monster.Exp;
+                    ResetTargetUser(user);
                 }
 
-                await UpdateMonsters();
+                UpdateMonsters();
             }
 
             return addingExp;
+        }
+
+        private async Task RefreshMonsters()
+        {
+            await Task.Delay(10000);
+
+            while (true)
+            {
+                if (Monsters.Count < 6)
+                {
+                    AddMonster();
+                }
+
+                await Task.Delay(new Random().Next(10, 26) * 1000);
+            }
+        }
+
+        protected void ResetTargetUser(ActiveUser user)
+        {
+            var searchedUser = ActiveUsers.FirstOrDefault(x => x.Value.Name == user.Name);
+
+            if (searchedUser.Value != null)
+            {
+                _ = HubContext.Clients.Client(searchedUser.Key).SendAsync("ResetTarget");
+            }
         }
     }
 }

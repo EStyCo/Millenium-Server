@@ -36,9 +36,9 @@ namespace Server.Controllers
         {
             var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
 
-            if (user != null && user.IsReadyCast)
+            if (user != null && user.CanAttack)
             {
-                int addingExp = await areaStorage.GetBattlePlace(dto.Place).AttackMonster(dto, user);
+                int addingExp = areaStorage.GetBattlePlace(dto.Place).AttackMonster(dto, user);
 
                 if (addingExp > 0)
                 {
