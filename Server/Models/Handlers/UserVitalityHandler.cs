@@ -17,7 +17,7 @@ namespace Server.Models.Handlers
         public int CurrentMP { get; private set; } = 0;
         public override int MaxHP { get { return maxHP = Consider.MaxHP(stats); } set { maxHP = value; } }
         public int MaxMP { get { return maxMP = Consider.MaxMP(stats); } }
-        public int RegenRateHP { get { return regenRateHP = Consider.RegenRateHP(stats); } }
+        public int RegenRateHP { get { return regenRateHP = Consider.RegenRateHP(this, stats); } }
         public int RegenRateMP { get { return regenRateMP = Consider.RegenRateMP(stats); } }
 
         public UserVitalityHandler(IHubContext<UserStorage> _hubContext, UserStatsHandler _stats, string connectionId)
@@ -36,7 +36,7 @@ namespace Server.Models.Handlers
                 _ = SendHP();
                 _ = SendMP();
 
-                await Task.Delay(1000);
+                await Task.Delay(500);
             }
         }
 

@@ -15,8 +15,8 @@ namespace Server.Models.Monsters
         public override string PlaceName { get; protected set; } = string.Empty;
         public override bool CanAttack { get; set; } = true;
         public override Dictionary<State, CancellationTokenSource> States { get; protected set; } = new();
-        public override double MinTimeAttack { get; set; } = 2.0;
-        public override double MaxTimeAttack { get; set; } = 4.0;
+        public override double MinTimeAttack { get; set; } = 3.0;
+        public override double MaxTimeAttack { get; set; } = 5.0;
         public override StatsHandler Stats { get; protected set; }
         public override VitalityHandler Vitality { get; protected set; }
 
@@ -25,7 +25,7 @@ namespace Server.Models.Monsters
         {
             Exp = 25;
             Name = "Goblin " + GetRandomName();
-            ImagePath = "goblin_image.png";
+            ImagePath = "goblin.png";
             PlaceInstance = place;
             PlaceName = place.NamePlace;
 
@@ -33,7 +33,7 @@ namespace Server.Models.Monsters
             Vitality = new MonsterVitalityHandler(64, 64);
         }
 
-        public override async Task SetTarget(string name)
+        public override async void SetTarget(string name)
         {
             Target = name;
 

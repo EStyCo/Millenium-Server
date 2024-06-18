@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Server.Models.EntityFramework;
 using Server.Models.Handlers;
+using Server.Models.Interfaces;
 using Server.Models.Monsters.States;
 using Server.Models.Skills;
 using Server.Models.Spells;
@@ -13,6 +14,7 @@ namespace Server.Models
     public class ActiveUser : Entity
     {
         private readonly IHubContext<UserStorage> hubContext;
+        private readonly IAreaStorage areaStorage;
         public string ConnectionId { get; set; } = string.Empty;
         public override string Name { get; protected set; } = string.Empty;
         public string Place { get; set; } = string.Empty;
@@ -24,10 +26,12 @@ namespace Server.Models
         public override Dictionary<State, CancellationTokenSource> States { get; protected set; } = new();
 
         public ActiveUser(IHubContext<UserStorage> _hubContext,
+                          IAreaStorage _areaStorage,
                           Stats stats,
                           Character character)
         {
             hubContext = _hubContext;
+            areaStorage = _areaStorage;
             Name = character.Name;
             Place = character.Place;
             Stats = new UserStatsHandler(stats);
@@ -43,7 +47,7 @@ namespace Server.Models
         {
             var skill = ActiveSkills.FirstOrDefault(x => x.GetType() == new SkillCollection().PickSkill(type).GetType());
 
-            if (skill != null)
+            if (skill != null && CanAttack)
             {
                 skill.Use(this, target);
 
@@ -130,6 +134,13 @@ namespace Server.Models
         {
             Vitality.TakeDamage(damage);
 
+            if (Vitality.CurrentHP <= 0)
+            {
+                areaStorage.GetBattlePlace(Place)?.WeakeningPlayer(Name);
+                AddState<WeaknessState>(this);
+                UpdateStates();
+            }
+
             return new(damage, Vitality.CurrentHP, Vitality.MaxHP);
         }
 
@@ -138,6 +149,14 @@ namespace Server.Models
             Vitality.TakeHealing(healing);
 
             return new(healing, Vitality.CurrentHP, Vitality.MaxHP);
+        }
+
+        public async void UpdateStates()
+        {
+            if (ConnectionId != string.Empty)
+            {
+                await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateBuffBar", States.Keys.Select(x => x.ToJson()).ToList());
+            }
         }
     }
 }

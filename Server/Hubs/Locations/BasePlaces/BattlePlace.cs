@@ -7,13 +7,13 @@ namespace Server.Hubs.Locations.BasePlaces
 {
     public abstract class BattlePlace : BasePlace
     {
+        public abstract List<Monster> Monsters { get; protected set; }
+        public abstract void AddMonster();
+
         protected BattlePlace(IHubContext<PlaceHub> hubContext) : base(hubContext)
         {
             _ = RefreshMonsters();
         }
-
-        public abstract List<Monster> Monsters { get; protected set; }
-        public abstract void AddMonster();
 
         public void RemoveMonster(Monster _monster)
         {
@@ -37,20 +37,6 @@ namespace Server.Hubs.Locations.BasePlaces
 
         public async void UpdateMonsters()
         {
-            /*List<Monster> removeList = new();
-            foreach (var monster in Monsters)
-            {
-                if (monster.Vitality.CurrentHP <= 0)
-                { 
-                    removeList.Add(monster);
-                }
-            }
-
-            foreach (var monster in removeList) 
-            {
-                Monsters.Remove(monster);
-            }*/
-
             if (HubContext.Clients != null)
             {
                 var dtoList = new List<MonsterDTO>();
@@ -69,7 +55,7 @@ namespace Server.Hubs.Locations.BasePlaces
             {
                 user.UseSpell(dto.Type, monster);
 
-                if (monster.Target != user.Name) _ = monster.SetTarget(user.Name);
+                if (monster.Target != user.Name) monster.SetTarget(user.Name);
                 if (monster.Vitality.CurrentHP <= 0)
                 {
                     Monsters.Remove(monster);
@@ -85,7 +71,7 @@ namespace Server.Hubs.Locations.BasePlaces
 
         private async Task RefreshMonsters()
         {
-            await Task.Delay(10000);
+            await Task.Delay(2000);
 
             while (true)
             {
@@ -107,5 +93,16 @@ namespace Server.Hubs.Locations.BasePlaces
                 _ = HubContext.Clients.Client(searchedUser.Key).SendAsync("ResetTarget");
             }
         }
+
+        public void WeakeningPlayer(string name)
+        {
+            foreach (var item in Monsters)
+            {
+                if (item.Target == name) item.SetTarget(string.Empty);
+            }
+
+            UpdateMonsters();
+        }
     }
+
 }

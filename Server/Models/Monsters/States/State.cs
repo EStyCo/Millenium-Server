@@ -4,7 +4,7 @@ namespace Server.Models.Monsters.States
 {
     public abstract class State
     {
-        public abstract bool IsStoppingSpell { get; }
+        public virtual bool IsStoppingSpell { get; } = false;
         public abstract string Name { get; }
         public abstract string Description { get; }
         public abstract string ImagePath { get; }

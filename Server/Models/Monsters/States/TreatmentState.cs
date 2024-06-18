@@ -3,7 +3,6 @@ namespace Server.Models.Monsters.States
 {
     public class TreatmentState : State
     {
-        public override bool IsStoppingSpell { get; } = false;
         public override string Name { get; } = string.Empty;
         public override string Description { get; } = string.Empty;
         public override string ImagePath { get; } = string.Empty;
@@ -17,9 +16,31 @@ namespace Server.Models.Monsters.States
             Enter();
         }
 
-        public override void Enter()
+        public override async void Enter()
         {
-            throw new NotImplementedException();
+            var user = User as ActiveUser;
+
+            _ = user?.AddBattleLog($"{Entity.Name} использовал Ауру восстановления.");
+            _ = Task.Delay(20000, CTS.Token).ContinueWith(_ =>
+            {
+                Entity.RemoveState<TreatmentState>();
+            });
+
+            int healing = (int)(Entity.Vitality.MaxHP / 100.0 * 3);
+
+            await Task.Run(async () =>
+            {
+                while (!CTS.IsCancellationRequested)
+                {
+                    await Task.Delay(1000);
+                    Entity.TakeHealing(healing);
+                    _ = user?.AddBattleLog($"{Entity.Name} восстановил {healing} здоровья.");
+                }
+                Entity.RemoveState<TreatmentState>();
+            }, CTS.Token);
+
+            _ = user?.AddBattleLog($"У {Entity.Name} закончилось Аура восстановления");
+            user?.UpdateStates();
         }
 
         public override void Exit()

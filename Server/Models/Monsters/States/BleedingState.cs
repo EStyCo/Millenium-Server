@@ -1,17 +1,12 @@
 ﻿
-using Server.Models.EntityFramework;
-
 namespace Server.Models.Monsters.States
 {
     public class BleedingState : State
     {
-        public override bool IsStoppingSpell { get; } = false;
-
         public override string Name { get; } = string.Empty;
-
         public override string Description { get; } = string.Empty;
-
         public override string ImagePath { get; } = string.Empty;
+
         public BleedingState(Entity user, Entity entity, CancellationTokenSource _CTS) : base(user, entity, _CTS)
         {
             Name = "Кровотечение";

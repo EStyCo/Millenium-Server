@@ -16,14 +16,15 @@ namespace Server.Models.Utilities
             return (int)(100 + (stats.Intelligence * 0.20) + (stats.Intelligence + stats.Agility + stats.Level));
         }
 
-        public static int RegenRateHP(UserStatsHandler character)
+        public static int RegenRateHP(UserVitalityHandler v, UserStatsHandler s)
         {
-            return new Random().Next(1, 10);
+            var res = (v.MaxHP / 60.0) * 0.5;
+            return (int)Math.Round(res);
         }
 
         public static int RegenRateMP(UserStatsHandler character)
         {
-            return new Random().Next(1, 10);
+            return new Random().Next(1, 5);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Server.Models.Spells.Models
         {
             SpellType = SpellType.LowHealing;
             Name = "Подорожник";
-            CoolDown = 45;
+            CoolDown = 20;
             Description = "Не много лечит раны.";
             ImagePath = "low_healing.png";
         }
@@ -18,7 +18,7 @@ namespace Server.Models.Spells.Models
             if (user != null)
             {
                 var s = user.Stats;
-                var heal = s.Strength + (s.Intelligence * 1.5);
+                var heal = s.Strength + (s.Intelligence * 2.5);
 
                 var resultHeal = user.TakeHealing((int)Math.Round(heal));
 

@@ -59,5 +59,17 @@ namespace Server.Controllers
            // await userStorage.ChangeStats(dto);
             return Ok(RespFactory.ReturnOk());
         }
+
+        [HttpPost("states")]
+        public async Task<IActionResult> GetStates(NameRequestDTO dto)
+        {
+            var states = userStorage.ActiveUsers
+                .Where(u => u.Name == dto.Name)
+                .SelectMany(u => u.States.Keys)
+                .Select(x => x.ToJson())
+                .ToList();
+
+            return Ok(RespFactory.ReturnOk(new CustomList<StateDTO>(states)));
+        }
     }
 }

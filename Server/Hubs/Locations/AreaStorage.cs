@@ -1,5 +1,4 @@
 ﻿using Server.Hubs.Locations.BasePlaces;
-using Server.Hubs.Locations.BattlePlaces;
 using Server.Models.Interfaces;
 
 namespace Server.Hubs.Locations

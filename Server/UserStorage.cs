@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Server.Hubs.Locations;
 using Server.Models;
 using Server.Models.DTO;
 using Server.Models.EntityFramework;
 using Server.Models.Handlers;
+using Server.Models.Interfaces;
 
 namespace Server
 {
@@ -10,13 +12,16 @@ namespace Server
     {
         //private readonly IServiceFactory<UserRepository> userRepositoryFactory;
         private readonly IHubContext<UserStorage> hubContext;
+        private readonly IAreaStorage areaStorage;
         public Dictionary<string, CancellationTokenSource> disconnectTokens = new();
         public List<ActiveUser> ActiveUsers { get; private set; }
 
-        public UserStorage(IHubContext<UserStorage> _hubContext)
+        public UserStorage(IHubContext<UserStorage> _hubContext,
+                           IAreaStorage _areaStorage)
 
         {
             hubContext = _hubContext;
+            areaStorage = _areaStorage;
             ActiveUsers = new();
         }
 
@@ -36,7 +41,7 @@ namespace Server
 
             if (activeUser == null)
             {
-                ActiveUser newUser = new(hubContext, stats, character);
+                ActiveUser newUser = new(hubContext, areaStorage, stats, character);
                 ActiveUsers.Add(newUser);
                 newUser.CreateSpellList(character);
             }

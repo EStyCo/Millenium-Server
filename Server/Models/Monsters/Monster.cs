@@ -25,7 +25,7 @@ namespace Server.Models.Monsters
             userStorageFactory = _userStorageFactory;
         }
 
-        public abstract Task SetTarget(string name);
+        public abstract void SetTarget(string name);
 
         public MonsterDTO ToJson()
         {
@@ -36,6 +36,7 @@ namespace Server.Models.Monsters
                 MaxHP = Vitality.MaxHP,
                 ImagePath = ImagePath,
                 Name = Name,
+                Target = Target,
                 States = States.Keys.Select(x => x.ToJson()).ToList()
             };
         }

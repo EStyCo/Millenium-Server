@@ -68,6 +68,8 @@ namespace Server.Models.Skills
                     return new Rest();
                 case SpellType.Bleeding:
                     return new Bleeding();
+                case SpellType.Treatment:
+                    return new Treatment();
                 default:
                     return null;
             }
@@ -82,7 +84,8 @@ namespace Server.Models.Skills
                 SpellType.LowHealing,
                 SpellType.Freezing,
                 SpellType.Rest,
-                SpellType.Bleeding
+                SpellType.Bleeding, 
+                SpellType.Treatment,
             };
         }
     }
