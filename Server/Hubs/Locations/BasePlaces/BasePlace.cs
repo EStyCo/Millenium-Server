@@ -8,7 +8,6 @@ namespace Server.Hubs.Locations.BasePlaces
         public string Id { get; set; } = new Random().Next(100).ToString();
         public abstract string NamePlace { get; }
         public abstract Dictionary<string, ActiveUserOnPlace> ActiveUsers { get; protected set; }
-
         protected IHubContext<PlaceHub> HubContext { get; }
 
         protected BasePlace(IHubContext<PlaceHub> hubContext)
@@ -24,8 +23,11 @@ namespace Server.Hubs.Locations.BasePlaces
 
             ActiveUsers.Add(connectionId, new(name, level));
 
-            if (HubContext.Clients != null)
+            if (HubContext.Clients != null) 
+            { 
                 await HubContext.Clients.Clients(ActiveUsers.Keys).SendAsync("UpdateListUsers", ActiveUsers.Values.ToList());
+                /*await HubContext.Clients.Clients(user.Key).SendAsync("UpdateDescription", );*/
+            }
         }
 
         public virtual async Task LeavePlace(string connectionId)

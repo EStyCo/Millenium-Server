@@ -15,7 +15,11 @@ namespace Server.Hubs.Locations.BattlePlaces
         public override List<Monster> Monsters { get; protected set; } = new();
         public override Dictionary<string, ActiveUserOnPlace> ActiveUsers { get; protected set; } = new();
 
-        public DarkWood(IMapper _mapper, 
+        public override string ImagePath { get; } = "darkwood.jpg";
+        public override string Description { get; } = "поле для драки, ебаштесь";
+        public override string[] Routes { get; } = { "glade" };
+
+        public DarkWood(IMapper _mapper,
             IHubContext<PlaceHub> hubContext,
             IServiceFactory<UserStorage> _userStorageFactory) : base(hubContext)
         {

@@ -10,8 +10,8 @@ namespace Server.Hubs
         private readonly IAreaStorage AreaStorage;
         private readonly UserStorage UserStorage;
 
-        public PlaceHub(IAreaStorage areaStorage, 
-                        UserStorage userStorage) 
+        public PlaceHub(IAreaStorage areaStorage,
+                        UserStorage userStorage)
         {
             AreaStorage = areaStorage;
             UserStorage = userStorage;
@@ -30,7 +30,7 @@ namespace Server.Hubs
                 await OnDisconnectedAsync(new());
                 return;
             }
-            
+
             place?.EnterPlace(dto.Name, stats.Level, Context.ConnectionId);
 
             Console.WriteLine($"Игрок: {dto.Name} подключился к {dto.Place} || ConnectionId: {Context.ConnectionId}");
@@ -41,12 +41,29 @@ namespace Server.Hubs
             var place = AreaStorage.GetPlaceById(Context.ConnectionId);
 
             if (place != null)
-            { 
+            {
                 place.LeavePlace(Context.ConnectionId);
             }
-            
+
             Console.WriteLine($"ConnectionId: {Context.ConnectionId} отключился от {place}");
             await base.OnDisconnectedAsync(exception);
+        }
+
+        public string[]? UpdateDescription(string namePlace)
+        {
+            var place = AreaStorage.GetBattlePlace(namePlace);
+
+            if (place != null)
+                return [place.ImagePath, place.Description];
+
+            return null;
+        }
+
+        public string[]? UpdateRoutes(string namePlace)
+        {
+            var place = AreaStorage.GetBattlePlace(namePlace);
+
+            return place?.Routes;
         }
     }
 }

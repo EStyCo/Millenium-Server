@@ -33,7 +33,7 @@ namespace Server.Controllers
         [HttpPost("go")]
         public async Task<IActionResult> GoNewArea(TravelDTO dto)
         {
-            var currentArea = rep.GetArea(new(dto.Name));
+            //var currentArea = rep.GetArea(new(dto.Name));
             var travelResponse = await rep.GoNewArea(dto);
 
             var user = userStorage.ActiveUsers.Where(x => x.Name == dto.Name).FirstOrDefault();

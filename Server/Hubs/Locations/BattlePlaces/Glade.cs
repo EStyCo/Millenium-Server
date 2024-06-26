@@ -15,6 +15,10 @@ namespace Server.Hubs.Locations.BattlePlaces
         public override List<Monster> Monsters { get; protected set; } = new();
         public override Dictionary<string, ActiveUserOnPlace> ActiveUsers { get; protected set; } = new();
 
+        public override string ImagePath { get; } = "glade.jpg";
+        public override string Description { get; } = "Мирная полянка с гоблинами, будь осторожен!";
+        public override string[] Routes { get; } = {"town",  "darkwood"};
+
         public Glade(IMapper _mapper, 
                      IHubContext<PlaceHub> hubContext,
                      IServiceFactory<UserStorage> _userStorageFactory) : base(hubContext)

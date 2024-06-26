@@ -7,8 +7,11 @@ namespace Server.Hubs.Locations.BasePlaces
 {
     public abstract class BattlePlace : BasePlace
     {
+        public abstract string ImagePath { get; }
+        public abstract string Description { get; }
         public abstract List<Monster> Monsters { get; protected set; }
         public abstract void AddMonster();
+        public abstract string[] Routes { get; }
 
         protected BattlePlace(IHubContext<PlaceHub> hubContext) : base(hubContext)
         {
@@ -26,6 +29,7 @@ namespace Server.Hubs.Locations.BasePlaces
         public override async Task EnterPlace(string name, int level, string connectionId)
         {
             await base.EnterPlace(name, level, connectionId);
+            //UpdateDescription();
             UpdateMonsters();
         }
 
@@ -43,6 +47,14 @@ namespace Server.Hubs.Locations.BasePlaces
                 foreach (var item in Monsters) dtoList.Add(item.ToJson());
 
                 await HubContext.Clients.Clients(ActiveUsers.Keys).SendAsync("UpdateListMonsters", dtoList);
+            }
+        }
+
+        public async void UpdateDescription()
+        {
+            if (HubContext.Clients != null)
+            {
+                await HubContext.Clients.Clients(ActiveUsers.Keys).SendAsync("UpdateDescription", new string[]{ ImagePath, Description });
             }
         }
 
@@ -104,5 +116,4 @@ namespace Server.Hubs.Locations.BasePlaces
             UpdateMonsters();
         }
     }
-
 }
