@@ -22,11 +22,11 @@ namespace Server.Repository
             mapper = _mapper;
         }
 
-        public async Task<bool> IsUniqueUser(string email)
+        public async Task<bool> IsUniqueUser(RegRequestDTO dto)
         {
             var result = await dbContext.Users
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Email == email);
+                .FirstOrDefaultAsync(x => x.Email == dto.Email || x.Character.Name == dto.Name);
 
             if (result != null)
                 return false;

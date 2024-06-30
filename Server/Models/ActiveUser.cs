@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Server.Hubs.DTO;
 using Server.Models.EntityFramework;
 using Server.Models.Handlers;
 using Server.Models.Interfaces;
@@ -157,6 +158,14 @@ namespace Server.Models
             {
                 await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateBuffBar", States.Keys.Select(x => x.ToJson()).ToList());
             }
+        }
+
+        public UserOnPlace ToJson()
+        {
+            var stats = Stats as UserStatsHandler;
+            var vitality = Vitality as UserVitalityHandler;
+
+            return new(Name, stats.Level, vitality.CurrentHP, vitality.MaxHP, States.Keys.Select(x => x.ToJson()).ToList());
         }
     }
 }

@@ -1,45 +1,53 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using Server.Hubs.Locations.DTO;
+using Server.Hubs.DTO;
+using Server.Models;
+using Server.Models.Interfaces;
+using Server.Models.Utilities;
 
 namespace Server.Hubs.Locations.BasePlaces
 {
     public abstract class BasePlace
     {
-        public string Id { get; set; } = new Random().Next(100).ToString();
-        public abstract string NamePlace { get; }
-        public abstract Dictionary<string, ActiveUserOnPlace> ActiveUsers { get; protected set; }
         protected IHubContext<PlaceHub> HubContext { get; }
+        public abstract string NamePlace { get; }
+        public virtual bool CanAttackUser { get; } = false;
+        public abstract Dictionary<string, ActiveUser> Users { get; protected set; }
 
         protected BasePlace(IHubContext<PlaceHub> hubContext)
         {
             HubContext = hubContext;
         }
 
-        public virtual async Task EnterPlace(string name, int level, string connectionId)
+        public virtual void AttackUser(ActiveUser user, ActiveUser target, SpellType type) 
         {
-            var user = ActiveUsers.FirstOrDefault(x => x.Key == connectionId);
+            if (user != null && target != null)
+            { 
+                user.UseSpell(type, target);
+            }
+        }
 
-            if (name == null || user.Value != null) return;
+        public virtual async Task EnterPlace(ActiveUser user, string connectionId)
+        {
+            if (user == null) return;
 
-            ActiveUsers.Add(connectionId, new(name, level));
+            Users.Add(connectionId, user);
 
             if (HubContext.Clients != null) 
             { 
-                await HubContext.Clients.Clients(ActiveUsers.Keys).SendAsync("UpdateListUsers", ActiveUsers.Values.ToList());
-                /*await HubContext.Clients.Clients(user.Key).SendAsync("UpdateDescription", );*/
+                await HubContext.Clients.Clients(Users.Keys).SendAsync("UpdateListUsers", Users.Values.Select(x => x.ToJson()).ToList());
             }
         }
 
         public virtual async Task LeavePlace(string connectionId)
         {
-            var user = ActiveUsers.FirstOrDefault(x => x.Key == connectionId);
+            var user = Users.FirstOrDefault(x => x.Key == connectionId);
 
             if (user.Value == null) return;
 
-            ActiveUsers.Remove(user.Key);
+            Users.Remove(user.Key);
 
             if (HubContext.Clients != null)
-                await HubContext.Clients.Clients(ActiveUsers.Keys).SendAsync("UpdateListUsers", ActiveUsers.Values.ToList());
+                await HubContext.Clients.Clients(Users.Keys).SendAsync("UpdateListUsers", Users.Values.Select(x => x.ToJson()).ToList());
         }
     }
 }

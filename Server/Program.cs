@@ -77,8 +77,9 @@ app.Run();
 
 void RegistrationPlaces(IServiceCollection services)
 {
-    services.AddSingleton<BasePlace, DarkWood>();
-    services.AddSingleton<BasePlace, Glade>();
     services.AddSingleton<BasePlace, Town>();
+    services.AddSingleton<BasePlace, Glade>();
+    services.AddSingleton<BasePlace, DarkWood>();
+    services.AddSingleton<BasePlace, SpecialPlace>();
     //builder.Services.AddSingleton<DarkWood>();
 }

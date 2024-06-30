@@ -14,13 +14,11 @@ namespace WebApplication1.Controllers
     {
         private readonly UserRepository userRep;
         private readonly UserStorage userStorage;
-        protected APIResponse response;
 
         public AuthController(UserRepository _userRep, UserStorage _userStorage)
         {
             userRep = _userRep;
             userStorage = _userStorage;
-            response = new();
         }
 
         [HttpPost("login")]
@@ -33,7 +31,7 @@ namespace WebApplication1.Controllers
             var stats = await userRep.GetStats(userResponse.Character.Name);
 
             if (character != null && stats != null)
-            { 
+            {
                 userStorage.AddActiveUser(stats, character);
             }
 
@@ -44,32 +42,22 @@ namespace WebApplication1.Controllers
         [HttpPost("reg")]
         public async Task<ActionResult> AddUser(RegRequestDTO dto)
         {
-            /*bool ifUserNameUnique = await userRep.IsUniqueUser( user.Email);
-            if (!ifUserNameUnique)
+            if (!await userRep.IsUniqueUser(dto))
             {
-                response.StatusCode = HttpStatusCode.BadRequest;
-                response.IsSuccess = false;
-                response.ErrorMessages.Add("Данные Имя/Эл.почта уже заняты!");
-                return BadRequest(response);
-            }*/
+                return BadRequest(RespFactory.ReturnBadRequest());
+            }
 
             var userResponse = await userRep.Registration(dto);
 
             if (!userResponse)
             {
-                response.StatusCode = HttpStatusCode.BadRequest;
-                response.IsSuccess = false;
-                response.ErrorMessages.Add("Ошибка регистрации");
-
-                return BadRequest(response);
+                return BadRequest(RespFactory.ReturnBadRequest());
             }
 
             //RegResponseDTO result = new(){ Name = dto.CharacterName, IsSuccess = userResponse };
 
-            response.StatusCode = HttpStatusCode.OK;
-            response.IsSuccess = true;
-            response.Result = "Пользователь успешно добавлен!";
-            return Ok(response);
+            return Ok(RespFactory
+                  .ReturnOk());
         }
     }
 }

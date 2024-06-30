@@ -1,6 +1,6 @@
 ﻿using Server.Models.Utilities;
 
-namespace Server.Models.DTO
+namespace Server.Hubs.DTO
 {
     public class AttackMonsterDTO
     {

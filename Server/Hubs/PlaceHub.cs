@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Server.Hubs.DTO;
 using Server.Hubs.Locations;
 using Server.Models.Handlers;
 using Server.Models.Interfaces;
@@ -20,18 +21,18 @@ namespace Server.Hubs
         public async Task ConnectToHub(ConnectToPlaceHubDTO dto)
         {
             var place = AreaStorage.GetPlace(dto.Place);
-            var stats = UserStorage.ActiveUsers.Where(x => x.Name == dto.Name)
-                .Select(x => x.Stats)
-                .FirstOrDefault() as UserStatsHandler;
+            var user = UserStorage.ActiveUsers
+                                   .Where(x => x.Name == dto.Name)
+                                   .FirstOrDefault() ;
 
-            if (place == null || stats == null)
+            if (place == null || user == null)
             {
                 Console.WriteLine($"Игрок: {dto.Name} не смог подключился к {dto.Place} || ConnectionId: {Context.ConnectionId}");
                 await OnDisconnectedAsync(new());
                 return;
             }
 
-            place?.EnterPlace(dto.Name, stats.Level, Context.ConnectionId);
+            place?.EnterPlace(user, Context.ConnectionId);
 
             Console.WriteLine($"Игрок: {dto.Name} подключился к {dto.Place} || ConnectionId: {Context.ConnectionId}");
         }
@@ -49,12 +50,12 @@ namespace Server.Hubs
             await base.OnDisconnectedAsync(exception);
         }
 
-        public string[]? UpdateDescription(string namePlace)
+        public DescriptionPlace? UpdateDescription(string namePlace)
         {
             var place = AreaStorage.GetBattlePlace(namePlace);
 
             if (place != null)
-                return [place.ImagePath, place.Description];
+                return new(place.ImagePath, place.Description, place.CanAttackUser);
 
             return null;
         }
@@ -67,3 +68,4 @@ namespace Server.Hubs
         }
     }
 }
+

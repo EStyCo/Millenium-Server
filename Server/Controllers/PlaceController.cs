@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Server.Hubs.DTO;
 using Server.Models.DTO;
 using Server.Models.Interfaces;
 using Server.Models.Utilities;
@@ -8,13 +9,13 @@ namespace Server.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class MonsterController : ControllerBase
+    public class PlaceController : ControllerBase
     {
         private readonly UserStorage userStorage;
         private readonly IAreaStorage areaStorage;
         private readonly UserRepository userRepository;
 
-        public MonsterController(UserStorage _userStorage,
+        public PlaceController(UserStorage _userStorage,
                                  IAreaStorage _areaStorage,
                                  UserRepository _userRepository)
         {
@@ -31,7 +32,7 @@ namespace Server.Controllers
             return Ok(RespFactory.ReturnOk());
         }
 
-        [HttpPost("attack")]
+        [HttpPost("attackMonster")]
         public async Task<IActionResult> AttackMonster(AttackMonsterDTO dto)
         {
             var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
@@ -45,6 +46,20 @@ namespace Server.Controllers
                     userStorage.AddExp(new UpdateExpDTO { Name = dto.Name, Exp = addingExp });
                     await userRepository.UpdateExp(addingExp, user.Name);
                 }
+            }
+
+            return Ok(RespFactory.ReturnOk());
+        }
+
+        [HttpPost("attackUser")]
+        public IActionResult AttackUser(AttackUserDTO dto)
+        {
+            var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.NameUser);
+            var target = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.NameTarget);
+
+            if (user != null && user.CanAttack && target != null)
+            {
+                areaStorage.GetPlace(dto.Place)?.AttackUser(user, user, dto.Type);
             }
 
             return Ok(RespFactory.ReturnOk());

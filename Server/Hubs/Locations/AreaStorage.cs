@@ -21,7 +21,7 @@ namespace Server.Hubs.Locations
         public BasePlace? GetPlaceById(string connectionId)
         {
             return services.GetServices<BasePlace>()
-                           .FirstOrDefault(place => place.ActiveUsers.ContainsKey(connectionId));
+                           .FirstOrDefault(place => place.Users.ContainsKey(connectionId));
         }
 
         public BattlePlace? GetBattlePlace(string place)
@@ -35,6 +35,5 @@ namespace Server.Hubs.Locations
             return services.GetServices<BasePlace>()
                            .FirstOrDefault(x => x.NamePlace == place) as CalmPlace;
         }
-
     }
 }

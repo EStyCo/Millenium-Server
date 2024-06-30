@@ -2,6 +2,7 @@
 using Server.Models.Monsters;
 using Server.Models;
 using Microsoft.AspNetCore.SignalR;
+using Server.Hubs.DTO;
 
 namespace Server.Hubs.Locations.BasePlaces
 {
@@ -26,9 +27,9 @@ namespace Server.Hubs.Locations.BasePlaces
             UpdateMonsters();
         }
 
-        public override async Task EnterPlace(string name, int level, string connectionId)
+        public override async Task EnterPlace(ActiveUser user, string connectionId)
         {
-            await base.EnterPlace(name, level, connectionId);
+            await base.EnterPlace(user, connectionId);
             //UpdateDescription();
             UpdateMonsters();
         }
@@ -46,15 +47,7 @@ namespace Server.Hubs.Locations.BasePlaces
                 var dtoList = new List<MonsterDTO>();
                 foreach (var item in Monsters) dtoList.Add(item.ToJson());
 
-                await HubContext.Clients.Clients(ActiveUsers.Keys).SendAsync("UpdateListMonsters", dtoList);
-            }
-        }
-
-        public async void UpdateDescription()
-        {
-            if (HubContext.Clients != null)
-            {
-                await HubContext.Clients.Clients(ActiveUsers.Keys).SendAsync("UpdateDescription", new string[]{ ImagePath, Description });
+                await HubContext.Clients.Clients(Users.Keys).SendAsync("UpdateListMonsters", dtoList);
             }
         }
 
@@ -98,7 +91,7 @@ namespace Server.Hubs.Locations.BasePlaces
 
         protected void ResetTargetUser(ActiveUser user)
         {
-            var searchedUser = ActiveUsers.FirstOrDefault(x => x.Value.Name == user.Name);
+            var searchedUser = Users.FirstOrDefault(x => x.Value.Name == user.Name);
 
             if (searchedUser.Value != null)
             {

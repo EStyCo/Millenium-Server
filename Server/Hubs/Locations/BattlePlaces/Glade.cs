@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
+using Server.Hubs.DTO;
 using Server.Hubs.Locations.BasePlaces;
-using Server.Hubs.Locations.DTO;
+using Server.Models;
 using Server.Models.Interfaces;
 using Server.Models.Monsters;
 
@@ -13,7 +14,7 @@ namespace Server.Hubs.Locations.BattlePlaces
         private readonly IServiceFactory<UserStorage> userStorageFactory;
         public override string NamePlace { get; } = "glade";
         public override List<Monster> Monsters { get; protected set; } = new();
-        public override Dictionary<string, ActiveUserOnPlace> ActiveUsers { get; protected set; } = new();
+        public override Dictionary<string, ActiveUser> Users { get; protected set; } = new();
 
         public override string ImagePath { get; } = "glade.jpg";
         public override string Description { get; } = "Мирная полянка с гоблинами, будь осторожен!";

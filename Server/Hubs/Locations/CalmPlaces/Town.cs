@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Server.Hubs.DTO;
 using Server.Hubs.Locations.BasePlaces;
-using Server.Hubs.Locations.DTO;
+using Server.Models;
 
 namespace Server.Hubs.Locations.CalmPlaces
 {
     public class Town : CalmPlace
     {
         public override string NamePlace { get; } = "town";
-        public override Dictionary<string, ActiveUserOnPlace> ActiveUsers { get; protected set; } = new();
+        public override Dictionary<string, ActiveUser> Users { get; protected set; } = new();
 
         public Town(IHubContext<PlaceHub> hubContext) : base(hubContext){}
     }
