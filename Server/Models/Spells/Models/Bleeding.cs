@@ -5,7 +5,7 @@ namespace Server.Models.Spells.Models
 {
     public class Bleeding : Spell
     {
-        private const int BLEEDING_CHANCE = 25;
+        private const int BLEEDING_CHANCE = 65;
 
         public Bleeding()
         {

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Server.Hubs.DTO;
-using Server.Hubs.Locations;
-using Server.Models.Handlers;
+using Server.Hubs.Locations.Interfaces;
 using Server.Models.Interfaces;
 
 namespace Server.Hubs
@@ -32,7 +31,7 @@ namespace Server.Hubs
                 return;
             }
 
-            place?.EnterPlace(user, Context.ConnectionId);
+            place.EnterPlace(user, Context.ConnectionId);
 
             Console.WriteLine($"Игрок: {dto.Name} подключился к {dto.Place} || ConnectionId: {Context.ConnectionId}");
         }
@@ -52,7 +51,7 @@ namespace Server.Hubs
 
         public DescriptionPlace? UpdateDescription(string namePlace)
         {
-            var place = AreaStorage.GetBattlePlace(namePlace);
+            var place = AreaStorage.GetPlace(namePlace) as IPlaceInfo;
 
             if (place != null)
                 return new(place.ImagePath, place.Description, place.CanAttackUser);
@@ -62,7 +61,7 @@ namespace Server.Hubs
 
         public string[]? UpdateRoutes(string namePlace)
         {
-            var place = AreaStorage.GetBattlePlace(namePlace);
+            var place = AreaStorage.GetPlace(namePlace) as IPlaceInfo;
 
             return place?.Routes;
         }

@@ -9,6 +9,7 @@
         Freezing = 4,
         Rest = 5,
         Bleeding = 6,
-        Treatment = 7
+        Treatment = 7,
+        UnFreezing = 8
     }
 }

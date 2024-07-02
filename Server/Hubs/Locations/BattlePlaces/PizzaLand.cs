@@ -1,26 +1,25 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
-using Server.Hubs.DTO;
 using Server.Hubs.Locations.BasePlaces;
-using Server.Models;
 using Server.Models.Interfaces;
 using Server.Models.Monsters;
+using Server.Models;
 
 namespace Server.Hubs.Locations.BattlePlaces
 {
-    public class Glade : BattlePlace
+    public class PizzaLand : BattlePlace
     {
         private readonly IMapper mapper;
         private readonly IServiceFactory<UserStorage> userStorageFactory;
-        public override string NamePlace { get; } = "glade";
+        public override string NamePlace { get; } = "pizzaland";
         public override List<Monster> Monsters { get; protected set; } = new();
         public override Dictionary<string, ActiveUser> Users { get; protected set; } = new();
 
-        public override string ImagePath { get; } = "glade.jpg";
-        public override string Description { get; } = "Мирная полянка с гоблинами, будь осторожен!";
-        public override string[] Routes { get; } = {"town", "pizzaland", "darkwood"};
+        public override string ImagePath { get; } = "pizzaland.png";
+        public override string Description { get; } = "Загадочная пиццерия, можно вкусно покушать, если выживешь.";
+        public override string[] Routes { get; } = { "glade" };
 
-        public Glade(IMapper _mapper, 
+        public PizzaLand(IMapper _mapper,
                      IHubContext<PlaceHub> hubContext,
                      IServiceFactory<UserStorage> _userStorageFactory) : base(hubContext)
         {
@@ -31,9 +30,7 @@ namespace Server.Hubs.Locations.BattlePlaces
 
         public override void AddMonster()
         {
-            Monster monster;
-            if (new Random().Next(0, 100) <= 15) monster = new PizzaPiece(userStorageFactory, this);
-            else monster = new Goblin(userStorageFactory, this);
+            Monster monster = new PizzaPiece(userStorageFactory, this);
 
             if (Monsters.Count == 0)
             {

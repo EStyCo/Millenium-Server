@@ -18,7 +18,7 @@ namespace Server.Hubs.Locations.BattlePlaces
 
         public override string ImagePath { get; } = "darkwood.jpg";
         public override string Description { get; } = "поле для драки, ебаштесь";
-        public override string[] Routes { get; } = { "glade" };
+        public override string[] Routes { get; } = { "glade", "masturbation" };
 
         public DarkWood(IMapper _mapper,
                         IHubContext<PlaceHub> hubContext,
@@ -43,7 +43,7 @@ namespace Server.Hubs.Locations.BattlePlaces
             }
             Monsters.Add(monster);
 
-            UpdateMonsters();
+            UpdateListMonsters();
         }
     }
 }

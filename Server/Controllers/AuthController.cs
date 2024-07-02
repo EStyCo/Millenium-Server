@@ -43,21 +43,11 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult> AddUser(RegRequestDTO dto)
         {
             if (!await userRep.IsUniqueUser(dto))
-            {
                 return BadRequest(RespFactory.ReturnBadRequest());
-            }
-
-            var userResponse = await userRep.Registration(dto);
-
-            if (!userResponse)
-            {
+            if (!await userRep.Registration(dto))
                 return BadRequest(RespFactory.ReturnBadRequest());
-            }
 
-            //RegResponseDTO result = new(){ Name = dto.CharacterName, IsSuccess = userResponse };
-
-            return Ok(RespFactory
-                  .ReturnOk());
+            return Ok(RespFactory.ReturnOk());
         }
     }
 }

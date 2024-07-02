@@ -23,7 +23,9 @@ namespace Server.Models.Spells.Models
                 var resultHeal = user.TakeHealing((int)Math.Round(heal));
 
                 string log = $"{user.Name} подлечился на {resultHeal.Count}. [{resultHeal.CurrentHP}/{resultHeal.MaxHP}]";
-                SendBattleLog(log, user, target.First());
+
+                if(target.Length > 0) SendBattleLog(log, user, target.First());
+                else SendBattleLog(log, user);
             }
         }
     }

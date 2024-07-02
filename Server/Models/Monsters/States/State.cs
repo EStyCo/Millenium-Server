@@ -4,10 +4,13 @@ namespace Server.Models.Monsters.States
 {
     public abstract class State
     {
-        public virtual bool IsStoppingSpell { get; } = false;
+        public virtual bool IsStoppingState { get; } = false;
         public abstract string Name { get; }
         public abstract string Description { get; }
         public abstract string ImagePath { get; }
+        public abstract int CurrentTime { get; set; }
+        public abstract int MaxTime { get; set; }
+
         public Entity Entity { get; protected set; }
         public Entity User { get; protected set; }
         public CancellationTokenSource CTS { get; protected set; }
@@ -19,12 +22,13 @@ namespace Server.Models.Monsters.States
             CTS = _CTS;
         }
 
-        public abstract void Enter();
+        public abstract Task Enter();
         public abstract void Exit();
+        public abstract void Refresh();
 
         public StateDTO ToJson()
         {
-            return new(Name, Description, ImagePath);
+            return new(Name, Description, ImagePath, CurrentTime);
         }
     }
 }

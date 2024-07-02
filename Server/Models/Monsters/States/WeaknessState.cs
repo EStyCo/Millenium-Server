@@ -5,38 +5,49 @@
         public override string Name { get; } = string.Empty;
         public override string Description { get; } = string.Empty;
         public override string ImagePath { get; } = string.Empty;
+        public override int CurrentTime { get; set; } = 0;
+        public override int MaxTime { get; set; } = 15;
 
         public WeaknessState(Entity user, Entity entity, CancellationTokenSource _CTS) : base(user, entity, _CTS)
         {
             Name = "Слабость";
             Description = "Игрок ослаблен и не может сражаться.";
             ImagePath = "weakness.png";
-
-            Enter();
         }
 
-        public override async void Enter()
+        public override async Task Enter()
         {
+            Refresh();
             var user = Entity as ActiveUser;
             if (user == null) return;
 
-            _ = user?.AddBattleLog($"{Entity.Name} ослаблен и не может дальше сражаться");
+            _ = user.AddBattleLog($"{Entity.Name} ослаблен и не может дальше сражаться");
             user.CanAttack = false;
 
             await Task.Run(async () =>
             {
-                await Task.Delay(20000);
-                Entity.RemoveState<WeaknessState>();
+                while (CurrentTime > 0)
+                {
+                    await Task.Delay(1000);
+                    CurrentTime -= 1;
+                }
             }, CTS.Token);
 
             user.CanAttack = true;
-            _ = user?.AddBattleLog($"{Entity.Name} восстановил силы!");
+            Entity.RemoveState<WeaknessState>();
+            _ = user.AddBattleLog($"{Entity.Name} восстановил силы!");
             user.UpdateStates();
         }
 
         public override void Exit()
         {
-            //throw new NotImplementedException();
+            CurrentTime = 0;
+            CTS.Cancel();
+        }
+
+        public override void Refresh()
+        {
+            CurrentTime = MaxTime;
         }
     }
 }

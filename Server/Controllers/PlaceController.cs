@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Server.Hubs.DTO;
+using Server.Hubs.Locations.Interfaces;
 using Server.Models.DTO;
 using Server.Models.Interfaces;
+using Server.Models.Monsters.States;
 using Server.Models.Utilities;
 using Server.Repository;
 
@@ -25,7 +27,7 @@ namespace Server.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddMonster(PlaceDTO dto)
+        public IActionResult AddMonster(PlaceDTO dto)
         {
             areaStorage.GetBattlePlace(dto.Place)?.AddMonster();
 
@@ -57,9 +59,10 @@ namespace Server.Controllers
             var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.NameUser);
             var target = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.NameTarget);
 
-            if (user != null && user.CanAttack && target != null)
+            if (user != null && user.CanAttack && 
+                target != null && !target.States.Keys.OfType<WeaknessState>().Any())
             {
-                areaStorage.GetPlace(dto.Place)?.AttackUser(user, user, dto.Type);
+                (areaStorage.GetPlace(dto.Place) as IBattleUsers)?.AttackUser(user, target, dto.Type);
             }
 
             return Ok(RespFactory.ReturnOk());

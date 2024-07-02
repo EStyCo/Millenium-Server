@@ -3,16 +3,20 @@ using Server.Models.Monsters;
 using Server.Models;
 using Microsoft.AspNetCore.SignalR;
 using Server.Hubs.DTO;
+using Server.Hubs.Locations.Interfaces;
 
 namespace Server.Hubs.Locations.BasePlaces
 {
-    public abstract class BattlePlace : BasePlace
+    public abstract class BattlePlace : BasePlace, IPlaceInfo
     {
+        public abstract List<Monster> Monsters { get; protected set; }
         public abstract string ImagePath { get; }
         public abstract string Description { get; }
-        public abstract List<Monster> Monsters { get; protected set; }
-        public abstract void AddMonster();
+        public virtual bool CanAttackUser { get; } = false;
         public abstract string[] Routes { get; }
+
+        public abstract void AddMonster();
+
 
         protected BattlePlace(IHubContext<PlaceHub> hubContext) : base(hubContext)
         {
@@ -24,23 +28,22 @@ namespace Server.Hubs.Locations.BasePlaces
             var monster = Monsters.FirstOrDefault(x => x == _monster);
             if (monster != null) Monsters.Remove(monster);
 
-            UpdateMonsters();
+            UpdateListMonsters();
         }
 
-        public override async Task EnterPlace(ActiveUser user, string connectionId)
+        public override void EnterPlace(ActiveUser user, string connectionId)
         {
-            await base.EnterPlace(user, connectionId);
-            //UpdateDescription();
-            UpdateMonsters();
+            base.EnterPlace(user, connectionId);
+            UpdateListMonsters();
         }
 
-        public override async Task LeavePlace(string connectionId)
+        public override void LeavePlace(string connectionId)
         {
-            await base.LeavePlace(connectionId);
-            UpdateMonsters();
+            base.LeavePlace(connectionId);
+            UpdateListMonsters();
         }
 
-        public async void UpdateMonsters()
+        public async void UpdateListMonsters()
         {
             if (HubContext.Clients != null)
             {
@@ -68,7 +71,7 @@ namespace Server.Hubs.Locations.BasePlaces
                     ResetTargetUser(user);
                 }
 
-                UpdateMonsters();
+                UpdateListMonsters();
             }
 
             return addingExp;
@@ -77,14 +80,9 @@ namespace Server.Hubs.Locations.BasePlaces
         private async Task RefreshMonsters()
         {
             await Task.Delay(2000);
-
             while (true)
             {
-                if (Monsters.Count < 6)
-                {
-                    AddMonster();
-                }
-
+                if (Monsters.Count < 6) AddMonster();
                 await Task.Delay(new Random().Next(10, 26) * 1000);
             }
         }
@@ -102,11 +100,8 @@ namespace Server.Hubs.Locations.BasePlaces
         public void WeakeningPlayer(string name)
         {
             foreach (var item in Monsters)
-            {
                 if (item.Target == name) item.SetTarget(string.Empty);
-            }
-
-            UpdateMonsters();
+            UpdateListMonsters();
         }
     }
 }

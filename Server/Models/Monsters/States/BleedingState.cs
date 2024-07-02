@@ -6,45 +6,47 @@ namespace Server.Models.Monsters.States
         public override string Name { get; } = string.Empty;
         public override string Description { get; } = string.Empty;
         public override string ImagePath { get; } = string.Empty;
+        public override int CurrentTime { get; set; } = 0;
+        public override int MaxTime { get; set; } = 10;
 
         public BleedingState(Entity user, Entity entity, CancellationTokenSource _CTS) : base(user, entity, _CTS)
         {
             Name = "Кровотечение";
             Description = "Наносит постепенный урон";
             ImagePath = "bleeding.png";
-
-            Enter();
         }
 
-        public override async void Enter()
+        public override async Task Enter()
         {
+            Refresh();
             var user = User as ActiveUser;
-
-            _ = user?.AddBattleLog($"{user.Name} наложил кровотечение на {Entity.Name}.");
-            _ = Task.Delay(30000, CTS.Token).ContinueWith(_ =>
-            {
-                Entity.RemoveState<BleedingState>();
-            });
-
             int damage = (int)(Entity.Vitality.MaxHP / 100.0 * 7);
 
             await Task.Run(async () =>
             {
-                while (Entity.Vitality.CurrentHP > 0)
+                while (CurrentTime > 0)
                 {
                     await Task.Delay(3000);
+                    CurrentTime -= 3;
                     Entity.TakeDamage(damage);
                     _ = user?.AddBattleLog($"Противнику {Entity.Name} нанесено {damage} кровотечением.");
                 }
-                Entity.RemoveState<BleedingState>();
             }, CTS.Token);
 
-            _ = user?.AddBattleLog($"У {Entity.Name} закончилось кровотечение");
+            user?.AddBattleLog($"У {Entity.Name} закончилось кровотечение");
+            Entity.RemoveState<BleedingState>();
+            Entity.UpdateStates();
         }
 
         public override void Exit()
         {
-            //throw new NotImplementedException();
+            CurrentTime = 0;
+            CTS.Cancel();
+        }
+
+        public override void Refresh()
+        {
+            CurrentTime = MaxTime;
         }
     }
 }

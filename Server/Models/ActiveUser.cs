@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Server.Hubs.DTO;
+using Server.Hubs.Locations.BasePlaces;
 using Server.Models.EntityFramework;
 using Server.Models.Handlers;
 using Server.Models.Interfaces;
@@ -22,6 +23,7 @@ namespace Server.Models
         public override bool CanAttack { get; set; } = true;
         public override StatsHandler Stats { get; protected set; }
         public override VitalityHandler Vitality { get; protected set; }
+        public BasePlace? CurrentPlace { get; set; }
         public List<Spell> ActiveSkills { get; set; } = new();
         public List<string> BattleLogs { get; set; } = new();
         public override Dictionary<State, CancellationTokenSource> States { get; protected set; } = new();
@@ -36,6 +38,7 @@ namespace Server.Models
             Name = character.Name;
             Place = character.Place;
             Stats = new UserStatsHandler(stats);
+            CurrentPlace = areaStorage.GetPlace(Place) as BasePlace;
             Vitality = new UserVitalityHandler(_hubContext, (UserStatsHandler)Stats, ConnectionId);
         }
 
@@ -152,7 +155,7 @@ namespace Server.Models
             return new(healing, Vitality.CurrentHP, Vitality.MaxHP);
         }
 
-        public async void UpdateStates()
+        public override async void UpdateStates()
         {
             if (ConnectionId != string.Empty)
             {

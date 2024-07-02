@@ -1,16 +1,10 @@
 ﻿namespace Server.Models.DTO
 {
-    public class StateDTO
+    public class StateDTO (string name, string description, string imagePath, int time)
     {
-        public string Name { get; }
-        public string Description { get; }
-        public string ImagePath { get; }
-
-        public StateDTO(string name, string description, string imagePath)
-        {
-            Name = name;
-            Description = description;
-            ImagePath = imagePath;
-        }
+        public string Name { get; } = name;
+        public string Description { get; } = description;
+        public string ImagePath { get; } = imagePath;
+        public int Time { get; } = time;
     }
 }

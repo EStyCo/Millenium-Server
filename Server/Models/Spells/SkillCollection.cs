@@ -70,6 +70,8 @@ namespace Server.Models.Skills
                     return new Bleeding();
                 case SpellType.Treatment:
                     return new Treatment();
+                case SpellType.UnFreezing:
+                    return new UnFreezing();
                 default:
                     return null;
             }
@@ -86,6 +88,7 @@ namespace Server.Models.Skills
                 SpellType.Rest,
                 SpellType.Bleeding, 
                 SpellType.Treatment,
+                SpellType.UnFreezing,
             };
         }
     }

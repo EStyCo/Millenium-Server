@@ -11,7 +11,6 @@ namespace Server.Models.Monsters
     {
         protected readonly IServiceFactory<UserStorage> userStorageFactory;
         public abstract int Id { get; set; }
-        //public override VitalityHandler Vitality { get; protected set; }
         public int Exp { get; set; } = 0;
         public string ImagePath { get; set; } = string.Empty;
         public abstract string Target { get; protected set; }
@@ -41,12 +40,6 @@ namespace Server.Models.Monsters
             };
         }
 
-        public override void RemoveState<T>() where T : class
-        {
-            base.RemoveState<T>();
-            PlaceInstance?.UpdateMonsters();
-        }
-
         public override ResultUseSpell TakeHealing(int healing)
         {
             Vitality.TakeHealing(healing);
@@ -62,16 +55,16 @@ namespace Server.Models.Monsters
                 PlaceInstance.RemoveMonster(this);
             }
 
-            PlaceInstance.UpdateMonsters();
+            PlaceInstance.UpdateListMonsters();
             return new(damage, Vitality.CurrentHP, Vitality.MaxHP);
         }
 
         public override void UseSpell(SpellType type, params Entity[] target)
         {
             var skill = new SkillCollection().PickSkill(type);
-            var user = target.First() as ActiveUser;
+            //var user = target.First();
 
-            if (skill != null && user != null && CanAttack)
+            if (skill != null && CanAttack)
             {
                 skill.Use(this, target);
 
@@ -92,6 +85,11 @@ namespace Server.Models.Monsters
             {
                 _ = user.AddBattleLog($"{user.Name} скрылся от {Name}.");
             }
+        }
+
+        public override void UpdateStates()
+        {
+            PlaceInstance?.UpdateListMonsters();
         }
     }
 }

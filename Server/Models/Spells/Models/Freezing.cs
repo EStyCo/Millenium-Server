@@ -9,7 +9,7 @@ namespace Server.Models.Spells.Models
         {
             SpellType = SpellType.Freezing;
             Name = "Заморозка";
-            CoolDown = 25;
+            CoolDown = 35;
             Description = "Замораживает противника на некоторое время";
             ImagePath = "freezing.png";
         }

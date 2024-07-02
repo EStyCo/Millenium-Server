@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Server.Hubs.Locations.BasePlaces;
 using Server.Models.Utilities;
 
 namespace Server.Models.Handlers
@@ -7,6 +8,10 @@ namespace Server.Models.Handlers
     {
         private readonly IHubContext<UserStorage> hubContext;
         private readonly UserStatsHandler stats;
+        /*public delegate void VitalityDelegate();
+        public VitalityDelegate OnVitalityChanged;*/
+
+        public event Action OnVitalityChanged;
         public string ConnectionId { get; set; }
 
         private int maxHP;
@@ -20,12 +25,13 @@ namespace Server.Models.Handlers
         public int RegenRateHP { get { return regenRateHP = Consider.RegenRateHP(this, stats); } }
         public int RegenRateMP { get { return regenRateMP = Consider.RegenRateMP(stats); } }
 
-        public UserVitalityHandler(IHubContext<UserStorage> _hubContext, UserStatsHandler _stats, string connectionId)
+        public UserVitalityHandler(IHubContext<UserStorage> _hubContext, 
+                                   UserStatsHandler _stats,
+                                   string connectionId)
         {
             hubContext = _hubContext;
             stats = _stats;
             ConnectionId = connectionId;
-
             _ = StartVitalityConnection();
         }
 
@@ -37,6 +43,8 @@ namespace Server.Models.Handlers
                 _ = SendMP();
 
                 await Task.Delay(500);
+
+                OnVitalityChanged?.Invoke();
             }
         }
 
@@ -53,6 +61,7 @@ namespace Server.Models.Handlers
             {
                 await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateHP", sendHP);
             }
+            
         }
 
         private async Task SendMP()
