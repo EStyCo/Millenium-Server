@@ -1,7 +1,7 @@
 ﻿using Server.Hubs.Locations.BasePlaces;
 using Server.Models.Handlers;
-using Server.Models.Monsters.States;
 using Server.Models.Spells;
+using Server.Models.Spells.States;
 using Server.Models.Utilities;
 
 namespace Server.Models

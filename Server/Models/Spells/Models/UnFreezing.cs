@@ -1,4 +1,4 @@
-﻿using Server.Models.Monsters.States;
+﻿using Server.Models.Spells.States;
 using Server.Models.Utilities;
 
 namespace Server.Models.Spells.Models
@@ -22,6 +22,7 @@ namespace Server.Models.Spells.Models
                 //var resultDamage = target.TakeDamage(10);
                 target.RemoveState<FreezeState>();
 
+                _ = StartRest();
                 string log = $"{user.Name} Разморозил {target.Name}";
                 SendBattleLog(log, user, target);
             }

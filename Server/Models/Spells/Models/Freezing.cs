@@ -1,4 +1,4 @@
-﻿using Server.Models.Monsters.States;
+﻿using Server.Models.Spells.States;
 using Server.Models.Utilities;
 
 namespace Server.Models.Spells.Models
@@ -23,6 +23,8 @@ namespace Server.Models.Spells.Models
                 target.AddState<FreezeState>(user);
 
                 string log = $"{user.Name} наслал снежную метель на {target.Name} и нанёс {resultDamage.Count}. [{resultDamage.CurrentHP}/{resultDamage.MaxHP}]\n{target.Name} Заморожен!";
+
+                _ = StartRest();
                 SendBattleLog(log, user, target);
             }
         }

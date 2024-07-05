@@ -1,4 +1,4 @@
-﻿using Server.Models.Monsters.States;
+﻿using Server.Models.Spells.States;
 using Server.Models.Utilities;
 
 namespace Server.Models.Spells.Models
@@ -32,6 +32,7 @@ namespace Server.Models.Spells.Models
             var resultDamage = target.TakeDamage((int)damage);
             string log = $"{user.Name} подрезал {target.Name} и нанёс {resultDamage.Count}. [{resultDamage.CurrentHP}/{resultDamage.MaxHP}]";
 
+            _ = StartRest();
             SendBattleLog(log, user, target);
         }
     }

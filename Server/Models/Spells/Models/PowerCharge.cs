@@ -31,6 +31,7 @@ namespace Server.Models.Spells.Models
 
                 string log = $"{user.Name} сильно врезал {target.Name} и нанёс {resultDamage.Count}. [{resultDamage.CurrentHP}/{resultDamage.MaxHP}]";
 
+                _ = StartRest();
                 SendBattleLog(log, user, target);
             }
         }
@@ -38,7 +39,6 @@ namespace Server.Models.Spells.Models
         private double AdditionalMultiplier()
         {
             if (new Random().Next(100) < CRIT_CHANCE) return CRIT_MULTIPLIER;
-
             return 1;
         }
     }

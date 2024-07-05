@@ -15,10 +15,7 @@ namespace Server.Hubs.Locations.BasePlaces
         public string Description { get; } = "добро пожаловать в дрочильню";
         public string[] Routes { get; } = { "darkwood" };
 
-        public SpecialPlace(IHubContext<PlaceHub> hubContext) : base(hubContext)
-        {
-
-        }
+        public SpecialPlace(IHubContext<PlaceHub> hubContext) : base(hubContext) { }
 
         public async void AttackUser(ActiveUser user, ActiveUser target, SpellType type)
         {

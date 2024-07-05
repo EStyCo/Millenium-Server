@@ -26,6 +26,7 @@ namespace Server.Models.Spells.Models
 
                 string log = $"{user.Name} ударил {target.Name} и нанёс {resultDamage.Count}. [{resultDamage.CurrentHP}/{resultDamage.MaxHP}]";
 
+                _ = StartRest();
                 SendBattleLog(log, user, targets.First());
             }
         }

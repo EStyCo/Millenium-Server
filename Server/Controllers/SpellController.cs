@@ -21,12 +21,12 @@ namespace Server.Controllers
         [HttpPost("getListSpells")]
         public async Task<IActionResult> GetListSpells(NameRequestDTO dto)
         {
-            var list = storage.ActiveUsers
-                .Where(x => x.Name == dto.Name)
-                .Select(x => x.ActiveSkills)
-                .First();                
+            var user = storage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
+            if (user == null) return BadRequest(RespFactory.ReturnBadRequest());
 
-            return Ok(RespFactory.ReturnOk(new CustomList<Spell>(list)));
+            var response = new SpellListResponse(user.CanAttack, user.GlobalRestSeconds, user.ActiveSkills); 
+
+            return Ok(RespFactory.ReturnOk(response));
         }
 
         /*[HttpPost("getSpell")]

@@ -3,7 +3,7 @@ using Server.Hubs.DTO;
 using Server.Hubs.Locations.Interfaces;
 using Server.Models.DTO;
 using Server.Models.Interfaces;
-using Server.Models.Monsters.States;
+using Server.Models.Spells.States;
 using Server.Models.Utilities;
 using Server.Repository;
 

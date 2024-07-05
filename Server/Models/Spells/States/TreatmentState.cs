@@ -1,9 +1,7 @@
 ﻿
 using Server.Models.EntityFramework;
-using Server.Models.Monsters.States;
-using Server.Models;
 
-namespace Server.Models.Monsters.States
+namespace Server.Models.Spells.States
 {
     public class TreatmentState : State
     {

@@ -20,6 +20,7 @@ namespace Server.Models.Spells.Models
             {
                 user.ResetAllSpells();
 
+                _ = StartRest();
                 string log =  $"{user.Name} восстановил все способности!";
                 SendBattleLog(log, user);
             }

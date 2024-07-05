@@ -3,48 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\source\\repos\\CombatGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\hubs\\locations\\battleplaces\\pizzaland.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\hubs\\locations\\battleplaces\\pizzaland.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\controllers\\placecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\controllers\\placecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\hubs\\locations\\battleplaces\\glade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\hubs\\locations\\battleplaces\\glade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\activeuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\activeuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\hubs\\locations\\battleplaces\\darkwood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\hubs\\locations\\battleplaces\\darkwood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\spells\\states\\weaknessstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\spells\\states\\weaknessstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\monsters\\goblin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\monsters\\goblin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\monsters\\pizzapiece.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\monsters\\pizzapiece.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\monsters\\monster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\monsters\\monster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\monsters\\orc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\monsters\\orc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\hubs\\locations\\baseplaces\\battleplace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\hubs\\locations\\baseplaces\\battleplace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\handlers\\monstervitalityhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\handlers\\monstervitalityhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\handlers\\uservitalityhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\handlers\\uservitalityhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\handlers\\vitalityhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\handlers\\vitalityhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\spells\\spell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\spells\\spell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -71,133 +43,49 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PizzaLand.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BattlePlaces\\PizzaLand.cs",
-              "RelativeDocumentMoniker": "Server\\Hubs\\Locations\\BattlePlaces\\PizzaLand.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BattlePlaces\\PizzaLand.cs*",
-              "RelativeToolTip": "Server\\Hubs\\Locations\\BattlePlaces\\PizzaLand.cs*",
+              "Title": "PlaceController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\PlaceController.cs",
+              "RelativeDocumentMoniker": "Server\\Controllers\\PlaceController.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\PlaceController.cs",
+              "RelativeToolTip": "Server\\Controllers\\PlaceController.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T08:43:55.646Z",
+              "WhenOpened": "2024-07-05T13:04:31.019Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Glade.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BattlePlaces\\Glade.cs",
-              "RelativeDocumentMoniker": "Server\\Hubs\\Locations\\BattlePlaces\\Glade.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BattlePlaces\\Glade.cs*",
-              "RelativeToolTip": "Server\\Hubs\\Locations\\BattlePlaces\\Glade.cs*",
+              "Title": "ActiveUser.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\ActiveUser.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\ActiveUser.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\ActiveUser.cs",
+              "RelativeToolTip": "Server\\Models\\ActiveUser.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T08:42:54.591Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "PizzaPiece.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Monsters\\PizzaPiece.cs",
-              "RelativeDocumentMoniker": "Server\\Models\\Monsters\\PizzaPiece.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Monsters\\PizzaPiece.cs",
-              "RelativeToolTip": "Server\\Models\\Monsters\\PizzaPiece.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T08:38:30.363Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Orc.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Monsters\\Orc.cs",
-              "RelativeDocumentMoniker": "Server\\Models\\Monsters\\Orc.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Monsters\\Orc.cs",
-              "RelativeToolTip": "Server\\Models\\Monsters\\Orc.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T08:37:50.344Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DarkWood.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BattlePlaces\\DarkWood.cs",
-              "RelativeDocumentMoniker": "Server\\Hubs\\Locations\\BattlePlaces\\DarkWood.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BattlePlaces\\DarkWood.cs*",
-              "RelativeToolTip": "Server\\Hubs\\Locations\\BattlePlaces\\DarkWood.cs*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T08:31:12.69Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "BattlePlace.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BasePlaces\\BattlePlace.cs",
-              "RelativeDocumentMoniker": "Server\\Hubs\\Locations\\BasePlaces\\BattlePlace.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Hubs\\Locations\\BasePlaces\\BattlePlace.cs",
-              "RelativeToolTip": "Server\\Hubs\\Locations\\BasePlaces\\BattlePlace.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T08:32:30.07Z",
+              "WhenOpened": "2024-07-05T13:01:17.742Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Goblin.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Monsters\\Goblin.cs",
-              "RelativeDocumentMoniker": "Server\\Models\\Monsters\\Goblin.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Monsters\\Goblin.cs",
-              "RelativeToolTip": "Server\\Models\\Monsters\\Goblin.cs",
+              "Title": "Spell.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Spells\\Spell.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Spells\\Spell.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Spells\\Spell.cs",
+              "RelativeToolTip": "Server\\Models\\Spells\\Spell.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T08:30:10.083Z",
+              "WhenOpened": "2024-07-05T13:01:01.784Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Monster.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Monsters\\Monster.cs",
-              "RelativeDocumentMoniker": "Server\\Models\\Monsters\\Monster.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Monsters\\Monster.cs",
-              "RelativeToolTip": "Server\\Models\\Monsters\\Monster.cs",
+              "DocumentIndex": 2,
+              "Title": "WeaknessState.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Spells\\States\\WeaknessState.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Spells\\States\\WeaknessState.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Spells\\States\\WeaknessState.cs",
+              "RelativeToolTip": "Server\\Models\\Spells\\States\\WeaknessState.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T08:30:20.073Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "MonsterVitalityHandler.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Handlers\\MonsterVitalityHandler.cs",
-              "RelativeDocumentMoniker": "Server\\Models\\Handlers\\MonsterVitalityHandler.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Handlers\\MonsterVitalityHandler.cs",
-              "RelativeToolTip": "Server\\Models\\Handlers\\MonsterVitalityHandler.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T08:29:35.494Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "VitalityHandler.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Handlers\\VitalityHandler.cs",
-              "RelativeDocumentMoniker": "Server\\Models\\Handlers\\VitalityHandler.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Handlers\\VitalityHandler.cs",
-              "RelativeToolTip": "Server\\Models\\Handlers\\VitalityHandler.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T08:29:37.255Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "UserVitalityHandler.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Handlers\\UserVitalityHandler.cs",
-              "RelativeDocumentMoniker": "Server\\Models\\Handlers\\UserVitalityHandler.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Handlers\\UserVitalityHandler.cs",
-              "RelativeToolTip": "Server\\Models\\Handlers\\UserVitalityHandler.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T08:29:36.503Z",
+              "WhenOpened": "2024-07-05T13:00:00.121Z",
               "EditorCaption": ""
             }
           ]

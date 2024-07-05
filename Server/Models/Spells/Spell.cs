@@ -14,12 +14,27 @@ namespace Server.Models.Spells
 
         public abstract void Use(Entity user, params Entity[] targets);
 
-        protected void SendBattleLog(string log, params Entity[] targets) 
+        protected async Task StartRest()
+        {
+            IsReady = false;
+            RestSeconds = CoolDown;
+
+            while (RestSeconds > 0)
+            {
+                await Task.Delay(1000);
+                RestSeconds--;
+            }
+
+            RestSeconds = 0;
+            IsReady = true;
+        }
+
+        protected void SendBattleLog(string log, params Entity[] targets)
         {
             foreach (var item in targets)
-            { 
+            {
                 var target = item as ActiveUser;
-                if(target == null) continue;
+                if (target == null) continue;
 
                 _ = target.AddBattleLog(log);
             }

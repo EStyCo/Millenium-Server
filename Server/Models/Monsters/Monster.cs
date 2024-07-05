@@ -1,9 +1,9 @@
 ﻿using Server.Hubs.Locations.BasePlaces;
-using Server.Models.DTO;
 using Server.Models.Interfaces;
+using Server.Models.Utilities;
 using Server.Models.Skills;
 using Server.Models.Spells;
-using Server.Models.Utilities;
+using Server.Models.DTO;
 
 namespace Server.Models.Monsters
 {
@@ -59,7 +59,6 @@ namespace Server.Models.Monsters
             }
 
             UpdatingAction?.Invoke();
-            //PlaceInstance.UpdateListMonsters();
             return new(damage, Vitality.CurrentHP, Vitality.MaxHP);
         }
 

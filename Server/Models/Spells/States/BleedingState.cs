@@ -1,5 +1,4 @@
-﻿
-namespace Server.Models.Monsters.States
+﻿namespace Server.Models.Spells.States
 {
     public class BleedingState : State
     {

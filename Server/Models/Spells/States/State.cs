@@ -1,6 +1,6 @@
 ﻿using Server.Models.DTO;
 
-namespace Server.Models.Monsters.States
+namespace Server.Models.Spells.States
 {
     public abstract class State
     {

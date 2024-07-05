@@ -1,28 +1,25 @@
-﻿namespace Server.Models.Monsters.States
+﻿namespace Server.Models.Spells.States
 {
-    public class WeaknessState : State
+    public class FreezeState : State
     {
+        public override bool IsStoppingState { get; } = true;
         public override string Name { get; } = string.Empty;
         public override string Description { get; } = string.Empty;
         public override string ImagePath { get; } = string.Empty;
         public override int CurrentTime { get; set; } = 0;
         public override int MaxTime { get; set; } = 15;
 
-        public WeaknessState(Entity user, Entity entity, CancellationTokenSource _CTS) : base(user, entity, _CTS)
+        public FreezeState(Entity user, Entity entity, CancellationTokenSource _CTS) : base(user, entity, _CTS)
         {
-            Name = "Слабость";
-            Description = "Игрок ослаблен и не может сражаться.";
-            ImagePath = "weakness.png";
+            Name = "Заморозка";
+            Description = "Замороженная цель не может двигаться и атаковать.";
+            ImagePath = "freezing.png";
         }
 
         public override async Task Enter()
         {
             Refresh();
-            var user = Entity as ActiveUser;
-            if (user == null) return;
-
-            _ = user.AddBattleLog($"{Entity.Name} ослаблен и не может дальше сражаться");
-            user.CanAttack = false;
+            Entity.CanAttack = false;
 
             await Task.Run(async () =>
             {
@@ -33,10 +30,11 @@
                 }
             }, CTS.Token);
 
-            user.CanAttack = true;
-            Entity.RemoveState<WeaknessState>();
-            _ = user.AddBattleLog($"{Entity.Name} восстановил силы!");
-            user.UpdateStates();
+            Entity.CanAttack = true;
+            var user = User as ActiveUser;
+            user?.AddBattleLog($"{Entity.Name} разморозился!");
+            Entity.RemoveState<FreezeState>();
+            Entity.UpdateStates();
         }
 
         public override void Exit()

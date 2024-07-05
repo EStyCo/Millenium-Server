@@ -24,7 +24,8 @@ namespace Server.Models.Spells.Models
 
                 string log = $"{user.Name} подлечился на {resultHeal.Count}. [{resultHeal.CurrentHP}/{resultHeal.MaxHP}]";
 
-                if(target.Length > 0) SendBattleLog(log, user, target.First());
+                _ = StartRest();
+                if (target.Length > 0) SendBattleLog(log, user, target.First());
                 else SendBattleLog(log, user);
             }
         }

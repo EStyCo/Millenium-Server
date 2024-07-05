@@ -39,6 +39,7 @@ namespace WebApplication1.Controllers
             return Ok(RespFactory.ReturnOk(userResponse));
         }
 
+
         [HttpPost("reg")]
         public async Task<ActionResult> AddUser(RegRequestDTO dto)
         {
@@ -48,6 +49,25 @@ namespace WebApplication1.Controllers
                 return BadRequest(RespFactory.ReturnBadRequest());
 
             return Ok(RespFactory.ReturnOk());
+        }
+
+        [HttpGet("version")]
+        public IActionResult CheckVersion()
+        {
+            var dictionary = new Dictionary<string, string>
+            {
+                { "version", ActualVersion.Version }
+            };
+
+            return Ok(RespFactory.ReturnOk(dictionary));
+        }
+
+        [HttpPost("changeVersion")]
+        public IActionResult ChangeVersion(string version)
+        {
+            ActualVersion.Version = version;
+
+            return RedirectToAction(nameof(CheckVersion));
         }
     }
 }

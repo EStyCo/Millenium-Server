@@ -4,10 +4,10 @@ using Server.Hubs.Locations.BasePlaces;
 using Server.Models.EntityFramework;
 using Server.Models.Handlers;
 using Server.Models.Interfaces;
-using Server.Models.Monsters.States;
 using Server.Models.Skills;
 using Server.Models.Spells;
 using Server.Models.Spells.Models;
+using Server.Models.Spells.States;
 using Server.Models.Utilities;
 using System.Text;
 
@@ -21,6 +21,7 @@ namespace Server.Models
         public override string Name { get; protected set; } = string.Empty;
         public string Place { get; set; } = string.Empty;
         public override bool CanAttack { get; set; } = true;
+        public int GlobalRestSeconds { get; private set; } = 0;
         public override StatsHandler Stats { get; protected set; }
         public override VitalityHandler Vitality { get; protected set; }
         public BasePlace? CurrentPlace { get; set; }
@@ -55,49 +56,27 @@ namespace Server.Models
             {
                 skill.Use(this, target);
 
-                skill.IsReady = false;
-                skill.RestSeconds = skill.CoolDown;
-
                 if (skill is not Rest)
                 {
-                    StartGlobalRest();
+                    _ = StartGlobalRest();
                 }
-
-                _ = StartRestSkill(skill);
-
-                /*if (resultUse != null)
-                    await AddBattleLog(resultUse);*/
             }
         }
 
-        private async Task StartRestSkill(Spell skill)
+        private async Task StartGlobalRest()
         {
-            while (skill.RestSeconds > 0)
+            GlobalRestSeconds = 5;
+            CanAttack = false;
+
+            while (GlobalRestSeconds > 0)
             {
                 await Task.Delay(1000);
-                skill.RestSeconds -= 1;
+                GlobalRestSeconds--;
             }
-            skill.RestSeconds = 0;
-            skill.IsReady = true;
-        }
 
-        private void StartGlobalRest()
-        {
-            foreach (var skill in ActiveSkills)
-            {
-                if (skill.RestSeconds <= 5 && !skill.IsReady)
-                {
-                    skill.RestSeconds = 5;
-                    skill.IsReady = false;
-                    _ = StartRestSkill(skill);
-                }
-                else if (skill.IsReady)
-                {
-                    skill.RestSeconds = 5;
-                    skill.IsReady = false;
-                    _ = StartRestSkill(skill);
-                }
-            }
+            GlobalRestSeconds = 0;
+            var a = States.Keys.FirstOrDefault(x => x.GetType() == typeof(WeaknessState));
+            if (a == null) CanAttack = true;
         }
 
         public void ResetAllSpells()
