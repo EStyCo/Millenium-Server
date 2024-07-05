@@ -10,6 +10,7 @@ namespace Server.Models.Monsters
     public abstract class Monster : Entity
     {
         protected readonly IServiceFactory<UserStorage> userStorageFactory;
+        public Action UpdatingAction { get; }
         public abstract int Id { get; set; }
         public int Exp { get; set; } = 0;
         public string ImagePath { get; set; } = string.Empty;
@@ -19,9 +20,11 @@ namespace Server.Models.Monsters
         public abstract double MinTimeAttack {  get; set; }
         public abstract double MaxTimeAttack { get; set; }
 
-        public Monster(IServiceFactory<UserStorage> _userStorageFactory)
+        public Monster(IServiceFactory<UserStorage> _userStorageFactory, Action updatingAction)
         {
             userStorageFactory = _userStorageFactory;
+
+            UpdatingAction = updatingAction;
         }
 
         public abstract void SetTarget(string name);
@@ -55,7 +58,8 @@ namespace Server.Models.Monsters
                 PlaceInstance.RemoveMonster(this);
             }
 
-            PlaceInstance.UpdateListMonsters();
+            UpdatingAction?.Invoke();
+            //PlaceInstance.UpdateListMonsters();
             return new(damage, Vitality.CurrentHP, Vitality.MaxHP);
         }
 

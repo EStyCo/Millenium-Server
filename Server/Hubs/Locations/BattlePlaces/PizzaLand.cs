@@ -4,6 +4,7 @@ using Server.Hubs.Locations.BasePlaces;
 using Server.Models.Interfaces;
 using Server.Models.Monsters;
 using Server.Models;
+using System;
 
 namespace Server.Hubs.Locations.BattlePlaces
 {
@@ -30,7 +31,8 @@ namespace Server.Hubs.Locations.BattlePlaces
 
         public override void AddMonster()
         {
-            Monster monster = new PizzaPiece(userStorageFactory, this);
+            var action = UpdateListMonsters;
+            Monster monster = new PizzaPiece(userStorageFactory, this, action);
 
             if (Monsters.Count == 0)
             {

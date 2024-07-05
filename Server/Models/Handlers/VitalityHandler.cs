@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using Server.Models.Interfaces;
-using Server.Models.Utilities;
-
-namespace Server.Models.Handlers
+﻿namespace Server.Models.Handlers
 {
     public abstract class VitalityHandler 
     {

@@ -6,9 +6,7 @@
         public override string Name { get; } = string.Empty;
         public override string Description { get; } = string.Empty;
         public override string ImagePath { get; } = string.Empty;
-
         public override int CurrentTime { get; set; } = 0;
-
         public override int MaxTime { get; set; } = 15;
 
         public FreezeState(Entity user, Entity entity, CancellationTokenSource _CTS) : base(user, entity, _CTS)

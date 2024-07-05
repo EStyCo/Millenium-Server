@@ -31,9 +31,10 @@ namespace Server.Hubs.Locations.BattlePlaces
 
         public override void AddMonster()
         {
+            var action = UpdateListMonsters;
             Monster monster;
-            if (new Random().Next(0, 100) <= 15) monster = new PizzaPiece(userStorageFactory, this);
-            else monster = new Goblin(userStorageFactory, this);
+            if (new Random().Next(0, 100) <= 15) monster = new PizzaPiece(userStorageFactory, this, action);
+            else monster = new Goblin(userStorageFactory, this, action);
 
             if (Monsters.Count == 0)
             {

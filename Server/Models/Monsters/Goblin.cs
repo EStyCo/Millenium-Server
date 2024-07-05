@@ -20,8 +20,9 @@ namespace Server.Models.Monsters
         public override StatsHandler Stats { get; protected set; }
         public override VitalityHandler Vitality { get; protected set; }
 
-        public Goblin(IServiceFactory<UserStorage> _userStorageFactory, BattlePlace place)
-            : base(_userStorageFactory)
+        public Goblin(IServiceFactory<UserStorage> _userStorageFactory,
+                   BattlePlace place,
+                   Action updatingAction) : base(_userStorageFactory, updatingAction)
         {
             Exp = 25;
             Name = "Goblin " + GetRandomName();

@@ -22,8 +22,9 @@ namespace Server.Models.Monsters
 
         private const int CRIT_CHANCE = 20;
 
-        public Orc(IServiceFactory<UserStorage> _userStorageFactory, BattlePlace place)
-            : base(_userStorageFactory)
+        public Orc(IServiceFactory<UserStorage> _userStorageFactory, 
+                   BattlePlace place,
+                   Action updatingAction) : base(_userStorageFactory, updatingAction)
         {
             Exp = 65;
             Name = "Orc " + GetRandomName();

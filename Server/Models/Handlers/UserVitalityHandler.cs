@@ -8,9 +8,6 @@ namespace Server.Models.Handlers
     {
         private readonly IHubContext<UserStorage> hubContext;
         private readonly UserStatsHandler stats;
-        /*public delegate void VitalityDelegate();
-        public VitalityDelegate OnVitalityChanged;*/
-
         public event Action OnVitalityChanged;
         public string ConnectionId { get; set; }
 

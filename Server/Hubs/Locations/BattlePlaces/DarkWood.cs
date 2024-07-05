@@ -31,7 +31,8 @@ namespace Server.Hubs.Locations.BattlePlaces
 
         public override void AddMonster()
         {
-            var monster = new Orc(userStorageFactory, this);
+            var action = UpdateListMonsters;
+            var monster = new Orc(userStorageFactory, this, action);
             if (Monsters.Count == 0)
             {
                 monster.Id = 0;
