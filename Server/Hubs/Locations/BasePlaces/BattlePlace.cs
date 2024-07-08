@@ -1,9 +1,9 @@
-﻿using Server.Models.DTO;
-using Server.Models.Monsters;
+﻿using Server.Models.Monsters;
 using Server.Models;
 using Microsoft.AspNetCore.SignalR;
 using Server.Hubs.DTO;
 using Server.Hubs.Locations.Interfaces;
+using Server.Models.Monsters.DTO;
 
 namespace Server.Hubs.Locations.BasePlaces
 {

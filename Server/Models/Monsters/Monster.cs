@@ -3,7 +3,7 @@ using Server.Models.Interfaces;
 using Server.Models.Utilities;
 using Server.Models.Skills;
 using Server.Models.Spells;
-using Server.Models.DTO;
+using Server.Models.Monsters.DTO;
 
 namespace Server.Models.Monsters
 {
@@ -14,6 +14,7 @@ namespace Server.Models.Monsters
         public abstract int Id { get; set; }
         public int Exp { get; set; } = 0;
         public string ImagePath { get; set; } = string.Empty;
+        public abstract string Description { get; set; }
         public abstract string Target { get; protected set; }
         public abstract string PlaceName { get; protected set; }
         public abstract BattlePlace PlaceInstance { get; protected set; }
@@ -39,6 +40,23 @@ namespace Server.Models.Monsters
                 ImagePath = ImagePath,
                 Name = Name,
                 Target = Target,
+                States = States.Keys.Select(x => x.ToJson()).ToList()
+            };
+        }
+        public DetailsMonsterDTO DetailsToJson()
+        {
+            return new()
+            {
+                Name = Name,
+                Description = Description,
+                MaxHP = Vitality.MaxHP,
+                Exp = Exp,
+                ImagePath = ImagePath,
+                MinTimeAttack = (int)MinTimeAttack,
+                MaxTimeAttack = (int)MaxTimeAttack,
+                Strength = Stats.Strength,
+                Agility = Stats.Agility,
+                Intelligence = Stats.Intelligence,
                 States = States.Keys.Select(x => x.ToJson()).ToList()
             };
         }

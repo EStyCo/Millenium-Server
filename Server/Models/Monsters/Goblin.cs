@@ -1,5 +1,6 @@
 ﻿using Server.Hubs.Locations.BasePlaces;
-using Server.Models.Handlers;
+using Server.Models.Handlers.Stats;
+using Server.Models.Handlers.Vitality;
 using Server.Models.Interfaces;
 using Server.Models.Spells.States;
 using Server.Models.Utilities;
@@ -19,6 +20,7 @@ namespace Server.Models.Monsters
         public override double MaxTimeAttack { get; set; } = 5.0;
         public override StatsHandler Stats { get; protected set; }
         public override VitalityHandler Vitality { get; protected set; }
+        public override string Description { get ; set ; }
 
         public Goblin(IServiceFactory<UserStorage> _userStorageFactory,
                    BattlePlace place,
@@ -27,6 +29,7 @@ namespace Server.Models.Monsters
             Exp = 25;
             Name = "Goblin " + GetRandomName();
             ImagePath = "goblin.png";
+            Description = "Мелкое чмо.";
             PlaceInstance = place;
             PlaceName = place.NamePlace;
 

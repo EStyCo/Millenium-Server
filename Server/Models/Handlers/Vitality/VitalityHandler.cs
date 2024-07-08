@@ -1,6 +1,6 @@
-﻿namespace Server.Models.Handlers
+﻿namespace Server.Models.Handlers.Vitality
 {
-    public abstract class VitalityHandler 
+    public abstract class VitalityHandler
     {
         public abstract int CurrentHP { get; protected set; }
         public abstract int MaxHP { get; set; }

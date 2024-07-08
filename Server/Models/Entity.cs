@@ -1,5 +1,6 @@
 ﻿using Server.Hubs.Locations.BasePlaces;
-using Server.Models.Handlers;
+using Server.Models.Handlers.Stats;
+using Server.Models.Handlers.Vitality;
 using Server.Models.Spells;
 using Server.Models.Spells.States;
 using Server.Models.Utilities;

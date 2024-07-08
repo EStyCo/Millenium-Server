@@ -1,4 +1,4 @@
-﻿namespace Server.Models.Handlers
+﻿namespace Server.Models.Handlers.Stats
 {
     public abstract class StatsHandler
     {

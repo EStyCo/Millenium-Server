@@ -2,7 +2,8 @@
 using Server.Hubs.DTO;
 using Server.Hubs.Locations.BasePlaces;
 using Server.Models.EntityFramework;
-using Server.Models.Handlers;
+using Server.Models.Handlers.Stats;
+using Server.Models.Handlers.Vitality;
 using Server.Models.Interfaces;
 using Server.Models.Skills;
 using Server.Models.Spells;

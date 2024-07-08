@@ -2,7 +2,7 @@
 using Server.Models.Utilities;
 using Server.Models;
 using Server.Hubs.Locations.Interfaces;
-using Server.Models.Handlers;
+using Server.Models.Handlers.Vitality;
 
 namespace Server.Hubs.Locations.BasePlaces
 {

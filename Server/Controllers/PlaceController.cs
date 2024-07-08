@@ -3,6 +3,7 @@ using Server.Hubs.DTO;
 using Server.Hubs.Locations.Interfaces;
 using Server.Models.DTO;
 using Server.Models.Interfaces;
+using Server.Models.Monsters.DTO;
 using Server.Models.Spells.States;
 using Server.Models.Utilities;
 using Server.Repository;
@@ -18,8 +19,8 @@ namespace Server.Controllers
         private readonly UserRepository userRepository;
 
         public PlaceController(UserStorage _userStorage,
-                                 IAreaStorage _areaStorage,
-                                 UserRepository _userRepository)
+                               IAreaStorage _areaStorage,
+                               UserRepository _userRepository)
         {
             userStorage = _userStorage;
             areaStorage = _areaStorage;
@@ -68,10 +69,19 @@ namespace Server.Controllers
             return Ok(RespFactory.ReturnOk());
         }
 
-        [HttpPost("getMonsters")]
-        public async Task<IActionResult> GetMonsters(PlaceDTO dto)
+        [HttpPost("getDetailsMonster")]
+        public IActionResult GetDetailsMonster(DetailsMonsterRequest dto)
         {
-            var monsters = areaStorage.GetBattlePlace(dto.Place).Monsters ?? new();
+            var details = areaStorage.GetBattlePlace(dto.Place)?.Monsters.FirstOrDefault(x => x.Id == dto.Id)?.DetailsToJson();
+            if (details == null) return BadRequest(RespFactory.ReturnBadRequest());
+
+            return Ok(RespFactory.ReturnOk(details));
+        }
+
+        [HttpPost("getMonsters")]
+        public IActionResult GetMonsters(PlaceDTO dto)
+        {
+            var monsters = areaStorage.GetBattlePlace(dto.Place)?.Monsters.Select(x =>x.ToJson()).ToList() ?? new();
 
             return Ok(RespFactory.ReturnOk(monsters));
         }

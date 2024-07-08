@@ -1,6 +1,7 @@
 ﻿using Server.Models.DTO;
 using Server.Models.EntityFramework;
-using Server.Models.Handlers;
+using Server.Models.Handlers.Stats;
+using Server.Models.Handlers.Vitality;
 
 namespace Server.Models.Utilities
 {

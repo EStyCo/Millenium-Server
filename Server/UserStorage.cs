@@ -3,7 +3,7 @@ using Server.Hubs.Locations;
 using Server.Models;
 using Server.Models.DTO;
 using Server.Models.EntityFramework;
-using Server.Models.Handlers;
+using Server.Models.Handlers.Stats;
 using Server.Models.Interfaces;
 
 namespace Server

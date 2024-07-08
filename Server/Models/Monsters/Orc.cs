@@ -1,5 +1,6 @@
 ﻿using Server.Hubs.Locations.BasePlaces;
-using Server.Models.Handlers;
+using Server.Models.Handlers.Stats;
+using Server.Models.Handlers.Vitality;
 using Server.Models.Interfaces;
 using Server.Models.Spells.States;
 using Server.Models.Utilities;
@@ -19,6 +20,7 @@ namespace Server.Models.Monsters
         public override double MaxTimeAttack { get; set; } = 7.0;
         public override StatsHandler Stats { get; protected set; }
         public override VitalityHandler Vitality { get; protected set; }
+        public override string Description { get; set; }
 
         private const int CRIT_CHANCE = 20;
 
@@ -30,6 +32,7 @@ namespace Server.Models.Monsters
             Name = "Orc " + GetRandomName();
             ImagePath = "orc.png";
             PlaceInstance = place;
+            Description = "Здоровый бугай, иногда может наподдать по башне.";
             PlaceName = place.NamePlace;
 
             Stats = new MonsterStatsHandler(18, 15, 3);

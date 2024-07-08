@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Server.Hubs.Locations.BasePlaces;
+using Server.Models.Handlers.Stats;
 using Server.Models.Utilities;
 
-namespace Server.Models.Handlers
+namespace Server.Models.Handlers.Vitality
 {
     public class UserVitalityHandler : VitalityHandler
     {
@@ -22,7 +23,7 @@ namespace Server.Models.Handlers
         public int RegenRateHP { get { return regenRateHP = Consider.RegenRateHP(this, stats); } }
         public int RegenRateMP { get { return regenRateMP = Consider.RegenRateMP(stats); } }
 
-        public UserVitalityHandler(IHubContext<UserStorage> _hubContext, 
+        public UserVitalityHandler(IHubContext<UserStorage> _hubContext,
                                    UserStatsHandler _stats,
                                    string connectionId)
         {
@@ -58,7 +59,7 @@ namespace Server.Models.Handlers
             {
                 await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateHP", sendHP);
             }
-            
+
         }
 
         private async Task SendMP()

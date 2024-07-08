@@ -1,5 +1,6 @@
 ﻿using Server.Hubs.Locations.BasePlaces;
-using Server.Models.Handlers;
+using Server.Models.Handlers.Stats;
+using Server.Models.Handlers.Vitality;
 using Server.Models.Interfaces;
 using Server.Models.Spells.States;
 using Server.Models.Utilities;
@@ -19,6 +20,7 @@ namespace Server.Models.Monsters
         public override double MaxTimeAttack { get; set; } = 7.0;
         public override StatsHandler Stats { get; protected set; }
         public override VitalityHandler Vitality { get; protected set; }
+        public override string Description { get; set; }
 
         public PizzaPiece(IServiceFactory<UserStorage> _userStorageFactory,
                    BattlePlace place,
@@ -27,6 +29,7 @@ namespace Server.Models.Monsters
             Exp = 25;
             Name = "Кусочек Пиццы";
             ImagePath = "pizza_piece.png";
+            Description = "Хочеца кушац!?";
             PlaceInstance = place;
             PlaceName = place.NamePlace;
 

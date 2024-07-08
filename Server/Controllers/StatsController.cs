@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models.DTO;
-using Server.Models.Handlers;
+using Server.Models.Handlers.Stats;
 using Server.Models.Utilities;
 using Server.Repository;
 

@@ -1,4 +1,6 @@
-﻿namespace Server.Models.DTO
+﻿using Server.Models.DTO;
+
+namespace Server.Models.Monsters.DTO
 {
     public class MonsterDTO
     {
@@ -8,6 +10,6 @@
         public string Name { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
         public string Target { get; set; } = string.Empty;
-        public List<StateDTO> States { get; set; } = new(); 
+        public List<StateDTO> States { get; set; } = new();
     }
 }
