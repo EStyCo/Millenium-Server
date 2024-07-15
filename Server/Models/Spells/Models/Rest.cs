@@ -10,7 +10,7 @@ namespace Server.Models.Spells.Models
             Name = "Вдохновение";
             CoolDown = 90;
             Description = "Сокращает время восстановления ваших способностей";
-            ImagePath = "rest.png";
+            ImagePath = "spells/rest.png";
         }
 
         public override void Use(Entity _user, params Entity[] target)

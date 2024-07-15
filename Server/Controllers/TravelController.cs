@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Server.Models.DTO;
+using Server.Models.DTO.User;
 using Server.Models.Utilities;
 using Server.Repository;
 

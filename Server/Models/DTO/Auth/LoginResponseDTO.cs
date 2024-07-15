@@ -1,4 +1,6 @@
-﻿namespace Server.Models.DTO.Auth
+﻿using Server.Models.DTO.User;
+
+namespace Server.Models.DTO.Auth
 {
     public class LoginResponseDTO
     {

@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Server;
-using Server.Models;
-using Server.Models.DTO.Auth;
 using Server.Models.Utilities;
-using Server.Repository;
-using System.Net;
+using Server.Models.DTO.Auth;
+using Server.Services;
 
 namespace WebApplication1.Controllers
 {
@@ -12,53 +9,40 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly UserRepository userRep;
-        private readonly UserStorage userStorage;
+        private readonly AuthService authService;
 
-        public AuthController(UserRepository _userRep, UserStorage _userStorage)
+        public AuthController(AuthService _authService)
         {
-            userRep = _userRep;
-            userStorage = _userStorage;
+            authService = _authService;
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> LoginUser(LoginRequestDTO dto)
         {
-            var userResponse = await userRep.LoginUser(dto.Email, dto.Password);
-            if (userResponse == null) return BadRequest(RespFactory.ReturnBadRequest());
-
-            var character = await userRep.GetCharacter(userResponse.Character.Name);
-            var stats = await userRep.GetStats(userResponse.Character.Name);
-
-            if (character != null && stats != null)
+            var response = await authService.LoginUser(dto);
+            if (response == null) 
             {
-                userStorage.AddActiveUser(stats, character);
+                return BadRequest(RespFactory.ReturnBadRequest());
             }
-
-            Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] {userResponse.Character.Name} Авторизован.");
-            return Ok(RespFactory.ReturnOk(userResponse));
+            return Ok(RespFactory.ReturnOk(response));
         }
 
 
         [HttpPost("reg")]
-        public async Task<ActionResult> AddUser(RegRequestDTO dto)
+        public async Task<ActionResult> RegistrationNewUser(RegRequestDTO dto)
         {
-            if (!await userRep.IsUniqueUser(dto))
+            if(!await authService.RegistrationNewUser(dto))
+            {
                 return BadRequest(RespFactory.ReturnBadRequest());
-            if (!await userRep.Registration(dto))
-                return BadRequest(RespFactory.ReturnBadRequest());
-
+            }
             return Ok(RespFactory.ReturnOk());
         }
 
         [HttpGet("version")]
         public IActionResult CheckVersion()
         {
-            var dictionary = new Dictionary<string, string>
-            {
-                { "version", ActualVersion.Version }
-            };
-
+            Dictionary<string, string> dictionary = new()
+            { { "version", ActualVersion.Version } };
             return Ok(RespFactory.ReturnOk(dictionary));
         }
 
@@ -66,7 +50,6 @@ namespace WebApplication1.Controllers
         public IActionResult ChangeVersion(string version)
         {
             ActualVersion.Version = version;
-
             return RedirectToAction(nameof(CheckVersion));
         }
     }

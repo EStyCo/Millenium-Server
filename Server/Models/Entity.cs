@@ -1,6 +1,5 @@
-﻿using Server.Hubs.Locations.BasePlaces;
+﻿using Server.Models.Handlers.Vitality;
 using Server.Models.Handlers.Stats;
-using Server.Models.Handlers.Vitality;
 using Server.Models.Spells;
 using Server.Models.Spells.States;
 using Server.Models.Utilities;
@@ -21,7 +20,7 @@ namespace Server.Models
 
         private CancellationTokenSource? UpdateStateToken { get; set; }
 
-        public async void AddState<T>(Entity user) where T : State
+        public void AddState<T>(Entity user) where T : State
         {
             var cts = new CancellationTokenSource();
             var instance = Activator.CreateInstance(typeof(T), user, this, cts) as State;

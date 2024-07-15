@@ -1,4 +1,4 @@
-﻿using Server.Models.DTO;
+﻿using Server.Models.DTO.User;
 
 namespace Server.Models.Spells.States
 {

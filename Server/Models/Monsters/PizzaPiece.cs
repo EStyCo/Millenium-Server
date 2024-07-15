@@ -28,7 +28,7 @@ namespace Server.Models.Monsters
         {
             Exp = 25;
             Name = "Кусочек Пиццы";
-            ImagePath = "pizza_piece.png";
+            ImagePath = "monsters/pizza_piece.png";
             Description = "Хочеца кушац!?";
             PlaceInstance = place;
             PlaceName = place.NamePlace;

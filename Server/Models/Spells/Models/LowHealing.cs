@@ -10,7 +10,7 @@ namespace Server.Models.Spells.Models
             Name = "Подорожник";
             CoolDown = 20;
             Description = "Не много лечит раны.";
-            ImagePath = "low_healing.png";
+            ImagePath = "spells/low_healing.png";
         }
 
         public override void Use(Entity user, params Entity[] target)

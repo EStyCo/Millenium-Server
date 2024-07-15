@@ -12,7 +12,7 @@
         {
             Name = "Слабость";
             Description = "Игрок ослаблен и не может сражаться.";
-            ImagePath = "weakness.png";
+            ImagePath = "spells/weakness.png";
         }
 
         public override async Task Enter()

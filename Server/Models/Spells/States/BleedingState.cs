@@ -12,7 +12,7 @@
         {
             Name = "Кровотечение";
             Description = "Наносит постепенный урон";
-            ImagePath = "bleeding.png";
+            ImagePath = "spells/bleeding.png";
         }
 
         public override async Task Enter()

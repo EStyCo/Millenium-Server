@@ -1,23 +1,24 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using Server.Hubs.DTO;
-using Server.Hubs.Locations.BasePlaces;
-using Server.Models.EntityFramework;
-using Server.Models.Handlers.Stats;
+﻿using Server.Hubs.Locations.BasePlaces;
 using Server.Models.Handlers.Vitality;
-using Server.Models.Interfaces;
-using Server.Models.Skills;
-using Server.Models.Spells;
+using Microsoft.AspNetCore.SignalR;
+using Server.Models.Handlers.Stats;
 using Server.Models.Spells.Models;
 using Server.Models.Spells.States;
 using Server.Models.Utilities;
+using Server.Models.Spells;
+using Server.Hubs.DTO;
 using System.Text;
+using I = Server.Models.Inventory;
+using Server.Models.Inventory;
+using Server.EntityFramework.Models;
+using Server.Services;
 
 namespace Server.Models
 {
     public class ActiveUser : Entity
     {
         private readonly IHubContext<UserStorage> hubContext;
-        private readonly IAreaStorage areaStorage;
+        private readonly PlaceService placeService;
         public string ConnectionId { get; set; } = string.Empty;
         public override string Name { get; protected set; } = string.Empty;
         public string Place { get; set; } = string.Empty;
@@ -29,29 +30,28 @@ namespace Server.Models
         public List<Spell> ActiveSkills { get; set; } = new();
         public List<string> BattleLogs { get; set; } = new();
         public override Dictionary<State, CancellationTokenSource> States { get; protected set; } = new();
+        public I.Inventory Inventory { get; set; }
 
         public ActiveUser(IHubContext<UserStorage> _hubContext,
-                          IAreaStorage _areaStorage,
+                          PlaceService _placeService,
                           Stats stats,
-                          Character character)
+                          Character character,
+                          List<Item> items)
+
         {
             hubContext = _hubContext;
-            areaStorage = _areaStorage;
+            placeService = _placeService;
             Name = character.Name;
             Place = character.Place;
             Stats = new UserStatsHandler(stats);
-            CurrentPlace = areaStorage.GetPlace(Place) as BasePlace;
             Vitality = new UserVitalityHandler(_hubContext, (UserStatsHandler)Stats, ConnectionId);
-        }
-
-        public void CreateSpellList(Character character)
-        {
-            ActiveSkills = new SkillCollection().CreateSkillList(new() { character.Spell1, character.Spell2, character.Spell3, character.Spell4, character.Spell5 });
+            CurrentPlace = placeService.GetPlace(Place) as BasePlace;
+            Inventory = new(items);
         }
 
         public override void UseSpell(SpellType type, params Entity[] target)
         {
-            var skill = ActiveSkills.FirstOrDefault(x => x.GetType() == new SkillCollection().PickSkill(type).GetType());
+            var skill = ActiveSkills.FirstOrDefault(x => x.SpellType == type);
 
             if (skill != null && CanAttack)
             {
@@ -120,7 +120,7 @@ namespace Server.Models
 
             if (Vitality.CurrentHP <= 0)
             {
-                areaStorage.GetBattlePlace(Place)?.WeakeningPlayer(Name);
+                placeService.GetBattlePlace(Place)?.WeakeningPlayer(Name);
                 AddState<WeaknessState>(this);
                 UpdateStates();
             }
@@ -131,16 +131,15 @@ namespace Server.Models
         public override ResultUseSpell TakeHealing(int healing)
         {
             Vitality.TakeHealing(healing);
-
             return new(healing, Vitality.CurrentHP, Vitality.MaxHP);
         }
 
         public override async void UpdateStates()
         {
             if (ConnectionId != string.Empty)
-            {
-                await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateBuffBar", States.Keys.Select(x => x.ToJson()).ToList());
-            }
+                await hubContext.Clients.Client(ConnectionId)
+                                        .SendAsync("UpdateBuffBar", States.Keys.Select(x => x.ToJson())
+                                        .ToList());
         }
 
         public UserOnPlace ToJson()

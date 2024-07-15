@@ -1,15 +1,15 @@
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore;
-using Server;
-using Server.Hubs;
-using Server.Hubs.Locations;
-using Server.Hubs.Locations.BasePlaces;
 using Server.Hubs.Locations.BattlePlaces;
+using Server.Hubs.Locations.BasePlaces;
 using Server.Hubs.Locations.CalmPlaces;
-using Server.Models;
+using Microsoft.EntityFrameworkCore;
 using Server.Models.Interfaces;
+using Server.Models.Utilities;
+using Server.EntityFramework;
 using Server.Repository;
-using System.Runtime.CompilerServices;
+using Server.Services;
+using Server.Models;
+using Server.Hubs;
+using Server;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,12 +27,11 @@ builder.Services.AddAutoMapper(typeof(MappingConfig));
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<TravelRepository>();
 
-builder.Services.AddTransient<IAreaStorage, AreaStorage>();
 builder.Services.AddSingleton<UserStorage>();
-//builder.Services.AddSingleton<IServiceFactory<UserRepository>, ScopedServiceFactory<UserRepository>>();
 builder.Services.AddSingleton<IServiceFactory<UserStorage>, ScopedServiceFactory<UserStorage>>();
 
 RegistrationPlaces(builder.Services);
+RegistrationServices(builder.Services);
 
 builder.Services.AddDbContext<DbUserContext>(
     options =>
@@ -41,7 +40,6 @@ builder.Services.AddDbContext<DbUserContext>(
     });
 
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -54,26 +52,17 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 #endif
 
-
 app.UseCors();
 //app.UseAuthorization();
 
 app.MapControllers();
 app.UseRouting();
-
+app.UseStaticFiles();
 
 app.MapHub<UserStorage>("/UserStorage");
 app.MapHub<PlaceHub>("/PlaceHub");
-//app.MapHub<Town>("/Town");
-//app.MapHub<DarkWood>("/DarkWoodHub");
 
 app.Run();
-
-/*builder.Services.AddSingleton<DbUserContext>(provider => {
-    var optionsBuilder = new DbContextOptionsBuilder<DbUserContext>();
-    optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
-    return new DbUserContext(optionsBuilder.Options);
-});*/
 
 void RegistrationPlaces(IServiceCollection services)
 {
@@ -82,5 +71,11 @@ void RegistrationPlaces(IServiceCollection services)
     services.AddSingleton<BasePlace, DarkWood>();
     services.AddSingleton<BasePlace, PizzaLand>();
     services.AddSingleton<BasePlace, SpecialPlace>();
-    //builder.Services.AddSingleton<DarkWood>();
+}
+
+void RegistrationServices(IServiceCollection services)
+{
+    services.AddTransient<AuthService>();
+    services.AddTransient<InventoryService>();
+    services.AddTransient<PlaceService>();
 }

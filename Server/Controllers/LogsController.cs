@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Server;
 using Server.Models;
-using Server.Models.DTO;
 using Server.Models.DTO.Auth;
+using Server.Models.DTO.User;
 using Server.Models.Utilities;
 using Server.Repository;
 using System.Net;

@@ -1,7 +1,4 @@
-﻿
-using Server.Models.EntityFramework;
-
-namespace Server.Models.Spells.States
+﻿namespace Server.Models.Spells.States
 {
     public class TreatmentState : State
     {
@@ -15,7 +12,7 @@ namespace Server.Models.Spells.States
         {
             Name = "Аура восстановления";
             Description = "Постепенно восстанавливает здоровье";
-            ImagePath = "treatment.png";
+            ImagePath = "spells/treatment.png";
         }
 
         public override async Task Enter()

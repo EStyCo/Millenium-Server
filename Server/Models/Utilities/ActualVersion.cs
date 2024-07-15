@@ -2,6 +2,6 @@
 {
     public static class ActualVersion
     {
-        public static string Version { get; set; } = "0.0.1";
+        public static string Version { get; set; } = "0.0.2";
     }
 }

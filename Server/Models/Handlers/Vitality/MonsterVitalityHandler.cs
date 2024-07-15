@@ -1,8 +1,8 @@
-﻿namespace Server.Models.Handlers
+﻿namespace Server.Models.Handlers.Vitality
 {
     public class MonsterVitalityHandler : VitalityHandler
     {
-        public override int CurrentHP { get ; protected set ; }
+        public override int CurrentHP { get; protected set; }
         public override int MaxHP { get; set; }
 
         public MonsterVitalityHandler(int currentHP, int maxHP)

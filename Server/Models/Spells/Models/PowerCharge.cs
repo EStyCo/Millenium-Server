@@ -14,7 +14,7 @@ namespace Server.Models.Spells.Models
             Name = "Сильный удар";
             CoolDown = 15;
             Description = "За мощь, нужно платить временем.";
-            ImagePath = "power_charge.png";
+            ImagePath = "spells/power_charge.png";
         }
 
         public override void Use(Entity user, params Entity[] targets)
@@ -34,6 +34,7 @@ namespace Server.Models.Spells.Models
                 _ = StartRest();
                 SendBattleLog(log, user, target);
             }
+            throw new NotImplementedException();
         }
 
         private double AdditionalMultiplier()

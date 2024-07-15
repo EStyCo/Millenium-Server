@@ -11,7 +11,7 @@ namespace Server.Models.Spells.Models
             Name = "Аура лечения";
             CoolDown = 35;
             Description = "Временно усиливает регенерацию здоровья";
-            ImagePath = "treatment.png";
+            ImagePath = "spells/treatment.png";
         }
 
         public override void Use(Entity _user, params Entity[] targets)

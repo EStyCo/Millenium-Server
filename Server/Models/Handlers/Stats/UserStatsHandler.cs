@@ -1,6 +1,7 @@
-﻿using Server.Models.EntityFramework;
+﻿using Server.Models.Utilities;
+using EF = Server.EntityFramework.Models;
 
-namespace Server.Models.Handlers
+namespace Server.Models.Handlers.Stats
 {
     public class UserStatsHandler : StatsHandler
     {
@@ -13,12 +14,12 @@ namespace Server.Models.Handlers
         public override int Agility { get; protected set; } = 5;
         public override int Intelligence { get; protected set; } = 5;
 
-        public UserStatsHandler(Stats _stats)
+        public UserStatsHandler(EF.Stats _stats)
         {
             CreateStats(_stats);
         }
 
-        public void CreateStats(Stats stats)
+        public void CreateStats(EF.Stats stats)
         {
             CurrentExp = stats.CurrentExp;
             TotalPoints = stats.TotalPoints;

@@ -30,7 +30,7 @@ namespace Server.Models.Monsters
         {
             Exp = 65;
             Name = "Orc " + GetRandomName();
-            ImagePath = "orc.png";
+            ImagePath = "monsters/orc.png";
             PlaceInstance = place;
             Description = "Здоровый бугай, иногда может наподдать по башне.";
             PlaceName = place.NamePlace;

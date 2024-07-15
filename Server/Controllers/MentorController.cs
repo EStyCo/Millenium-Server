@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Server.Models.DTO;
+using Server.Models.DTO.User;
+using Server.Models.Skills;
 using Server.Models.Skills.LearningMaster;
 using Server.Models.Utilities;
 using Server.Repository;
@@ -20,9 +21,9 @@ namespace Server.Controllers
         }
 
         [HttpPost("get")]
-        public async Task<IActionResult> GetSkills(NameRequestDTO dto)
+        public IActionResult GetSkills(NameRequestDTO dto)
         {
-            var skillList = await userRepository.GetSkills(dto.Name);
+            var skillList = userRepository.GetSkills(dto.Name);
 
             if (skillList == null)
             {
@@ -35,28 +36,22 @@ namespace Server.Controllers
         [HttpPost("learn")]
         public async Task<IActionResult> LearnSkill(SpellRequestDTO dto)
         {
-            var character = await userRepository.LearnSkill(dto);
+            var spellList = await userRepository.LearnSkill(dto);
             var user = storage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
 
-            if (character != null && user != null)
-            {
-                user.CreateSpellList(character);
-            }
-
+            if (user != null)
+                user.ActiveSkills = spellList;
             return Ok(RespFactory.ReturnOk());
         }
 
         [HttpPost("forgot")]
         public async Task<IActionResult> ForgotSkill(SpellRequestDTO dto)
         {
-            var character = await userRepository.ForgotSkill(dto);
-            var activeCharacter = storage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
+            var spellList = await userRepository.ForgotSkill(dto);
+            var user = storage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
 
-            if (character == null || activeCharacter == null)
-            {
-                return BadRequest(RespFactory.ReturnBadRequest());
-            }
-
+            if (user != null)
+                user.ActiveSkills = spellList;
             return Ok(RespFactory.ReturnOk());
         }
     }

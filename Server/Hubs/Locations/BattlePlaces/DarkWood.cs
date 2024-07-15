@@ -16,7 +16,7 @@ namespace Server.Hubs.Locations.BattlePlaces
         public override List<Monster> Monsters { get; protected set; } = new();
         public override Dictionary<string, ActiveUser> Users { get; protected set; } = new();
 
-        public override string ImagePath { get; } = "darkwood.jpg";
+        public override string ImagePath { get; } = "locations/darkwood.jpg";
         public override string Description { get; } = "поле для драки, ебаштесь";
         public override string[] Routes { get; } = { "glade", "masturbation" };
 

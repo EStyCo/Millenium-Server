@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Server.Models;
-using Server.Models.DTO;
 using Server.Models.Utilities;
 using Server.Models.Spells;
+using Server.Models.DTO.User;
 
 namespace Server.Controllers
 {

@@ -28,7 +28,7 @@ namespace Server.Models.Monsters
         {
             Exp = 25;
             Name = "Goblin " + GetRandomName();
-            ImagePath = "goblin.png";
+            ImagePath = "monsters/goblin.png";
             Description = "Мелкое чмо.";
             PlaceInstance = place;
             PlaceName = place.NamePlace;

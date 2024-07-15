@@ -2,24 +2,25 @@
 using Server.Hubs.DTO;
 using Server.Hubs.Locations.Interfaces;
 using Server.Models.Interfaces;
+using Server.Services;
 
 namespace Server.Hubs
 {
     public class PlaceHub : Hub
     {
-        private readonly IAreaStorage AreaStorage;
+        private readonly PlaceService placeService;
         private readonly UserStorage UserStorage;
 
-        public PlaceHub(IAreaStorage areaStorage,
+        public PlaceHub(PlaceService _placeService,
                         UserStorage userStorage)
         {
-            AreaStorage = areaStorage;
+            placeService = _placeService;
             UserStorage = userStorage;
         }
 
         public async Task ConnectToHub(ConnectToPlaceHubDTO dto)
         {
-            var place = AreaStorage.GetPlace(dto.Place);
+            var place = placeService.GetPlace(dto.Place);
             var user = UserStorage.ActiveUsers
                                    .Where(x => x.Name == dto.Name)
                                    .FirstOrDefault() ;
@@ -38,7 +39,7 @@ namespace Server.Hubs
 
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
-            var place = AreaStorage.GetPlaceById(Context.ConnectionId);
+            var place = placeService.GetPlaceById(Context.ConnectionId);
 
             if (place != null)
             {
@@ -51,7 +52,7 @@ namespace Server.Hubs
 
         public DescriptionPlace? UpdateDescription(string namePlace)
         {
-            var place = AreaStorage.GetPlace(namePlace) as IPlaceInfo;
+            var place = placeService.GetPlace(namePlace) as IPlaceInfo;
 
             if (place != null)
                 return new(place.ImagePath, place.Description, place.CanAttackUser);
@@ -61,7 +62,7 @@ namespace Server.Hubs
 
         public string[]? UpdateRoutes(string namePlace)
         {
-            var place = AreaStorage.GetPlace(namePlace) as IPlaceInfo;
+            var place = placeService.GetPlace(namePlace) as IPlaceInfo;
 
             return place?.Routes;
         }

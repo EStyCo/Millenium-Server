@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Server.Hubs.DTO;
 using Server.Hubs.Locations.Interfaces;
-using Server.Models.DTO;
+using Server.Models;
+using Server.Models.DTO.User;
+using Server.Models.Handlers.Stats;
 using Server.Models.Interfaces;
 using Server.Models.Monsters.DTO;
 using Server.Models.Spells.States;
 using Server.Models.Utilities;
 using Server.Repository;
+using Server.Services;
 
 namespace Server.Controllers
 {
@@ -15,22 +18,22 @@ namespace Server.Controllers
     public class PlaceController : ControllerBase
     {
         private readonly UserStorage userStorage;
-        private readonly IAreaStorage areaStorage;
+        private readonly PlaceService placeService;
         private readonly UserRepository userRepository;
 
         public PlaceController(UserStorage _userStorage,
-                               IAreaStorage _areaStorage,
+                               PlaceService _placeService,
                                UserRepository _userRepository)
         {
             userStorage = _userStorage;
-            areaStorage = _areaStorage;
+            placeService = _placeService;
             userRepository = _userRepository;
         }
 
         [HttpPost("add")]
         public IActionResult AddMonster(PlaceDTO dto)
         {
-            areaStorage.GetBattlePlace(dto.Place)?.AddMonster();
+            placeService.GetBattlePlace(dto.Place)?.AddMonster();
 
             return Ok(RespFactory.ReturnOk());
         }
@@ -42,11 +45,11 @@ namespace Server.Controllers
 
             if (user != null && user.CanAttack)
             {
-                int addingExp = areaStorage.GetBattlePlace(dto.Place).AttackMonster(dto, user);
+                int addingExp = placeService.GetBattlePlace(dto.Place).AttackMonster(dto, user);
 
                 if (addingExp > 0)
                 {
-                    userStorage.AddExp(new UpdateExpDTO { Name = dto.Name, Exp = addingExp });
+                    (user.Stats as UserStatsHandler)?.AddExp(addingExp);
                     await userRepository.UpdateExp(addingExp, user.Name);
                 }
             }
@@ -63,7 +66,7 @@ namespace Server.Controllers
             if (user != null && user.CanAttack && 
                 target != null && !target.States.Keys.OfType<WeaknessState>().Any())
             {
-                (areaStorage.GetPlace(dto.Place) as IBattleUsers)?.AttackUser(user, target, dto.Type);
+                (placeService.GetPlace(dto.Place) as IBattleUsers)?.AttackUser(user, target, dto.Type);
             }
 
             return Ok(RespFactory.ReturnOk());
@@ -72,7 +75,7 @@ namespace Server.Controllers
         [HttpPost("getDetailsMonster")]
         public IActionResult GetDetailsMonster(DetailsMonsterRequest dto)
         {
-            var details = areaStorage.GetBattlePlace(dto.Place)?.Monsters.FirstOrDefault(x => x.Id == dto.Id)?.DetailsToJson();
+            var details = placeService.GetBattlePlace(dto.Place)?.Monsters.FirstOrDefault(x => x.Id == dto.Id)?.DetailsToJson();
             if (details == null) return BadRequest(RespFactory.ReturnBadRequest());
 
             return Ok(RespFactory.ReturnOk(details));
@@ -81,7 +84,7 @@ namespace Server.Controllers
         [HttpPost("getMonsters")]
         public IActionResult GetMonsters(PlaceDTO dto)
         {
-            var monsters = areaStorage.GetBattlePlace(dto.Place)?.Monsters.Select(x =>x.ToJson()).ToList() ?? new();
+            var monsters = placeService.GetBattlePlace(dto.Place)?.Monsters.Select(x =>x.ToJson()).ToList() ?? new();
 
             return Ok(RespFactory.ReturnOk(monsters));
         }

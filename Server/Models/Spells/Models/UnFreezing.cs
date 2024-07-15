@@ -10,8 +10,8 @@ namespace Server.Models.Spells.Models
             SpellType = SpellType.UnFreezing;
             Name = "Разморозка";
             CoolDown = 5;
-            Description = "Отменяет заморрозку";
-            ImagePath = "freezing.png";
+            Description = "Отменяет заморозку";
+            ImagePath = "spells/freezing.png";
         }
 
         public override void Use(Entity user, params Entity[] targets)

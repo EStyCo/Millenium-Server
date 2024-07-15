@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Server.Models;
-using Server.Models.DTO;
+using Server.EntityFramework;
+using Server.Models.DTO.User;
 
 namespace Server.Repository
 {

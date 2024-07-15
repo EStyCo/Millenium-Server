@@ -11,7 +11,7 @@ namespace Server.Models.Spells.Models
             Name = "Заморозка";
             CoolDown = 35;
             Description = "Замораживает противника на некоторое время";
-            ImagePath = "freezing.png";
+            ImagePath = "spells/freezing.png";
         }
 
         public override void Use(Entity user, params Entity[] targets)

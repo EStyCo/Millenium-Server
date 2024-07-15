@@ -18,7 +18,7 @@ namespace Server.Models.Monsters
         public abstract string Target { get; protected set; }
         public abstract string PlaceName { get; protected set; }
         public abstract BattlePlace PlaceInstance { get; protected set; }
-        public abstract double MinTimeAttack {  get; set; }
+        public abstract double MinTimeAttack { get; set; }
         public abstract double MaxTimeAttack { get; set; }
 
         public Monster(IServiceFactory<UserStorage> _userStorageFactory, Action updatingAction)
@@ -82,16 +82,7 @@ namespace Server.Models.Monsters
 
         public override void UseSpell(SpellType type, params Entity[] target)
         {
-            var skill = new SkillCollection().PickSkill(type);
-            //var user = target.First();
-
-            if (skill != null && CanAttack)
-            {
-                skill.Use(this, target);
-
-                /*if (resultUse != null)
-                    _ = user.AddBattleLog(resultUse);*/
-            }
+            if (CanAttack) SpellFactory.Get(type)?.Use(this, target);
         }
 
         protected bool CheckPlayerInPlace(UserStorage storage, string name) => storage.ActiveUsers.Any(x => x.Name == name && x.Place == PlaceName);

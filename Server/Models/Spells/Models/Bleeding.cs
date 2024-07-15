@@ -13,7 +13,7 @@ namespace Server.Models.Spells.Models
             Name = "Рассечение";
             CoolDown = 45;
             Description = "Наносит не высокий урон, с 25% шансом накладывает кровотечение.";
-            ImagePath = "bleeding.png";
+            ImagePath = "spells/bleeding.png";
         }
 
         public override void Use(Entity user, params Entity[] targets)

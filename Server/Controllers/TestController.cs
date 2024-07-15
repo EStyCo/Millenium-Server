@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Server.Models.Spells;
 using Server.Models.Utilities;
 
 namespace Server.Controllers
@@ -36,11 +37,11 @@ namespace Server.Controllers
         public async Task<IActionResult> GetActiveDisconnectTokens()
         {
             await Task.Delay(10);
-            if (userStorage.disconnectTokens.Count <= 0) return BadRequest(RespFactory.ReturnBadRequest("Активных токенов нет"));
+            if (userStorage.DisconnectTokens.Count <= 0) return BadRequest(RespFactory.ReturnBadRequest("Активных токенов нет"));
 
             List<string> result = new();
 
-            foreach (var item in userStorage.disconnectTokens)
+            foreach (var item in userStorage.DisconnectTokens)
             {
                 result.Add($"ConnectionId: {item.Key} Status: {item.Value.Token.IsCancellationRequested}");
             }
@@ -56,5 +57,29 @@ namespace Server.Controllers
 
             return Ok(RespFactory.ReturnOk(user.BattleLogs));
         }
+
+        [HttpGet("{index}")]
+        public IActionResult Test(int index)
+        {
+            if (!Enum.IsDefined(typeof(SpellType), index))
+            {
+                return BadRequest(RespFactory.ReturnBadRequest("Invalid spell type."));
+            }
+
+            return Ok(RespFactory.ReturnOk(SpellFactory.Get((SpellType)index)));
+        }
+
+        [HttpGet("TestAll")]
+        public IActionResult TestAll()
+        {
+            return Ok(RespFactory.ReturnOk(SpellFactory.GetAll()));
+        }
+
+        [HttpGet("TestAllMentor")]
+        public IActionResult TestAllMentor()
+        {
+            return Ok(RespFactory.ReturnOk(SpellFactory.GetMentorAllSpells()));
+        }
+
     }
 }

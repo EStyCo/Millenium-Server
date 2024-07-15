@@ -13,7 +13,7 @@
         {
             Name = "Заморозка";
             Description = "Замороженная цель не может двигаться и атаковать.";
-            ImagePath = "freezing.png";
+            ImagePath = "spells/freezing.png";
         }
 
         public override async Task Enter()
