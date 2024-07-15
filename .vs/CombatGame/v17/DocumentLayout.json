@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\source\\repos\\CombatGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\utilities\\actualversion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\utilities\\actualversion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\utilities\\actualversion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\utilities\\actualversion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\inventory\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -42,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 239,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,19 +58,18 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ActualVersion.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Utilities\\ActualVersion.cs",
               "RelativeDocumentMoniker": "Server\\Models\\Utilities\\ActualVersion.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Utilities\\ActualVersion.cs*",
-              "RelativeToolTip": "Server\\Models\\Utilities\\ActualVersion.cs*",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Utilities\\ActualVersion.cs",
+              "RelativeToolTip": "Server\\Models\\Utilities\\ActualVersion.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-15T15:28:03.03Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-15T15:28:03.03Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Program.cs",
               "RelativeDocumentMoniker": "Server\\Program.cs",
@@ -89,8 +88,7 @@
               "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\UserStorage.cs",
               "RelativeToolTip": "Server\\UserStorage.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-15T15:04:32.543Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-15T15:04:32.543Z"
             },
             {
               "$type": "Document",
@@ -101,8 +99,7 @@
               "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Repository\\UserRepository.cs",
               "RelativeToolTip": "Server\\Repository\\UserRepository.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-15T14:42:05.004Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-15T14:42:05.004Z"
             },
             {
               "$type": "Document",
@@ -113,8 +110,7 @@
               "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Services\\AuthService.cs",
               "RelativeToolTip": "Server\\Services\\AuthService.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-15T14:19:27.886Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-15T14:19:27.886Z"
             },
             {
               "$type": "Document",
@@ -125,8 +121,7 @@
               "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\AuthController.cs",
               "RelativeToolTip": "Server\\Controllers\\AuthController.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-15T14:18:52.571Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-15T14:18:52.571Z"
             },
             {
               "$type": "Document",
@@ -137,8 +132,7 @@
               "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Services\\InventoryService.cs",
               "RelativeToolTip": "Server\\Services\\InventoryService.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-15T15:12:56.631Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-15T15:12:56.631Z"
             },
             {
               "$type": "Document",
@@ -146,11 +140,10 @@
               "Title": "Inventory.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Inventory\\Inventory.cs",
               "RelativeDocumentMoniker": "Server\\Models\\Inventory\\Inventory.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Inventory\\Inventory.cs*",
-              "RelativeToolTip": "Server\\Models\\Inventory\\Inventory.cs*",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Inventory\\Inventory.cs",
+              "RelativeToolTip": "Server\\Models\\Inventory\\Inventory.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-15T15:15:34.126Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-15T15:15:34.126Z"
             }
           ]
         }
