@@ -79,5 +79,3 @@ void RegistrationServices(IServiceCollection services)
     services.AddTransient<InventoryService>();
     services.AddTransient<PlaceService>();
 }
-
-Console.WriteLine("Testing");
