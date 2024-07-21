@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Server.Models.Inventory;
 using Server.Models.Utilities;
 using Server.Models.DTO.User;
-using Server.Repository;
-using AutoMapper;
 using Server.Services;
 using Server.Models.Inventory.Items;
 
@@ -15,20 +13,18 @@ namespace Server.Controllers
     public class InventoryController : ControllerBase
     {
         private readonly UserStorage userStorage;
-        private readonly UserRepository userRep;
+
         private readonly InventoryService invService;
 
         public InventoryController(UserStorage _userStorage,
-                                   UserRepository _userRepository,
                                    InventoryService _invService)
         {
             userStorage = _userStorage;
-            userRep = _userRepository;
             invService = _invService;
         }
 
         [HttpPost("getInventory")]
-        public async Task<IActionResult> GetInventory(NameRequestDTO dto)
+        public IActionResult GetInventory(NameRequestDTO dto)
         {
             var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
             if (user == null) return BadRequest(RespFactory.ReturnBadRequest());
@@ -69,7 +65,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("destroyItem")]
-        public IActionResult AddItem()
+        public IActionResult DestroyItem()
         {
             var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == "Denny");
 
@@ -77,6 +73,12 @@ namespace Server.Controllers
 
             user.Inventory.AddItem(new Apple());
             return Ok(RespFactory.ReturnOk());
+        }
+
+        [HttpPost("getInventoryFromDB")]
+        public async Task<IActionResult> GetInventoryFromDB(NameRequestDTO dto)
+        {
+            return Ok(await invService.GetInventoryFromDB(dto));
         }
     }
 }

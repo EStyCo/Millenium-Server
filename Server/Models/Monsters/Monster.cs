@@ -4,6 +4,7 @@ using Server.Models.Utilities;
 using Server.Models.Skills;
 using Server.Models.Spells;
 using Server.Models.Monsters.DTO;
+using Server.Models.Spells.States;
 
 namespace Server.Models.Monsters
 {
@@ -85,7 +86,12 @@ namespace Server.Models.Monsters
             if (CanAttack) SpellFactory.Get(type)?.Use(this, target);
         }
 
-        protected bool CheckPlayerInPlace(UserStorage storage, string name) => storage.ActiveUsers.Any(x => x.Name == name && x.Place == PlaceName);
+        protected bool CheckPlayerInPlace(UserStorage storage, string name)
+        {
+            var user = storage.ActiveUsers.FirstOrDefault(x => x.Name == name && x.Place == PlaceName);
+            if (user == null) return false;
+            return !user.States.Keys.OfType<WeaknessState>().Any();
+        }
 
         protected void SendBattleLog(ActiveUser user)
         {

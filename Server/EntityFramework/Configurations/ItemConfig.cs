@@ -12,9 +12,7 @@ namespace Server.EntityFramework.Configurations
 
             builder.HasOne(c => c.Character)
                    .WithMany(u => u.Items)
-
                    .HasForeignKey(c => c.CharacterId);
-
         }
     }
 }

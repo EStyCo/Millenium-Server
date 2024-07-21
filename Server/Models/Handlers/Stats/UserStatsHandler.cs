@@ -10,13 +10,17 @@ namespace Server.Models.Handlers.Stats
         public int ToLevelExp { get; private set; } = 0;
         public int TotalPoints { get; private set; } = 0;
         public int FreePoints { get; private set; } = 5;
-        public override int Strength { get; protected set; } = 5;
-        public override int Agility { get; protected set; } = 5;
-        public override int Intelligence { get; protected set; } = 5;
 
-        public UserStatsHandler(EF.Stats _stats)
+        public OriginalStatsValues OriginalStats { get; private set; }
+
+        public override int Strength { get; set; }
+        public override int Agility { get;  set; }
+        public override int Intelligence { get; set; }
+
+        public UserStatsHandler(EF.Stats stats)
         {
-            CreateStats(_stats);
+            CreateStats(stats);
+            ResetToOriginalStats(stats);
         }
 
         public void CreateStats(EF.Stats stats)
@@ -46,5 +50,24 @@ namespace Server.Models.Handlers.Stats
                 ToLevelExp = newLvlPair.Value;
             }
         }
+
+        public void ResetToOriginalStats(EF.Stats stats)
+        {
+            OriginalStats = new OriginalStatsValues(stats.Strength, stats.Agility, stats.Intelligence);
+        }
+    }
+}
+
+public class OriginalStatsValues
+{
+    public int Strength { get; set; }
+    public int Agility { get; set; }
+    public int Intelligence { get; set; }
+
+    public OriginalStatsValues(int strength, int agility, int intelligence)
+    {
+        Strength = strength;
+        Agility = agility;
+        Intelligence = intelligence;
     }
 }

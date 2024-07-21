@@ -5,8 +5,9 @@ namespace Server.EntityFramework.Models
 {
     public class Stats
     {
-        public int CharacterId { get; set; }
-        public Character Character { get; set; }
+        public int Id { get; set; }
+        public int CharacterEFId { get; set; }
+        public CharacterEF CharacterEF { get; set; }
         public int CurrentExp { get; private set; } = 0;
         public int TotalPoints { get; private set; } = 0;
         public int FreePoints { get; private set; } = 5;

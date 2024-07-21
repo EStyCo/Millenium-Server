@@ -11,11 +11,11 @@ namespace Server.Models.Utilities
     {
         public MappingConfig()
         {
-            CreateMap<Character, CharacterDTO>().ReverseMap();
+            CreateMap<CharacterEF, CharacterDTO>().ReverseMap();
             CreateMap<StatDTO, UserStatsHandler>().ReverseMap();
             CreateMap<Stats, UserStatsHandler>().ReverseMap();
             CreateMap<UpdateStatDTO, CharacterDTO>();
-            CreateMap<UpdateStatDTO, Character>();
+            CreateMap<UpdateStatDTO, CharacterEF>();
             CreateMap<Monster, MonsterDTO>().ReverseMap();
         }
     }

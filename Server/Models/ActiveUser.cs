@@ -18,7 +18,6 @@ namespace Server.Models
     public class ActiveUser : Entity
     {
         private readonly IHubContext<UserStorage> hubContext;
-        private readonly PlaceService placeService;
         public string ConnectionId { get; set; } = string.Empty;
         public override string Name { get; protected set; } = string.Empty;
         public string Place { get; set; } = string.Empty;
@@ -26,27 +25,21 @@ namespace Server.Models
         public int GlobalRestSeconds { get; private set; } = 0;
         public override StatsHandler Stats { get; protected set; }
         public override VitalityHandler Vitality { get; protected set; }
-        public BasePlace? CurrentPlace { get; set; }
         public List<Spell> ActiveSkills { get; set; } = new();
         public List<string> BattleLogs { get; set; } = new();
         public override Dictionary<State, CancellationTokenSource> States { get; protected set; } = new();
         public I.Inventory Inventory { get; set; }
 
-        public ActiveUser(IHubContext<UserStorage> _hubContext,
-                          PlaceService _placeService,
-                          Stats stats,
-                          Character character,
-                          List<Item> items)
-
+        public ActiveUser(
+            IHubContext<UserStorage> _hubContext,
+            CharacterEF character)
         {
             hubContext = _hubContext;
-            placeService = _placeService;
             Name = character.Name;
             Place = character.Place;
-            Stats = new UserStatsHandler(stats);
+            Stats = new UserStatsHandler(character.Stats);
             Vitality = new UserVitalityHandler(_hubContext, (UserStatsHandler)Stats, ConnectionId);
-            CurrentPlace = placeService.GetPlace(Place) as BasePlace;
-            Inventory = new(items);
+            Inventory = new(ItemFactory.GetList(character.Items));
         }
 
         public override void UseSpell(SpellType type, params Entity[] target)
@@ -56,15 +49,11 @@ namespace Server.Models
             if (skill != null && CanAttack)
             {
                 skill.Use(this, target);
-
-                if (skill is not Rest)
-                {
-                    _ = StartGlobalRest();
-                }
+                if (skill is not Rest) StartGlobalRest();
             }
         }
 
-        private async Task StartGlobalRest()
+        private async void StartGlobalRest()
         {
             GlobalRestSeconds = 5;
             CanAttack = false;
@@ -74,7 +63,6 @@ namespace Server.Models
                 await Task.Delay(1000);
                 GlobalRestSeconds--;
             }
-
             GlobalRestSeconds = 0;
             var a = States.Keys.FirstOrDefault(x => x.GetType() == typeof(WeaknessState));
             if (a == null) CanAttack = true;
@@ -120,7 +108,7 @@ namespace Server.Models
 
             if (Vitality.CurrentHP <= 0)
             {
-                placeService.GetBattlePlace(Place)?.WeakeningPlayer(Name);
+                //placeService.GetBattlePlace(Place)?.WeakeningPlayer(Name);
                 AddState<WeaknessState>(this);
                 UpdateStates();
             }
@@ -137,9 +125,9 @@ namespace Server.Models
         public override async void UpdateStates()
         {
             if (ConnectionId != string.Empty)
-                await hubContext.Clients.Client(ConnectionId)
-                                        .SendAsync("UpdateBuffBar", States.Keys.Select(x => x.ToJson())
-                                        .ToList());
+                await hubContext.Clients
+                    .Client(ConnectionId)
+                    .SendAsync("UpdateBuffBar", States.Keys.Select(x => x.ToJson()).ToList());
         }
 
         public UserOnPlace ToJson()

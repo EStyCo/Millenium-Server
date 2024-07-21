@@ -35,61 +35,56 @@ namespace Server.Repository
             return true;
         }
 
-        public async Task<LoginResponseDTO?> LoginUser(LoginRequestDTO dto)
+        public async Task<CharacterEF?> LoginUser(LoginRequestDTO dto)
         {
-            var user = await dbContext.Users
+            var character = await dbContext.Characters
                 .AsNoTracking()
-                .Include(x => x.Character)
-                .FirstOrDefaultAsync(x => x.Email == dto.Email.ToLower() && x.Password == dto.Password);
-            if (user != null)
-                return new LoginResponseDTO()
-                {
-                    Character = mapper.Map<CharacterDTO>(user.Character)
-                };
-            return null;
+                .Where(x => x.User.Email == dto.Email.ToLower() && x.User.Password == dto.Password)
+                .Include(x => x.Items)
+                .Include(x => x.Stats)
+                .FirstOrDefaultAsync();
+            if (character == null) return null;
+            return character;
         }
 
         public async Task<bool> Registration(RegRequestDTO regDTO)
         {
-            if (regDTO != null)
+            if (regDTO == null) return false;
+
+            var user = new UserEF
             {
-                var user = new User
-                {
-                    Email = regDTO.Email,
-                    Password = regDTO.Password,
-                };
+                Email = regDTO.Email,
+                Password = regDTO.Password,
+            };
 
-                var character = new Character
-                {
-                    Name = regDTO.Name,
-                    Gender = Gender.male,
-                    Race = Race.Human,
-                    Place = "town",
-                    User = user,
-                    Spells = [],
-                    Items = []
-                };
+            var character = new CharacterEF
+            {
+                Name = regDTO.Name,
+                Gender = Gender.male,
+                Race = Race.Human,
+                Place = "town",
+                User = user,
+                Spells = [],
+                Items = []
+            };
 
-                var stats = new Stats
-                {
-                    Character = character
-                };
+            var stats = new Stats
+            {
+                CharacterEF = character
+            };
 
-                user.Character = character;
-                user.Character.Stats = stats;
+            user.Character = character;
+            character.Stats = stats;
 
-                dbContext.Users.Add(user);
-                dbContext.Characters.Add(character);
+            dbContext.Users.Add(user);
+            dbContext.Characters.Add(character);
 
-                await dbContext.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
 
-                return true;
-            }
-
-            return false;
+            return true;
         }
 
-        public async Task<Character> GetCharacter(string name)
+        public async Task<CharacterEF?> GetCharacter(string name)
         {
             return await dbContext.Characters.FirstOrDefaultAsync(x => x.Name == name);
         }

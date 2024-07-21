@@ -4,9 +4,9 @@ using Server.EntityFramework.Models;
 
 namespace Server.EntityFramework.Configurations
 {
-    public class UserConfig : IEntityTypeConfiguration<User>
+    public class UserConfig : IEntityTypeConfiguration<UserEF>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<UserEF> builder)
         {
             builder.HasKey(u => u.Id);
 

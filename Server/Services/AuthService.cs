@@ -1,4 +1,5 @@
 ﻿using Server.Models.DTO.Auth;
+using Server.Models.DTO.User;
 using Server.Repository;
 
 namespace Server.Services
@@ -7,27 +8,28 @@ namespace Server.Services
     {
         private readonly UserStorage userStorage;
         private readonly UserRepository userRep;
-        private readonly InventoryService invService;
+        private readonly UserFactory userFactory;
 
         public AuthService(UserStorage _userStorage,
                            UserRepository _userRepository,
-                           InventoryService _invService)
+                           UserFactory _userFactory)
         {
             userStorage = _userStorage;
             userRep = _userRepository;
-            invService = _invService;
+            userFactory = _userFactory;
         }
 
-        public async Task<LoginResponseDTO?> LoginUser(LoginRequestDTO dto)
+        public async Task<CharacterDTO?> LoginUser(LoginRequestDTO dto)
         {
-            var responseUser = await userRep.LoginUser(dto);
-            if (responseUser == null) return null;
+            var character = await userRep.LoginUser(dto);
+            if (character == null) return null;
 
-            if(await CreateActiveUser(responseUser.Character.Name))
+            userFactory.LoginUser(character);
+            return new()
             {
-                return responseUser;
-            }
-            return null;
+                Name = character.Name,
+                Place = character.Place,
+            };
         }
 
         public async Task<bool> RegistrationNewUser(RegRequestDTO dto)
@@ -38,18 +40,19 @@ namespace Server.Services
             }
             return true;
         }
-
-        private async Task<bool> CreateActiveUser(string name)
-        {
-            var character = await userRep.GetCharacter(name);
-            var stats = await userRep.GetStats(name);
-            var items = await userRep.GetInventory(name);
-
-            if (character == null || stats == null || items == null)
-                return false;
-
-            userStorage.LoginUser(stats, character, items);
-            return true;
-        }
     }
+
+    /*private async Task<bool> CreateActiveUser(string name)
+    {
+        var character = await userRep.GetCharacter(name);
+        var stats = await userRep.GetStats(name);
+        var items = await userRep.GetInventory(name);
+
+        if (character == null || stats == null || items == null)
+            return false;
+
+        userStorage.LoginUser(stats, character, items);
+        return true;
+    }*/
 }
+

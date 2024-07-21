@@ -2,9 +2,9 @@
 {
     public class MonsterStatsHandler : StatsHandler
     {
-        public override int Strength { get; protected set; }
-        public override int Agility { get; protected set; }
-        public override int Intelligence { get; protected set; }
+        public override int Strength { get; set; }
+        public override int Agility { get; set; }
+        public override int Intelligence { get; set; }
 
         public MonsterStatsHandler(int strength, int agility, int intelligence)
         {

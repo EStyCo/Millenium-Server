@@ -1,4 +1,6 @@
 ﻿using Server.Models.DTO.Inventory;
+using Server.Models.DTO.User;
+using Server.Models.Inventory;
 using Server.Repository;
 
 namespace Server.Services
@@ -54,6 +56,28 @@ namespace Server.Services
                 Name = dto.Name
             });
             return true;
+        }
+
+
+        /// <summary>
+        /// Testing method
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public async Task<List<Tuple<string, Item?>>> GetInventoryFromDB(NameRequestDTO dto)
+        {
+            var list = await userRep.GetInventory(dto.Name);
+            var response = new List<Tuple<string, Item?>>();
+
+            foreach (var item in list)
+            {
+                if(item.IsEquipped)
+                {
+                    response.Add(new(item.Name, item));
+                }
+            }
+
+            return response;
         }
     }
 }

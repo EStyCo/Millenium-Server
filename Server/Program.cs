@@ -78,4 +78,6 @@ void RegistrationServices(IServiceCollection services)
     services.AddTransient<AuthService>();
     services.AddTransient<InventoryService>();
     services.AddTransient<PlaceService>();
+
+    services.AddTransient<UserFactory>();
 }

@@ -1,11 +1,10 @@
 ﻿namespace Server.EntityFramework.Models
 {
-    public class User
+    public class UserEF
     {
         public int Id { get; set; }
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public int CharacterId { get; set; }
-        public Character Character { get; set; }
+        public CharacterEF Character { get; set; }
     }
 }

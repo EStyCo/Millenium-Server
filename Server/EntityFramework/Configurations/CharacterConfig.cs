@@ -4,15 +4,15 @@ using Server.EntityFramework.Models;
 
 namespace Server.EntityFramework.Configurations
 {
-    public class CharacterConfig : IEntityTypeConfiguration<Character>
+    public class CharacterConfig : IEntityTypeConfiguration<CharacterEF>
     {
-        public void Configure(EntityTypeBuilder<Character> builder)
+        public void Configure(EntityTypeBuilder<CharacterEF> builder)
         {
             builder.HasKey(c => c.Id);
 
             builder.HasOne(c => c.User)
                    .WithOne(u => u.Character)
-                   .HasForeignKey<User>(c => c.Id);
+                   .HasForeignKey<CharacterEF>(c => c.UserId);
         }
     }
 }

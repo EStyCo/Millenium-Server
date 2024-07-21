@@ -8,6 +8,6 @@ namespace Server.EntityFramework.Models
         public ItemType Type { get; set; }
         public bool IsEquipped { get; set; } = false;
         public int CharacterId { get; set; }
-        public Character Character { get; set; }
+        public CharacterEF Character { get; set; }
     }
 }

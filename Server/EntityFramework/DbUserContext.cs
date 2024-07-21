@@ -8,8 +8,8 @@ namespace Server.EntityFramework
     {
         public DbUserContext(DbContextOptions<DbUserContext> options) : base(options) { }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Character> Characters { get; set; }
+        public DbSet<UserEF> Users { get; set; }
+        public DbSet<CharacterEF> Characters { get; set; }
         public DbSet<Stats> Stats { get; set; }
         public DbSet<ItemEF> Items { get; set; }
 

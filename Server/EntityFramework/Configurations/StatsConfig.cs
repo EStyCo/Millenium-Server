@@ -8,11 +8,13 @@ namespace Server.EntityFramework.Configurations
     {
         public void Configure(EntityTypeBuilder<Stats> builder)
         {
-            builder.HasKey(u => u.CharacterId);
+            builder.ToTable("Stats");
+            builder.HasKey(u => u.Id);
 
-            builder.HasOne(c => c.Character)
+            builder.HasOne(c => c.CharacterEF)
                    .WithOne(u => u.Stats)
-                   .HasForeignKey<Character>(c => c.Id);
+                   .HasForeignKey<Stats>(c => c.CharacterEFId)
+                   .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Server.Models.Spells
 
         public int SpellId { get; set; }
         public int CharacterId { get; set; }
-        public Character Character { get; set; }
+        public CharacterEF Character { get; set; }
 
         public abstract void Use(Entity user, params Entity[] targets);
 

@@ -47,6 +47,8 @@ namespace Server.Models.Utilities
         public static List<Item> GetList(List<ItemEF> listItemsEF)
         {
             var listItems = new List<Item>();
+            if (listItemsEF == null) return listItems;
+
             foreach (var itemEF in listItemsEF)
             {
                 var item = Get(itemEF);
