@@ -7,9 +7,10 @@ namespace Server.Models.Spells.Models
     {
         public Treatment()
         {
-            SpellType = SpellType.Treatment;
             Name = "Аура лечения";
-            CoolDown = 35;
+            SpellType = SpellType.Treatment;
+            SelfUse = true;
+            CoolDown = 6;
             Description = "Временно усиливает регенерацию здоровья";
             ImagePath = "spells/treatment.png";
         }

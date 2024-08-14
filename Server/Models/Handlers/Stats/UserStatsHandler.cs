@@ -1,5 +1,6 @@
 ﻿using Server.Models.Utilities;
-using EF = Server.EntityFramework.Models;
+using Server.EntityFramework.Models;
+using Server.Models.DTO.User;
 
 namespace Server.Models.Handlers.Stats
 {
@@ -10,27 +11,21 @@ namespace Server.Models.Handlers.Stats
         public int ToLevelExp { get; private set; } = 0;
         public int TotalPoints { get; private set; } = 0;
         public int FreePoints { get; private set; } = 5;
-
         public OriginalStatsValues OriginalStats { get; private set; }
 
-        public override int Strength { get; set; }
-        public override int Agility { get;  set; }
-        public override int Intelligence { get; set; }
-
-        public UserStatsHandler(EF.Stats stats)
-        {
-            CreateStats(stats);
-            ResetToOriginalStats(stats);
-        }
-
-        public void CreateStats(EF.Stats stats)
+        public override void SetStats(StatsEF stats)
         {
             CurrentExp = stats.CurrentExp;
             TotalPoints = stats.TotalPoints;
             FreePoints = stats.FreePoints;
             Strength = stats.Strength;
             Agility = stats.Agility;
+            Vitality = stats.Vitality;
             Intelligence = stats.Intelligence;
+            Mastery = stats.Mastery;
+            Luck = stats.Luck;
+
+            OriginalStats = new(stats);
 
             var level = new LevelFactory().SetLevel(CurrentExp);
 
@@ -51,23 +46,19 @@ namespace Server.Models.Handlers.Stats
             }
         }
 
-        public void ResetToOriginalStats(EF.Stats stats)
+        public void ReturnToOriginalStats()
         {
-            OriginalStats = new OriginalStatsValues(stats.Strength, stats.Agility, stats.Intelligence);
+            Strength = OriginalStats.Strength;
+            Agility = OriginalStats.Agility;
+            Vitality = OriginalStats.Vitality;
+            Intelligence = OriginalStats.Intelligence;
+            Mastery = OriginalStats.Mastery;
+            Luck = OriginalStats.Luck;
         }
-    }
-}
 
-public class OriginalStatsValues
-{
-    public int Strength { get; set; }
-    public int Agility { get; set; }
-    public int Intelligence { get; set; }
-
-    public OriginalStatsValues(int strength, int agility, int intelligence)
-    {
-        Strength = strength;
-        Agility = agility;
-        Intelligence = intelligence;
+        public override StatDTO ToJson()
+        {
+            return new(this);
+        }
     }
 }

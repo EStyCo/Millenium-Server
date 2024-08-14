@@ -4,11 +4,18 @@ using Microsoft.AspNetCore.SignalR;
 using Server.Hubs.DTO;
 using Server.Hubs.Locations.Interfaces;
 using Server.Models.Monsters.DTO;
+using System.Threading;
+using Server.Services;
+using Server.Models.Handlers.Stats;
+using Server.Repository;
+using Server.Models.Interfaces;
 
 namespace Server.Hubs.Locations.BasePlaces
 {
     public abstract class BattlePlace : BasePlace, IPlaceInfo
     {
+        private readonly IServiceProvider serviceProvider;
+
         public abstract List<Monster> Monsters { get; protected set; }
         public abstract string ImagePath { get; }
         public abstract string Description { get; }
@@ -18,8 +25,11 @@ namespace Server.Hubs.Locations.BasePlaces
         public abstract void AddMonster();
 
 
-        protected BattlePlace(IHubContext<PlaceHub> hubContext) : base(hubContext)
+        protected BattlePlace(
+            IHubContext<PlaceHub> hubContext,
+            IServiceProvider _serviceProvider) : base(hubContext)
         {
+            serviceProvider = _serviceProvider;
             _ = RefreshMonsters();
         }
 
@@ -28,53 +38,44 @@ namespace Server.Hubs.Locations.BasePlaces
             var monster = Monsters.FirstOrDefault(x => x == _monster);
             if (monster != null) Monsters.Remove(monster);
 
-            UpdateListMonsters();
+            _ = UpdateListMonsters();
         }
 
         public override void EnterPlace(ActiveUser user, string connectionId)
         {
             base.EnterPlace(user, connectionId);
-            UpdateListMonsters();
+            _ = UpdateListMonsters();
         }
 
         public override void LeavePlace(string connectionId)
         {
             base.LeavePlace(connectionId);
-            UpdateListMonsters();
+            _ = UpdateListMonsters();
         }
 
-        public async void UpdateListMonsters()
+        public async Task UpdateListMonsters()
         {
-            if (HubContext.Clients != null)
+            if (Users.Any())
             {
-                var dtoList = new List<MonsterDTO>();
-                foreach (var item in Monsters) dtoList.Add(item.ToJson());
-
+                var dtoList = Monsters.Select(x => x.ToJson()).ToList();
                 await HubContext.Clients.Clients(Users.Keys).SendAsync("UpdateListMonsters", dtoList);
             }
         }
 
-        public int AttackMonster(AttackMonsterDTO dto, ActiveUser user)
+        public async Task AttackMonster(AttackMonsterDTO dto, ActiveUser user)
         {
             var monster = Monsters.FirstOrDefault(x => x.Id == dto.IdMonster);
-            int addingExp = 0;
+            if (monster == null) return;
 
-            if (monster != null)
+            user.UseSpell(dto.Type, monster);
+
+            if (monster.Target != user.Name) monster.SetTarget(user.Name);
+            if (monster.Vitality.CurrentHP <= 0)
             {
-                user.UseSpell(dto.Type, monster);
-
-                if (monster.Target != user.Name) monster.SetTarget(user.Name);
-                if (monster.Vitality.CurrentHP <= 0)
-                {
-                    Monsters.Remove(monster);
-                    addingExp = monster.Exp;
-                    ResetTargetUser(user);
-                }
-
-                UpdateListMonsters();
+                await MonsterKilled(user, monster);
             }
+            _ = UpdateListMonsters();
 
-            return addingExp;
         }
 
         private async Task RefreshMonsters()
@@ -101,7 +102,27 @@ namespace Server.Hubs.Locations.BasePlaces
         {
             foreach (var item in Monsters)
                 if (item.Target == name) item.SetTarget(string.Empty);
-            UpdateListMonsters();
+            _ = UpdateListMonsters();
+        }
+
+        private async Task MonsterKilled(ActiveUser user, Monster monster)
+        {
+            var scopeFactory = serviceProvider.GetRequiredService<IServiceScopeFactory>();
+            using (var scope = scopeFactory.CreateScope())
+            {
+                var inventoryService = scope.ServiceProvider.GetRequiredService<InventoryService>();
+                var combatService = scope.ServiceProvider.GetRequiredService<CombatService>();
+
+                combatService?.AddExp(monster.Exp, user.Name);
+                (user.Stats as UserStatsHandler)?.AddExp(monster.Exp);
+
+                var items = monster.DropItemsOnDeath().ToArray();
+                if (items.Any() && inventoryService != null)
+                    await inventoryService.AddItemsUser(user.Name, items);
+            }
+
+            Monsters.Remove(monster);
+            ResetTargetUser(user as ActiveUser);
         }
     }
 }

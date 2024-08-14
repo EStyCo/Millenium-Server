@@ -6,8 +6,9 @@ namespace Server.Models.Spells.Models
     {
         public LowHealing()
         {
-            SpellType = SpellType.LowHealing;
             Name = "Подорожник";
+            SpellType = SpellType.LowHealing;
+            SelfUse = true;
             CoolDown = 20;
             Description = "Не много лечит раны.";
             ImagePath = "spells/low_healing.png";

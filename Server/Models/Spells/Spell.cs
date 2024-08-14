@@ -1,5 +1,4 @@
-﻿using Server.EntityFramework.Models;
-using Server.Models.Utilities;
+﻿using Server.Models.Utilities;
 
 namespace Server.Models.Spells
 {
@@ -12,10 +11,9 @@ namespace Server.Models.Spells
         public string Description { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
         public bool IsReady { get; set; } = true;
-
+        public bool SelfUse { get; protected set; } = false;
         public int SpellId { get; set; }
         public int CharacterId { get; set; }
-        public CharacterEF Character { get; set; }
 
         public abstract void Use(Entity user, params Entity[] targets);
 

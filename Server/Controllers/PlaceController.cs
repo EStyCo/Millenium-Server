@@ -15,21 +15,10 @@ namespace Server.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class PlaceController : ControllerBase
+    public class PlaceController(
+        UserStorage userStorage,
+        PlaceService placeService) : ControllerBase
     {
-        private readonly UserStorage userStorage;
-        private readonly PlaceService placeService;
-        private readonly UserRepository userRepository;
-
-        public PlaceController(UserStorage _userStorage,
-                               PlaceService _placeService,
-                               UserRepository _userRepository)
-        {
-            userStorage = _userStorage;
-            placeService = _placeService;
-            userRepository = _userRepository;
-        }
-
         [HttpPost("add")]
         public IActionResult AddMonster(PlaceDTO dto)
         {
@@ -38,24 +27,24 @@ namespace Server.Controllers
             return Ok(RespFactory.ReturnOk());
         }
 
-        [HttpPost("attackMonster")]
+        /*[HttpPost("attackMonster")]
         public async Task<IActionResult> AttackMonster(AttackMonsterDTO dto)
         {
             var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
 
             if (user != null && user.CanAttack)
             {
-                int addingExp = placeService.GetBattlePlace(dto.Place).AttackMonster(dto, user);
+                await placeService.GetBattlePlace(dto.Place).AttackMonster(dto, user);
 
-                if (addingExp > 0)
+                */ /*if (addingExp > 0)
                 {
                     (user.Stats as UserStatsHandler)?.AddExp(addingExp);
                     await userRepository.UpdateExp(addingExp, user.Name);
-                }
+                }*/ /*
             }
 
             return Ok(RespFactory.ReturnOk());
-        }
+        }*/
 
         [HttpPost("attackUser")]
         public IActionResult AttackUser(AttackUserDTO dto)
@@ -63,7 +52,7 @@ namespace Server.Controllers
             var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.NameUser);
             var target = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.NameTarget);
 
-            if (user != null && user.CanAttack && 
+            if (user != null && user.CanAttack &&
                 target != null && !target.States.Keys.OfType<WeaknessState>().Any())
             {
                 (placeService.GetPlace(dto.Place) as IBattleUsers)?.AttackUser(user, target, dto.Type);
@@ -75,7 +64,8 @@ namespace Server.Controllers
         [HttpPost("getDetailsMonster")]
         public IActionResult GetDetailsMonster(DetailsMonsterRequest dto)
         {
-            var details = placeService.GetBattlePlace(dto.Place)?.Monsters.FirstOrDefault(x => x.Id == dto.Id)?.DetailsToJson();
+            var details = placeService.GetBattlePlace(dto.Place)?.Monsters.FirstOrDefault(x => x.Id == dto.Id)
+                ?.DetailsToJson();
             if (details == null) return BadRequest(RespFactory.ReturnBadRequest());
 
             return Ok(RespFactory.ReturnOk(details));
@@ -84,7 +74,7 @@ namespace Server.Controllers
         [HttpPost("getMonsters")]
         public IActionResult GetMonsters(PlaceDTO dto)
         {
-            var monsters = placeService.GetBattlePlace(dto.Place)?.Monsters.Select(x =>x.ToJson()).ToList() ?? new();
+            var monsters = placeService.GetBattlePlace(dto.Place)?.Monsters.Select(x => x.ToJson()).ToList() ?? new();
 
             return Ok(RespFactory.ReturnOk(monsters));
         }

@@ -10,9 +10,10 @@ namespace Server.Models.Inventory.Items
         public override string Name { get; } = "Яблоко";
         public override bool CanEquipped { get; } = true;
         public override string Description { get; } = "Просто вкусное яблоко.";
+        public override string GainsDescription { get; } = "";
         public override string ImagePath { get; } = "items/apple.png";
 
-        public override void ApplyChanges()
+        public override void ApplyChanges(ActiveUser user)
         {
             throw new NotImplementedException();
         }

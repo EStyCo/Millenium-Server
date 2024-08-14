@@ -3,15 +3,17 @@ using Server.Models.Handlers.Stats;
 using Server.Models.Spells;
 using Server.Models.Spells.States;
 using Server.Models.Utilities;
+using Server.Models.Handlers;
 
 namespace Server.Models
 {
     public abstract class Entity
     {
-        public abstract string Name { get; protected set; }
+        public string Name { get; set; } = string.Empty;
         public abstract bool CanAttack { get; set; }
         public abstract Dictionary<State, CancellationTokenSource> States { get; protected set; }
-        public abstract StatsHandler Stats { get; protected set; }
+        public abstract StatsHandler Stats { get; set; }
+        public abstract ModifiersHandler Modifiers { get; set; }
         public abstract VitalityHandler Vitality { get; protected set; }
         public abstract void UseSpell(SpellType type, params Entity[] target);
         public abstract ResultUseSpell TakeDamage(int damage);

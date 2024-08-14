@@ -1,5 +1,4 @@
-﻿using Server.Hubs.Locations.BasePlaces;
-using Server.Models.Handlers.Vitality;
+﻿using Server.Models.Handlers.Vitality;
 using Microsoft.AspNetCore.SignalR;
 using Server.Models.Handlers.Stats;
 using Server.Models.Spells.Models;
@@ -9,38 +8,25 @@ using Server.Models.Spells;
 using Server.Hubs.DTO;
 using System.Text;
 using I = Server.Models.Inventory;
-using Server.Models.Inventory;
 using Server.EntityFramework.Models;
-using Server.Services;
+using Server.Models.Handlers;
 
 namespace Server.Models
 {
     public class ActiveUser : Entity
     {
-        private readonly IHubContext<UserStorage> hubContext;
+        private IHubContext<UserStorage> hubContext;
         public string ConnectionId { get; set; } = string.Empty;
-        public override string Name { get; protected set; } = string.Empty;
         public string Place { get; set; } = string.Empty;
         public override bool CanAttack { get; set; } = true;
-        public int GlobalRestSeconds { get; private set; } = 0;
-        public override StatsHandler Stats { get; protected set; }
+        public int GlobalRestSeconds { get; set; } = 0;
+        public override StatsHandler Stats { get; set; }
+        public I.Inventory Inventory { get; set; }
+        public override ModifiersHandler Modifiers { get; set; }
         public override VitalityHandler Vitality { get; protected set; }
         public List<Spell> ActiveSkills { get; set; } = new();
-        public List<string> BattleLogs { get; set; } = new();
         public override Dictionary<State, CancellationTokenSource> States { get; protected set; } = new();
-        public I.Inventory Inventory { get; set; }
-
-        public ActiveUser(
-            IHubContext<UserStorage> _hubContext,
-            CharacterEF character)
-        {
-            hubContext = _hubContext;
-            Name = character.Name;
-            Place = character.Place;
-            Stats = new UserStatsHandler(character.Stats);
-            Vitality = new UserVitalityHandler(_hubContext, (UserStatsHandler)Stats, ConnectionId);
-            Inventory = new(ItemFactory.GetList(character.Items));
-        }
+        public List<string> BattleLogs { get; set; } = new();
 
         public override void UseSpell(SpellType type, params Entity[] target)
         {
@@ -51,6 +37,25 @@ namespace Server.Models
                 skill.Use(this, target);
                 if (skill is not Rest) StartGlobalRest();
             }
+        }
+
+        public void ChangeHubContext(IHubContext<UserStorage> _hubContext)
+        {
+            hubContext = _hubContext;
+        }
+
+        public void Initialize(CharacterEF character)
+        {
+            Name = character.Name;
+            Place = character.Place;
+            Stats = new UserStatsHandler();
+            Stats.SetStats(character.Stats);
+
+            Modifiers = new ModifiersHandler();
+
+            Vitality = new UserVitalityHandler(hubContext,ConnectionId, (UserStatsHandler)Stats, Modifiers);
+            Inventory = new(ItemFactory.GetList(character.Items), this);
+            ActiveSkills.AddRange(SpellFactory.Get(character.Spells));
         }
 
         private async void StartGlobalRest()
@@ -108,7 +113,6 @@ namespace Server.Models
 
             if (Vitality.CurrentHP <= 0)
             {
-                //placeService.GetBattlePlace(Place)?.WeakeningPlayer(Name);
                 AddState<WeaknessState>(this);
                 UpdateStates();
             }
@@ -128,6 +132,14 @@ namespace Server.Models
                 await hubContext.Clients
                     .Client(ConnectionId)
                     .SendAsync("UpdateBuffBar", States.Keys.Select(x => x.ToJson()).ToList());
+        }
+
+        public void ReAssembly()
+        {
+            (Stats as UserStatsHandler)?.ReturnToOriginalStats();
+            Modifiers.ResetValues();
+            Inventory.EquipItems();
+            Vitality.ResetValues();
         }
 
         public UserOnPlace ToJson()

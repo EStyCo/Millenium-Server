@@ -22,7 +22,9 @@ namespace Server.Hubs.Locations.BattlePlaces
 
         public DarkWood(IMapper _mapper,
                         IHubContext<PlaceHub> hubContext,
-                        IServiceFactory<UserStorage> _userStorageFactory) : base(hubContext)
+                        IServiceFactory<UserStorage> _userStorageFactory,
+                        IServiceProvider serviceProvider) : base(hubContext, serviceProvider)
+            
         {
             mapper = _mapper;
             userStorageFactory = _userStorageFactory;

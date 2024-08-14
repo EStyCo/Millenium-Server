@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Server.Hubs.Locations.BasePlaces;
 using Server.Models.Handlers.Stats;
+using Server.Models.Modifiers.Additional;
+using Server.Models.Modifiers.Increased;
 using Server.Models.Utilities;
 
 namespace Server.Models.Handlers.Vitality
@@ -8,99 +10,85 @@ namespace Server.Models.Handlers.Vitality
     public class UserVitalityHandler : VitalityHandler
     {
         private readonly IHubContext<UserStorage> hubContext;
-        private readonly UserStatsHandler stats;
-        public event Action OnVitalityChanged;
         public string ConnectionId { get; set; }
-
-        private int maxHP;
-        private int maxMP;
-        private int regenRateHP;
-        private int regenRateMP;
-        public override int CurrentHP { get; protected set; } = 0;
-        public int CurrentMP { get; private set; } = 0;
-        public override int MaxHP { get { return maxHP = Consider.MaxHP(stats); } set { maxHP = value; } }
-        public int MaxMP { get { return maxMP = Consider.MaxMP(stats); } }
-        public int RegenRateHP { get { return regenRateHP = Consider.RegenRateHP(this, stats); } }
-        public int RegenRateMP { get { return regenRateMP = Consider.RegenRateMP(stats); } }
+        private readonly UserStatsHandler stats;
+        private readonly ModifiersHandler modifiers;
+        public event Action? OnVitalityChanged;
 
         public UserVitalityHandler(IHubContext<UserStorage> _hubContext,
+                                   string connectionId,
                                    UserStatsHandler _stats,
-                                   string connectionId)
+                                   ModifiersHandler _modifiers)
         {
             hubContext = _hubContext;
-            stats = _stats;
             ConnectionId = connectionId;
+            stats = _stats;
+            modifiers = _modifiers;
             _ = StartVitalityConnection();
         }
 
+
         public async Task StartVitalityConnection()
         {
+            MaxHP = GetMaxHP();
+            CurrentHP = MaxHP;
             while (true)
             {
-                _ = SendHP();
-                _ = SendMP();
-
                 await Task.Delay(500);
-
+                _ = SendHP();
                 OnVitalityChanged?.Invoke();
             }
         }
 
         private async Task SendHP()
         {
-            int[] sendHP = { maxHP, maxHP };
-
+            int[] sendHP = { MaxHP, MaxHP };
             if (CurrentHP < MaxHP)
-            {
                 sendHP[0] = CurrentHP += RegenRateHP;
-            }
-
             if (ConnectionId != string.Empty)
-            {
                 await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateHP", sendHP);
-            }
-
-        }
-
-        private async Task SendMP()
-        {
-            int[] sendMP = { maxMP, maxMP };
-
-            if (CurrentMP < MaxMP)
-            {
-                sendMP[0] = CurrentMP += RegenRateMP;
-            }
-
-            if (ConnectionId != string.Empty)
-            {
-                await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateMP", sendMP);
-            }
         }
 
         public override void TakeDamage(int damage)
         {
             if (CurrentHP - damage <= 0)
-            {
                 CurrentHP = 0;
-            }
             else
-            {
                 CurrentHP -= damage;
-            }
         }
 
         public override void TakeHealing(int heal)
         {
             int temp = CurrentHP + heal;
-
             if (temp >= MaxHP)
-            {
-                CurrentHP = maxHP;
-            }
+                CurrentHP = MaxHP;
             else
-            {
                 CurrentHP = temp;
+        }
+
+        public override void ResetValues()
+        {
+            var tempHP = CurrentHP;
+            MaxHP = GetMaxHP();
+            RegenRateHP = (int)(Math.Round(MaxHP / 60.0) * 0.5);
+
+            if (CurrentHP > MaxHP)
+                CurrentHP = MaxHP;
+            else
+                CurrentHP = tempHP;
+        }
+
+        private int GetMaxHP()
+        {
+            var additionalHP = modifiers.Get<AdditionalHPModifier>();
+            var increaseHP = modifiers.Get<IncreasedHPModifier>();
+            var result = (int)(100 + (stats.Vitality * 0.20) + (stats.Strength + stats.Agility + stats.Level));
+            if (additionalHP != null && increaseHP != null)
+            {
+                result += additionalHP.Value;
+                result += (int)Math.Round((double)(result * increaseHP.Value) / 100);
             }
+            return result;
         }
     }
 }

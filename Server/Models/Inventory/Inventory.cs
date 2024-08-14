@@ -5,12 +5,14 @@ namespace Server.Models.Inventory
 {
     public class Inventory
     {
+        private readonly ActiveUser user;
         public List<Item> Items { get; private set; } = [];
         public Dictionary<SlotType, Item?> Slots { get; private set; }
 
-        public Inventory(List<Item> items)
+        public Inventory(List<Item> items, ActiveUser _user)
         {
             Items = items;
+            user = _user;
             Slots = new()
             {
                 { SlotType.Head, null },
@@ -18,17 +20,16 @@ namespace Server.Models.Inventory
                 { SlotType.Feet, null },
                 { SlotType.Weapon, null },
             };
-
-            EquipItems();
         }
 
-        private void EquipItems()
+        public void EquipItems()
         {
             foreach (var item in Items)
             {
-                if(item.IsEquipped)
+                if (item.IsEquipped)
                 {
                     Slots[item.SlotType] = item;
+                    item.ApplyChanges(user);
                 }
             }
         }
@@ -38,20 +39,14 @@ namespace Server.Models.Inventory
             Items.Add(item);
         }
 
-        public void TakeItem(int id)
-        {
-            var item = FindItem(id);
-            if (item != null)
-            {
-                Items.Remove(item);
-            }
-        }
-
         public void DeleteItem(int id)
         {
             var item = FindItem(id);
             if (item != null)
+            {
+                UnEquip(id);
                 Items.Remove(item);
+            }
         }
 
         private Item? FindItem(int id)
@@ -59,7 +54,7 @@ namespace Server.Models.Inventory
             return Items.FirstOrDefault(x => x.Id == id);
         }
 
-        public DressingResult Equip(int id)
+        public DressingResult? Equip(int id)
         {
             var item = FindItem(id);
             if (item == null) return null;
@@ -74,17 +69,13 @@ namespace Server.Models.Inventory
 
         public int? UnEquip(SlotType slotType)
         {
-            //var slotPair = Slots.FirstOrDefault(x => x.Key == slotType);
-            var slot = Slots[slotType];
-            int id = -1;
-            if (slot != null)
-            {
-                id = slot.Id;
-                slot.IsEquipped = false;
-                Slots[slotType] = null;
-                return id;
-            }
-            return null;
+            var item = Slots[slotType];
+            if (item == null) return null;
+
+            int id = item.Id;
+            item.IsEquipped = false;
+            Slots[slotType] = null;
+            return id;
         }
 
         public int? UnEquip(int id)
@@ -99,9 +90,10 @@ namespace Server.Models.Inventory
                 Slots[item.SlotType] = null;
                 return item.Id;
             }
-
             return null;
         }
+
+
 
         public InventoryDTO ToJsonInventory()
         {

@@ -1,4 +1,5 @@
-﻿using Server.Models.Utilities;
+﻿using Server.Models.Modifiers.Increased;
+using Server.Models.Utilities;
 
 namespace Server.Models.Spells.Models
 {
@@ -20,7 +21,12 @@ namespace Server.Models.Spells.Models
             {
                 var target = targets.First();
                 var s = user.Stats;
-                var damage = s.Strength * 2 + s.Strength * (s.Agility / 100);
+                
+                var modifier = user.Modifiers.Modifiers.FirstOrDefault(x => x.GetType() == typeof(IncreasedDamageModifier));
+                var damage = (s.Strength * 2 + s.Strength * (s.Agility / 100));
+                double additionalDamage = (damage * modifier.Value) / 100;
+
+                damage += (int)Math.Round(additionalDamage);
 
                 var resultDamage = target.TakeDamage(damage);
 

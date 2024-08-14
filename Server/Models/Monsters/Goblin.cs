@@ -1,16 +1,16 @@
 ﻿using Server.Hubs.Locations.BasePlaces;
+using Server.Models.Handlers;
 using Server.Models.Handlers.Stats;
 using Server.Models.Handlers.Vitality;
 using Server.Models.Interfaces;
 using Server.Models.Spells.States;
 using Server.Models.Utilities;
+using Server.Models.Utilities.Slots;
 
 namespace Server.Models.Monsters
 {
     public class Goblin : Monster
     {
-        public override int Id { get; set; }
-        public override string Name { get; protected set; }
         public override BattlePlace PlaceInstance { get; protected set; }
         public override string Target { get; protected set; } = string.Empty;
         public override string PlaceName { get; protected set; } = string.Empty;
@@ -18,13 +18,15 @@ namespace Server.Models.Monsters
         public override Dictionary<State, CancellationTokenSource> States { get; protected set; } = new();
         public override double MinTimeAttack { get; set; } = 3.0;
         public override double MaxTimeAttack { get; set; } = 5.0;
-        public override StatsHandler Stats { get; protected set; }
+        public override StatsHandler Stats { get; set; }
         public override VitalityHandler Vitality { get; protected set; }
         public override string Description { get ; set ; }
+        public override Dictionary<ItemType, int> DroppedItems { get; }
+        public override ModifiersHandler Modifiers { get; set; }
 
         public Goblin(IServiceFactory<UserStorage> _userStorageFactory,
                    BattlePlace place,
-                   Action updatingAction) : base(_userStorageFactory, updatingAction)
+                   Func<Task> updatingAction) : base(_userStorageFactory, updatingAction)
         {
             Exp = 25;
             Name = "Goblin " + GetRandomName();
@@ -33,8 +35,16 @@ namespace Server.Models.Monsters
             PlaceInstance = place;
             PlaceName = place.NamePlace;
 
-            Stats = new MonsterStatsHandler(12, 7, 3);
+            Modifiers = new ModifiersHandler();
+            Stats = new MonsterStatsHandler(12, 7, 3, 5,5,5);
             Vitality = new MonsterVitalityHandler(64, 64);
+
+            DroppedItems = new Dictionary<ItemType, int>()
+            {
+                {ItemType.Apple, 6},
+                {ItemType.Spacesuit, 13},
+                {ItemType.TitanSword, 16},
+            };
         }
 
         public override async void SetTarget(string name)

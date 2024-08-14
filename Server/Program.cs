@@ -24,6 +24,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
+builder.Services.AddScoped<ItemRepository>();
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<TravelRepository>();
 
@@ -76,8 +77,10 @@ void RegistrationPlaces(IServiceCollection services)
 void RegistrationServices(IServiceCollection services)
 {
     services.AddTransient<AuthService>();
-    services.AddTransient<InventoryService>();
+    services.AddScoped<InventoryService>();
     services.AddTransient<PlaceService>();
+    services.AddTransient<CombatService>();
+    services.AddTransient<StatsService>();
 
     services.AddTransient<UserFactory>();
 }

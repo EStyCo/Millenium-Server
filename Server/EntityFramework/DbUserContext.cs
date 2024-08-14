@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Server.EntityFramework.Configurations;
 using Server.EntityFramework.Models;
+using Server.Models.Interfaces;
 
 namespace Server.EntityFramework
 {
@@ -10,7 +11,7 @@ namespace Server.EntityFramework
 
         public DbSet<UserEF> Users { get; set; }
         public DbSet<CharacterEF> Characters { get; set; }
-        public DbSet<Stats> Stats { get; set; }
+        public DbSet<StatsEF> Stats { get; set; }
         public DbSet<ItemEF> Items { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

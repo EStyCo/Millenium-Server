@@ -11,19 +11,12 @@ namespace WebApplication1.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class LogsController : ControllerBase
+    public class LogsController(UserStorage userStorage) : ControllerBase
     {
-        private readonly UserStorage storage;
-
-        public LogsController(UserStorage _userStorage)
-        {
-            storage = _userStorage;
-        }
-
         [HttpPost("get")]
         public async Task<IActionResult> GetBattleLogs(NameRequestDTO dto)
         {
-            var user = storage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
+            var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
 
             if (user != null)
             {

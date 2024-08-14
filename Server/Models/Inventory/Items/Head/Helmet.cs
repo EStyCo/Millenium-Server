@@ -1,6 +1,6 @@
 ﻿using Server.Models.Utilities.Slots;
 
-namespace Server.Models.Inventory.Items
+namespace Server.Models.Inventory.Items.Head
 {
     public class Spacesuit : Item
     {
@@ -10,9 +10,10 @@ namespace Server.Models.Inventory.Items
         public override string Name { get; } = "Скафандр";
         public override bool CanEquipped { get; } = true;
         public override string Description { get; } = "Такое обычно носят астронавты и Даники-дураки.";
+        public override string GainsDescription { get; } = "";
         public override string ImagePath { get; } = "items/helmet.png";
 
-        public override void ApplyChanges()
+        public override void ApplyChanges(ActiveUser user)
         {
             throw new NotImplementedException();
         }

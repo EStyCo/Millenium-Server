@@ -10,10 +10,10 @@ namespace Server.EntityFramework.Models
         public Gender Gender { get; set; }
         public string Place { get; set; } = string.Empty;
         public int TotalSpellPoints { get; set; } = 5;
-        public int FreelSpellPoints { get; set; } = 5;
+        public int FreeSpellPoints { get; set; } = 5;
         public List<SpellType> Spells { get; set; }
         public List<ItemEF> Items { get; set; }
-        public Stats Stats { get; set; }
+        public StatsEF Stats { get; set; }
         public int UserId { get; set; }
         public UserEF User { get; set; }
     }

@@ -1,6 +1,6 @@
 ﻿using Server.Models.Utilities.Slots;
 
-namespace Server.Models.Inventory.Items
+namespace Server.Models.Inventory.Items.Head
 {
     public class TitanHelmet : Item
     {
@@ -10,9 +10,10 @@ namespace Server.Models.Inventory.Items
         public override string Name { get; } = "Шлем Титана";
         public override bool CanEquipped { get; } = true;
         public override string Description { get; } = "Хорошо защищает голову, не зря их носили лучшие бойцы поколения";
+        public override string GainsDescription { get; } = "";
         public override string ImagePath { get; } = "items/titanHelmet.png";
 
-        public override void ApplyChanges()
+        public override void ApplyChanges(ActiveUser user)
         {
             throw new NotImplementedException();
         }

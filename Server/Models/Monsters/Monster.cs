@@ -1,18 +1,18 @@
 ﻿using Server.Hubs.Locations.BasePlaces;
 using Server.Models.Interfaces;
 using Server.Models.Utilities;
-using Server.Models.Skills;
 using Server.Models.Spells;
 using Server.Models.Monsters.DTO;
 using Server.Models.Spells.States;
+using Server.Models.Utilities.Slots;
 
 namespace Server.Models.Monsters
 {
     public abstract class Monster : Entity
     {
         protected readonly IServiceFactory<UserStorage> userStorageFactory;
-        public Action UpdatingAction { get; }
-        public abstract int Id { get; set; }
+        public Func<Task> UpdatingAction { get; }
+        public int Id { get; set; }
         public int Exp { get; set; } = 0;
         public string ImagePath { get; set; } = string.Empty;
         public abstract string Description { get; set; }
@@ -22,10 +22,11 @@ namespace Server.Models.Monsters
         public abstract double MinTimeAttack { get; set; }
         public abstract double MaxTimeAttack { get; set; }
 
-        public Monster(IServiceFactory<UserStorage> _userStorageFactory, Action updatingAction)
+        public abstract Dictionary<ItemType, int> DroppedItems { get; }
+
+        public Monster(IServiceFactory<UserStorage> _userStorageFactory, Func<Task> updatingAction)
         {
             userStorageFactory = _userStorageFactory;
-
             UpdatingAction = updatingAction;
         }
 
@@ -95,19 +96,25 @@ namespace Server.Models.Monsters
 
         protected void SendBattleLog(ActiveUser user)
         {
-            if (Vitality.CurrentHP <= 0)
+            _ = user.AddBattleLog($"{user.Name} скрылся от {Name}.");
+            /*if (Vitality.CurrentHP <= 0)
             {
                 _ = user.AddBattleLog($"{user.Name} уничтожил {Name}.");
-            }
-            else
-            {
-                _ = user.AddBattleLog($"{user.Name} скрылся от {Name}.");
-            }
+            }*/
         }
 
         public override void UpdateStates()
         {
             PlaceInstance?.UpdateListMonsters();
+        }
+
+        public List<ItemType> DropItemsOnDeath()
+        {
+            var list = new List<ItemType>();
+            foreach (var item in DroppedItems)
+                if (new Random().Next(0, item.Value) == 0)
+                    list.Add(item.Key);
+            return list;
         }
     }
 }

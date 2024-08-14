@@ -1,9 +1,18 @@
-﻿namespace Server.Models.Spells
+﻿using Server.Models.Interfaces;
+
+namespace Server.Models.Spells
 {
-    public class SpellListResponse(bool canAttack, int globalRestSeconds, List<Spell> list)
+    public class SpellListResponse
     {
-        public bool CanAttack { get; } = canAttack;
-        public int GlobalRestSeconds { get; } = globalRestSeconds;
-        public List<Spell> SpellList { get; } = list;
+        public bool CanAttack { get; }
+        public int GlobalRestSeconds { get; } 
+        public List<Spell> SpellList { get; }
+
+        public SpellListResponse(ActiveUser user)
+        {
+            CanAttack = user.CanAttack;
+            GlobalRestSeconds = user.GlobalRestSeconds;
+            SpellList = user.ActiveSkills;
+        }
     }
 }

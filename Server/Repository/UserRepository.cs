@@ -25,14 +25,9 @@ namespace Server.Repository
 
         public async Task<bool> IsUniqueUser(RegRequestDTO dto)
         {
-            var result = await dbContext.Users
+            return await dbContext.Users
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Email == dto.Email || x.Character.Name == dto.Name);
-
-            if (result != null)
-                return false;
-
-            return true;
+                .AnyAsync(x => x.Email == dto.Email || x.Character.Name == dto.Name);
         }
 
         public async Task<CharacterEF?> LoginUser(LoginRequestDTO dto)
@@ -68,7 +63,7 @@ namespace Server.Repository
                 Items = []
             };
 
-            var stats = new Stats
+            var stats = new StatsEF
             {
                 CharacterEF = character
             };
@@ -96,7 +91,7 @@ namespace Server.Repository
 
             return new MentorSpellListResponseDTO()
             {
-                FreePoints = character.FreelSpellPoints,
+                FreePoints = character.FreeSpellPoints,
                 TotalPoints = character.TotalSpellPoints,
                 SpellList = SpellFactory.GetLearningList(character.Spells)
             };
@@ -109,10 +104,10 @@ namespace Server.Repository
 
             if (character == null) return null;
             if (character.Spells.Contains(dto.SpellType)
-                || character.FreelSpellPoints <= 0) return null;
+                || character.FreeSpellPoints <= 0) return null;
 
             character.Spells.Add(dto.SpellType);
-            character.FreelSpellPoints--;
+            character.FreeSpellPoints--;
             await dbContext.SaveChangesAsync();
             return SpellFactory.Get(character.Spells);
         }
@@ -128,7 +123,7 @@ namespace Server.Repository
             {
                 character.Spells.Remove(dto.SpellType);
             }
-            character.FreelSpellPoints++;
+            character.FreeSpellPoints++;
             await dbContext.SaveChangesAsync();
             return SpellFactory.Get(character.Spells);
         }
@@ -157,79 +152,20 @@ namespace Server.Repository
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<Stats> GetStats(string name)
+        public async Task<StatsEF?> GetStats(string name)
         {
-#pragma warning disable CS8603 
             return await dbContext.Characters
                 .Where(x => x.Name == name)
                 .Select(x => x.Stats)
                 .AsNoTracking()
-                .FirstOrDefaultAsync() ?? null;
-#pragma warning restore CS8603 
+                .FirstOrDefaultAsync();
         }
 
-        public async Task<List<Item>> GetInventory(string name)
+        public async Task<bool> CharacterExists(string name)
         {
-            var items = new List<Item>();
-            var itemsEF = await dbContext.Characters
-                           .AsNoTracking()
-                           .Where(x => x.Name == name)
-                           .Select(x => x.Items)
-                           .FirstOrDefaultAsync();
-            if (itemsEF != null)
-            {
-                var a = ItemFactory.GetList(itemsEF);
-                items.AddRange(a);
-            }
-            return items;
-        }
-
-        public async Task<bool> UserExists(string name)
-        {
-            var character = await dbContext.Characters
+            return await dbContext.Characters
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Name == name);
-
-            return character != null;
-        }
-
-        public async Task<bool> ItemExists(DressingDTO dto)
-        {
-            var item = await dbContext.Characters
-                .AsNoTracking()
-                .Where(x => x.Name == dto.Name)
-                .SelectMany(x => x.Items)
-                .FirstOrDefaultAsync(x => x.Id == dto.Id);
-
-            return item != null;
-        }
-
-        public async Task EquipItem(DressingDTO dto)
-        {
-            var item = await dbContext.Characters
-                .Where(x => x.Name == dto.Name)
-                .SelectMany(x => x.Items)
-                .FirstOrDefaultAsync(x => x.Id == dto.Id);
-
-            if (item != null)
-            {
-                item.IsEquipped = true;
-                await dbContext.SaveChangesAsync();
-            }
-        }
-
-        public async Task UnEquipItem(DressingDTO dto)
-        {
-            var item = await dbContext.Characters
-                .Where(x => x.Name == dto.Name)
-                .SelectMany(x => x.Items)
-                .FirstOrDefaultAsync(x => x.Id == dto.Id);
-
-            if (item != null)
-            {
-                item.IsEquipped = false;
-                await dbContext.SaveChangesAsync();
-            }
+                .AnyAsync(x => x.Name == name);
         }
     }
 }

@@ -1,6 +1,10 @@
 ﻿using Server.EntityFramework.Models;
 using Server.Models.Inventory;
 using Server.Models.Inventory.Items;
+using Server.Models.Inventory.Items.Body;
+using Server.Models.Inventory.Items.Feet;
+using Server.Models.Inventory.Items.Head;
+using Server.Models.Inventory.Items.Weapon;
 using Server.Models.Utilities.Slots;
 
 namespace Server.Models.Utilities
@@ -16,6 +20,9 @@ namespace Server.Models.Utilities
             { ItemType.TitanSword, () => new TitanSword() },
             { ItemType.KnightHelmet, () => null },
             { ItemType.TitanHelmet, () => new TitanHelmet() },
+            { ItemType.ChainBoots, () => new ChainBoots() },
+            { ItemType.LeatherArmor, () => new LeatherArmor() },
+            { ItemType.Stone, () => new Stone() },
         };
 
         public static Item? Get(ItemEF dto)
@@ -34,14 +41,8 @@ namespace Server.Models.Utilities
 
         public static Item? Get(ItemType type)
         {
-            if (itemDictionary.TryGetValue(type, out var factory))
-            {
-                var item = factory?.Invoke();
-                if (item == null) return null;
-
-                return item;
-            }
-            return null;
+            itemDictionary.TryGetValue(type, out var factory);
+            return factory?.Invoke();
         }
 
         public static List<Item> GetList(List<ItemEF> listItemsEF)

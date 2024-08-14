@@ -1,6 +1,5 @@
 ﻿using Server.Models.DTO.Inventory;
 using Microsoft.AspNetCore.Mvc;
-using Server.Models.Inventory;
 using Server.Models.Utilities;
 using Server.Models.DTO.User;
 using Server.Services;
@@ -13,41 +12,33 @@ namespace Server.Controllers
     public class InventoryController : ControllerBase
     {
         private readonly UserStorage userStorage;
-
         private readonly InventoryService invService;
 
-        public InventoryController(UserStorage _userStorage,
-                                   InventoryService _invService)
+        public InventoryController(
+            UserStorage _userStorage,
+            InventoryService _invService)
         {
             userStorage = _userStorage;
             invService = _invService;
         }
 
-        [HttpPost("getInventory")]
+        [HttpPost("Inventory")]
         public IActionResult GetInventory(NameRequestDTO dto)
         {
-            var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
+            var user = userStorage.GetUser(dto.Name);
             if (user == null) return BadRequest(RespFactory.ReturnBadRequest());
-
             return Ok(RespFactory.ReturnOk(user.Inventory.ToJsonInventory()));
         }
 
-        [HttpPost("getEquip")]
+        [HttpPost("GetEquip")]
         public IActionResult GetEquip(NameRequestDTO dto)
         {
-            var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
+            var user = userStorage.GetUser(dto.Name);
             if (user == null) return BadRequest(RespFactory.ReturnBadRequest());
-
             return Ok(RespFactory.ReturnOk(user.Inventory.ToJsonEquip()));
         }
 
-        [HttpPost("getItem")]
-        public IActionResult GetItem(DressingDTO dto)
-        {
-            return Ok(RespFactory.ReturnOk());
-        }
-
-        [HttpPut("equipItem")]
+        [HttpPut("Equip")]
         public async Task<IActionResult> EquipItem(DressingDTO dto)
         {
             if (await invService.EquipItem(dto))
@@ -56,7 +47,7 @@ namespace Server.Controllers
         }
 
 
-        [HttpPut("unEquipItem")]
+        [HttpPut("UnEquip")]
         public async Task<IActionResult> UnEquipItem(DressingDTO dto)
         {
             if (await invService.UnEquipItem(dto))
@@ -64,15 +55,12 @@ namespace Server.Controllers
             return BadRequest(RespFactory.ReturnBadRequest());
         }
 
-        [HttpGet("destroyItem")]
-        public IActionResult DestroyItem()
+        [HttpDelete("Destroy")]
+        public async Task<IActionResult> DestroyItem(DressingDTO dto)
         {
-            var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == "Denny");
-
-            if (user == null) return BadRequest(RespFactory.ReturnBadRequest());
-
-            user.Inventory.AddItem(new Apple());
-            return Ok(RespFactory.ReturnOk());
+            if (await invService.DestroyItem(dto))
+                return Ok(RespFactory.ReturnOk());
+            return BadRequest(RespFactory.ReturnBadRequest());
         }
 
         [HttpPost("getInventoryFromDB")]

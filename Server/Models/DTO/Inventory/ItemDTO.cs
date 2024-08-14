@@ -1,28 +1,18 @@
-﻿using Server.Models.Utilities.Slots;
+﻿using Server.Models.Inventory;
+using Server.Models.Utilities.Slots;
 
 namespace Server.Models.DTO.Inventory
 {
-    public class ItemDTO
+    public class ItemDTO(Item item)
     {
-        public int Id { get; set; }
-        public SlotType SlotType { get; set; }
-        public ItemType ItemType { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string ImagePath { get; set; }
-        public bool CanEquipped { get; set; }
-        public bool IsEquipped { get; set; }
-
-        public ItemDTO(int id, SlotType slotType, ItemType itemType, string name, string description, string imagePath, bool canEquipped, bool isEquipped)
-        {
-            Id = id;
-            SlotType = slotType;
-            ItemType = itemType;
-            Name = name;
-            Description = description;
-            ImagePath = imagePath;
-            CanEquipped = canEquipped;
-            IsEquipped = isEquipped;
-        }
+        public int Id { get; } = item.Id;
+        public SlotType SlotType { get; } = item.SlotType;
+        public ItemType ItemType { get; } = item.ItemType;
+        public string Name { get; } = item.Name;
+        public string Description { get;  } = item.Description;
+        public string GainsDescription { get;  } = item.GainsDescription;
+        public string ImagePath { get;  } = item.ImagePath;
+        public bool CanEquipped { get;  } = item.CanEquipped;
+        public bool IsEquipped { get;  } = item.IsEquipped;
     }
 }

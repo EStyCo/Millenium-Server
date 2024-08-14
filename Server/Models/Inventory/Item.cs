@@ -10,15 +10,16 @@ namespace Server.Models.Inventory
         public abstract ItemType ItemType { get; }
         public abstract string Name { get; }
         public abstract string Description { get; }
+        public abstract string GainsDescription { get; }
         public abstract string ImagePath { get; }
         public abstract bool CanEquipped { get; }
         public virtual bool IsEquipped { get; set; } = false;
 
-        public abstract void ApplyChanges();
+        public abstract void ApplyChanges(ActiveUser user);
 
-        public virtual ItemDTO ToJson()
+        public ItemDTO ToJson()
         {
-            return new(Id, SlotType, ItemType, Name, Description, ImagePath, CanEquipped, IsEquipped);
+            return new(this);
         }
     }
 }

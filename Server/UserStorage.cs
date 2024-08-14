@@ -5,13 +5,11 @@ namespace Server
 {
     public class UserStorage : Hub
     {
-        //private readonly IHubContext<UserStorage> hubContext;
         public Dictionary<string, CancellationTokenSource> DisconnectTokens { get; private set; }
         public List<ActiveUser> ActiveUsers { get; private set; }
 
-        public UserStorage(IHubContext<UserStorage> _hubContext)
+        public UserStorage()
         {
-            //hubContext = _hubContext;
             ActiveUsers = [];
             DisconnectTokens = [];
         }

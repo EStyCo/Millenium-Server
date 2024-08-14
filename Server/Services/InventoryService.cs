@@ -1,6 +1,8 @@
 ﻿using Server.Models.DTO.Inventory;
 using Server.Models.DTO.User;
 using Server.Models.Inventory;
+using Server.Models.Utilities;
+using Server.Models.Utilities.Slots;
 using Server.Repository;
 
 namespace Server.Services
@@ -8,56 +10,74 @@ namespace Server.Services
     public class InventoryService
     {
         private readonly UserStorage userStorage;
-        private readonly UserRepository userRep;
+        private readonly ItemRepository itemRep;
 
         public InventoryService(UserStorage _userStorage,
-                                UserRepository _userRepository)
+                                ItemRepository _itemRep)
         {
             userStorage = _userStorage;
-            userRep = _userRepository;
+            itemRep = _itemRep;
         }
 
         public async Task<bool> EquipItem(DressingDTO dto)
         {
-            if (!await userRep.ItemExists(dto)) return false;
-
-            var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
+            if (!await itemRep.ItemExists(dto)) return false;
+            var user = userStorage.GetUser(dto.Name);
             if (user == null) return false;
 
-            var result = user.Inventory.Equip(dto.Id);
+            var dressingItems = user.Inventory.Equip(dto.Id);
 
-            if (result != null)
+            if (dressingItems?.UnEquippedId != null)
             {
-                await userRep.EquipItem(dto);
-                if (result.UnEquippedId != null)
+                await itemRep.UnEquipItem(new()
                 {
-                    await userRep.UnEquipItem(new()
-                    {
-                        Id = (int)result.UnEquippedId,
-                        Name = dto.Name
-                    });
-                }
+                    Id = (int)dressingItems.UnEquippedId,
+                    Name = dto.Name
+                });
             }
+            await itemRep.EquipItem(dto);
+            user.ReAssembly();
             return true;
         }
 
         public async Task<bool> UnEquipItem(DressingDTO dto)
         {
-            if (!await userRep.ItemExists(dto)) return false;
+            if (!await itemRep.ItemExists(dto)) return false;
 
             var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
             if (user == null) return false;
 
             var id = user.Inventory.UnEquip(dto.Id);
 
-            await userRep.UnEquipItem(new()
+            await itemRep.UnEquipItem(new()
             {
                 Id = dto.Id,
                 Name = dto.Name
             });
+            user.ReAssembly();
             return true;
         }
 
+        public async Task AddItemsUser(string name, params ItemType[] types)
+        {
+            var user = userStorage.GetUser(name);
+            foreach (var type in types)
+            {
+                var item = await itemRep.AddItem(name, type);
+                if (item != null)
+                    user?.Inventory.AddItem(item);
+            }
+        }
+
+        public async Task<bool> DestroyItem(DressingDTO dto)
+        {
+            var user = userStorage.GetUser(dto.Name);
+
+            await itemRep.DestroyItem(dto);
+            user?.Inventory.DeleteItem(dto.Id);
+            user?.ReAssembly();
+            return true;
+        }
 
         /// <summary>
         /// Testing method
@@ -66,17 +86,17 @@ namespace Server.Services
         /// <returns></returns>
         public async Task<List<Tuple<string, Item?>>> GetInventoryFromDB(NameRequestDTO dto)
         {
-            var list = await userRep.GetInventory(dto.Name);
+            var listEF = await itemRep.GetInventory(dto.Name);
+            var list = ItemFactory.GetList(listEF);
             var response = new List<Tuple<string, Item?>>();
 
             foreach (var item in list)
             {
-                if(item.IsEquipped)
+                if (item.IsEquipped)
                 {
                     response.Add(new(item.Name, item));
                 }
             }
-
             return response;
         }
     }

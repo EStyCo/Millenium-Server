@@ -34,7 +34,6 @@ namespace Server.Models.Spells.Models
                 _ = StartRest();
                 SendBattleLog(log, user, target);
             }
-            throw new NotImplementedException();
         }
 
         private double AdditionalMultiplier()

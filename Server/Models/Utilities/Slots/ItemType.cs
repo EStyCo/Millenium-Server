@@ -1,6 +1,6 @@
 ﻿namespace Server.Models.Utilities.Slots
 {
-    public enum ItemType
+    public enum ItemType : ulong
     {
         None = 0,
         Apple = 1,
@@ -10,5 +10,8 @@
         TitanSword = 5,
         KnightHelmet = 6,
         TitanHelmet = 7,
+        ChainBoots = 8,
+        LeatherArmor = 9,
+        Stone = 10,
     }
 }
