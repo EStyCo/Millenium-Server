@@ -22,9 +22,12 @@ namespace Server.Models.Spells.Models
                 var resultDamage = target.TakeDamage(10);
                 target.AddState<FreezeState>(user);
 
-                string log = $"{user.Name} наслал снежную метель на {target.Name} и нанёс {resultDamage.Count}. [{resultDamage.CurrentHP}/{resultDamage.MaxHP}]\n{target.Name} Заморожен!";
+                string log = $"{user.Leading()} наслал снежную метель /i{ImagePath}/i на {target.Leading()} .Нанесено /b{resultDamage.Count}/b /bурона./b";
 
                 _ = StartRest();
+                SendBattleLog(log, user, target);
+
+                log = $"/i{target.ImagePath}/i /b{target.Name}/b Заморожен! /i{ImagePath}/i";
                 SendBattleLog(log, user, target);
             }
         }

@@ -29,10 +29,7 @@ namespace Server.Hubs.Locations.BasePlaces
         public virtual void LeavePlace(string connectionId)
         {
             var user = Users.FirstOrDefault(x => x.Key == connectionId);
-
             if (user.Value == null) return;
-
-            //(user.Value.Vitality as UserVitalityHandler)?.ChangePlace(null);
 
             Users.Remove(user.Key);
             UpdateListUsers();

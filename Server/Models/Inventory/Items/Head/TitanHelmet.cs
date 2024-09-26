@@ -15,7 +15,7 @@ namespace Server.Models.Inventory.Items.Head
 
         public override void ApplyChanges(ActiveUser user)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

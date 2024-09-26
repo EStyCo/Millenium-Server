@@ -21,7 +21,7 @@
             var user = Entity as ActiveUser;
             if (user == null) return;
 
-            _ = user.AddBattleLog($"{Entity.Name} ослаблен и не может дальше сражаться");
+            _ = user.AddBattleLog($"{Entity.Leading()} ослаблен /ispells/weakness.png/i и не может дальше сражаться");
             user.CanAttack = false;
 
             await Task.Run(async () =>
@@ -35,7 +35,7 @@
 
             user.CanAttack = true;
             Entity.RemoveState<WeaknessState>();
-            _ = user.AddBattleLog($"{Entity.Name} восстановил силы!");
+            _ = user.AddBattleLog($"{Entity.Leading()} восстановил силы! /ispells/unweakness.png/i");
             user.UpdateStates();
         }
 

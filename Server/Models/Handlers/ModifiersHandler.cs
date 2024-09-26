@@ -1,6 +1,7 @@
 ﻿using Server.Models.Modifiers;
 using Server.Models.Modifiers.Additional;
 using Server.Models.Modifiers.Increased;
+using Server.Models.Modifiers.Unique;
 
 namespace Server.Models.Handlers
 {
@@ -13,9 +14,18 @@ namespace Server.Models.Handlers
             Modifiers = new()
             {
                 new AdditionalHPModifier(),
+
+                new AdditionalStrength(),
+                new AdditionalAgility(),
+                new AddRegeratedHP(),
+                new AdditionalBleedingChance(),
+
                 new IncreasedHPModifier(),
                 new IncreasedDamageModifier(),
-                new IncreasedHealingModifier()
+                new IncreasedHealingModifier(),
+
+                new LuckyBleedingChance(),
+                new IncreasedDamagePowerChargeModifier(),
             };
         }
 

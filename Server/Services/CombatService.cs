@@ -1,23 +1,14 @@
-﻿using Server.Hubs.DTO;
+﻿using Server.Hubs;
+using Server.Hubs.DTO;
 using Server.Repository;
 
 namespace Server.Services
 {
-    public class CombatService
+    public class CombatService(
+        UserStorage userStorage,
+        PlaceService placeService,
+        UserRepository userRepository)
     {
-        private readonly UserStorage userStorage;
-        private readonly PlaceService placeService;
-        private readonly UserRepository userRepository;
-
-        public CombatService(
-            UserStorage _userStorage,
-            PlaceService _placeService,
-            UserRepository _userRepository)
-        {
-            userStorage = _userStorage;
-            placeService = _placeService;
-            userRepository = _userRepository;
-        }
 
         public void AttackUser() { }
 

@@ -49,6 +49,14 @@ namespace Server.Hubs.Locations.BasePlaces
 
         public override void LeavePlace(string connectionId)
         {
+            var user = Users.FirstOrDefault(x => x.Key == connectionId);
+            if (user.Value != null)
+            {
+                foreach (var monster in Monsters)
+                    if (monster.Target == user.Value.Name)
+                        _ = monster.SetTarget(string.Empty);
+            }
+
             base.LeavePlace(connectionId);
             _ = UpdateListMonsters();
         }
@@ -69,13 +77,10 @@ namespace Server.Hubs.Locations.BasePlaces
 
             user.UseSpell(dto.Type, monster);
 
-            if (monster.Target != user.Name) monster.SetTarget(user.Name);
-            if (monster.Vitality.CurrentHP <= 0)
-            {
-                await MonsterKilled(user, monster);
-            }
-            _ = UpdateListMonsters();
+            if (monster.Target != user.Name) _ = monster.SetTarget(user.Name);
+            if (monster.Vitality.CurrentHP <= 0) await MonsterKilled(user, monster);
 
+            _ = UpdateListMonsters();
         }
 
         private async Task RefreshMonsters()

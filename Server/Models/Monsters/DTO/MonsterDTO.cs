@@ -1,4 +1,5 @@
-﻿using Server.Models.DTO.User;
+﻿using Server.Models.DTO.Inventory;
+using Server.Models.DTO.User;
 
 namespace Server.Models.Monsters.DTO
 {

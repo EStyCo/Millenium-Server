@@ -1,0 +1,6 @@
+digraph G {
+    Person [label="Person\n- name: string\n- age: int\n+ GetName(): string\n+ SetName(name: string): void"]
+    Student [label="Student\n+ studentId: string\n+ GetStudentId(): string\n+ SetStudentId(id: string): void"]
+
+    Student -> Person [label="extends"]
+}

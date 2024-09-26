@@ -4,6 +4,7 @@ using Server.Models.Utilities;
 using Server.Models.DTO.User;
 using Server.Services;
 using Server.Models.Inventory.Items;
+using Server.Hubs;
 
 namespace Server.Controllers
 {
@@ -55,7 +56,7 @@ namespace Server.Controllers
             return BadRequest(RespFactory.ReturnBadRequest());
         }
 
-        [HttpDelete("Destroy")]
+        [HttpPost("Destroy")]
         public async Task<IActionResult> DestroyItem(DressingDTO dto)
         {
             if (await invService.DestroyItem(dto))

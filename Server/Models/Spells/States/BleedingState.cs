@@ -28,11 +28,11 @@
                     await Task.Delay(3000);
                     CurrentTime -= 3;
                     Entity.TakeDamage(damage);
-                    _ = user?.AddBattleLog($"Противнику {Entity.Name} нанесено {damage} кровотечением.");
+                    _ = user?.AddBattleLog($"{Entity.Leading()} нанесено /b{damage}/b /bурона/b кровотечением.");
                 }
             }, CTS.Token);
 
-            user?.AddBattleLog($"У {Entity.Name} закончилось кровотечение");
+            user?.AddBattleLog($"У {Entity.Leading()} закончилось кровотечение.");
             Entity.RemoveState<BleedingState>();
             Entity.UpdateStates();
         }

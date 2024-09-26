@@ -1,4 +1,6 @@
-﻿namespace Server.Models.Spells.States
+﻿using Server.Models.Modifiers.Additional;
+
+namespace Server.Models.Spells.States
 {
     public class TreatmentState : State
     {
@@ -19,9 +21,8 @@
         {
             Refresh();
             var user = User as ActiveUser;
-            int damage = (int)(Entity.Vitality.MaxHP / 100.0 * 7);
-
-            int healing = (int)(Entity.Vitality.MaxHP / 100.0 * 3);
+            var addHealing = user.Modifiers.Get<AddRegeratedHP>().Value;
+            int healing = (int)(Entity.Vitality.MaxHP / 100.0 * 3 + addHealing);
             await Task.Run(async () =>
             {
                 while (CurrentTime > 0)
@@ -30,11 +31,11 @@
                     CurrentTime -= 1;
 
                     Entity.TakeHealing(healing);
-                    _ = user?.AddBattleLog($"{Entity.Name} восстановил {healing} здоровья.");
+                    _ = user?.AddBattleLog($"{Entity.Leading()} восстановил /b{healing}/b /bздоровья/b");
                 }
             }, CTS.Token);
 
-            user?.AddBattleLog($"У {Entity.Name} закончилась аура восстановления.");
+            user?.AddBattleLog($"У {Entity.Leading()} закончилась аура восстановления.");
             Entity.RemoveState<TreatmentState>();
             Entity.UpdateStates();
         }

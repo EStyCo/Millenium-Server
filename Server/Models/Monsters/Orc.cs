@@ -1,4 +1,5 @@
-﻿using Server.Hubs.Locations.BasePlaces;
+﻿using Server.Hubs;
+using Server.Hubs.Locations.BasePlaces;
 using Server.Models.Handlers;
 using Server.Models.Handlers.Stats;
 using Server.Models.Handlers.Vitality;
@@ -23,7 +24,7 @@ namespace Server.Models.Monsters
         public override string Description { get; set; }
 
         public override Dictionary<ItemType, int> DroppedItems { get; }
-        public override ModifiersHandler Modifiers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override ModifiersHandler Modifiers { get; set; }
 
         private const int CRIT_CHANCE = 20;
 
@@ -40,6 +41,7 @@ namespace Server.Models.Monsters
 
             Stats = new MonsterStatsHandler(18, 15, 3,5,5,5);
             Vitality = new MonsterVitalityHandler(138, 138);
+            Modifiers = new ModifiersHandler();
 
             DroppedItems = new Dictionary<ItemType, int>()
             {
@@ -47,30 +49,6 @@ namespace Server.Models.Monsters
                 {ItemType.TitanArmor, 7},
                 {ItemType.TitanSword, 10},
             };
-        }
-
-        public override async void SetTarget(string name)
-        {
-            Target = name;
-
-            var storage = userStorageFactory.Create();
-            var user = storage.ActiveUsers.FirstOrDefault(x => x.Name == name);
-
-            if (user == null) return;
-
-            while (CheckPlayerInPlace(storage, name) && Vitality.CurrentHP > 0 && Target != string.Empty)
-            {
-                if (TryPowerCharge())
-                    UseSpell(SpellType.PowerCharge, user);
-                else
-                    UseSpell(SpellType.Simple, user);
-
-                double delayInSeconds = new Random().NextDouble() * (MaxTimeAttack - MinTimeAttack) + MinTimeAttack;
-                await Task.Delay((int)(delayInSeconds * 1000));
-            }
-
-            Target = string.Empty;
-            SendBattleLog(user);
         }
 
         private string GetRandomName()
@@ -84,6 +62,14 @@ namespace Server.Models.Monsters
         {
             if (new Random().Next(0, 101) <= CRIT_CHANCE) return true;
             return false;
+        }
+
+        protected override void ActionAttack(ActiveUser user)
+        {
+            if (TryPowerCharge())
+                UseSpell(SpellType.PowerCharge, user);
+            else
+                UseSpell(SpellType.Simple, user);
         }
     }
 }

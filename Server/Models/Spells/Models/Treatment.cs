@@ -23,8 +23,6 @@ namespace Server.Models.Spells.Models
             user.UpdateStates();
 
             _ = StartRest();
-            /*string log = $"{user.Name} подрезал {target.Name} и нанёс {resultDamage.Count}. [{resultDamage.CurrentHP}/{resultDamage.MaxHP}]";
-            SendBattleLog(log, user, target);*/
         }
     }
 }

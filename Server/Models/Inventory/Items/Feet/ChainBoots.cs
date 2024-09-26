@@ -15,7 +15,7 @@ namespace Server.Models.Inventory.Items.Feet
 
         public override void ApplyChanges(ActiveUser user)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

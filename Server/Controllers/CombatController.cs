@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Server.Models.Utilities;
 using Server.Services;
 using Server.Hubs.DTO;
+using Server.Hubs;
 
 namespace Server.Controllers
 {
@@ -37,8 +38,8 @@ namespace Server.Controllers
         [HttpPost("User")]
         public IActionResult AttackUser(AttackUserDTO dto)
         {
-            var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.NameUser);
-            var target = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.NameTarget);
+            var user = userStorage.GetUser(dto.NameUser);
+            var target = userStorage.GetUser(dto.NameTarget);
 
             if (user != null && user.CanAttack &&
                 target != null && !target.States.Keys.OfType<WeaknessState>().Any())

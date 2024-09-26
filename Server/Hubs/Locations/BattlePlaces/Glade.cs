@@ -18,9 +18,9 @@ namespace Server.Hubs.Locations.BattlePlaces
 
         public override string ImagePath { get; } = "locations/glade.jpg";
         public override string Description { get; } = "Мирная полянка с гоблинами, будь осторожен!";
-        public override string[] Routes { get; } = {"town", "pizzaland", "darkwood"};
+        public override string[] Routes { get; } = { "town", "pizzaland", "darkwood" };
 
-        public Glade(IMapper _mapper, 
+        public Glade(IMapper _mapper,
                      IHubContext<PlaceHub> hubContext,
                      IServiceFactory<UserStorage> _userStorageFactory,
                      IServiceProvider serviceProvider) : base(hubContext, serviceProvider)
@@ -30,7 +30,7 @@ namespace Server.Hubs.Locations.BattlePlaces
         }
 
 
-        public override void AddMonster()
+        public override async void AddMonster()
         {
             var action = UpdateListMonsters;
             Monster monster;
@@ -47,8 +47,7 @@ namespace Server.Hubs.Locations.BattlePlaces
                 monster.Id = maxId + 1;
             }
             Monsters.Add(monster);
-
-            UpdateListMonsters();
+            await UpdateListMonsters();
         }
     }
 }

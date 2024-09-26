@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Server.Hubs;
 using Server.Hubs.DTO;
 using Server.Hubs.Locations.Interfaces;
 using Server.Models;
@@ -26,25 +27,6 @@ namespace Server.Controllers
 
             return Ok(RespFactory.ReturnOk());
         }
-
-        /*[HttpPost("attackMonster")]
-        public async Task<IActionResult> AttackMonster(AttackMonsterDTO dto)
-        {
-            var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
-
-            if (user != null && user.CanAttack)
-            {
-                await placeService.GetBattlePlace(dto.Place).AttackMonster(dto, user);
-
-                */ /*if (addingExp > 0)
-                {
-                    (user.Stats as UserStatsHandler)?.AddExp(addingExp);
-                    await userRepository.UpdateExp(addingExp, user.Name);
-                }*/ /*
-            }
-
-            return Ok(RespFactory.ReturnOk());
-        }*/
 
         [HttpPost("attackUser")]
         public IActionResult AttackUser(AttackUserDTO dto)

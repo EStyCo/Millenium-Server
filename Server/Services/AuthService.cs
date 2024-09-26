@@ -1,4 +1,5 @@
-﻿using Server.Models.DTO.Auth;
+﻿using Server.Hubs;
+using Server.Models.DTO.Auth;
 using Server.Models.DTO.User;
 using Server.Repository;
 
@@ -34,7 +35,7 @@ namespace Server.Services
 
         public async Task<bool> RegistrationNewUser(RegRequestDTO dto)
         {
-            if (!await userRep.IsUniqueUser(dto) || !await userRep.Registration(dto))
+            if (await userRep.IsUniqueUser(dto) || !await userRep.Registration(dto))
             {
                 return false;
             }

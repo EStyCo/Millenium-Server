@@ -22,7 +22,7 @@ namespace Server.Models.Spells
             IsReady = false;
             RestSeconds = CoolDown;
 
-            while (RestSeconds > 0)
+            while (RestSeconds >= 0)
             {
                 await Task.Delay(1000);
                 RestSeconds--;

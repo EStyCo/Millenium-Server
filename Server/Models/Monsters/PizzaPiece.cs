@@ -1,4 +1,5 @@
-﻿using Server.Hubs.Locations.BasePlaces;
+﻿using Server.Hubs;
+using Server.Hubs.Locations.BasePlaces;
 using Server.Models.Handlers;
 using Server.Models.Handlers.Stats;
 using Server.Models.Handlers.Vitality;
@@ -30,7 +31,7 @@ namespace Server.Models.Monsters
                    Func<Task> updatingAction) : base(_userStorageFactory, updatingAction)
         {
             Exp = 25;
-            Name = "Кусочек Пиццы";
+            Name = "КусочекПиццы";
             ImagePath = "monsters/pizza_piece.png";
             Description = "Хочеца кушац!?";
             PlaceInstance = place;
@@ -48,28 +49,12 @@ namespace Server.Models.Monsters
             };
         }
 
-        public override async void SetTarget(string name)
+        protected override void ActionAttack(ActiveUser user)
         {
-            Target = name;
-
-            var storage = userStorageFactory.Create();
-            var user = storage.ActiveUsers.FirstOrDefault(x => x.Name == name);
-
-            if (user == null) return;
-
-            while (CheckPlayerInPlace(storage, name) && Vitality.CurrentHP > 0 && Target != string.Empty)
-            {
-                if (new Random().Next(0, 100) <= 33)
-                    UseSpell(SpellType.LowHealing, user);
-                else
-                    UseSpell(SpellType.Simple, user);
-
-                double delayInSeconds = new Random().NextDouble() * (MaxTimeAttack - MinTimeAttack) + MinTimeAttack;
-                await Task.Delay((int)(delayInSeconds * 1000));
-            }
-
-            Target = string.Empty;
-            SendBattleLog(user);
+            if (new Random().Next(0, 100) <= 33)
+                UseSpell(SpellType.LowHealing, user);
+            else
+                UseSpell(SpellType.Simple, user);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Server.Models
     public abstract class Entity
     {
         public string Name { get; set; } = string.Empty;
+        public string ImagePath { get; set; }
         public abstract bool CanAttack { get; set; }
         public abstract Dictionary<State, CancellationTokenSource> States { get; protected set; }
         public abstract StatsHandler Stats { get; set; }
@@ -71,6 +72,11 @@ namespace Server.Models
                 UpdateStateToken.Cancel();
                 UpdateStateToken = null;
             }
+        }
+
+        public string Leading()
+        {
+            return $"/i{ImagePath}/i /b{Name}/b /b[{Vitality.CurrentHP}/{Vitality.MaxHP}]/b";
         }
     }
 }

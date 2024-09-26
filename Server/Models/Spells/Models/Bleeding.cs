@@ -30,7 +30,8 @@ namespace Server.Models.Spells.Models
             }
 
             var resultDamage = target.TakeDamage((int)damage);
-            string log = $"{user.Name} подрезал {target.Name} и нанёс {resultDamage.Count}. [{resultDamage.CurrentHP}/{resultDamage.MaxHP}]";
+
+            string log = $"{user.Leading()} коварно подрезал /i{ImagePath}/i {target.Leading()} и нанёс /b{resultDamage.Count}/b /bурона./b";
 
             _ = StartRest();
             SendBattleLog(log, user, target);

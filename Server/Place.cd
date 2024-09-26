@@ -3,35 +3,36 @@
   <Class Name="Server.Hubs.Locations.BasePlaces.BasePlace" Collapsed="true">
     <Position X="2.5" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAEAAAAAAAAAAAAABAAAABAAAAAAAAAAAAAAEA=</HashCode>
+      <HashCode>AACAACAEAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAUA=</HashCode>
       <FileName>Hubs\Locations\BasePlaces\BasePlace.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Server.Hubs.Locations.BasePlaces.BattlePlace" Collapsed="true">
     <Position X="1" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EABAAAAECAAAAAAAAAAAABAAAAAAAEAAAAAAAAAEAAA=</HashCode>
+      <HashCode>AAFAAAAEIAAkAAAAAEAAAJAAAAADAEAAAAAAIAAkAAA=</HashCode>
       <FileName>Hubs\Locations\BasePlaces\BattlePlace.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Server.Hubs.Locations.BasePlaces.CalmPlace" Collapsed="true">
     <Position X="4" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAEAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Hubs\Locations\BasePlaces\CalmPlace.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Server.Hubs.Locations.BattlePlaces.Glade" Collapsed="true">
-    <Position X="1" Y="3.75" Width="1.5" />
+    <Position X="0.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAAAAAAAIAAAAAAAAAAAAAABAAAAAAAAAAAAEAEA=</HashCode>
+      <HashCode>AABAACAAAAAoAAAAAEAIAIAAAAAAAAAAAAAAAAAEAEA=</HashCode>
       <FileName>Hubs\Locations\BattlePlaces\Glade.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Server.Hubs.Locations.CalmPlaces.Town" Collapsed="true">
     <Position X="4" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAEA=</HashCode>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Hubs\Locations\CalmPlaces\Town.cs</FileName>
     </TypeIdentifier>
   </Class>

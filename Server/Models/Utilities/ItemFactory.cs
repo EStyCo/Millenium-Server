@@ -23,6 +23,7 @@ namespace Server.Models.Utilities
             { ItemType.ChainBoots, () => new ChainBoots() },
             { ItemType.LeatherArmor, () => new LeatherArmor() },
             { ItemType.Stone, () => new Stone() },
+            { ItemType.Bloodletter, () => new Bloodletter() },
         };
 
         public static Item? Get(ItemEF dto)
@@ -53,6 +54,20 @@ namespace Server.Models.Utilities
             foreach (var itemEF in listItemsEF)
             {
                 var item = Get(itemEF);
+                if (item != null)
+                    listItems.Add(item);
+            }
+            return listItems;
+        }
+
+        public static List<Item> GetList(List<ItemType> listTypes)
+        {
+            var listItems = new List<Item>();
+            if (listTypes == null || listTypes.Count <= 0) return listItems;
+
+            foreach (var itemType in listTypes)
+            {
+                var item = Get(itemType);
                 if (item != null)
                     listItems.Add(item);
             }

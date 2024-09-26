@@ -1,42 +1,86 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Admin\\source\\repos\\CombatGame\\",
+  "WorkspaceRootPath": "C:\\GitHub\\Millenium-Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\controllers\\statscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\controllers\\statscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\modifiers\\increased\\increaseddamagemodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\modifiers\\increased\\increaseddamagemodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\dto\\user\\statdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\dto\\user\\statdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\handlers\\stats\\userstatshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\handlers\\stats\\userstatshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\services\\inventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\services\\inventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\services\\inventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\activeuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\activeuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\models\\inventory\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\inventory\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\inventory\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\users\\admin\\source\\repos\\combatgame\\server\\services\\userfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\services\\userfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\controllers\\inventorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\controllers\\inventorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\activeuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\activeuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\repository\\itemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\repository\\itemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\spells\\models\\powercharge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\spells\\models\\powercharge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\handlers\\modifiershandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\handlers\\modifiershandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\monsters\\monster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\monsters\\monster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\monsters\\orc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\monsters\\orc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\utilities\\itemfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\utilities\\itemfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\inventory\\items\\body\\titanarmor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\inventory\\items\\body\\titanarmor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\inventory\\items\\body\\leatherarmor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\inventory\\items\\body\\leatherarmor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\spells\\states\\treatmentstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\spells\\states\\treatmentstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\spells\\models\\treatment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\spells\\models\\treatment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\monsters\\goblin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\monsters\\goblin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\modifiers\\imodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\modifiers\\imodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\inventory\\items\\weapon\\bloodletter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\inventory\\items\\weapon\\bloodletter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\controllers\\placecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\controllers\\placecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\monsters\\dto\\detailsmonsterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\monsters\\dto\\detailsmonsterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\monsters\\dto\\monsterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\monsters\\dto\\monsterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -45,124 +89,268 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 242,
-          "SelectedChildIndex": 4,
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0174dea2-fdbe-4ef1-8f99-c0beae78880f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "StatsController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\StatsController.cs",
-              "RelativeDocumentMoniker": "Server\\Controllers\\StatsController.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\StatsController.cs",
-              "RelativeToolTip": "Server\\Controllers\\StatsController.cs",
+              "DocumentIndex": 1,
+              "Title": "Inventory.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Inventory\\Inventory.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Inventory\\Inventory.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Inventory\\Inventory.cs",
+              "RelativeToolTip": "Server\\Models\\Inventory\\Inventory.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAQwFMAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-11T07:54:48.121Z",
+              "WhenOpened": "2024-09-26T15:04:58.798Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IncreasedDamageModifier.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Modifiers\\Increased\\IncreasedDamageModifier.cs",
-              "RelativeDocumentMoniker": "Server\\Models\\Modifiers\\Increased\\IncreasedDamageModifier.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Modifiers\\Increased\\IncreasedDamageModifier.cs",
-              "RelativeToolTip": "Server\\Models\\Modifiers\\Increased\\IncreasedDamageModifier.cs",
+              "DocumentIndex": 0,
+              "Title": "InventoryService.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Services\\InventoryService.cs",
+              "RelativeDocumentMoniker": "Server\\Services\\InventoryService.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Services\\InventoryService.cs*",
+              "RelativeToolTip": "Server\\Services\\InventoryService.cs*",
+              "ViewState": "AgIAACQAAAAAAAAAAAAlwDIAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-11T07:54:40.338Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "StatDTO.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\DTO\\User\\StatDTO.cs",
-              "RelativeDocumentMoniker": "Server\\Models\\DTO\\User\\StatDTO.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\DTO\\User\\StatDTO.cs",
-              "RelativeToolTip": "Server\\Models\\DTO\\User\\StatDTO.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-11T05:21:24.074Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserStatsHandler.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Handlers\\Stats\\UserStatsHandler.cs",
-              "RelativeDocumentMoniker": "Server\\Models\\Handlers\\Stats\\UserStatsHandler.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Handlers\\Stats\\UserStatsHandler.cs",
-              "RelativeToolTip": "Server\\Models\\Handlers\\Stats\\UserStatsHandler.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-10T18:36:42.012Z"
+              "WhenOpened": "2024-09-26T15:04:58.807Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "InventoryService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Services\\InventoryService.cs",
-              "RelativeDocumentMoniker": "Server\\Services\\InventoryService.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Services\\InventoryService.cs",
-              "RelativeToolTip": "Server\\Services\\InventoryService.cs",
+              "Title": "ItemRepository.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Repository\\ItemRepository.cs",
+              "RelativeDocumentMoniker": "Server\\Repository\\ItemRepository.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Repository\\ItemRepository.cs",
+              "RelativeToolTip": "Server\\Repository\\ItemRepository.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAuwCQAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-10T18:31:23.56Z"
+              "WhenOpened": "2024-09-26T14:47:22.253Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "InventoryController.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Controllers\\InventoryController.cs",
+              "RelativeDocumentMoniker": "Server\\Controllers\\InventoryController.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Controllers\\InventoryController.cs",
+              "RelativeToolTip": "Server\\Controllers\\InventoryController.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAgwCwAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T14:42:20.971Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ActiveUser.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\ActiveUser.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\ActiveUser.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\ActiveUser.cs",
+              "RelativeToolTip": "Server\\Models\\ActiveUser.cs",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAnwIwAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T13:17:34.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Treatment.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Spells\\Models\\Treatment.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Spells\\Models\\Treatment.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Spells\\Models\\Treatment.cs",
+              "RelativeToolTip": "Server\\Models\\Spells\\Models\\Treatment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T13:10:38.802Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "ActiveUser.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\ActiveUser.cs",
-              "RelativeDocumentMoniker": "Server\\Models\\ActiveUser.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\ActiveUser.cs",
-              "RelativeToolTip": "Server\\Models\\ActiveUser.cs",
+              "Title": "ModifiersHandler.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Handlers\\ModifiersHandler.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Handlers\\ModifiersHandler.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Handlers\\ModifiersHandler.cs",
+              "RelativeToolTip": "Server\\Models\\Handlers\\ModifiersHandler.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBsAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-10T18:31:01.561Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Inventory.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Inventory\\Inventory.cs",
-              "RelativeDocumentMoniker": "Server\\Models\\Inventory\\Inventory.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Models\\Inventory\\Inventory.cs",
-              "RelativeToolTip": "Server\\Models\\Inventory\\Inventory.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-10T18:30:47.088Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "UserFactory.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Services\\UserFactory.cs",
-              "RelativeDocumentMoniker": "Server\\Services\\UserFactory.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Services\\UserFactory.cs",
-              "RelativeToolTip": "Server\\Services\\UserFactory.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-10T18:29:02.758Z"
+              "WhenOpened": "2024-09-26T13:06:07.5Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "Server\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\CombatGame\\Server\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "Server\\Controllers\\AuthController.cs",
+              "Title": "PowerCharge.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Spells\\Models\\PowerCharge.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Spells\\Models\\PowerCharge.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Spells\\Models\\PowerCharge.cs",
+              "RelativeToolTip": "Server\\Models\\Spells\\Models\\PowerCharge.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwC0AAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-10T18:28:42.024Z"
+              "WhenOpened": "2024-09-26T12:14:40.442Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Orc.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Monsters\\Orc.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Monsters\\Orc.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Monsters\\Orc.cs",
+              "RelativeToolTip": "Server\\Models\\Monsters\\Orc.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAA6wCUAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T13:15:04.907Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "LeatherArmor.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Inventory\\Items\\Body\\LeatherArmor.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Inventory\\Items\\Body\\LeatherArmor.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Inventory\\Items\\Body\\LeatherArmor.cs",
+              "RelativeToolTip": "Server\\Models\\Inventory\\Items\\Body\\LeatherArmor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T12:57:46.062Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TitanArmor.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Inventory\\Items\\Body\\TitanArmor.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Inventory\\Items\\Body\\TitanArmor.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Inventory\\Items\\Body\\TitanArmor.cs",
+              "RelativeToolTip": "Server\\Models\\Inventory\\Items\\Body\\TitanArmor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T12:57:33.715Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Monster.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Monsters\\Monster.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Monsters\\Monster.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Monsters\\Monster.cs",
+              "RelativeToolTip": "Server\\Models\\Monsters\\Monster.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAADYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T10:21:08.493Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "TreatmentState.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Spells\\States\\TreatmentState.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Spells\\States\\TreatmentState.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Spells\\States\\TreatmentState.cs",
+              "RelativeToolTip": "Server\\Models\\Spells\\States\\TreatmentState.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAuwBsAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T13:10:46.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "PlaceController.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Controllers\\PlaceController.cs",
+              "RelativeDocumentMoniker": "Server\\Controllers\\PlaceController.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Controllers\\PlaceController.cs",
+              "RelativeToolTip": "Server\\Controllers\\PlaceController.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAmwBsAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T10:34:03.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ItemFactory.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Utilities\\ItemFactory.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Utilities\\ItemFactory.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Utilities\\ItemFactory.cs",
+              "RelativeToolTip": "Server\\Models\\Utilities\\ItemFactory.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAlwBEAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T10:27:50.154Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Goblin.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Monsters\\Goblin.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Monsters\\Goblin.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Monsters\\Goblin.cs",
+              "RelativeToolTip": "Server\\Models\\Monsters\\Goblin.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAA2wCoAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T12:24:48.274Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "DetailsMonsterDTO.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Monsters\\DTO\\DetailsMonsterDTO.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Monsters\\DTO\\DetailsMonsterDTO.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Monsters\\DTO\\DetailsMonsterDTO.cs",
+              "RelativeToolTip": "Server\\Models\\Monsters\\DTO\\DetailsMonsterDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T10:24:06.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "IModifier.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Modifiers\\IModifier.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Modifiers\\IModifier.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Modifiers\\IModifier.cs",
+              "RelativeToolTip": "Server\\Models\\Modifiers\\IModifier.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T12:09:37.922Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Bloodletter.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Inventory\\Items\\Weapon\\Bloodletter.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Inventory\\Items\\Weapon\\Bloodletter.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Inventory\\Items\\Weapon\\Bloodletter.cs",
+              "RelativeToolTip": "Server\\Models\\Inventory\\Items\\Weapon\\Bloodletter.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T12:05:04.689Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "MonsterDTO.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Monsters\\DTO\\MonsterDTO.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Monsters\\DTO\\MonsterDTO.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Monsters\\DTO\\MonsterDTO.cs",
+              "RelativeToolTip": "Server\\Models\\Monsters\\DTO\\MonsterDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T10:21:30.918Z",
+              "EditorCaption": ""
             }
           ]
         }

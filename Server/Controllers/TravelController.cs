@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Server.Hubs;
 using Server.Models.DTO.User;
 using Server.Models.Utilities;
 using Server.Repository;
+using Server.Services;
 
 namespace Server.Controllers
 {
@@ -10,12 +12,17 @@ namespace Server.Controllers
     public class TravelController : ControllerBase
     {
         private readonly TravelRepository rep;
+        private readonly PlaceService placeService;
         private readonly UserStorage userStorage;
 
-        public TravelController(TravelRepository _rep, UserStorage _userStorage)
+        public TravelController(
+            TravelRepository _rep, 
+            UserStorage _userStorage,
+            PlaceService _placeService)
         {
             rep = _rep;
             userStorage = _userStorage;
+            placeService = _placeService;
         }
 
         [HttpPost("get")]
@@ -43,7 +50,6 @@ namespace Server.Controllers
                 user.Place = travelResponse.Place;
                 return Ok(RespFactory.ReturnOk());
             }
-
             return BadRequest(RespFactory.ReturnBadRequest());
         }
     }

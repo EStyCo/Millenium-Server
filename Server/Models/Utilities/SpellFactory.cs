@@ -20,17 +20,24 @@ namespace Server.Models.Utilities
 
         public static Spell? Get(SpellType type)
         {
-            if (spellDictionary.TryGetValue(type, out var spell))
+            return type switch
             {
-                return spell;
-            }
-            return null;
+                SpellType.Simple => new Simple(),
+                SpellType.PowerCharge => new PowerCharge(),
+                SpellType.LowHealing => new LowHealing(),
+                SpellType.Freezing => new Freezing(),
+                SpellType.Rest => new Rest(),
+                SpellType.Bleeding => new Bleeding(),
+                SpellType.Treatment => new Treatment(),
+                SpellType.UnFreezing => new UnFreezing(),
+                _ => null
+            };
         }
 
         public static List<Spell> Get(List<SpellType> types)
         {
             var spellList = new List<Spell>();
-            foreach (var type in types) 
+            foreach (var type in types)
             {
                 spellList.Add(Get(type));
             }

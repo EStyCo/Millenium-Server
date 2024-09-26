@@ -6,24 +6,16 @@ using Server.Services;
 
 namespace Server.Hubs
 {
-    public class PlaceHub : Hub
+    public class PlaceHub(
+        PlaceService placeService, 
+        UserStorage userStorage) : Hub
     {
-        private readonly PlaceService placeService;
-        private readonly UserStorage UserStorage;
-
-        public PlaceHub(PlaceService _placeService,
-                        UserStorage userStorage)
-        {
-            placeService = _placeService;
-            UserStorage = userStorage;
-        }
-
         public async Task ConnectToHub(ConnectToPlaceHubDTO dto)
         {
             var place = placeService.GetPlace(dto.Place);
-            var user = UserStorage.ActiveUsers
-                                   .Where(x => x.Name == dto.Name)
-                                   .FirstOrDefault() ;
+            var user = userStorage.ActiveUsers
+                                  .Where(x => x.Name == dto.Name)
+                                  .FirstOrDefault();
 
             if (place == null || user == null)
             {
@@ -63,7 +55,6 @@ namespace Server.Hubs
         public string[]? UpdateRoutes(string namePlace)
         {
             var place = placeService.GetPlace(namePlace) as IPlaceInfo;
-
             return place?.Routes;
         }
     }

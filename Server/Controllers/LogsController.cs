@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Server;
+using Server.Hubs;
 using Server.Models;
 using Server.Models.DTO.Auth;
 using Server.Models.DTO.User;
@@ -11,17 +11,15 @@ namespace WebApplication1.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class LogsController(UserStorage userStorage) : ControllerBase
+    public class LogsController(
+        UserStorage userStorage) : ControllerBase
     {
         [HttpPost("get")]
-        public async Task<IActionResult> GetBattleLogs(NameRequestDTO dto)
+        public IActionResult GetBattleLogs(NameRequestDTO dto)
         {
-            var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
-
+            var user = userStorage.GetUser(dto.Name);
             if (user != null)
-            {
-                return Ok(RespFactory.ReturnOk(new CustomList<string>(user.BattleLogs)));
-            }
+                return Ok(RespFactory.ReturnOk(new CustomList<BattleLog>(user.BattleLogs)));
             return BadRequest(RespFactory.ReturnBadRequest(new CustomList<string>(new List<string>())));
         }
     }

@@ -4,6 +4,7 @@ using Server.Models.Utilities;
 using Server.Models;
 using Microsoft.AspNetCore.SignalR;
 using Server.Models.Interfaces;
+using Server.Hubs;
 
 namespace Server.Services
 {

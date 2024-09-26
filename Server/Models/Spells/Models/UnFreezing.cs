@@ -19,11 +19,10 @@ namespace Server.Models.Spells.Models
             if (targets.First() != null)
             {
                 var target = targets.First();
-                //var resultDamage = target.TakeDamage(10);
                 target.RemoveState<FreezeState>();
 
                 _ = StartRest();
-                string log = $"{user.Name} Разморозил {target.Name}";
+                string log = $"{user.Leading()} согрел своей любовью и разморозил {target.Leading()}";
                 SendBattleLog(log, user, target);
             }
         }

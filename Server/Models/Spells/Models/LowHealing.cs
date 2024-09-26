@@ -23,7 +23,7 @@ namespace Server.Models.Spells.Models
 
                 var resultHeal = user.TakeHealing((int)Math.Round(heal));
 
-                string log = $"{user.Name} подлечился на {resultHeal.Count}. [{resultHeal.CurrentHP}/{resultHeal.MaxHP}]";
+                string log = $"{user.Leading()} приклеил подорожник и восстановил /b{resultHeal.Count}/b /bздоровья/b";
 
                 _ = StartRest();
                 if (target.Length > 0) SendBattleLog(log, user, target.First());

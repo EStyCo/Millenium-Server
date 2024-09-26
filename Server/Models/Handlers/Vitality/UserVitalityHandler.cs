@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Server.Hubs;
 using Server.Hubs.Locations.BasePlaces;
 using Server.Models.Handlers.Stats;
 using Server.Models.Modifiers.Additional;

@@ -1,20 +1,14 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Server.Models;
 
-namespace Server
+namespace Server.Hubs
 {
     public class UserStorage : Hub
     {
-        public Dictionary<string, CancellationTokenSource> DisconnectTokens { get; private set; }
-        public List<ActiveUser> ActiveUsers { get; private set; }
+        public Dictionary<string, CancellationTokenSource> DisconnectTokens { get; private set; } = [];
+        public List<ActiveUser> ActiveUsers { get; private set; } = [];
 
-        public UserStorage()
-        {
-            ActiveUsers = [];
-            DisconnectTokens = [];
-        }
-
-        public ActiveUser? GetUser(string name) 
+        public ActiveUser? GetUser(string name)
         {
             return ActiveUsers.FirstOrDefault(x => x.Name == name);
         }

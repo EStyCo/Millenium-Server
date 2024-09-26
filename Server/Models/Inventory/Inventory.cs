@@ -78,19 +78,18 @@ namespace Server.Models.Inventory
             return id;
         }
 
-        public int? UnEquip(int id)
+        public void UnEquip(int id)
         {
             var item = FindItem(id);
-            if (item == null) return null;
+            if (item == null) return;
 
             var slot = Slots[item.SlotType];
-            if (slot != null)
+            if (slot != null && slot.Id == id)
             {
                 slot.IsEquipped = false;
                 Slots[item.SlotType] = null;
-                return item.Id;
             }
-            return null;
+            return;
         }
 
 

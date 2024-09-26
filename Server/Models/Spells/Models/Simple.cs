@@ -21,6 +21,11 @@ namespace Server.Models.Spells.Models
             {
                 var target = targets.First();
                 var s = user.Stats;
+
+                if (user.Name == "Denny")
+                {
+                    Console.WriteLine("Денни атаковал");
+                }
                 
                 var modifier = user.Modifiers.Modifiers.FirstOrDefault(x => x.GetType() == typeof(IncreasedDamageModifier));
                 var damage = (s.Strength * 2 + s.Strength * (s.Agility / 100));
@@ -30,7 +35,8 @@ namespace Server.Models.Spells.Models
 
                 var resultDamage = target.TakeDamage(damage);
 
-                string log = $"{user.Name} ударил {target.Name} и нанёс {resultDamage.Count}. [{resultDamage.CurrentHP}/{resultDamage.MaxHP}]";
+                string log = $"{user.Leading()} провёл комбинацию простых ударов  /i{ImagePath}/i " +
+                    $"на {target.Leading()} и нанёс /b{resultDamage.Count}/b /bурона./b";
 
                 _ = StartRest();
                 SendBattleLog(log, user, targets.First());

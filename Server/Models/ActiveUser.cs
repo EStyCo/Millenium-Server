@@ -1,15 +1,16 @@
 ﻿using Server.Models.Handlers.Vitality;
+using Server.EntityFramework.Models;
 using Microsoft.AspNetCore.SignalR;
 using Server.Models.Handlers.Stats;
 using Server.Models.Spells.Models;
 using Server.Models.Spells.States;
+using I = Server.Models.Inventory;
 using Server.Models.Utilities;
+using Server.Models.Handlers;
 using Server.Models.Spells;
 using Server.Hubs.DTO;
 using System.Text;
-using I = Server.Models.Inventory;
-using Server.EntityFramework.Models;
-using Server.Models.Handlers;
+using Server.Hubs;
 
 namespace Server.Models
 {
@@ -26,7 +27,7 @@ namespace Server.Models
         public override VitalityHandler Vitality { get; protected set; }
         public List<Spell> ActiveSkills { get; set; } = new();
         public override Dictionary<State, CancellationTokenSource> States { get; protected set; } = new();
-        public List<string> BattleLogs { get; set; } = new();
+        public List<BattleLog> BattleLogs { get; set; } = new();
 
         public override void UseSpell(SpellType type, params Entity[] target)
         {
@@ -47,13 +48,14 @@ namespace Server.Models
         public void Initialize(CharacterEF character)
         {
             Name = character.Name;
+            ImagePath = "characters/titan.png";
             Place = character.Place;
             Stats = new UserStatsHandler();
             Stats.SetStats(character.Stats);
 
             Modifiers = new ModifiersHandler();
 
-            Vitality = new UserVitalityHandler(hubContext,ConnectionId, (UserStatsHandler)Stats, Modifiers);
+            Vitality = new UserVitalityHandler(hubContext, ConnectionId, (UserStatsHandler)Stats, Modifiers);
             Inventory = new(ItemFactory.GetList(character.Items), this);
             ActiveSkills.AddRange(SpellFactory.Get(character.Spells));
         }
@@ -95,16 +97,14 @@ namespace Server.Models
 
         public async Task AddBattleLog(string str)
         {
-            StringBuilder sb = new(str);
-
             if (BattleLogs.Count > 10) BattleLogs.RemoveAt(0);
-
-            BattleLogs.Add(sb.Insert(0, $"[{DateTime.Now.ToString("HH:mm:ss")}] - ").ToString());
-
-            if (ConnectionId != string.Empty)
+            BattleLogs.Add(new()
             {
+                Data = str,
+                Time = $"{DateTime.Now.ToString("HH:mm:ss")}"
+            });
+            if (ConnectionId != string.Empty)
                 await hubContext.Clients.Client(ConnectionId).SendAsync("UpdateLogs", BattleLogs.Last());
-            }
         }
 
         public override ResultUseSpell TakeDamage(int damage)

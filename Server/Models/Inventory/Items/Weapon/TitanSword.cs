@@ -1,4 +1,6 @@
-﻿using Server.Models.Utilities.Slots;
+﻿using Server.Models.Modifiers.Additional;
+using Server.Models.Modifiers.Unique;
+using Server.Models.Utilities.Slots;
 
 namespace Server.Models.Inventory.Items.Weapon
 {
@@ -9,13 +11,19 @@ namespace Server.Models.Inventory.Items.Weapon
         public override ItemType ItemType { get; } = ItemType.TitanSword;
         public override string Name { get; } = "Меч Титана";
         public override bool CanEquipped { get; } = true;
-        public override string Description { get; } = "Оружие Титанов, слегка ржавый, но все же очень острый.";
-        public override string GainsDescription { get; } = "";
+        public override string Description { get; } = "Оружие титанов, слегка ржавый, но еще очень острый. Готов служить новому хозяину верой и правдой.";
+        public override string GainsDescription { get; } = "Сила +20\nЗдоровье +35\nПовышает урон Сильного удара.";
         public override string ImagePath { get; } = "items/titanSword.png";
 
         public override void ApplyChanges(ActiveUser user)
         {
-           
+            var addStrength = user.Modifiers.Get<AdditionalStrength>();
+            var addHP = user.Modifiers.Get<AdditionalHPModifier>();
+            var addDamagePowerCharge = user.Modifiers.Get<IncreasedDamagePowerChargeModifier>();
+
+            addStrength.Value += 20;
+            addHP.Value += 35;
+            addDamagePowerCharge.Value += 50;
         }
     }
 }

@@ -13,5 +13,6 @@
         ChainBoots = 8,
         LeatherArmor = 9,
         Stone = 10,
+        Bloodletter = 11,
     }
 }

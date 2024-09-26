@@ -1,4 +1,5 @@
-﻿using Server.Models.DTO.Inventory;
+﻿using Server.Hubs;
+using Server.Models.DTO.Inventory;
 using Server.Models.DTO.User;
 using Server.Models.Inventory;
 using Server.Models.Utilities;
@@ -47,8 +48,7 @@ namespace Server.Services
             var user = userStorage.ActiveUsers.FirstOrDefault(x => x.Name == dto.Name);
             if (user == null) return false;
 
-            var id = user.Inventory.UnEquip(dto.Id);
-
+            user.Inventory.UnEquip(dto.Id);
             await itemRep.UnEquipItem(new()
             {
                 Id = dto.Id,

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Server.Hubs;
 using Server.Models.Spells;
 using Server.Models.Utilities;
 

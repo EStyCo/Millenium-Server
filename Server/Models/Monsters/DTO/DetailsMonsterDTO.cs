@@ -1,4 +1,5 @@
-﻿using Server.Models.DTO.User;
+﻿using Server.Models.DTO.Inventory;
+using Server.Models.DTO.User;
 
 namespace Server.Models.Monsters.DTO
 {
@@ -15,5 +16,6 @@ namespace Server.Models.Monsters.DTO
         public int Agility { get; set; }
         public int Intelligence { get; set; }
         public List<StateDTO> States { get; set; } = new();
+        public List<ItemDTO> Rewards { get; set; } = new();
     }
 }

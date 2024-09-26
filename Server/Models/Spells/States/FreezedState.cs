@@ -32,7 +32,7 @@
 
             Entity.CanAttack = true;
             var user = User as ActiveUser;
-            user?.AddBattleLog($"{Entity.Name} разморозился!");
+            user?.AddBattleLog($"{Entity.Leading()} разморозился! /ispells/unfreezing.png/i");
             Entity.RemoveState<FreezeState>();
             Entity.UpdateStates();
         }

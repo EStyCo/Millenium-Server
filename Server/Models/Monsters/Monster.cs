@@ -5,23 +5,23 @@ using Server.Models.Spells;
 using Server.Models.Monsters.DTO;
 using Server.Models.Spells.States;
 using Server.Models.Utilities.Slots;
+using Server.Hubs;
 
 namespace Server.Models.Monsters
 {
     public abstract class Monster : Entity
     {
         protected readonly IServiceFactory<UserStorage> userStorageFactory;
+        protected CancellationTokenSource AttackCTS;
         public Func<Task> UpdatingAction { get; }
         public int Id { get; set; }
         public int Exp { get; set; } = 0;
-        public string ImagePath { get; set; } = string.Empty;
         public abstract string Description { get; set; }
         public abstract string Target { get; protected set; }
         public abstract string PlaceName { get; protected set; }
         public abstract BattlePlace PlaceInstance { get; protected set; }
         public abstract double MinTimeAttack { get; set; }
         public abstract double MaxTimeAttack { get; set; }
-
         public abstract Dictionary<ItemType, int> DroppedItems { get; }
 
         public Monster(IServiceFactory<UserStorage> _userStorageFactory, Func<Task> updatingAction)
@@ -30,38 +30,7 @@ namespace Server.Models.Monsters
             UpdatingAction = updatingAction;
         }
 
-        public abstract void SetTarget(string name);
-
-        public MonsterDTO ToJson()
-        {
-            return new()
-            {
-                Id = Id,
-                CurrentHP = Vitality.CurrentHP,
-                MaxHP = Vitality.MaxHP,
-                ImagePath = ImagePath,
-                Name = Name,
-                Target = Target,
-                States = States.Keys.Select(x => x.ToJson()).ToList()
-            };
-        }
-        public DetailsMonsterDTO DetailsToJson()
-        {
-            return new()
-            {
-                Name = Name,
-                Description = Description,
-                MaxHP = Vitality.MaxHP,
-                Exp = Exp,
-                ImagePath = ImagePath,
-                MinTimeAttack = (int)MinTimeAttack,
-                MaxTimeAttack = (int)MaxTimeAttack,
-                Strength = Stats.Strength,
-                Agility = Stats.Agility,
-                Intelligence = Stats.Intelligence,
-                States = States.Keys.Select(x => x.ToJson()).ToList()
-            };
-        }
+        protected abstract void ActionAttack(ActiveUser user);
 
         public override ResultUseSpell TakeHealing(int healing)
         {
@@ -84,7 +53,8 @@ namespace Server.Models.Monsters
 
         public override void UseSpell(SpellType type, params Entity[] target)
         {
-            if (CanAttack) SpellFactory.Get(type)?.Use(this, target);
+            if (CanAttack)
+                SpellFactory.Get(type)?.Use(this, target);
         }
 
         protected bool CheckPlayerInPlace(UserStorage storage, string name)
@@ -96,11 +66,14 @@ namespace Server.Models.Monsters
 
         protected void SendBattleLog(ActiveUser user)
         {
-            _ = user.AddBattleLog($"{user.Name} скрылся от {Name}.");
-            /*if (Vitality.CurrentHP <= 0)
+            if (Vitality.CurrentHP <= 0)
             {
-                _ = user.AddBattleLog($"{user.Name} уничтожил {Name}.");
-            }*/
+                _ = user.AddBattleLog($"{user.Leading()} жестоко покарал {Leading()}");
+            }
+            else
+            {
+                _ = user.AddBattleLog($"{user.Leading()} скрылся с глаз от {Leading()}");
+            }
         }
 
         public override void UpdateStates()
@@ -116,5 +89,81 @@ namespace Server.Models.Monsters
                     list.Add(item.Key);
             return list;
         }
+
+        protected void RefreshAttackToken()
+        {
+            if (AttackCTS != null)
+                if (!AttackCTS.IsCancellationRequested)
+                    AttackCTS?.Cancel();
+            AttackCTS = new CancellationTokenSource();
+        }
+
+        public async Task SetTarget(string name)
+        {
+            RefreshAttackToken();
+
+            var storage = userStorageFactory.Create();
+            var user = storage.GetUser(name);
+            if (user == null) return;
+            Target = name;
+
+            while ((CheckPlayerInPlace(storage, name) && Vitality.CurrentHP > 0)
+                && !AttackCTS.IsCancellationRequested)
+            {
+                ActionAttack(user);
+                await Task.Run(ActionDelay, AttackCTS.Token);
+            }
+            Target = string.Empty;
+            SendBattleLog(user);
+        }
+
+        private async Task ActionDelay()
+        {
+            double generalTimeInSec = new Random().NextDouble() * (MaxTimeAttack - MinTimeAttack) + MinTimeAttack;
+            double currentTimeInSec = 0;
+
+            while (currentTimeInSec <= generalTimeInSec && !AttackCTS.IsCancellationRequested)
+            {
+                await Task.Delay(100);
+                currentTimeInSec += 0.1;
+            }
+        }
+
+        #region Json Methods
+        public MonsterDTO ToJson()
+        {
+            return new()
+            {
+                Id = Id,
+                CurrentHP = Vitality.CurrentHP,
+                MaxHP = Vitality.MaxHP,
+                ImagePath = ImagePath,
+                Name = Name,
+                Target = Target,
+                States = States.Keys.Select(x => x.ToJson()).ToList(),
+            };
+        }
+
+        public DetailsMonsterDTO DetailsToJson()
+        {
+            var rewards1 = ItemFactory.GetList(DroppedItems.Keys.ToList());
+            var rewards2 = rewards1.Select(x => x.ToJson()).ToList();
+            return new()
+            {
+                Name = Name,
+                Description = Description,
+                MaxHP = Vitality.MaxHP,
+                Exp = Exp,
+                ImagePath = ImagePath,
+                MinTimeAttack = (int)MinTimeAttack,
+                MaxTimeAttack = (int)MaxTimeAttack,
+                Strength = Stats.Strength,
+                Agility = Stats.Agility,
+                Intelligence = Stats.Intelligence,
+                States = States.Keys.Select(x => x.ToJson()).ToList(),
+                Rewards = rewards2
+            };
+        }
+        #endregion
     }
 }
