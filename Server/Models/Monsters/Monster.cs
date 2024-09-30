@@ -68,7 +68,7 @@ namespace Server.Models.Monsters
         {
             if (Vitality.CurrentHP <= 0)
             {
-                _ = user.AddBattleLog($"{user.Leading()} жестоко покарал {Leading()}");
+                _ = user.AddBattleLog($"{user.Leading()} жестоко покарал {Leading()} . Получено /b{Exp}exp/b");
             }
             else
             {

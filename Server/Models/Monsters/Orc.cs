@@ -22,40 +22,33 @@ namespace Server.Models.Monsters
         public override StatsHandler Stats { get;  set; }
         public override VitalityHandler Vitality { get; protected set; }
         public override string Description { get; set; }
-
         public override Dictionary<ItemType, int> DroppedItems { get; }
         public override ModifiersHandler Modifiers { get; set; }
-
         private const int CRIT_CHANCE = 20;
 
-        public Orc(IServiceFactory<UserStorage> _userStorageFactory, 
-                   BattlePlace place,
-                   Func<Task> updatingAction) : base(_userStorageFactory, updatingAction)
+        public Orc(
+            IServiceFactory<UserStorage> _userStorageFactory, 
+            BattlePlace place,
+            Func<Task> updatingAction) : base(_userStorageFactory, updatingAction)
         {
             Exp = 65;
-            Name = "Orc " + GetRandomName();
+            Name = "Орк";
             ImagePath = "monsters/orc.png";
             PlaceInstance = place;
             Description = "Здоровый бугай, иногда может наподдать по башне.";
             PlaceName = place.NamePlace;
 
-            Stats = new MonsterStatsHandler(18, 15, 3,5,5,5);
+            Stats = new MonsterStatsHandler(18, 15, 3,5,15,5);
             Vitality = new MonsterVitalityHandler(138, 138);
             Modifiers = new ModifiersHandler();
 
             DroppedItems = new Dictionary<ItemType, int>()
             {
-                {ItemType.Apple, 2},
-                {ItemType.TitanArmor, 7},
-                {ItemType.TitanSword, 10},
+                {ItemType.Apple, 3},
+                {ItemType.TitanArmor, 18},
+                {ItemType.HeavyBelt, 9},
+                {ItemType.TitanSword, 13},
             };
-        }
-
-        private string GetRandomName()
-        {
-            string[] array = ["Serega", "Alex", "Grigor", "Maxim", "Artem", "Anton"];
-
-            return array[new Random().Next(0, array.Length)];
         }
 
         private bool TryPowerCharge()
@@ -70,6 +63,10 @@ namespace Server.Models.Monsters
                 UseSpell(SpellType.PowerCharge, user);
             else
                 UseSpell(SpellType.Simple, user);
+        }
+        public override int GetWeaponDamage()
+        {
+            return 25;
         }
     }
 }

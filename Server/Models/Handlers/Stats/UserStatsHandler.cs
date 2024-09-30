@@ -36,11 +36,9 @@ namespace Server.Models.Handlers.Stats
         public void AddExp(int exp)
         {
             CurrentExp += exp;
-
             if (CurrentExp >= ToLevelExp)
             {
                 var newLvlPair = new LevelFactory().LevelUp(Level);
-
                 Level = newLvlPair.Key;
                 ToLevelExp = newLvlPair.Value;
             }

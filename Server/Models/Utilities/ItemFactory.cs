@@ -1,6 +1,7 @@
 ﻿using Server.EntityFramework.Models;
 using Server.Models.Inventory;
 using Server.Models.Inventory.Items;
+using Server.Models.Inventory.Items.Belts;
 using Server.Models.Inventory.Items.Body;
 using Server.Models.Inventory.Items.Feet;
 using Server.Models.Inventory.Items.Head;
@@ -23,55 +24,57 @@ namespace Server.Models.Utilities
             { ItemType.ChainBoots, () => new ChainBoots() },
             { ItemType.LeatherArmor, () => new LeatherArmor() },
             { ItemType.Stone, () => new Stone() },
-            { ItemType.Bloodletter, () => new Bloodletter() },
+            { ItemType.Bloodletter, () => new Bloodletter()},
+            { ItemType.LightBelt, () => new LightBelt() },
+            { ItemType.HeavyBelt, () => new HeavyBelt() },
         };
 
-        public static Item? Get(ItemEF dto)
+    public static Item? Get(ItemEF dto)
+    {
+        if (itemDictionary.TryGetValue(dto.Type, out var factory))
         {
-            if (itemDictionary.TryGetValue(dto.Type, out var factory))
-            {
-                var item = factory?.Invoke();
-                if (item == null) return null;
+            var item = factory?.Invoke();
+            if (item == null) return null;
 
-                item.Id = dto.Id;
-                item.IsEquipped = dto.IsEquipped;
-                return item;
-            }
-            return null;
+            item.Id = dto.Id;
+            item.IsEquipped = dto.IsEquipped;
+            return item;
         }
-
-        public static Item? Get(ItemType type)
-        {
-            itemDictionary.TryGetValue(type, out var factory);
-            return factory?.Invoke();
-        }
-
-        public static List<Item> GetList(List<ItemEF> listItemsEF)
-        {
-            var listItems = new List<Item>();
-            if (listItemsEF == null) return listItems;
-
-            foreach (var itemEF in listItemsEF)
-            {
-                var item = Get(itemEF);
-                if (item != null)
-                    listItems.Add(item);
-            }
-            return listItems;
-        }
-
-        public static List<Item> GetList(List<ItemType> listTypes)
-        {
-            var listItems = new List<Item>();
-            if (listTypes == null || listTypes.Count <= 0) return listItems;
-
-            foreach (var itemType in listTypes)
-            {
-                var item = Get(itemType);
-                if (item != null)
-                    listItems.Add(item);
-            }
-            return listItems;
-        }
+        return null;
     }
+
+    public static Item? Get(ItemType type)
+    {
+        itemDictionary.TryGetValue(type, out var factory);
+        return factory?.Invoke();
+    }
+
+    public static List<Item> GetList(List<ItemEF> listItemsEF)
+    {
+        var listItems = new List<Item>();
+        if (listItemsEF == null) return listItems;
+
+        foreach (var itemEF in listItemsEF)
+        {
+            var item = Get(itemEF);
+            if (item != null)
+                listItems.Add(item);
+        }
+        return listItems;
+    }
+
+    public static List<Item> GetList(List<ItemType> listTypes)
+    {
+        var listItems = new List<Item>();
+        if (listTypes == null || listTypes.Count <= 0) return listItems;
+
+        foreach (var itemType in listTypes)
+        {
+            var item = Get(itemType);
+            if (item != null)
+                listItems.Add(item);
+        }
+        return listItems;
+    }
+}
 }

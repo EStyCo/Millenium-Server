@@ -45,6 +45,7 @@ namespace Server.Models.Monsters
                 {ItemType.Stone, 5},
                 {ItemType.LeatherArmor, 22},
                 {ItemType.Spacesuit, 17},
+                {ItemType.LightBelt, 8},
                 {ItemType.ChainBoots, 13},
             };
         }
@@ -55,6 +56,11 @@ namespace Server.Models.Monsters
                 UseSpell(SpellType.LowHealing, user);
             else
                 UseSpell(SpellType.Simple, user);
+        }
+
+        public override int GetWeaponDamage()
+        {
+            return 17;
         }
     }
 }

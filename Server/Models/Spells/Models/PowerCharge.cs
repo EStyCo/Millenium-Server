@@ -1,5 +1,4 @@
 ﻿using Server.Models.Modifiers.Unique;
-using Server.Models.Monsters;
 using Server.Models.Utilities;
 
 namespace Server.Models.Spells.Models
@@ -25,12 +24,11 @@ namespace Server.Models.Spells.Models
             {
                 var target = targets.First();
                 var s = user.Stats;
-
-                var defaultDamage = (s.Strength * 2 + s.Strength * (s.Agility / 100)) * 1.5 * AdditionalMultiplier();
-
+                
+                var defaultDmg = user.GetDefaultDamage() * 1.5 * AdditionalMultiplier();
                 var dmgModifier = user.Modifiers.Get<IncreasedDamagePowerChargeModifier>();
                 if (dmgModifier == null) return;
-                var damage = defaultDamage + (defaultDamage / 100 * dmgModifier.Value);
+                var damage = defaultDmg + (defaultDmg / 100 * dmgModifier.Value);
 
                 var resultDamage = target.TakeDamage((int)Math.Round(damage));
                 string log = $"{user.Leading()} наполнившись невероятной силой /i{ImagePath}/i со всего размаху врезал " +

@@ -11,6 +11,8 @@ using Server.Models.Spells;
 using Server.Hubs.DTO;
 using System.Text;
 using Server.Hubs;
+using Server.Models.Utilities.Slots;
+using Server.Models.Inventory.Items.Weapon;
 
 namespace Server.Models
 {
@@ -54,6 +56,7 @@ namespace Server.Models
             Stats.SetStats(character.Stats);
 
             Modifiers = new ModifiersHandler();
+            Stats.SetEntity(this);
 
             Vitality = new UserVitalityHandler(hubContext, ConnectionId, (UserStatsHandler)Stats, Modifiers);
             Inventory = new(ItemFactory.GetList(character.Items), this);
@@ -87,12 +90,9 @@ namespace Server.Models
         public void ChangeConnectionId(string connectionId)
         {
             ConnectionId = connectionId;
-
             var vitality = Vitality as UserVitalityHandler;
             if (vitality != null)
-            {
                 vitality.ConnectionId = connectionId;
-            }
         }
 
         public async Task AddBattleLog(string str)
@@ -148,6 +148,12 @@ namespace Server.Models
             var vitality = Vitality as UserVitalityHandler;
 
             return new(Name, stats.Level, vitality.CurrentHP, vitality.MaxHP, States.Keys.Select(x => x.ToJson()).ToList());
+        }
+
+        public override int GetWeaponDamage()
+        {
+            var weapon = Inventory.Slots[SlotType.Weapon] as Weapon;
+            return weapon?.Damage ?? 0;
         }
     }
 }

@@ -3,12 +3,64 @@
   "WorkspaceRootPath": "C:\\GitHub\\Millenium-Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\services\\statsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\services\\statsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\handlers\\modifiershandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\handlers\\modifiershandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\controllers\\statscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\controllers\\statscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\modifiers\\additional\\stats\\addmastery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\modifiers\\additional\\stats\\addmastery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\modifiers\\additional\\stats\\addstrength.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\modifiers\\additional\\stats\\addstrength.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\inventory\\items\\weapons\\titansword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\inventory\\items\\weapons\\titansword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\inventory\\items\\weapons\\bloodletter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\inventory\\items\\weapons\\bloodletter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\inventory\\items\\body\\titanarmor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\inventory\\items\\body\\titanarmor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\dto\\user\\statdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\dto\\user\\statdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\modifiers\\additional\\stats\\addvitality.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\modifiers\\additional\\stats\\addvitality.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\modifiers\\additional\\stats\\addluck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\modifiers\\additional\\stats\\addluck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\modifiers\\additional\\stats\\addintelligence.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\modifiers\\additional\\stats\\addintelligence.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\modifiers\\additional\\stats\\addagility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\modifiers\\additional\\stats\\addagility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\handlers\\stats\\statshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\handlers\\stats\\statshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\handlers\\stats\\userstatshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\handlers\\stats\\userstatshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\activeuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\activeuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|c:\\github\\millenium-server\\server\\models\\dto\\inventory\\itemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4EB637E-075E-406B-BAB4-FF0FFE069611}|Server\\Server.csproj|solutionrelative:server\\models\\dto\\inventory\\itemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +70,201 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "StatsController.cs",
-              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Controllers\\StatsController.cs",
-              "RelativeDocumentMoniker": "Server\\Controllers\\StatsController.cs",
-              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Controllers\\StatsController.cs",
-              "RelativeToolTip": "Server\\Controllers\\StatsController.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAAACYAAAAcAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "TitanSword.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Inventory\\Items\\Weapons\\TitanSword.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Inventory\\Items\\Weapons\\TitanSword.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Inventory\\Items\\Weapons\\TitanSword.cs",
+              "RelativeToolTip": "Server\\Models\\Inventory\\Items\\Weapons\\TitanSword.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABkAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T17:18:14.534Z",
+              "WhenOpened": "2024-09-30T13:15:39.459Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TitanArmor.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Inventory\\Items\\Body\\TitanArmor.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Inventory\\Items\\Body\\TitanArmor.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Inventory\\Items\\Body\\TitanArmor.cs",
+              "RelativeToolTip": "Server\\Models\\Inventory\\Items\\Body\\TitanArmor.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAMwBMAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T13:15:21.402Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "StatsService.cs",
-              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Services\\StatsService.cs",
-              "RelativeDocumentMoniker": "Server\\Services\\StatsService.cs",
-              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Services\\StatsService.cs",
-              "RelativeToolTip": "Server\\Services\\StatsService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAASAAAAAAAAAA==",
+              "Title": "ModifiersHandler.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Handlers\\ModifiersHandler.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Handlers\\ModifiersHandler.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Handlers\\ModifiersHandler.cs*",
+              "RelativeToolTip": "Server\\Models\\Handlers\\ModifiersHandler.cs*",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAuwBwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T17:19:21.048Z",
+              "WhenOpened": "2024-09-30T13:15:01.114Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AddMastery.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Modifiers\\Additional\\Stats\\AddMastery.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Modifiers\\Additional\\Stats\\AddMastery.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Modifiers\\Additional\\Stats\\AddMastery.cs",
+              "RelativeToolTip": "Server\\Models\\Modifiers\\Additional\\Stats\\AddMastery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T13:05:50.533Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AddLuck.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Modifiers\\Additional\\Stats\\AddLuck.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Modifiers\\Additional\\Stats\\AddLuck.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Modifiers\\Additional\\Stats\\AddLuck.cs",
+              "RelativeToolTip": "Server\\Models\\Modifiers\\Additional\\Stats\\AddLuck.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T13:05:04.505Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AddStrength.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Modifiers\\Additional\\Stats\\AddStrength.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Modifiers\\Additional\\Stats\\AddStrength.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Modifiers\\Additional\\Stats\\AddStrength.cs",
+              "RelativeToolTip": "Server\\Models\\Modifiers\\Additional\\Stats\\AddStrength.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T13:03:16.36Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Bloodletter.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Inventory\\Items\\Weapons\\Bloodletter.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Inventory\\Items\\Weapons\\Bloodletter.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Inventory\\Items\\Weapons\\Bloodletter.cs",
+              "RelativeToolTip": "Server\\Models\\Inventory\\Items\\Weapons\\Bloodletter.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAIA1wBYAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T13:15:33.774Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AddIntelligence.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Modifiers\\Additional\\Stats\\AddIntelligence.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Modifiers\\Additional\\Stats\\AddIntelligence.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Modifiers\\Additional\\Stats\\AddIntelligence.cs",
+              "RelativeToolTip": "Server\\Models\\Modifiers\\Additional\\Stats\\AddIntelligence.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T13:04:53.985Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AddVitality.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Modifiers\\Additional\\Stats\\AddVitality.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Modifiers\\Additional\\Stats\\AddVitality.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Modifiers\\Additional\\Stats\\AddVitality.cs",
+              "RelativeToolTip": "Server\\Models\\Modifiers\\Additional\\Stats\\AddVitality.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T13:04:35.204Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AddAgility.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Modifiers\\Additional\\Stats\\AddAgility.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Modifiers\\Additional\\Stats\\AddAgility.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Modifiers\\Additional\\Stats\\AddAgility.cs",
+              "RelativeToolTip": "Server\\Models\\Modifiers\\Additional\\Stats\\AddAgility.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T13:03:50.897Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "StatsHandler.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Handlers\\Stats\\StatsHandler.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Handlers\\Stats\\StatsHandler.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Handlers\\Stats\\StatsHandler.cs",
+              "RelativeToolTip": "Server\\Models\\Handlers\\Stats\\StatsHandler.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAoAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T12:59:52.293Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "StatDTO.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\DTO\\User\\StatDTO.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\DTO\\User\\StatDTO.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\DTO\\User\\StatDTO.cs",
+              "RelativeToolTip": "Server\\Models\\DTO\\User\\StatDTO.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T12:54:47.568Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "UserStatsHandler.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Handlers\\Stats\\UserStatsHandler.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\Handlers\\Stats\\UserStatsHandler.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\Handlers\\Stats\\UserStatsHandler.cs",
+              "RelativeToolTip": "Server\\Models\\Handlers\\Stats\\UserStatsHandler.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAADwvzgAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T12:51:54.24Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ActiveUser.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\ActiveUser.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\ActiveUser.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\ActiveUser.cs",
+              "RelativeToolTip": "Server\\Models\\ActiveUser.cs",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAAADMAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T12:51:13.985Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ItemDTO.cs",
+              "DocumentMoniker": "C:\\GitHub\\Millenium-Server\\Server\\Models\\DTO\\Inventory\\ItemDTO.cs",
+              "RelativeDocumentMoniker": "Server\\Models\\DTO\\Inventory\\ItemDTO.cs",
+              "ToolTip": "C:\\GitHub\\Millenium-Server\\Server\\Models\\DTO\\Inventory\\ItemDTO.cs",
+              "RelativeToolTip": "Server\\Models\\DTO\\Inventory\\ItemDTO.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAA7wCMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T12:18:09.244Z",
               "EditorCaption": ""
             }
           ]

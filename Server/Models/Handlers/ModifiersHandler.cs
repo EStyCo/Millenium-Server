@@ -1,5 +1,7 @@
 ﻿using Server.Models.Modifiers;
 using Server.Models.Modifiers.Additional;
+using Server.Models.Modifiers.Additional.Stats;
+using Server.Models.Modifiers.Default;
 using Server.Models.Modifiers.Increased;
 using Server.Models.Modifiers.Unique;
 
@@ -13,10 +15,18 @@ namespace Server.Models.Handlers
         {
             Modifiers = new()
             {
+                new LowLimitDamage(),
+                new HighLimitDamage(),
+
                 new AdditionalHPModifier(),
 
-                new AdditionalStrength(),
-                new AdditionalAgility(),
+                new AddStrength(),
+                new AddAgility(),
+                new AddVitality(),
+                new AddIntelligence(),
+                new AddMastery(),
+                new AddLuck(),
+
                 new AddRegeratedHP(),
                 new AdditionalBleedingChance(),
 

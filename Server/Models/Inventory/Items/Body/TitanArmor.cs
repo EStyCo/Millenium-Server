@@ -1,4 +1,5 @@
 ﻿using Server.Models.Modifiers.Additional;
+using Server.Models.Modifiers.Additional.Stats;
 using Server.Models.Utilities.Slots;
 
 namespace Server.Models.Inventory.Items.Body
@@ -16,8 +17,8 @@ namespace Server.Models.Inventory.Items.Body
 
         public override void ApplyChanges(ActiveUser user)
         {
-            user.Modifiers.Get<AdditionalStrength>().Value += 15;
-            user.Modifiers.Get<AdditionalAgility>().Value += 15;
+            user.Modifiers.Get<AddStrength>().Value += 15;
+            user.Modifiers.Get<AddAgility>().Value += 15;
             user.Modifiers.Get<AddRegeratedHP>().Value += 2;
         }
     }

@@ -12,8 +12,15 @@ namespace Server.Models.Handlers.Stats
         public int Mastery { get; set; }
         public int Luck { get; set; }
 
+        public Entity Entity { get; set; }
+
         public abstract void SetStats(StatsEF stats);
 
         public abstract StatDTO ToJson();
+
+        public void SetEntity(Entity entity)
+        {
+            Entity = entity;
+        }
     }
 }

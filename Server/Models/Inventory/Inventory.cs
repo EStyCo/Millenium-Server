@@ -17,6 +17,7 @@ namespace Server.Models.Inventory
             {
                 { SlotType.Head, null },
                 { SlotType.Body, null },
+                { SlotType.Belt, null },
                 { SlotType.Feet, null },
                 { SlotType.Weapon, null },
             };
@@ -104,6 +105,7 @@ namespace Server.Models.Inventory
             return new(
                 Slots[SlotType.Head]?.ToJson(),
                 Slots[SlotType.Body]?.ToJson(),
+                Slots[SlotType.Belt]?.ToJson(),
                 Slots[SlotType.Feet]?.ToJson(),
                 Slots[SlotType.Weapon]?.ToJson());
         }

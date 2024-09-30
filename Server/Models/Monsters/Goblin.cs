@@ -55,5 +55,10 @@ namespace Server.Models.Monsters
         {
             UseSpell(SpellType.Simple, user);
         }
+
+        public override int GetWeaponDamage()
+        {
+            return 10;
+        }
     }
 }

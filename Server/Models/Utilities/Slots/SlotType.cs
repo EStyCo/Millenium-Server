@@ -6,5 +6,6 @@
         Body = 1,
         Feet = 2,
         Weapon = 3,
+        Belt = 4,
     }
 }

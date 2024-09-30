@@ -64,8 +64,9 @@ namespace Server.Services
             foreach (var type in types)
             {
                 var item = await itemRep.AddItem(name, type);
-                if (item != null)
-                    user?.Inventory.AddItem(item);
+                if (item == null) continue;
+                user?.Inventory.AddItem(item);
+                user?.AddBattleLog($"{item.Name} добавлен в инвентарь.");
             }
         }
 
@@ -79,11 +80,6 @@ namespace Server.Services
             return true;
         }
 
-        /// <summary>
-        /// Testing method
-        /// </summary>
-        /// <param name="dto"></param>
-        /// <returns></returns>
         public async Task<List<Tuple<string, Item?>>> GetInventoryFromDB(NameRequestDTO dto)
         {
             var listEF = await itemRep.GetInventory(dto.Name);

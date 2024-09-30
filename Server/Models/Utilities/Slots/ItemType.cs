@@ -14,5 +14,7 @@
         LeatherArmor = 9,
         Stone = 10,
         Bloodletter = 11,
+        LightBelt = 12,
+        HeavyBelt = 13,
     }
 }

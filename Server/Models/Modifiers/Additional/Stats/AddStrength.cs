@@ -1,6 +1,6 @@
-﻿namespace Server.Models.Modifiers.Additional
+﻿namespace Server.Models.Modifiers.Additional.Stats
 {
-    public class AdditionalStrength : Modifier
+    public class AddStrength : Modifier
     {
         public override string Name { get; } = "Дополнительная сила.";
         public override int Value { get; set; } = 0;

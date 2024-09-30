@@ -20,19 +20,14 @@ namespace Server.Models.Spells.Models
                 targets.First() != null)
             {
                 var target = targets.First();
-                var s = user.Stats;
-
-                if (user.Name == "Denny")
-                {
-                    Console.WriteLine("Денни атаковал");
-                }
-                
+                /*var s = user.Stats;
                 var modifier = user.Modifiers.Modifiers.FirstOrDefault(x => x.GetType() == typeof(IncreasedDamageModifier));
                 var damage = (s.Strength * 2 + s.Strength * (s.Agility / 100));
                 double additionalDamage = (damage * modifier.Value) / 100;
-
                 damage += (int)Math.Round(additionalDamage);
+                var resultDamage = target.TakeDamage(damage);*/
 
+                var damage = user.GetDefaultDamage();
                 var resultDamage = target.TakeDamage(damage);
 
                 string log = $"{user.Leading()} провёл комбинацию простых ударов  /i{ImagePath}/i " +
