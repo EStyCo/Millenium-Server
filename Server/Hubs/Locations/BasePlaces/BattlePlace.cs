@@ -1,14 +1,13 @@
-﻿using Server.Models.Monsters;
-using Server.Models;
-using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.SignalR;
 using Server.Hubs.DTO;
 using Server.Hubs.Locations.Interfaces;
-using Server.Models.Monsters.DTO;
 using System.Threading;
 using Server.Services;
 using Server.Models.Handlers.Stats;
 using Server.Repository;
 using Server.Models.Interfaces;
+using Server.Models.Entities;
+using Server.Models.Entities.Monsters;
 
 namespace Server.Hubs.Locations.BasePlaces
 {
@@ -89,7 +88,7 @@ namespace Server.Hubs.Locations.BasePlaces
             while (true)
             {
                 if (Monsters.Count < 6) AddMonster();
-                await Task.Delay(new Random().Next(10, 26) * 1000);
+                await Task.Delay(new Random().Next(5, 19) * 1000);
             }
         }
 
@@ -106,7 +105,7 @@ namespace Server.Hubs.Locations.BasePlaces
         public void WeakeningPlayer(string name)
         {
             foreach (var item in Monsters)
-                if (item.Target == name) item.SetTarget(string.Empty);
+                if (item.Target == name) item?.SetTarget(string.Empty);
             _ = UpdateListMonsters();
         }
 
@@ -119,15 +118,14 @@ namespace Server.Hubs.Locations.BasePlaces
                 var combatService = scope.ServiceProvider.GetRequiredService<CombatService>();
 
                 combatService?.AddExp(monster.Exp, user.Name);
-                (user.Stats as UserStatsHandler)?.AddExp(monster.Exp);
+                //(user.Stats as UserStatsHandler)?.AddExp(monster.Exp);
 
                 var items = monster.DropItemsOnDeath().ToArray();
                 if (items.Any() && inventoryService != null)
                     await inventoryService.AddItemsUser(user.Name, items);
             }
-
             Monsters.Remove(monster);
-            ResetTargetUser(user as ActiveUser);
+            ResetTargetUser(user);
         }
     }
 }

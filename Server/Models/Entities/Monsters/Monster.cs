@@ -2,12 +2,13 @@
 using Server.Models.Interfaces;
 using Server.Models.Utilities;
 using Server.Models.Spells;
-using Server.Models.Monsters.DTO;
 using Server.Models.Spells.States;
 using Server.Models.Utilities.Slots;
 using Server.Hubs;
+using Server.Models.Entities;
+using Server.Models.Entities.Monsters.DTO;
 
-namespace Server.Models.Monsters
+namespace Server.Models.Entities.Monsters
 {
     public abstract class Monster : Entity
     {
@@ -107,7 +108,7 @@ namespace Server.Models.Monsters
             if (user == null) return;
             Target = name;
 
-            while ((CheckPlayerInPlace(storage, name) && Vitality.CurrentHP > 0)
+            while (CheckPlayerInPlace(storage, name) && Vitality.CurrentHP > 0
                 && !AttackCTS.IsCancellationRequested)
             {
                 ActionAttack(user);

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Server.Hubs;
-using Server.Models;
 using Server.Models.DTO.Auth;
 using Server.Models.DTO.User;
 using Server.Models.Utilities;

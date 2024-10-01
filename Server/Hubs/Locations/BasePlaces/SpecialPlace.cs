@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Server.Models.Utilities;
-using Server.Models;
 using Server.Hubs.Locations.Interfaces;
 using Server.Models.Handlers.Vitality;
+using Server.Models.Entities;
 
 namespace Server.Hubs.Locations.BasePlaces
 {

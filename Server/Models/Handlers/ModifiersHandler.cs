@@ -1,9 +1,9 @@
-﻿using Server.Models.Modifiers;
+﻿using Server.Models.Modifiers.Additional.Stats;
 using Server.Models.Modifiers.Additional;
-using Server.Models.Modifiers.Additional.Stats;
-using Server.Models.Modifiers.Default;
 using Server.Models.Modifiers.Increased;
+using Server.Models.Modifiers.Default;
 using Server.Models.Modifiers.Unique;
+using Server.Models.Modifiers;
 
 namespace Server.Models.Handlers
 {
@@ -41,10 +41,7 @@ namespace Server.Models.Handlers
 
         public void ResetValues()
         {
-            foreach (var modifier in Modifiers)
-            {
-                modifier.Reset();
-            }
+            Modifiers.ForEach(x => x.Reset());
         }
 
         public Modifier? Get<T>() where T : Modifier

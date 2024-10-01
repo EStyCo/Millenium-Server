@@ -1,5 +1,6 @@
 ﻿using Server.EntityFramework.Models;
 using Server.Models.DTO.User;
+using Server.Models.Entities;
 
 namespace Server.Models.Handlers.Stats
 {

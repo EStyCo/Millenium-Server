@@ -1,7 +1,7 @@
 ﻿using Server.Models.DTO.Inventory;
 using Server.Models.DTO.User;
 
-namespace Server.Models.Monsters.DTO
+namespace Server.Models.Entities.Monsters.DTO
 {
     public class MonsterDTO
     {

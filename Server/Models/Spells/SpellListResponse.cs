@@ -1,4 +1,5 @@
-﻿using Server.Models.Interfaces;
+﻿using Server.Models.Entities;
+using Server.Models.Interfaces;
 
 namespace Server.Models.Spells
 {

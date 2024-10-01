@@ -1,10 +1,10 @@
 ﻿using Server.EntityFramework.Models;
 using Server.Models.Inventory;
 using Server.Models.Utilities;
-using Server.Models;
 using Microsoft.AspNetCore.SignalR;
 using Server.Models.Interfaces;
 using Server.Hubs;
+using Server.Models.Entities;
 
 namespace Server.Services
 {

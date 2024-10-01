@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Server.Hubs;
 using Server.Hubs.Locations.BasePlaces;
+using Server.Models.Entities;
 using Server.Models.Handlers;
 using Server.Models.Handlers.Stats;
 using Server.Models.Handlers.Vitality;
@@ -9,7 +10,7 @@ using Server.Models.Spells.States;
 using Server.Models.Utilities;
 using Server.Models.Utilities.Slots;
 
-namespace Server.Models.Monsters
+namespace Server.Models.Entities.Monsters
 {
     public class Goblin : Monster
     {
@@ -31,7 +32,7 @@ namespace Server.Models.Monsters
             BattlePlace place,
             Func<Task> updatingAction) : base(_userStorageFactory, updatingAction)
         {
-            Exp = 25;
+            Exp = 15;
             Name = "Гоблин";
             ImagePath = "monsters/goblin.png";
             Description = "Мелкое чмо.";

@@ -19,14 +19,10 @@ namespace Server.Hubs
 
             if (place == null || user == null)
             {
-                Console.WriteLine($"Игрок: {dto.Name} не смог подключился к {dto.Place} || ConnectionId: {Context.ConnectionId}");
                 await OnDisconnectedAsync(new());
                 return;
             }
-
             place.EnterPlace(user, Context.ConnectionId);
-
-            Console.WriteLine($"Игрок: {dto.Name} подключился к {dto.Place} || ConnectionId: {Context.ConnectionId}");
         }
 
         public override async Task OnDisconnectedAsync(Exception? exception)
@@ -37,8 +33,6 @@ namespace Server.Hubs
             {
                 place.LeavePlace(Context.ConnectionId);
             }
-
-            Console.WriteLine($"ConnectionId: {Context.ConnectionId} отключился от {place}");
             await base.OnDisconnectedAsync(exception);
         }
 

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Server.EntityFramework.Models;
 using Server.Models.DTO.User;
+using Server.Models.Entities.Monsters;
+using Server.Models.Entities.Monsters.DTO;
 using Server.Models.Handlers.Stats;
-using Server.Models.Monsters;
-using Server.Models.Monsters.DTO;
 
 namespace Server.Models.Utilities
 {

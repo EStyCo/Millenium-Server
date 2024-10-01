@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.SignalR;
 using Server.Hubs.DTO;
 using Server.Hubs.Locations.BasePlaces;
-using Server.Models;
+using Server.Models.Entities;
+using Server.Models.Entities.Monsters;
 using Server.Models.Interfaces;
-using Server.Models.Monsters;
 
 namespace Server.Hubs.Locations.BattlePlaces
 {

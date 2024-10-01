@@ -1,4 +1,5 @@
-﻿using Server.Models.Utilities.Slots;
+﻿using Server.Models.Entities;
+using Server.Models.Utilities.Slots;
 
 namespace Server.Models.Inventory.Items
 {

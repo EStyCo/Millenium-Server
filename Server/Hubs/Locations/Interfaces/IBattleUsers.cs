@@ -1,5 +1,5 @@
 ﻿using Server.Models.Utilities;
-using Server.Models;
+using Server.Models.Entities;
 
 namespace Server.Hubs.Locations.Interfaces
 {

@@ -1,4 +1,5 @@
-﻿using Server.Models.Modifiers.Unique;
+﻿using Server.Models.Entities;
+using Server.Models.Modifiers.Unique;
 using Server.Models.Utilities;
 
 namespace Server.Models.Spells.Models

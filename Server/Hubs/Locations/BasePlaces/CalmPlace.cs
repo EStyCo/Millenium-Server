@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using Server.Models.Monsters;
 
 namespace Server.Hubs.Locations.BasePlaces
 {

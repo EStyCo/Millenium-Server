@@ -1,5 +1,6 @@
 ﻿using Server.Hubs;
 using Server.Hubs.Locations.BasePlaces;
+using Server.Models.Entities;
 using Server.Models.Handlers;
 using Server.Models.Handlers.Stats;
 using Server.Models.Handlers.Vitality;
@@ -8,7 +9,7 @@ using Server.Models.Spells.States;
 using Server.Models.Utilities;
 using Server.Models.Utilities.Slots;
 
-namespace Server.Models.Monsters
+namespace Server.Models.Entities.Monsters
 {
     public class PizzaPiece : Monster
     {
@@ -19,7 +20,7 @@ namespace Server.Models.Monsters
         public override Dictionary<State, CancellationTokenSource> States { get; protected set; } = new();
         public override double MinTimeAttack { get; set; } = 3.0;
         public override double MaxTimeAttack { get; set; } = 7.0;
-        public override StatsHandler Stats { get;  set; }
+        public override StatsHandler Stats { get; set; }
         public override VitalityHandler Vitality { get; protected set; }
         public override string Description { get; set; }
 

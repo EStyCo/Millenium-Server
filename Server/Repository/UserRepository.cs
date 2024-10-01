@@ -1,27 +1,19 @@
 ﻿using Server.Models.Skills.LearningMaster;
 using Server.EntityFramework.Models;
 using Microsoft.EntityFrameworkCore;
-using Server.Models.DTO.Inventory;
 using Server.Models.Utilities;
-using Server.Models.Inventory;
 using Server.EntityFramework;
 using Server.Models.DTO.Auth;
 using Server.Models.DTO.User;
 using Server.Models.Spells;
 using AutoMapper;
+using Humanizer;
 
 namespace Server.Repository
 {
-    public class UserRepository
+    public class UserRepository(
+        DbUserContext dbContext)
     {
-        private readonly DbUserContext dbContext;
-        private readonly IMapper mapper;
-
-        public UserRepository(DbUserContext _dbContext, IMapper _mapper)
-        {
-            dbContext = _dbContext;
-            mapper = _mapper;
-        }
 
         public async Task<bool> IsUniqueUser(RegRequestDTO dto)
         {
@@ -166,6 +158,21 @@ namespace Server.Repository
             return await dbContext.Characters
                 .AsNoTracking()
                 .AnyAsync(x => x.Name == name);
+        }
+
+        public async Task<bool> LevelUp(string name)
+        {
+            var stats = await dbContext.Characters
+                .Where(c => c.Name == name)
+                .Select(c => c.Stats)
+                .FirstOrDefaultAsync();
+            if (stats != null)
+            {
+                stats.AddFreePoints(5);
+                await dbContext.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
     }
 }

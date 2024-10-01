@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Server.Hubs.DTO;
 using Server.Hubs.Locations.BasePlaces;
-using Server.Models;
+using Server.Models.Entities;
 
 namespace Server.Hubs.Locations.CalmPlaces
 {

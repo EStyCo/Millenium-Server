@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using Server.Models;
+using Server.Models.Entities;
 using Server.Models.Handlers;
 using Server.Models.Utilities;
 

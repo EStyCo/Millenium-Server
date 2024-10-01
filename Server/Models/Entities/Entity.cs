@@ -7,7 +7,7 @@ using Server.Models.Handlers;
 using Server.Models.Modifiers.Default;
 using Server.Models.Modifiers.Increased;
 
-namespace Server.Models
+namespace Server.Models.Entities
 {
     public abstract class Entity
     {
@@ -93,7 +93,7 @@ namespace Server.Models
             else
                 luckDmg = 10;
             var masteryDmg = s.Mastery / 100 * 20;
-            double countDmg = (s.Strength * 2 + s.Mastery * (s.Agility / 100))
+            double countDmg = s.Strength * 2 + s.Mastery * (s.Agility / 100)
                 + masteryDmg + luckDmg;
 
             var clearDmg = (int)Math.Round(countDmg) + GetWeaponDamage();
@@ -101,8 +101,8 @@ namespace Server.Models
 
             var a = Modifiers.Get<LowLimitDamage>()?.Value ?? 0;
             var b = Modifiers.Get<HighLimitDamage>()?.Value ?? 0;
-            var lowDmg = clearDmg - ((double)clearDmg / 100 * a);
-            var highDmg = clearDmg + ((double)clearDmg / 100 * b);
+            var lowDmg = clearDmg - (double)clearDmg / 100 * a;
+            var highDmg = clearDmg + (double)clearDmg / 100 * b;
 
             var dmg = new Random().Next((int)Math.Round(lowDmg), (int)Math.Round(highDmg) + 1);
 

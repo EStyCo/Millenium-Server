@@ -1,4 +1,6 @@
-﻿namespace Server.Models.Spells.States
+﻿using Server.Models.Entities;
+
+namespace Server.Models.Spells.States
 {
     public class WeaknessState : State
     {

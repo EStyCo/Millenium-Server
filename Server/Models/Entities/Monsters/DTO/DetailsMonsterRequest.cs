@@ -1,4 +1,4 @@
-﻿namespace Server.Models.Monsters.DTO
+﻿namespace Server.Models.Entities.Monsters.DTO
 {
     public class DetailsMonsterRequest
     {

@@ -37,5 +37,10 @@ namespace Server.EntityFramework.Models
         {
             CurrentExp += currentExp;
         }
+
+        public void AddFreePoints(int count)
+        {
+            FreePoints += count;
+        }
     }
 }

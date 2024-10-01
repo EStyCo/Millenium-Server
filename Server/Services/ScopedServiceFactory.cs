@@ -1,6 +1,6 @@
 ﻿using Server.Models.Interfaces;
 
-namespace Server.Models
+namespace Server.Services
 {
     public class ScopedServiceFactory<T> : IServiceFactory<T>
     {

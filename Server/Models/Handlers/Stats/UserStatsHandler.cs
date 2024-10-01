@@ -1,16 +1,17 @@
 ﻿using Server.Models.Utilities;
 using Server.EntityFramework.Models;
 using Server.Models.DTO.User;
+using Server.Models.Entities;
 
 namespace Server.Models.Handlers.Stats
 {
     public class UserStatsHandler : StatsHandler
     {
-        public int Level { get; private set; } = 1;
-        public int CurrentExp { get; private set; } = 0;
-        public int ToLevelExp { get; private set; } = 0;
+        public int Level { get; set; } = 1;
+        public int CurrentExp { get; set; } = 0;
+        public int ToLevelExp { get; set; } = 0;
         public int TotalPoints { get; private set; } = 0;
-        public int FreePoints { get; private set; } = 5;
+        public int FreePoints { get; set; } = 5;
         public OriginalStatsValues OriginalStats { get; private set; }
 
         public override void SetStats(StatsEF stats)
@@ -33,15 +34,22 @@ namespace Server.Models.Handlers.Stats
             ToLevelExp = level.Value;
         }
 
-        public void AddExp(int exp)
+        public void UpdateExp(int exp)
         {
-            CurrentExp += exp;
+
+
+
+
+
+            /*CurrentExp += exp;
             if (CurrentExp >= ToLevelExp)
             {
                 var newLvlPair = new LevelFactory().LevelUp(Level);
                 Level = newLvlPair.Key;
                 ToLevelExp = newLvlPair.Value;
-            }
+
+                (Entity as ActiveUser)?.AddBattleLog($"Вы достигли {Level} уровня. Мои поздравления!");
+            }*/
         }
 
         public void ReturnToOriginalStats()

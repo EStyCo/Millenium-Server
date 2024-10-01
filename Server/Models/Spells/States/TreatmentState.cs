@@ -1,4 +1,5 @@
-﻿using Server.Models.Modifiers.Additional;
+﻿using Server.Models.Entities;
+using Server.Models.Modifiers.Additional;
 
 namespace Server.Models.Spells.States
 {

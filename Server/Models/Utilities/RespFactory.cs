@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Server.Models.DTO;
+using System.Net;
 
 namespace Server.Models.Utilities
 {

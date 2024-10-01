@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Server.Models;
 using Server.Models.Utilities;
 using Server.Models.Spells;
 using Server.Models.DTO.User;
 using Server.Hubs;
+using Server.Models.DTO;
 
 namespace Server.Controllers
 {
@@ -24,9 +24,6 @@ namespace Server.Controllers
         {
             var user = storage.GetUser(dto.Name);
             if (user == null) return BadRequest(RespFactory.ReturnBadRequest());
-
-            Console.WriteLine(new SpellListResponse(user).SpellList[0].RestSeconds);
-
             return Ok(RespFactory.ReturnOk(new SpellListResponse(user)));
         }
     }

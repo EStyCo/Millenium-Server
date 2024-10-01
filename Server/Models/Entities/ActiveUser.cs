@@ -13,8 +13,9 @@ using System.Text;
 using Server.Hubs;
 using Server.Models.Utilities.Slots;
 using Server.Models.Inventory.Items.Weapon;
+using Server.Models.DTO.User;
 
-namespace Server.Models
+namespace Server.Models.Entities
 {
     public class ActiveUser : Entity
     {

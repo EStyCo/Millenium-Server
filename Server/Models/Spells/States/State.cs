@@ -1,4 +1,5 @@
 ﻿using Server.Models.DTO.User;
+using Server.Models.Entities;
 
 namespace Server.Models.Spells.States
 {

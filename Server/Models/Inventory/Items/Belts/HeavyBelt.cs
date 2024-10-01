@@ -1,4 +1,5 @@
-﻿using Server.Models.Modifiers.Additional;
+﻿using Server.Models.Entities;
+using Server.Models.Modifiers.Additional;
 using Server.Models.Modifiers.Additional.Stats;
 using Server.Models.Modifiers.Increased;
 using Server.Models.Utilities.Slots;
