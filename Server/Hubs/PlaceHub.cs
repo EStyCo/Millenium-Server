@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Server.Hubs.Locations.Interfaces;
+using Microsoft.AspNetCore.SignalR;
 using Server.Hubs.DTO;
-using Server.Hubs.Locations.Interfaces;
-using Server.Models.Interfaces;
 using Server.Services;
 
 namespace Server.Hubs

@@ -36,6 +36,8 @@ builder.Services.AddScoped<TravelRepository>();
 builder.Services.AddSingleton<UserStorage>();
 builder.Services.AddSingleton<IServiceFactory<UserStorage>, ScopedServiceFactory<UserStorage>>();
 
+builder.Services.AddSingleton<ChatStorage>();
+
 RegistrationPlaces(builder.Services);
 RegistrationServices(builder.Services);
 
@@ -67,6 +69,7 @@ app.UseStaticFiles();
 
 app.MapHub<UserStorage>("/UserStorage");
 app.MapHub<PlaceHub>("/PlaceHub");
+app.MapHub<ChatHub>("/ChatHub");
 
 app.Run();
 

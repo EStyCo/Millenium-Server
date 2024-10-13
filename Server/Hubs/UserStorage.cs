@@ -17,17 +17,13 @@ namespace Server.Hubs
         public void ConnectHub(string name)
         {
             var activeUser = ActiveUsers.FirstOrDefault(x => x.Name == name);
-
             if (activeUser != null)
-            {
                 activeUser.ChangeConnectionId(Context.ConnectionId);
-            }
         }
 
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
             var connectionId = Context.ConnectionId;
-
             var userToRemove = ActiveUsers.FirstOrDefault(user => user.ConnectionId == connectionId);
             if (userToRemove != null)
             {
@@ -40,7 +36,6 @@ namespace Server.Hubs
                     DisconnectTokens.Remove(connectionId);
                 }, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnRanToCompletion); ;
             }
-
             await base.OnDisconnectedAsync(exception);
         }
         #endregion
