@@ -1,26 +1,22 @@
-﻿using Server.Hubs;
+﻿using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Server.Models.DTO.Auth;
-using Server.Models.DTO.User;
+using Server.Models.Utilities;
 using Server.Repository;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Xml.Linq;
 
 namespace Server.Services
 {
-    public class AuthService
+    public class AuthService(
+        UserRepository userRep,
+        UserFactory userFactory,
+        IOptions<JwtSettings> settings)
     {
-        private readonly UserStorage userStorage;
-        private readonly UserRepository userRep;
-        private readonly UserFactory userFactory;
 
-        public AuthService(UserStorage _userStorage,
-                           UserRepository _userRepository,
-                           UserFactory _userFactory)
-        {
-            userStorage = _userStorage;
-            userRep = _userRepository;
-            userFactory = _userFactory;
-        }
-
-        public async Task<CharacterDTO?> LoginUser(LoginRequestDTO dto)
+        public async Task<LoginResponseDTO?> LoginUser(LoginRequestDTO dto)
         {
             var character = await userRep.LoginUser(dto);
             if (character == null) return null;
@@ -28,7 +24,7 @@ namespace Server.Services
             userFactory.LoginUser(character);
             return new()
             {
-                Name = character.Name,
+                Token = AuthUser(character.Name),
                 Place = character.Place,
             };
         }
@@ -41,19 +37,26 @@ namespace Server.Services
             }
             return true;
         }
+
+        private string AuthUser(string name)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(settings.Value.SecretKey);
+
+            var tokenDescriptor = new SecurityTokenDescriptor()
+            {
+                Subject = new ClaimsIdentity(
+                [
+                    new Claim(ClaimTypes.Name, name),
+                ]),
+                Expires = DateTime.UtcNow.AddMinutes(settings.Value.ExpirationMinutes),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+            return tokenString;
+        }
     }
-
-    /*private async Task<bool> CreateActiveUser(string name)
-    {
-        var character = await userRep.GetCharacter(name);
-        var stats = await userRep.GetStats(name);
-        var items = await userRep.GetInventory(name);
-
-        if (character == null || stats == null || items == null)
-            return false;
-
-        userStorage.LoginUser(stats, character, items);
-        return true;
-    }*/
 }
 

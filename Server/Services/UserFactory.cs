@@ -1,25 +1,14 @@
 ﻿using Server.EntityFramework.Models;
-using Server.Models.Inventory;
-using Server.Models.Utilities;
 using Microsoft.AspNetCore.SignalR;
-using Server.Models.Interfaces;
-using Server.Hubs;
 using Server.Models.Entities;
+using Server.Hubs;
 
 namespace Server.Services
 {
-    public class UserFactory
+    public class UserFactory(
+        IHubContext<UserStorage> hubContext,
+        UserStorage userStorage)
     {
-        private readonly IHubContext<UserStorage> hubContext;
-        private readonly UserStorage userStorage;
-
-        public UserFactory(IHubContext<UserStorage> _hubContext,
-                           UserStorage _userStorage)
-        {
-            hubContext = _hubContext;
-            userStorage = _userStorage;
-        }
-
         public void LoginUser(CharacterEF character)
         {
             var activeUser = userStorage.GetUser(character.Name) as ActiveUser;
@@ -27,7 +16,6 @@ namespace Server.Services
                 ReconnectUser(activeUser, character);
             else
                 AddNewUser(character);
-
         }
 
         private void AddNewUser(CharacterEF character)
@@ -46,7 +34,6 @@ namespace Server.Services
                 cts.Cancel();
                 userStorage.DisconnectTokens.Remove(activeUser.ConnectionId);
             }
-            //activeUser.ActiveSkills = SpellFactory.Get(character.Spells);
         }
     }
 }

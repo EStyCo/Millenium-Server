@@ -8,10 +8,12 @@ using Server.EntityFramework;
 using Server.Repository;
 using Server.Services;
 using Server.Hubs;
-using Microsoft.OpenApi.Models;
-using System.Reflection;
+using Server.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+
+AuthenticationConfig.ConfigureAuthentication(builder.Services, builder.Configuration);
+SwaggerConfig.ConfigureSwagger(builder.Services);
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
     policy.SetIsOriginAllowed(_ => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
@@ -19,14 +21,7 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
 // Add services to the container.
 builder.Services.AddSignalR();
 builder.Services.AddControllers();
-
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    c.IncludeXmlComments(xmlPath);
-});
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 builder.Services.AddScoped<ItemRepository>();
@@ -53,18 +48,23 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API V1");
+    });
 }
+
 
 #if !DEBUG
 app.UseHttpsRedirection();
 #endif
 
 app.UseCors();
-//app.UseAuthorization();
 
 app.MapControllers();
 app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseStaticFiles();
 
 app.MapHub<UserStorage>("/UserStorage");

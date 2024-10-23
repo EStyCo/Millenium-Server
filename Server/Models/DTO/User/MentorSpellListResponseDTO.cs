@@ -1,5 +1,4 @@
-﻿using Server.Models.Skills;
-using Server.Models.Skills.LearningMaster;
+﻿using Server.Models.Skills.LearningMaster;
 
 namespace Server.Models.DTO.User
 {
