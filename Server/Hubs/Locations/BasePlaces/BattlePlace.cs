@@ -19,7 +19,7 @@ namespace Server.Hubs.Locations.BasePlaces
         public abstract string ImagePath { get; }
         public abstract string Description { get; }
         public virtual bool CanAttackUser { get; } = false;
-        public abstract string[] Routes { get; }
+        public abstract IRoute[] Routes { get; }
 
         public abstract void AddMonster();
 

@@ -4,7 +4,7 @@
     {
         public string ImagePath { get; }
         public string Description { get; }
-        public string[] Routes { get; }
+        public IRoute[] Routes { get; }
         public bool CanAttackUser { get; }
     }
 }

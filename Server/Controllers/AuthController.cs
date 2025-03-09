@@ -12,34 +12,36 @@ namespace WebApplication1.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController(
+        AuthService authService) : ControllerBase
     {
-        private readonly AuthService authService;
 
-        public AuthController(AuthService _authService)
+        [HttpPost("loginByEmail")]
+        public async Task<IActionResult> LoginUserByEmail(EmailLoginRequest dto)
         {
-            authService = _authService;
+            var response = await authService.LoginUserByEmail(dto);
+            if (response == null)
+                return BadRequest(RespFactory.ReturnBadRequest());
+            return Ok(RespFactory.ReturnOk(response));
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> LoginUser(LoginRequestDTO dto)
+        [HttpPost("loginByGoogle")]
+        public async Task<IActionResult> LoginUserByGoogle(GoogleLoginRequest dto)
         {
-            var response = await authService.LoginUser(dto);
-            if (response == null) 
+            /*var response = await authService.LoginUser(dto);
+            if (response == null)
             {
                 return BadRequest(RespFactory.ReturnBadRequest());
-            }
-            return Ok(RespFactory.ReturnOk(response));
+            }*/
+            return Ok(RespFactory.ReturnOk());
         }
 
 
         [HttpPost("reg")]
         public async Task<ActionResult> RegistrationNewUser(RegRequestDTO dto)
         {
-            if(!await authService.RegistrationNewUser(dto))
-            {
+            if (!await authService.RegistrationNewUser(dto))
                 return BadRequest(RespFactory.ReturnBadRequest());
-            }
             return Ok(RespFactory.ReturnOk());
         }
 

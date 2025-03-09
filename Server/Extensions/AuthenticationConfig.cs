@@ -12,7 +12,6 @@ namespace Server.Extensions
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
             var settings = configuration.GetSection("JwtSettings").Get<JwtSettings>();
-
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
@@ -24,7 +23,7 @@ namespace Server.Extensions
                     RequireExpirationTime = true,
                     ValidateIssuerSigningKey = true,
                     ClockSkew = TimeSpan.Zero,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.SecretKey))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings?.SecretKey ?? ""))
                 };
             });
         }

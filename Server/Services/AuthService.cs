@@ -1,12 +1,11 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
-using Server.Models.DTO.Auth;
+using Microsoft.Extensions.Options;
 using Server.Models.Utilities;
-using Server.Repository;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Server.Models.DTO.Auth;
+using Server.Repository;
 using System.Text;
-using System.Xml.Linq;
 
 namespace Server.Services
 {
@@ -15,18 +14,18 @@ namespace Server.Services
         UserFactory userFactory,
         IOptions<JwtSettings> settings)
     {
-
-        public async Task<LoginResponseDTO?> LoginUser(LoginRequestDTO dto)
+        public async Task<LoginResponse> LoginUserByEmail(EmailLoginRequest dto)
         {
             var character = await userRep.LoginUser(dto);
             if (character == null) return null;
 
             userFactory.LoginUser(character);
-            return new()
-            {
-                Token = AuthUser(character.Name),
-                Place = character.Place,
-            };
+            return new(character.Name, AuthUser(character.Name), character.Place);
+        }
+
+        public async Task<LoginResponse> LoginUserByGoogle(GoogleLoginRequest dto)
+        {
+            return new("77", "77", "77");
         }
 
         public async Task<bool> RegistrationNewUser(RegRequestDTO dto)

@@ -3,6 +3,7 @@ using Server.Models.Utilities;
 using Server.Hubs.Locations.Interfaces;
 using Server.Models.Handlers.Vitality;
 using Server.Models.Entities;
+using Server.Hubs.Locations.BattlePlaces;
 
 namespace Server.Hubs.Locations.BasePlaces
 {
@@ -13,7 +14,7 @@ namespace Server.Hubs.Locations.BasePlaces
         public override Dictionary<string, ActiveUser> Users { get; protected set; } = new();
         public string ImagePath { get; } = "masturbation.png";
         public string Description { get; } = "добро пожаловать в дрочильню";
-        public string[] Routes { get; } = { "darkwood" };
+        public IRoute[] Routes { get; } = { new DarkWoodRoute() };
 
         public SpecialPlace(IHubContext<PlaceHub> hubContext) : base(hubContext) { }
 

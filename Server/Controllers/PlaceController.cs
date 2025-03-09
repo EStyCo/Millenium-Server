@@ -1,16 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Server.Hubs;
-using Server.Hubs.DTO;
+﻿using Server.Models.Entities.Monsters.DTO;
 using Server.Hubs.Locations.Interfaces;
-using Server.Models;
-using Server.Models.DTO.User;
-using Server.Models.Entities.Monsters.DTO;
-using Server.Models.Handlers.Stats;
-using Server.Models.Interfaces;
 using Server.Models.Spells.States;
+using Microsoft.AspNetCore.Mvc;
 using Server.Models.Utilities;
-using Server.Repository;
+using Server.Models.DTO.User;
+using Server.Hubs.DTO;
 using Server.Services;
+using Server.Hubs;
 
 namespace Server.Controllers
 {

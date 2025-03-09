@@ -18,7 +18,7 @@ namespace Server.Hubs.Locations.BattlePlaces
 
         public override string ImagePath { get; } = "locations/darkwood.jpg";
         public override string Description { get; } = "поле для драки, ебаштесь";
-        public override string[] Routes { get; } = { "glade", "masturbation" };
+        public override IRoute[] Routes { get; } = { new GladeRoute()};
 
         public DarkWood(IMapper _mapper,
                         IHubContext<PlaceHub> hubContext,

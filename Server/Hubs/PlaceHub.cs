@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.SignalR;
 using Server.Hubs.DTO;
 using Server.Services;
+using Server.Hubs.Locations;
 
 namespace Server.Hubs
 {
@@ -45,7 +46,7 @@ namespace Server.Hubs
             return null;
         }
 
-        public string[]? UpdateRoutes(string namePlace)
+        public IRoute[]? UpdateRoutes(string namePlace)
         {
             var place = placeService.GetPlace(namePlace) as IPlaceInfo;
             return place?.Routes;

@@ -22,7 +22,7 @@ namespace Server.Repository
                 .AnyAsync(x => x.Email == dto.Email || x.Character.Name == dto.Name);
         }
 
-        public async Task<CharacterEF?> LoginUser(LoginRequestDTO dto)
+        public async Task<CharacterEF?> LoginUser(EmailLoginRequest dto)
         {
             var character = await dbContext.Characters
                 .AsNoTracking()

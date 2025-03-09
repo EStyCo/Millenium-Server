@@ -17,7 +17,7 @@ namespace Server.Hubs.Locations.BattlePlaces
 
         public override string ImagePath { get; } = "locations/pizzaland.png";
         public override string Description { get; } = "Загадочная пиццерия, можно вкусно покушать, если выживешь.";
-        public override string[] Routes { get; } = { "glade" };
+        public override IRoute[] Routes { get; } = { new GladeRoute() };
 
         public PizzaLand(IMapper _mapper,
                      IHubContext<PlaceHub> hubContext,

@@ -17,7 +17,7 @@ namespace Server.Hubs.Locations.BattlePlaces
 
         public override string ImagePath { get; } = "locations/glade.jpg";
         public override string Description { get; } = "Мирная полянка с гоблинами, будь осторожен!";
-        public override string[] Routes { get; } = { "town", "pizzaland", "darkwood" };
+        public override IRoute[] Routes { get; } = { new DarkWoodRoute(), new PizzaLandRoute()};
 
         public Glade(IMapper _mapper,
                      IHubContext<PlaceHub> hubContext,
